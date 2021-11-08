@@ -353,16 +353,18 @@ margin_bottom = 338.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ExpandableTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
+[node name="ThumbnailTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 0.0
 margin_top = 170.0
 margin_right = 329.0
 margin_bottom = 194.0
 size_flags_vertical = 1
-path_to_expandableControl = NodePath("../VP")
+path_to_expandableControl = NodePath("../ThumbnailContainer")
+text = "Thumbnail Generator"
+icon = ExtResource( 23 )
 
-[node name="VP" type="ViewportContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
+[node name="ThumbnailContainer" type="MarginContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 198.0
 margin_right = 329.0
 margin_bottom = 538.0

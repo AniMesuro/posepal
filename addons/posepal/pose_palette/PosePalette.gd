@@ -49,22 +49,18 @@ func fill_previews():
 	if !is_instance_valid(editedSceneRoot.get_node(owner.poselib_scene)):
 		return
 	
-	
-	var vp: ViewportContainer = $"../../PoseLib/VBox/VP"
-	var poseThumbnailGenerator: Viewport
-#
-	for viewport in vp.get_children():
-		viewport.queue_free()
-	poseThumbnailGenerator = SCN_PoseThumbnailGenerator.instance()
-	vp.add_child(poseThumbnailGenerator)
-	print("---",poseThumbnailGenerator)
-	vp.print_tree()
-	
+	var thumbnailContainer: MarginContainer = $"../../PoseLib/VBox/ThumbnailContainer"
+	for preview in thumbnailContainer.get_children():
+		preview.queue_free()
+	var thumbnailGenerator: VBoxContainer = SCN_PoseThumbnailGenerator.instance()
+	thumbnailContainer.add_child(thumbnailGenerator)
 #	if !is_instance_valid(owner.pluginInstance.poseThumbnailGenerator):
 #		owner.pluginInstance.poseThumbnailGenerator = SCN_PoseThumbnailGenerator.instance()
 #		owner.pluginInstance.add_child(owner.pluginInstance.poseThumbnailGenerator)
 #	var poseThumbnailGenerator: Viewport = owner.pluginInstance.poseThumbnailGenerator
-	print(poseThumbnailGenerator)
+	print(thumbnailGenerator)
+	thumbnailGenerator.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
+	thumbnailGenerator.posePalDock = owner
 	
 	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
 	for pose_id in collection.size():
@@ -97,18 +93,16 @@ func fill_previews():
 		else:
 			posePreview.label.text = str(pose_id)
 			
+		posePreview.pose = collection[pose_id]
 		posePreview.pose_id = pose_id
 		posePreview.pose_name = pose_name
-		
-		
-		
-		posePreview.pose = collection[pose_id]
 		posePreview.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
 #		posePreview._generate_thumbnail()
-		poseThumbnailGenerator.posePalDock = owner
-		poseThumbnailGenerator.generate_thumbnail(pose, poselib.filterData[owner.poselib_filter], editedSceneRoot.get_node(owner.poselib_scene), pose_id)
-		poseThumbnailGenerator.connect("taken_snapshot", posePreview, "_on_PoseThumbnailGenerator_taken_snapshot")
+		
+		thumbnailGenerator.queue_generate_thumbnail(pose, poselib.filterData[owner.poselib_filter], editedSceneRoot.get_node(owner.poselib_scene), pose_id)
+#		thumbnailGenerator.connect("taken_snapshot", posePreview, "_on_PoseThumbnailGenerator_taken_snapshot")
 	
+	thumbnailGenerator.generate_next_pose()
 	# After a ton of photos the viewport is deleted.
 #	Maybe it shouldnt so switching pages wouldn't recreate the dummy scene again.
 #	poseThumbnailGenerator.queue_free()

@@ -18,7 +18,6 @@ __meta__ = {
 }
 
 [node name="ThumbnailButton" type="TextureButton" parent="."]
-modulate = Color( 1.5, 1.5, 0, 1 )
 margin_right = 85.0
 margin_bottom = 98.0
 grow_vertical = 0
