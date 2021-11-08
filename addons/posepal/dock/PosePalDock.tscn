@@ -1,0 +1,517 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://addons/posepal/interface/NodeMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/posepal/interface/ExpandableTab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/posepal/pose_palette/PosePalette.gd" type="Script" id=4]
+[ext_resource path="res://addons/posepal/interface/WarningIcon.gd" type="Script" id=5]
+[ext_resource path="res://addons/posepal/dock/CollectionSelectButton.gd" type="Script" id=6]
+[ext_resource path="res://addons/posepal/dock/AnimPlayerHBox.gd" type="Script" id=7]
+[ext_resource path="res://addons/posepal/dock/TemplateMoreButton.gd" type="Script" id=8]
+[ext_resource path="res://addons/posepal/pose_palette/ZoomHScroll.gd" type="Script" id=9]
+[ext_resource path="res://addons/posepal/assets/icons/icon_new.png" type="Texture" id=10]
+[ext_resource path="res://addons/posepal/assets/icons/icon_warning.png" type="Texture" id=11]
+[ext_resource path="res://addons/posepal/assets/icons/icon_expand.png" type="Texture" id=12]
+[ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=13]
+[ext_resource path="res://addons/posepal/dock/CollectionMoreButton.gd" type="Script" id=14]
+[ext_resource path="res://addons/posepal/dock/PosePalDock.gd" type="Script" id=15]
+[ext_resource path="res://addons/posepal/dock/FilterSelectButton.gd" type="Script" id=16]
+[ext_resource path="res://addons/posepal/dock/TemplateSelectButton.gd" type="Script" id=17]
+[ext_resource path="res://addons/posepal/dock/FilterMoreButton.gd" type="Script" id=18]
+[ext_resource path="res://addons/posepal/paging_system/PageHBox.gd" type="Script" id=19]
+[ext_resource path="res://addons/posepal/dock/PoseCreationVBox.gd" type="Script" id=20]
+[ext_resource path="res://addons/posepal/dock/SceneSelectButton.gd" type="Script" id=21]
+[ext_resource path="res://addons/posepal/paging_system/PageNumButton.gd" type="Script" id=22]
+[ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Image" id=4]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=3]
+flags = 4
+flags = 4
+image = SubResource( 4 )
+size = Vector2( 16, 16 )
+
+[node name="PosePal" type="Control"]
+anchor_right = 0.322
+anchor_bottom = 1.0
+margin_right = 0.271973
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_plPoseLib_poseFile": "res://addons/posturecord/.poselibs/PostuRecord_0.poselib.tres"
+}
+
+[node name="VSplit" type="VSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+collapsed = true
+dragger_visibility = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="VSplit"]
+margin_right = 330.0
+margin_bottom = 556.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+
+[node name="PoseLib" type="ScrollContainer" parent="VSplit/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 18.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib"]
+margin_right = 330.0
+margin_bottom = 538.0
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParametersTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_left = 0.0
+margin_right = 329.0
+margin_bottom = 24.0
+size_flags_vertical = 1
+path_to_expandableControl = NodePath("../ParametersVBox")
+text = "Parameters"
+icon = ExtResource( 23 )
+
+[node name="ParametersVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
+margin_top = 28.0
+margin_right = 329.0
+margin_bottom = 138.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SceneHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_right = 329.0
+margin_bottom = 16.0
+hint_tooltip = "The poselib is referenced from the scene."
+
+[node name="Label" type="Label" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/SceneHBox"]
+margin_right = 51.0
+margin_bottom = 16.0
+hint_tooltip = "A scene holds a poselib, which holds all collections and groups for pose keying."
+mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Poselib:"
+valign = 1
+
+[node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/SceneHBox"]
+margin_left = 55.0
+margin_right = 329.0
+margin_bottom = 16.0
+hint_tooltip = "The scene that holds the pose data."
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Select a scene"
+icon = ExtResource( 12 )
+flat = false
+clip_text = true
+align = 0
+expand_icon = true
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+msg_no_selection = "Select a scene"
+owner_reference = "poselib_scene"
+
+[node name="FilterHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_top = 20.0
+margin_right = 329.0
+margin_bottom = 38.0
+hint_tooltip = "Works both as a pose template and a node filter."
+
+[node name="Label" type="Label" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/FilterHBox"]
+margin_right = 37.0
+margin_bottom = 18.0
+hint_tooltip = "A group is a selection of nodes to be keyed."
+mouse_filter = 1
+size_flags_vertical = 3
+text = "Filter:"
+valign = 1
+
+[node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/FilterHBox"]
+margin_left = 41.0
+margin_top = 1.0
+margin_right = 305.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Select a filter"
+icon = ExtResource( 12 )
+flat = false
+clip_text = true
+align = 0
+expand_icon = true
+script = ExtResource( 16 )
+msg_no_selection = "Select a filter"
+owner_reference = "poselib_filter"
+
+[node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/FilterHBox"]
+margin_left = 309.0
+margin_right = 329.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 20, 18 )
+custom_styles/pressed = SubResource( 1 )
+keep_pressed_outside = true
+text = "l"
+icon = ExtResource( 13 )
+clip_text = true
+align = 0
+expand_icon = true
+switch_on_hover = true
+script = ExtResource( 18 )
+
+[node name="TemplateHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_top = 42.0
+margin_right = 329.0
+margin_bottom = 60.0
+hint_tooltip = "Stores subcollections."
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/TemplateHBox"]
+margin_right = 64.0
+margin_bottom = 18.0
+hint_tooltip = "A Collection is a holder for subcollections."
+mouse_filter = 1
+size_flags_vertical = 3
+text = "Template:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/TemplateHBox"]
+margin_left = 68.0
+margin_top = 1.0
+margin_right = 305.0
+margin_bottom = 17.0
+hint_tooltip = "The group of poses"
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Select a template"
+icon = ExtResource( 12 )
+flat = false
+clip_text = true
+align = 0
+expand_icon = true
+script = ExtResource( 17 )
+msg_no_selection = "Select a template"
+owner_reference = "poselib_template"
+
+[node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/TemplateHBox"]
+margin_left = 309.0
+margin_right = 329.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 20, 18 )
+custom_styles/pressed = SubResource( 1 )
+keep_pressed_outside = true
+text = "l"
+icon = ExtResource( 13 )
+clip_text = true
+align = 0
+expand_icon = true
+switch_on_hover = true
+script = ExtResource( 8 )
+
+[node name="CollectionHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_top = 64.0
+margin_right = 329.0
+margin_bottom = 82.0
+hint_tooltip = "Stores pose data."
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/CollectionHBox"]
+margin_right = 68.0
+margin_bottom = 18.0
+hint_tooltip = "A Subcollection holds property:value pairs to be keyed in the animation."
+mouse_filter = 1
+size_flags_vertical = 3
+text = "Collection:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/CollectionHBox"]
+margin_left = 72.0
+margin_top = 1.0
+margin_right = 305.0
+margin_bottom = 17.0
+hint_tooltip = "The group of poses"
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Select a collection"
+icon = ExtResource( 12 )
+flat = false
+clip_text = true
+align = 0
+expand_icon = true
+script = ExtResource( 6 )
+msg_no_selection = "Select a collection"
+owner_reference = "poselib_collection"
+
+[node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/CollectionHBox"]
+margin_left = 309.0
+margin_right = 329.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 20, 18 )
+custom_styles/pressed = SubResource( 1 )
+keep_pressed_outside = true
+text = "l"
+icon = ExtResource( 13 )
+clip_text = true
+align = 0
+expand_icon = true
+switch_on_hover = true
+script = ExtResource( 14 )
+
+[node name="AnimPlayerHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_top = 86.0
+margin_right = 329.0
+margin_bottom = 102.0
+hint_tooltip = "The AnimationPlayer selected in the AnimationPlayerEditor for pose editing/keying."
+size_flags_horizontal = 3
+script = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/AnimPlayerHBox"]
+margin_right = 109.0
+margin_bottom = 16.0
+hint_tooltip = "The AnimationPlayer selected on the Animation  bottom panel."
+mouse_filter = 1
+size_flags_vertical = 3
+text = "AnimationPlayer:"
+valign = 1
+
+[node name="Button" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/AnimPlayerHBox" instance=ExtResource( 1 )]
+margin_left = 113.0
+margin_right = 329.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 0 )
+size_flags_vertical = 4
+text = "Select an AnimationPlayer"
+icon = ExtResource( 12 )
+msg_no_selection = "Select an AnimationPlayer"
+owner_reference = "poselib_animPlayer"
+node_type = "AnimationPlayer"
+
+[node name="HSeparator" type="HSeparator" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
+margin_top = 106.0
+margin_right = 329.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 4 )
+
+[node name="OptionsTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_left = 0.0
+margin_top = 142.0
+margin_right = 329.0
+margin_bottom = 166.0
+size_flags_vertical = 1
+path_to_expandableControl = NodePath("../OptionsVBox")
+text = "Pose Options"
+icon = ExtResource( 23 )
+
+[node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
+margin_top = 170.0
+margin_right = 329.0
+margin_bottom = 538.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Palette" type="ScrollContainer" parent="VSplit/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 18.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="VSplit/TabContainer/Palette"]
+margin_right = 330.0
+margin_bottom = 538.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 2
+custom_constants/hseparation = 2
+columns = 8
+script = ExtResource( 4 )
+
+[node name="ExtraHBox" type="HBoxContainer" parent="VSplit"]
+margin_top = 556.0
+margin_right = 330.0
+margin_bottom = 600.0
+grow_vertical = 0
+rect_clip_content = true
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PoseCreationVBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
+margin_right = 75.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationVBox"]
+margin_right = 75.0
+margin_bottom = 20.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "New Pose"
+icon = ExtResource( 10 )
+align = 0
+expand_icon = true
+
+[node name="CancelPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationVBox"]
+margin_top = 24.0
+margin_right = 75.0
+margin_bottom = 44.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Cancel"
+align = 0
+expand_icon = true
+
+[node name="WarningIcon" type="TextureRect" parent="VSplit/ExtraHBox"]
+visible = false
+margin_left = 104.0
+margin_right = 124.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 5 )
+
+[node name="VBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
+margin_left = 79.0
+margin_right = 329.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="PageHBox" type="HBoxContainer" parent="VSplit/ExtraHBox/VBox"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_clip_content = true
+script = ExtResource( 19 )
+
+[node name="FirstButton" type="Button" parent="VSplit/ExtraHBox/VBox/PageHBox"]
+margin_right = 28.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 8 )
+hint_tooltip = "First"
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "<<"
+
+[node name="PreviousButton" type="Button" parent="VSplit/ExtraHBox/VBox/PageHBox"]
+margin_left = 32.0
+margin_right = 52.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 8 )
+hint_tooltip = "First"
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "<"
+
+[node name="NumButton" type="OptionButton" parent="VSplit/ExtraHBox/VBox/PageHBox"]
+margin_left = 56.0
+margin_right = 194.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "1"
+align = 1
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="Button" parent="VSplit/ExtraHBox/VBox/PageHBox"]
+margin_left = 198.0
+margin_right = 218.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = ">"
+
+[node name="LastButton" type="Button" parent="VSplit/ExtraHBox/VBox/PageHBox"]
+margin_left = 222.0
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = ">>"
+
+[node name="ZoomHBox" type="HBoxContainer" parent="VSplit/ExtraHBox/VBox"]
+margin_top = 24.0
+margin_right = 250.0
+margin_bottom = 40.0
+rect_clip_content = true
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZoomIcon" type="TextureRect" parent="VSplit/ExtraHBox/VBox/ZoomHBox"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = SubResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="ZoomSlider" type="HSlider" parent="VSplit/ExtraHBox/VBox/ZoomHBox"]
+margin_left = 20.0
+margin_right = 250.0
+margin_bottom = 16.0
+grow_horizontal = 0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 5.0
+max_value = 20.0
+value = 5.0
+script = ExtResource( 9 )

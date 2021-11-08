@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/posepal/interface/NodeMenu.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Button" type="MenuButton"]
+margin_left = 254.0
+margin_right = 434.0
+margin_bottom = 26.0
+grow_horizontal = 0
+rect_min_size = Vector2( 0, 24 )
+rect_clip_content = true
+size_flags_horizontal = 3
+text = "Please select a node."
+icon = ExtResource( 2 )
+flat = false
+clip_text = true
+align = 0
+expand_icon = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

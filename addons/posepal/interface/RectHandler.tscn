@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/posepal/interface/RectHandler.gd" type="Script" id=1]
+
+
+
+[node name="RectHandler" type="ReferenceRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = -10.0
+rect_min_size = Vector2( 0, 10 )
+mouse_default_cursor_shape = 9
+editor_only = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+handler_size = 10

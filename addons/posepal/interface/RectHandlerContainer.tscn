@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/posepal/interface/RectHandler.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/posepal/interface/RectHandlerContainer.gd" type="Script" id=2]
+
+
+
+[node name="RectHandlerContainer" type="Control"]
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+handler_size = 10
+_windowRect = NodePath(".")
+
+[node name="HandlerTop" parent="." instance=ExtResource( 1 )]
+margin_top = 0.0
+margin_bottom = 10.0
+_windowRect = NodePath("..")
+
+[node name="HandlerBottom" parent="." instance=ExtResource( 1 )]
+handler_direction = 1
+_windowRect = NodePath("..")
+
+[node name="HandlerLeft" parent="." instance=ExtResource( 1 )]
+margin_top = 0.0
+margin_right = 10.0
+margin_bottom = 10.0
+mouse_default_cursor_shape = 10
+handler_direction = 2
+_windowRect = NodePath("..")
+
+[node name="HandlerRight" parent="." instance=ExtResource( 1 )]
+margin_left = -10.0
+margin_top = 0.0
+margin_bottom = 10.0
+mouse_default_cursor_shape = 10
+handler_direction = 3
+_windowRect = NodePath("..")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/posepal/assets/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://addons/posepal/interface/TitleBar.gd" type="Script" id=2]
+[ext_resource path="res://addons/posepal/assets/icons/icon_not.png" type="Texture" id=3]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/icon_warning.png-8df2d95b4878e30798bde4b17b4dec99.stex"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="TitleBar" type="HBoxContainer"]
+margin_right = 357.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+title_name = "Title Name"
+icon_texture = SubResource( 1 )
+
+[node name="IconRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 1 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+margin_left = 44.0
+margin_top = 10.0
+margin_right = 313.0
+margin_bottom = 30.0
+size_flags_horizontal = 7
+custom_fonts/font = SubResource( 2 )
+text = "Title Name"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 317.0
+margin_right = 357.0
+margin_bottom = 40.0
+size_flags_vertical = 4
+texture_normal = ExtResource( 3 )
+stretch_mode = 5

@@ -1,0 +1,65 @@
+[gd_resource type="Theme" load_steps=9 format=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.117996, 0.117996, 0.144531, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.239216, 0.231373, 0.270588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.45793, 0.437759, 0.511719, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.156863, 0.14902, 0.12549, 1 )
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0862745, 0.0784314, 0.0745098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color( 0.109804, 0.101961, 0.0901961, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color( 0.282353, 0.262745, 0.25098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 10.0
+content_margin_right = 15.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0.52549, 0.454902, 0.313726, 1 )
+expand_margin_top = 3.0
+
+[resource]
+Label/fonts/font = null
+LineEdit/styles/normal = SubResource( 2 )
+MenuButton/colors/font_color = Color( 0.996078, 0.984314, 0.984314, 1 )
+MenuButton/styles/hover = SubResource( 10 )
+MenuButton/styles/normal = SubResource( 9 )
+PanelContainer/styles/panel = SubResource( 11 )
+TabContainer/colors/font_color_fg = Color( 0.0862745, 0.0784314, 0.0745098, 1 )
+TabContainer/styles/panel = SubResource( 5 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 7 )
+TabContainer/styles/tab_fg = SubResource( 8 )

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://addons/posepal/interface/PosePreview.gd" type="Script" id=2]
+
+[node name="PosePreview" type="VBoxContainer"]
+margin_right = 85.0
+margin_bottom = 112.0
+grow_horizontal = 0
+rect_min_size = Vector2( 32, 44 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 0
+alignment = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThumbnailButton" type="TextureButton" parent="."]
+modulate = Color( 1.5, 1.5, 0, 1 )
+margin_right = 85.0
+margin_bottom = 98.0
+grow_vertical = 0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+margin_top = 98.0
+margin_right = 85.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 14 )
+size_flags_vertical = 1
+text = "hey im a pretty cool test text, I sure do love lasagna. It's tasty and stuff man."
+valign = 2
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
