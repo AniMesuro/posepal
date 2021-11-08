@@ -162,6 +162,22 @@ func _generate_thumbnail():
 	pose = {}
 	used_points.resize(0)
 
+func invert_thumbnail_ver():
+	pass
+
+func _on_PoseThumbnailGenerator_taken_snapshot(image: Image, _pose_id: int):
+#	print('screenshot recieved ', texture," from ",_pose_id, " my id is ", pose_id)
+	return
+	if _pose_id == pose_id:
+#		var imageData: Image = texture.get_data()
+		image.flip_y()
+		var thumbnailImageTexture :ImageTexture= ImageTexture.new()
+		thumbnailImageTexture.create_from_image(image)
+#		thumbnailButton.texture_normal.lock()
+		thumbnailButton.texture_normal = thumbnailImageTexture;
+		print('!',pose_id,' set texture to ',image,thumbnailImageTexture)
+#		thumbnailViewportImage.lock()
+
 func _generate_preview_scene(parent: Node = null, previewParent: Node = null, has_filtered: bool = false, iter: int = 0):
 	# Loops through all of a Node's children in a maximum of %iter iterations.
 	for ch in parent.get_children():

@@ -20,8 +20,8 @@ func _on_pressed():
 #			text = msg_no_selection
 		_reset_selection()
 		return
-	for subcol in poselib.poseData[owner.poselib_template].keys():
-		popup.add_item(subcol)
+	for collection in poselib.poseData[owner.poselib_template].keys():
+		popup.add_item(collection)
 
 func _on_id_selected(id :int):
 	var poselib: RES_PoseLibrary = owner.current_poselib

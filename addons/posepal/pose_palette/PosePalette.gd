@@ -3,6 +3,8 @@ extends GridContainer
 
 var pageHBox: HBoxContainer
 
+const SCN_PoseThumbnailGenerator: PackedScene = preload("res://addons/posepal/interface/PoseThumbnailGenerator.tscn")
+
 const SCN_AskNamePopup: PackedScene = preload("res://addons/posepal/interface/AskNamePopup.tscn")
 const SCN_AskIDPopup: PackedScene = preload("res://addons/posepal/interface/AskIDPopup.tscn")
 const SCN_PosePreview: PackedScene= preload("res://addons/posepal/interface/PosePreview.tscn")
@@ -22,12 +24,13 @@ func _fix_PoseCreationVBox_ref() -> void:
 	
 
 # [] Todo generate 1 dummy scene then just pose and print 9 times.
+
 func fill_previews():
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
 	print('starting to fill')
-	# <TODO> Limit preview maximum by 9 for each page. 
+	# <TODO> Limit preview maximum by 9 at current page.
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		print('poselib resource not valid')
@@ -36,7 +39,7 @@ func fill_previews():
 #	if !owner.poseData.has('collections'):
 #		return
 	if !poselib.filterData.has(owner.poselib_filter):
-		print('')
+#		print('')
 		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
@@ -46,9 +49,26 @@ func fill_previews():
 	if !is_instance_valid(editedSceneRoot.get_node(owner.poselib_scene)):
 		return
 	
-	var subcol: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
-	for pose_id in subcol.size():
-		var pose: Dictionary = subcol[pose_id]
+	
+	var vp: ViewportContainer = $"../../PoseLib/VBox/VP"
+	var poseThumbnailGenerator: Viewport
+#
+	for viewport in vp.get_children():
+		viewport.queue_free()
+	poseThumbnailGenerator = SCN_PoseThumbnailGenerator.instance()
+	vp.add_child(poseThumbnailGenerator)
+	print("---",poseThumbnailGenerator)
+	vp.print_tree()
+	
+#	if !is_instance_valid(owner.pluginInstance.poseThumbnailGenerator):
+#		owner.pluginInstance.poseThumbnailGenerator = SCN_PoseThumbnailGenerator.instance()
+#		owner.pluginInstance.add_child(owner.pluginInstance.poseThumbnailGenerator)
+#	var poseThumbnailGenerator: Viewport = owner.pluginInstance.poseThumbnailGenerator
+	print(poseThumbnailGenerator)
+	
+	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
+	for pose_id in collection.size():
+		var pose: Dictionary = collection[pose_id]
 		# Ignore if pose doesn't have all nodes from Filter pose.
 		if owner.poselib_filter != 'none':
 			var inside_group: bool = true
@@ -82,10 +102,17 @@ func fill_previews():
 		
 		
 		
-		posePreview.pose = subcol[pose_id]
+		posePreview.pose = collection[pose_id]
 		posePreview.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
-		posePreview._generate_thumbnail()
-			
+#		posePreview._generate_thumbnail()
+		poseThumbnailGenerator.posePalDock = owner
+		poseThumbnailGenerator.generate_thumbnail(pose, poselib.filterData[owner.poselib_filter], editedSceneRoot.get_node(owner.poselib_scene), pose_id)
+		poseThumbnailGenerator.connect("taken_snapshot", posePreview, "_on_PoseThumbnailGenerator_taken_snapshot")
+	
+	# After a ton of photos the viewport is deleted.
+#	Maybe it shouldnt so switching pages wouldn't recreate the dummy scene again.
+#	poseThumbnailGenerator.queue_free()
+	
 #		print('posekey =',posePreview.pose_key)
 	var zoomSlider :HSlider= owner.get_node('VSplit/ExtraHBox/VBox/ZoomHBox/ZoomSlider')
 	

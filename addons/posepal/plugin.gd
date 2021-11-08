@@ -18,6 +18,8 @@ var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
 var posePalDock :Control
 var editorControl :Control
 
+var poseThumbnailGenerator: Viewport
+
 func _enter_tree() -> void:
 	add_to_group(plugin_group)
 	

@@ -53,7 +53,7 @@ theme = ExtResource( 3 )
 script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false,
-"_plPoseLib_poseFile": "res://addons/posturecord/.poselibs/PostuRecord_0.poselib.tres"
+"_plPoseLib_poseFile": "res://addons/posepal/.poselibs/PosePal_0.poselib.tres"
 }
 
 [node name="VSplit" type="VSplitContainer" parent="."]
@@ -343,9 +343,27 @@ size_flags_vertical = 1
 path_to_expandableControl = NodePath("../OptionsVBox")
 text = "Pose Options"
 icon = ExtResource( 23 )
+expand = false
 
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
+visible = false
 margin_top = 170.0
+margin_right = 329.0
+margin_bottom = 338.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ExpandableTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
+anchor_right = 0.0
+margin_left = 0.0
+margin_top = 170.0
+margin_right = 329.0
+margin_bottom = 194.0
+size_flags_vertical = 1
+path_to_expandableControl = NodePath("../VP")
+
+[node name="VP" type="ViewportContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
+margin_top = 198.0
 margin_right = 329.0
 margin_bottom = 538.0
 size_flags_horizontal = 3

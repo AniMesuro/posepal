@@ -336,68 +336,68 @@ func save_poseData():
 	# OLD # JSON SAVE
 	return
 	# Save PoseData to PoseFile.
-	var json_poseData: Dictionary= get_json_poseData(poseData)
-	
-	f.open(poseFile_path, f.WRITE_READ)
-	f.store_string(JSON.print(json_poseData," "))
-	f.close()
+#	var json_poseData: Dictionary= get_json_poseData(poseData)
+#
+#	f.open(poseFile_path, f.WRITE_READ)
+#	f.store_string(JSON.print(json_poseData," "))
+#	f.close()
 
-func get_json_poseData(poseData: Dictionary) -> Dictionary:
-#	Loops through every property from every group and face
-#	And converts it to a more json friendly format.
-	var selectedScene :Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
-	if !is_instance_valid(selectedScene):
-		return {}
-	
-	var json_poseData: Dictionary = poseData
-	
-#	return new_poseData
-	for group in poseData['groups']:
-		for nodepath in poseData['groups'][group]:
-			var selectedNode: Node = selectedScene.get_node(nodepath)
-			for property in poseData['groups'][group][nodepath]:
-				match typeof(selectedNode.get(property)):
-					TYPE_VECTOR2:
-						print('group ',group,' vec2: ', poseData['groups'][group][nodepath][property]['val'])
-						json_poseData['groups'][group][nodepath][property]['val'] = [
-							poseData['groups'][group][nodepath][property]['val'].x,
-							poseData['groups'][group][nodepath][property]['val'].y
-						]
-					TYPE_OBJECT:
-						print('group ',group,' is ',json_poseData['groups'][group][nodepath][property]['val'])
-						if selectedNode.get(property) is Resource:
-#							if 	typeof(poseData['groups'][group][nodepath][property]['val']) == TYPE_STRING:
-#								var property_resource_path: String = poseData['groups'][group][nodepath][property]['val']
+#func get_json_poseData(poseData: Dictionary) -> Dictionary:
+##	Loops through every property from every group and face
+##	And converts it to a more json friendly format.
+#	var selectedScene :Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
+#	if !is_instance_valid(selectedScene):
+#		return {}
+#
+#	var json_poseData: Dictionary = poseData
+#
+##	return new_poseData
+#	for group in poseData['groups']:
+#		for nodepath in poseData['groups'][group]:
+#			var selectedNode: Node = selectedScene.get_node(nodepath)
+#			for property in poseData['groups'][group][nodepath]:
+#				match typeof(selectedNode.get(property)):
+#					TYPE_VECTOR2:
+#						print('group ',group,' vec2: ', poseData['groups'][group][nodepath][property]['val'])
+#						json_poseData['groups'][group][nodepath][property]['val'] = [
+#							poseData['groups'][group][nodepath][property]['val'].x,
+#							poseData['groups'][group][nodepath][property]['val'].y
+#						]
+#					TYPE_OBJECT:
+#						print('group ',group,' is ',json_poseData['groups'][group][nodepath][property]['val'])
+#						if selectedNode.get(property) is Resource:
+##							if 	typeof(poseData['groups'][group][nodepath][property]['val']) == TYPE_STRING:
+##								var property_resource_path: String = poseData['groups'][group][nodepath][property]['val']
+###										print('RESOURCE = ',resource)
+##								json_poseData['groups'][group][nodepath][property]['val'] = property_resource_path
+#							if typeof(poseData['groups'][group][nodepath][property]['val']) == TYPE_OBJECT:
+##										print("!!", property," is type ",typeof(poseData[group][face][pose][nodepath][property]))
+#								json_poseData['groups'][group][nodepath][property]['val'] = poseData['groups'][group][nodepath][property]['val'].resource_path
+#	for col in poseData['collections']:
+#		for subcol in poseData['collections'][col]:
+#			for pose in poseData['collections'][col][subcol]:
+#				for nodepath in poseData['collections'][col][subcol][pose]:
+#					var selectedNode: Node = selectedScene.get_node(nodepath)
+#					for property in poseData['collections'][col][subcol][pose][nodepath]:
+##						print('PROPERTY =  ',property,' ',poseData['collections'][col][subcol][pose][nodepath][property]['val'])
+#						match typeof(selectedNode.get(property)):
+#							TYPE_VECTOR2:
+#								json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = [
+#									poseData['collections'][col][subcol][pose][nodepath][property]['val'].x,#.x
+#									poseData['collections'][col][subcol][pose][nodepath][property]['val'].y#.y
+#									]
+##								print(';vector2 ',json_poseData['collections'][col][subcol][pose][nodepath][property])
+#							TYPE_OBJECT:
+#								if selectedNode.get(property) is Resource:
+#									if 	typeof(poseData['collections'][col][subcol][pose][nodepath][property]['val']) == TYPE_STRING:
+#										var property_resource_path :String= poseData['collections'][col][subcol][pose][nodepath][property]['val']
 ##										print('RESOURCE = ',resource)
-#								json_poseData['groups'][group][nodepath][property]['val'] = property_resource_path
-							if typeof(poseData['groups'][group][nodepath][property]['val']) == TYPE_OBJECT:
-#										print("!!", property," is type ",typeof(poseData[group][face][pose][nodepath][property]))
-								json_poseData['groups'][group][nodepath][property]['val'] = poseData['groups'][group][nodepath][property]['val'].resource_path
-	for col in poseData['collections']:
-		for subcol in poseData['collections'][col]:
-			for pose in poseData['collections'][col][subcol]:
-				for nodepath in poseData['collections'][col][subcol][pose]:
-					var selectedNode: Node = selectedScene.get_node(nodepath)
-					for property in poseData['collections'][col][subcol][pose][nodepath]:
-#						print('PROPERTY =  ',property,' ',poseData['collections'][col][subcol][pose][nodepath][property]['val'])
-						match typeof(selectedNode.get(property)):
-							TYPE_VECTOR2:
-								json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = [
-									poseData['collections'][col][subcol][pose][nodepath][property]['val'].x,#.x
-									poseData['collections'][col][subcol][pose][nodepath][property]['val'].y#.y
-									]
-#								print(';vector2 ',json_poseData['collections'][col][subcol][pose][nodepath][property])
-							TYPE_OBJECT:
-								if selectedNode.get(property) is Resource:
-									if 	typeof(poseData['collections'][col][subcol][pose][nodepath][property]['val']) == TYPE_STRING:
-										var property_resource_path :String= poseData['collections'][col][subcol][pose][nodepath][property]['val']
-#										print('RESOURCE = ',resource)
-										json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = property_resource_path
-									elif typeof(poseData['collections'][col][subcol][pose][nodepath][property]['val']) == TYPE_OBJECT:
-#										print("!!", property," is type ",typeof(poseData[group][face][pose][nodepath][property]))
-										json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = poseData['collections'][col][subcol][pose][nodepath][property]['val'].resource_path
-							
-	return json_poseData
+#										json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = property_resource_path
+#									elif typeof(poseData['collections'][col][subcol][pose][nodepath][property]['val']) == TYPE_OBJECT:
+##										print("!!", property," is type ",typeof(poseData[group][face][pose][nodepath][property]))
+#										json_poseData['collections'][col][subcol][pose][nodepath][property]['val'] = poseData['collections'][col][subcol][pose][nodepath][property]['val'].resource_path
+#
+#	return json_poseData
 
 func get_editor_poseData(jsonPoseData :Dictionary) -> Dictionary:
 #	print('jsonPoseData = ',jsonPoseData)
