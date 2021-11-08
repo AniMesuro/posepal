@@ -33,12 +33,16 @@ var poseData: Dictionary = {}
 var current_poselib: RES_PoseLibrary
 var wf_current_poselib: WeakRef
 
+var poseCreationVBox: VBoxContainer
+var tabContainer: TabContainer
 var warningIcon :TextureRect
 var posePalette: GridContainer setget ,_get_posePalette
 func _enter_tree() -> void:
 #	pluginInstance = _get_pluginInstance()
 	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
 	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	tabContainer = $"VSplit/TabContainer"
+	poseCreationVBox = $VSplit/ExtraHBox/PoseCreationVBox
 	
 #	yield(get_tree(), "idle_frame")
 	if get_tree().edited_scene_root == self:

@@ -31,7 +31,7 @@ func _on_pressed():
 		popupMenu.add_item('Erase',Items.ERASE)
 
 func _on_id_pressed(id: int):
-	var poseCreationVBox = owner.get_node("VBox/ExtraHBox/PoseCreationVBox")
+	var poseCreationVBox = owner.poseCreationVBox
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return

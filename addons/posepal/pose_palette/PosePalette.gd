@@ -61,6 +61,7 @@ func fill_previews():
 	print(thumbnailGenerator)
 	thumbnailGenerator.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
 	thumbnailGenerator.posePalDock = owner
+	thumbnailGenerator.connect("taken_snapshot", self, "_on_PoseThumbnailGenerator_taken_snapshot")
 	
 	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
 	for pose_id in collection.size():
@@ -102,7 +103,8 @@ func fill_previews():
 		thumbnailGenerator.queue_generate_thumbnail(pose, poselib.filterData[owner.poselib_filter], editedSceneRoot.get_node(owner.poselib_scene), pose_id)
 #		thumbnailGenerator.connect("taken_snapshot", posePreview, "_on_PoseThumbnailGenerator_taken_snapshot")
 	
-	thumbnailGenerator.generate_next_pose()
+	thumbnailGenerator.begin_thumbnail_generation()
+#	thumbnailGenerator.generate_next_pose()
 	# After a ton of photos the viewport is deleted.
 #	Maybe it shouldnt so switching pages wouldn't recreate the dummy scene again.
 #	poseThumbnailGenerator.queue_free()
@@ -114,6 +116,20 @@ func fill_previews():
 	yield(get_tree(), "idle_frame")
 	zoomSlider._fix_columns()
 #	zoomSlider._update_frame_sizes()
+
+func _on_PoseThumbnailGenerator_taken_snapshot(pose_id: int, texture: Texture):
+	print("pose thumbnail taken snapshot ",pose_id, texture)
+	for posePreview in get_children():
+		if posePreview.pose_id != pose_id:
+			continue
+#		yield(get_tree(), "idle_frame")
+#		yield(get_tree(), "idle_frame")
+
+		var image: Image = texture.get_data()
+		var imageTexture: ImageTexture = ImageTexture.new()
+		imageTexture.create_from_image(image)
+		posePreview.thumbnailButton.texture_normal = imageTexture
+		break
 
 func _clear_previews():
 	for posePreview in get_children():
