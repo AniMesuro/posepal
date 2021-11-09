@@ -7,16 +7,14 @@
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
-load_path = "res://.import/icon_warning.png-8df2d95b4878e30798bde4b17b4dec99.stex"
 
 [node name="AskidPopup" type="Popup"]
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 312.0
-margin_top = 200.0
-margin_right = -312.0
-margin_bottom = -200.0
+margin_left = 26.0
+margin_right = -598.0
+margin_bottom = -400.0
 rect_min_size = Vector2( 400, 200 )
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
@@ -58,9 +56,9 @@ text = "Choose an id from a to b:"
 autowrap = true
 
 [node name="ValueHBox" type="HBoxContainer" parent="Panel/VBox"]
-margin_left = 104.0
+margin_left = 121.0
 margin_top = 76.0
-margin_right = 276.0
+margin_right = 259.0
 margin_bottom = 155.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -69,6 +67,7 @@ __meta__ = {
 }
 
 [node name="WarningIcon" type="TextureRect" parent="Panel/VBox/ValueHBox"]
+visible = false
 margin_right = 30.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 30, 0 )
@@ -77,9 +76,8 @@ expand = true
 stretch_mode = 6
 
 [node name="SpinBox" type="SpinBox" parent="Panel/VBox/ValueHBox"]
-margin_left = 34.0
 margin_top = 28.0
-margin_right = 172.0
+margin_right = 138.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 6

@@ -46,24 +46,15 @@ func fill_previews():
 	if !is_instance_valid(editedSceneRoot.get_node(owner.poselib_scene)):
 		return
 	
-	var subcol: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
-	for pose_id in subcol.size():
-		var pose: Dictionary = subcol[pose_id]
+	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
+	for pose_id in collection.size():
+		var pose: Dictionary = collection[pose_id]
 		# Ignore if pose doesn't have all nodes from Filter pose.
 		if owner.poselib_filter != 'none':
-			var inside_group: bool = true
-			for node_path in pose:
-				# This approach ignores filtered children.
-				if node_path == '_name':
-					continue
-				if !poselib.filterData[owner.poselib_filter].has(node_path):
-				# Might be expensive, but filtered children are noted.
-#				if poselib.filterData[owner.poselib_filter].has(node_path):
-					inside_group = false
-					break
+			var inside_filter: bool = _filter_previews(pose, poselib)
 				
 				
-			if !inside_group:
+			if !inside_filter:
 				continue
 		
 		var posePreview: VBoxContainer = SCN_PosePreview.instance()
@@ -82,7 +73,7 @@ func fill_previews():
 		
 		
 		
-		posePreview.pose = subcol[pose_id]
+		posePreview.pose = collection[pose_id]
 		posePreview.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
 		posePreview._generate_thumbnail()
 			
@@ -97,3 +88,78 @@ func fill_previews():
 func _clear_previews():
 	for posePreview in get_children():
 		posePreview.queue_free()
+
+func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
+	var first = true
+	var inside_filter: bool = false
+#	var highest_filtered_parent_path: String = ""
+#	var highest_filtered_parent_level: int = -1
+#	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
+	
+	var highest_filtered_parents_path: PoolStringArray = []
+	var highest_filtered_parents_level: PoolIntArray= []
+	
+	var pose_raw: Dictionary = pose
+	pose_raw.erase('_name')
+	
+	for node_path in pose:
+		# This approach ignores filtered children.
+		if node_path == '_name':
+			continue
+		
+		# Loop through all parents to see if any of them is filtered
+		# Find highest filtered level parent.
+		var nodepath_array: PoolStringArray = node_path.split('/', false, 15)
+		print('nodepath array ',nodepath_array)
+		var current_path: String = nodepath_array[0]#node_path
+		
+		
+#		while nodepath_array.size() > 0:
+		for i in nodepath_array.size():
+			if i>0:
+				current_path = current_path +'/'+ nodepath_array[i]
+			
+			if current_path in highest_filtered_parents_path:
+				break
+			if poselib.filterData[owner.poselib_filter].has(current_path):
+				highest_filtered_parents_path.append(current_path)
+				highest_filtered_parents_level.append(i)
+#				highest_filtered_parent_path = current_path
+#					inside_filter = true
+#					Maybe doesn't need break because a filter can have multiple parents
+				break
+			
+			# Parents seems to be ignored already.
+			
+			# If siblings
+			if i in highest_filtered_parents_level && (i > 0):
+				var parent_path: String = current_path.trim_suffix("/"+ nodepath_array[i])
+				print('parent_path ',parent_path)
+				for path in highest_filtered_parents_path:
+					var high_path: String = path
+					print('high path ',high_path)
+					
+					var high_path_parent: String = high_path.rsplit('/', false, 1)[0]
+#					print('high path -- ',high_path_last_node)
+					if high_path_parent == parent_path:
+						print('nodepath slice ',i,' sibling with highest')
+						
+						return false
+			
+#			if nodepath_array.size() > 1:
+#				current_path = current_path.trim_suffix('/'+nodepath_array[nodepath_array.size()-1])
+#			else:
+#				print('--  last one', nodepath_array)
+#
+#				current_path = current_path.trim_suffix(nodepath_array[nodepath_array.size()-1])
+			
+			if first: print('current_path ', current_path,' | ', nodepath_array)
+#			nodepath_array.remove(nodepath_array.size()-1)
+#					if pose_id == 0: print("current path =", current_path)
+#					return
+		first = false
+		# At least one node in filter
+#				if !poselib.filterData[owner.poselib_filter].has(node_path):
+#					inside_filter = false
+#					break
+	return true

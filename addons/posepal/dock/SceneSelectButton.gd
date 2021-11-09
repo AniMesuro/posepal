@@ -151,6 +151,9 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	if !is_instance_valid(sceneNode):
 		_reset_selection()
 
+func _on_issued_forced_selection():
+	pass
+
 func _reset_selection():
 	text = msg_no_selection
 	icon = TEX_ExpandIcon

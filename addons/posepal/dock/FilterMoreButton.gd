@@ -12,7 +12,7 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-	popupMenu.rect_size = popupMenu.rect_min_size
+#	popupMenu.rect_size = popupMenu.rect_min_size
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -31,7 +31,7 @@ func _on_pressed():
 		popupMenu.add_item('Erase',Items.ERASE)
 
 func _on_id_pressed(id: int):
-	var poseCreationVBox = owner.get_node("VBox/ExtraHBox/PoseCreationVBox")
+	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return

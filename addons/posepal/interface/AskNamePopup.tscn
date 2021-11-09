@@ -7,10 +7,9 @@
 [node name="AskNamePopup" type="Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 312.0
-margin_top = 200.0
-margin_right = -312.0
-margin_bottom = -200.0
+margin_left = 26.0
+margin_right = -598.0
+margin_bottom = -400.0
 rect_min_size = Vector2( 400, 200 )
 theme = ExtResource( 2 )
 script = ExtResource( 3 )
@@ -58,7 +57,7 @@ autowrap = true
 [node name="LineEdit" type="LineEdit" parent="Panel/VBox"]
 margin_top = 76.0
 margin_right = 360.0
-margin_bottom = 106.0
+margin_bottom = 98.0
 placeholder_text = "Please insert new name here."
 caret_blink = true
 caret_blink_speed = 0.5
@@ -67,7 +66,7 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="Panel/VBox"]
-margin_top = 110.0
+margin_top = 102.0
 margin_right = 360.0
-margin_bottom = 130.0
+margin_bottom = 122.0
 text = "Done"
