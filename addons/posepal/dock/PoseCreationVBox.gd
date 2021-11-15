@@ -8,11 +8,12 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 const TEX_IconSave: StreamTexture = preload("res://addons/posepal/assets/icons/icon_save.png")
 const TEX_IconNew: StreamTexture = preload("res://addons/posepal/assets/icons/icon_new.png")
-#const SCN_newPosePopup :PackedScene= preload("res://addons/pose library/new_pose_popup/NewPosePopup.tscn")
+#const SCN_newPosePopup :PackedScene= preload("res://addons/posepal/new_pose_popup/NewPosePopup.tscn")
 
 enum PoseType {
-	NORMAL, # Animation Pose - Stores property animation keys.
-	FILTER # Filter Pose - Poses with nodes outside the Filter pose will be ignored.
+	NORMAL,  # Animation Pose - Stores property animation keys.
+	FILTER,  # Filter Pose - Poses with nodes outside the Filter pose will be ignored.
+	TEMPLATE # Base pose used as a template for all poses inside its collection.
 }
 var current_pose_type: int= PoseType.NORMAL
 
@@ -107,10 +108,12 @@ func _on_NewPoseButton_pressed():
 	if !is_instance_valid(poselib):
 		return
 	if posegen_mode == PoseGenMode.CREATE:
+		apply_pose(0, PoseType.TEMPLATE)
 		owner.load_poseData()
 		print('new_pose')
 		#Check if all parameters are valid
 		if !are_parameters_valid():
+			print('param invalid')
 			return
 #		var available_id: int = poselib.poseData[owner.poselib_template][owner.poselib_collection].size()
 #		for i in 50:
@@ -145,6 +148,11 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 			return
 #		pose_id is ignored if pose is filter pose.
 		pose_name = owner.poselib_filter
+	elif pose_type == PoseType.TEMPLATE:
+		if !poselib.templateData.has(owner.poselib_template):
+			return
+		pose_name = owner.poselib_template
+		
 #		if owner.poselib_filter != 'none':
 #			if poselib.filterData[owner.poselib_filter].has('_name'):
 #				pose_name = poselib.filterData[owner.poselib_filter]['_name']
@@ -218,16 +226,23 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	
 	# If pose exists, load pose.
 	if pose_type == PoseType.NORMAL:
+#		apply_pose(0, PoseType.TEMPLATE)
 		if pose_id < poselib.poseData[owner.poselib_template][owner.poselib_collection].size():
-			load_pose(pose_id, PoseType.NORMAL)
+			var err = load_pose(pose_id, PoseType.NORMAL)
+#			if !err: posegen_mode = PoseGenMode.CREATE; print('loading pose failed')
 			selected_pose_id = pose_id
 		else:
-#			Load filter pose as a base.
-			load_pose(0, PoseType.FILTER)
-			selected_pose_id = pose_id
+#			Templates shouldn't be stored on the poses inside it. They're just applied.
+
+#			load_pose(0, PoseType.TEMPLATE)
+#			selected_pose_id = pose_id
 			self.posegen_mode = PoseGenMode.SAVE
 	elif pose_type == PoseType.FILTER:
-		load_pose(0, PoseType.FILTER)
+		var err = load_pose(0, PoseType.FILTER)
+#		if !err: posegen_mode = PoseGenMode.CREATE; print('loading pose failed')
+	else:
+		var err = load_pose(0, PoseType.TEMPLATE)
+#		if !err: posegen_mode = PoseGenMode.CREATE; print('loading pose failed')
 
 func _on_EditedSceneRoot_tree_exiting():
 ##	print('edited scene is exiting tree: ',get_tree().edited_scene_root)
@@ -242,7 +257,7 @@ func _on_EditedSceneRoot_tree_exiting():
 #	animationPlayer.root_node = animationPlayer.get_path_to(self)#NodePath('..')
 	for anim in animationPlayer.get_animation_list():
 		animationPlayer.remove_animation(anim)
-	
+	animationPlayer.play("RESET")
 	var newPoseButton: Button = $NewPoseButton
 	for child in newPoseButton.get_children():
 		child.set_process_input(false)
@@ -285,11 +300,44 @@ func _on_EditedSceneRoot_tree_exiting():
 #			return value
 #	return null
 
+func apply_pose(pose_id: int, pose_type: int = -1):
+	print('applying pose')
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	if !is_instance_valid(poselib):
+		return
+	
+	var pose: Dictionary
+	if pose_type == -1: pose_type = current_pose_type
+	if pose_type == PoseType.NORMAL:
+		print('alllll poses = ',poselib.poseData[owner.poselib_template][owner.poselib_collection])
+		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+	elif pose_type == PoseType.FILTER:
+		pose = poselib.filterData[owner.poselib_filter]
+	else:
+		pose = poselib.templateData[owner.poselib_template]
+	
+	
+	var editedSceneRoot: Node = get_tree().edited_scene_root
+	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
+#		var animRoot: Node = animationPlayer.root_node
+	for node_path in pose.keys():
+		if node_path == "_name":
+			continue
+		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
+		if !is_instance_valid(animNode):
+			break
+		for property in pose[node_path]:
+			var value
+			if !pose[node_path][property].has('val'):
+				break
+			value = pose[node_path][property]['val']
+			animNode.set(property, value)
+			
+
 # Loads the pose from the Poselib
-func load_pose(pose_id: int, pose_type: int= -1):
+func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 	print('loading pose')
 	if !(is_instance_valid(animationPlayer)):
-#	or is_instance_valid(anim)):
 		return
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
@@ -301,6 +349,8 @@ func load_pose(pose_id: int, pose_type: int= -1):
 		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 	elif pose_type == PoseType.FILTER:
 		pose = poselib.filterData[owner.poselib_filter]
+	else:
+		pose = poselib.templateData[owner.poselib_template]
 	
 	var anim: Animation = animationPlayer.get_animation(selected_animation)
 	if !is_instance_valid(anim):
@@ -357,6 +407,7 @@ func load_pose(pose_id: int, pose_type: int= -1):
 			anim.track_insert_key(tr_property, 0.0, key_value, transition_out)
 	
 	self.posegen_mode = PoseGenMode.SAVE
+	return true # returns true if loading was succesful
 
 func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	print('saving pose ',pose_type)
@@ -400,7 +451,10 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 #			is_empty = true
 #		else:
 #			poselib.filterData[owner.poselib_filter] = {}
-			
+	else:
+		poselib.templateData[owner.poselib_template] = {}
+		print(owner.poselib_template,' is empty')
+		
 #	poselib = null
 	
 	
@@ -476,6 +530,13 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
 				poselib.filterData[owner.poselib_filter][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
+	else:
+		if !poselib.templateData[owner.poselib_template].has(node_path):
+			poselib.templateData[owner.poselib_template][node_path] = {}
+		poselib.templateData[owner.poselib_template][node_path][property] = {}
+		
+		poselib.templateData[owner.poselib_template][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+#		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 
 func are_parameters_valid() -> bool:
 	var poselib: RES_PoseLibrary = owner.current_poselib
@@ -489,6 +550,8 @@ func are_parameters_valid() -> bool:
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
 		return false
 	if !poselib.filterData.has(owner.poselib_filter):
+		return false
+	if !poselib.templateData.has(owner.poselib_template):
 		return false
 	return true
 

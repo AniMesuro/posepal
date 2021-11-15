@@ -52,6 +52,8 @@ func _on_issued_forced_selection():
 #		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
+	if !poselib.templateData.has(owner.poselib_template):
+		return
 	text = owner.poselib_template
 	icon = owner.editorControl.get_icon("Folder", "EditorIcons")
 

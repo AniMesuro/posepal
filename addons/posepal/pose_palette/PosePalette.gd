@@ -110,7 +110,7 @@ func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
 		# Loop through all parents to see if any of them is filtered
 		# Find highest filtered level parent.
 		var nodepath_array: PoolStringArray = node_path.split('/', false, 15)
-		print('nodepath array ',nodepath_array)
+#		print('nodepath array ',nodepath_array)
 		var current_path: String = nodepath_array[0]#node_path
 		
 		
@@ -134,15 +134,15 @@ func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
 			# If siblings
 			if i in highest_filtered_parents_level && (i > 0):
 				var parent_path: String = current_path.trim_suffix("/"+ nodepath_array[i])
-				print('parent_path ',parent_path)
+#				print('parent_path ',parent_path)
 				for path in highest_filtered_parents_path:
 					var high_path: String = path
-					print('high path ',high_path)
+#					print('high path ',high_path)
 					
 					var high_path_parent: String = high_path.rsplit('/', false, 1)[0]
 #					print('high path -- ',high_path_last_node)
 					if high_path_parent == parent_path:
-						print('nodepath slice ',i,' sibling with highest')
+#						print('nodepath slice ',i,' sibling with highest')
 						
 						return false
 			
@@ -153,11 +153,11 @@ func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
 #
 #				current_path = current_path.trim_suffix(nodepath_array[nodepath_array.size()-1])
 			
-			if first: print('current_path ', current_path,' | ', nodepath_array)
+#			if first: print('current_path ', current_path,' | ', nodepath_array)
 #			nodepath_array.remove(nodepath_array.size()-1)
 #					if pose_id == 0: print("current path =", current_path)
 #					return
-		first = false
+#		first = false
 		# At least one node in filter
 #				if !poselib.filterData[owner.poselib_filter].has(node_path):
 #					inside_filter = false

@@ -1,4 +1,4 @@
-tool
+#tool
 extends VBoxContainer
 
 const SCN_NodeOption :PackedScene= preload("res://addons/posepal/new_pose_popup/NodeOption.tscn")
@@ -8,7 +8,7 @@ var selected_nodepaths :PoolStringArray= PoolStringArray([])
 var pluginInstance :EditorPlugin
 
 func _ready() -> void:
-	pluginInstance = get_tree().get_nodes_in_group("plugin pose_library")[0]
+	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 
 func fill_nodes():
 	clear_nodes()

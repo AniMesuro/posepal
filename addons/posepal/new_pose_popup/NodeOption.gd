@@ -1,4 +1,4 @@
-tool
+#tool
 extends HBoxContainer
 
 signal changed_selection (nodeOption)

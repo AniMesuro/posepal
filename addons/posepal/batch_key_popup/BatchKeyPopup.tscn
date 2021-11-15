@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/posepal/batch_key_popup/BatchKeyPopup.gd" type="Script" id=2]
+[ext_resource path="res://addons/posepal/batch_key_popup/property_display/PropertyBox.gd" type="Script" id=3]
+[ext_resource path="res://addons/posepal/batch_key_popup/NodeVBox.gd" type="Script" id=4]
+
+[node name="CustomPose" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -312.0
+margin_top = -170.0
+margin_right = 300.0
+margin_bottom = 186.0
+theme = ExtResource( 1 )
+window_title = "Batch Key"
+resizable = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 5.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 592.0
+margin_bottom = 341.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleHBox" type="HBoxContainer" parent="MarginContainer/VBox"]
+margin_right = 592.0
+margin_bottom = 14.0
+
+[node name="NodeLabel" type="Label" parent="MarginContainer/VBox/TitleHBox"]
+margin_right = 294.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Nodes"
+align = 1
+
+[node name="PropertyLabel" type="Label" parent="MarginContainer/VBox/TitleHBox"]
+margin_left = 298.0
+margin_right = 592.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Properties"
+align = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBox"]
+margin_top = 18.0
+margin_right = 592.0
+margin_bottom = 321.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+collapsed = true
+
+[node name="TreeScroll" type="ScrollContainer" parent="MarginContainer/VBox/HSplitContainer"]
+margin_right = 290.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+scroll_deadzone = 24
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/HSplitContainer/TreeScroll"]
+margin_right = 290.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="PropertyScroll" type="ScrollContainer" parent="MarginContainer/VBox/HSplitContainer"]
+margin_left = 302.0
+margin_right = 592.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/HSplitContainer/PropertyScroll"]
+margin_right = 290.0
+margin_bottom = 303.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="FilterBox" type="LineEdit" parent="MarginContainer/VBox"]
+margin_top = 325.0
+margin_right = 592.0
+margin_bottom = 341.0
+text = "property"
+caret_blink = true
+caret_blink_speed = 0.5

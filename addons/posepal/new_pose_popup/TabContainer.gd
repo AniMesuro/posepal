@@ -1,4 +1,4 @@
-tool
+#tool
 extends TabContainer
 
 func _ready() -> void:

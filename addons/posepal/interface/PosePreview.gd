@@ -7,6 +7,7 @@ enum PopupItems {
 	RENAME
 	ERASE
 	REORDER
+	APPLY
 }
 
 var pose_id: int = -1
@@ -82,7 +83,11 @@ func _generate_thumbnail():
 	
 	######## NAO TESTADO SE FUNCIONA
 	if owner.poselib_filter != 'none':
-		_generate_preview_scene(poseSceneRoot, _rt, false, 15)
+		var poselib: Resource = owner.current_poselib
+		if poselib.filterData[owner.poselib_filter].size() > 0:
+			_generate_preview_scene(poseSceneRoot, _rt, false, 15)
+		else:
+			_generate_preview_scene(poseSceneRoot, _rt, true, 15)
 	else:
 		_generate_preview_scene(poseSceneRoot, _rt, true, 15)
 #	
@@ -164,20 +169,24 @@ func _generate_thumbnail():
 
 func _generate_preview_scene(parent: Node = null, previewParent: Node = null, has_filtered: bool = false, iter: int = 0):
 	# Loops through all of a Node's children in a maximum of %iter iterations.
+	var is_node_filtered: bool = has_filtered
+	
 	for ch in parent.get_children():
 		var _np_ch: String = poseSceneRoot.get_path_to(ch)
 		var _ch: Node
-		if !has_filtered:
+		if !is_node_filtered:
 			if filterPose.has(_np_ch):
-				has_filtered = true
+				is_node_filtered = true
 #				continue
 		
-		if has_filtered:
+		if is_node_filtered:
 			_ch = _generate_previewNode(ch)
 		else:
 			_ch = Node2D.new()
 		previewParent.add_child(_ch)
 		_generate_preview_scene(ch, _ch, has_filtered, iter-1)
+		if !has_filtered:
+			is_node_filtered = false
 #	print(previewParent.get_children()[0],' globaltrans =',previewParent.get_children()[0].global_transform)
 
 
@@ -504,6 +513,8 @@ func _on_PopupMenu_id_selected(id: int):
 		return
 #	print('poseCreationVBox ',poseCreationVBox)
 	match id:
+		PopupItems.APPLY:
+			poseCreationVBox.apply_pose(pose_id, 0)
 		PopupItems.EDIT:
 			print('posecrea ',poseCreationVBox)
 #			print('edit pose =',pose_key)

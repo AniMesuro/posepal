@@ -1,7 +1,7 @@
-tool
+#tool
 extends VBoxContainer
 
-const SCN_PropertyTab :PackedScene= preload("res://addons/pose library/new_pose_popup/property_display/PropertyTab.tscn")
+const SCN_PropertyTab :PackedScene= preload("res://addons/posepal/new_pose_popup/property_display/PropertyTab.tscn")
 
 var pose :Dictionary= {} # Remote with all PropertyTabs
 #var jsonPose :Dictionary= {} # Stores only values incompatible with JSON. ex: Resources

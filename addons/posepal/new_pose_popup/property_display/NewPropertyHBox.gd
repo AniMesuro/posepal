@@ -1,8 +1,8 @@
 tool
 extends HBoxContainer
 
-const TEX_IconValid :StreamTexture= preload("res://addons/pose library/assets/icons/icon_yes.png")
-const TEX_IconInvalid :StreamTexture= preload("res://addons/pose library/assets/icons/icon_not.png")
+const TEX_IconValid :StreamTexture= preload("res://addons/posepal/assets/icons/icon_yes.png")
+const TEX_IconInvalid :StreamTexture= preload("res://addons/posepal/assets/icons/icon_not.png")
 
 var propertyContainer :VBoxContainer
 

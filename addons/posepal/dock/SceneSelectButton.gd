@@ -119,7 +119,7 @@ func _on_id_selected(id :int):
 #	var available_path :String
 #	var f :File= File.new()
 #	for i in 100:
-#		available_path = "res://addons/pose library/.posedata/" + owner.poselib_scene.get_basename().get_file()+"_"+str(i) + ".pose"
+#		available_path = "res://addons/posepal/.posedata/" + owner.poselib_scene.get_basename().get_file()+"_"+str(i) + ".pose"
 #		if f.file_exists(available_path):
 #			continue
 #		selected_scene.set_meta('_plPoseLib_poseFile', available_path)

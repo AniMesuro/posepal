@@ -69,19 +69,16 @@ func _on_name_settled(new_name: String, id: int):
 			if new_name == 'none':
 				return
 			poselib.filterData[new_name] = {}
+			
 			owner.poselib_filter = new_name
-#			owner.poselib_template = new_name
 			owner.emit_signal("issued_forced_selection")
 		Items.RENAME:
 			if new_name == 'none':
 				return
 			if owner.poselib_filter == new_name:
-#			if owner.poselib_filter == 'none':
 				return
-			
 			poselib.filterData[new_name] = poselib.filterData[owner.poselib_filter]
 			poselib.filterData.erase(owner.poselib_filter)
 			owner.poselib_filter = new_name
 			owner.emit_signal("issued_forced_selection")
-#	print(owner.poseData['groups'])
 	owner.save_poseData()

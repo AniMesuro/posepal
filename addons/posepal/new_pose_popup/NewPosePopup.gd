@@ -1,4 +1,4 @@
-tool
+#tool
 extends Popup
 
 signal pose_created (pose, pose_key)
@@ -27,7 +27,7 @@ func _enter_tree() -> void:
 		
 func _ready() -> void:
 #	if get_tree().edited_scene_root == self:
-	pluginInstance = get_tree().get_nodes_in_group("plugin pose_library")[0]
+	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 #	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 	print('plugininstance ',pluginInstance)
 #		$"Panel/VBox/TabContainer/Properties/PropertyDisplay".pluginInstance = pluginInstance

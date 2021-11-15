@@ -109,31 +109,25 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 _windowRect = NodePath("..")
-debug_mode = false
 
 [node name="HandlerTop" parent="RectHandlerContainer" index="0"]
 margin_right = 418.0
-handler_direction = 0
-debug_mode = false
 _windowRect = NodePath("../..")
 
 [node name="HandlerBottom" parent="RectHandlerContainer" index="1"]
 margin_top = 450.0
 margin_right = 418.0
 margin_bottom = 460.0
-debug_mode = false
 _windowRect = NodePath("../..")
 
 [node name="HandlerLeft" parent="RectHandlerContainer" index="2"]
 margin_bottom = 460.0
-debug_mode = false
 _windowRect = NodePath("../..")
 
 [node name="HandlerRight" parent="RectHandlerContainer" index="3"]
 margin_left = 408.0
 margin_right = 418.0
 margin_bottom = 460.0
-debug_mode = false
 _windowRect = NodePath("../..")
 
 [editable path="RectHandlerContainer"]

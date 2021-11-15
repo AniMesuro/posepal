@@ -42,6 +42,7 @@ export var scene_shortcuts: Dictionary = {} # Node shortcuts ex. {0:"/Head/Eyes"
 
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
+export var templateData: Dictionary = {"default": {}}
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 
 func _init() -> void:

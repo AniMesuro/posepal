@@ -8,7 +8,7 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-	popupMenu.rect_size = rect_min_size
+#	popupMenu.rect_size = rect_min_size
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -18,8 +18,8 @@ func _on_pressed():
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
-		return
-#		popupMenu.add_item('Create', Items.CREATE)
+#		return
+		popupMenu.add_item('Create', Items.CREATE)
 	elif owner.poselib_collection == 'default':
 		popupMenu.add_item('Create', Items.CREATE)
 	else:
@@ -57,7 +57,7 @@ func _on_name_settled(new_name: String, id: int):
 		Items.CREATE:
 			if new_name == 'default':
 				return
-			poselib.poseData[owner.poselib_template][new_name] = {}
+			poselib.poseData[owner.poselib_template][new_name] = []
 			owner.poselib_collection = new_name
 			owner.emit_signal("issued_forced_selection")
 		Items.RENAME:
