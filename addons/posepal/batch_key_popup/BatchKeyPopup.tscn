@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/posepal/batch_key_popup/BatchKeyPopup.gd" type="Script" id=2]
 [ext_resource path="res://addons/posepal/batch_key_popup/property_display/PropertyBox.gd" type="Script" id=3]
 [ext_resource path="res://addons/posepal/batch_key_popup/NodeVBox.gd" type="Script" id=4]
+[ext_resource path="res://addons/posepal/assets/icons/icon_not.png" type="Texture" id=5]
+[ext_resource path="res://addons/posepal/batch_key_popup/BatchAddVBox.gd" type="Script" id=6]
 
 [node name="CustomPose" type="WindowDialog"]
 visible = true
@@ -65,14 +67,14 @@ align = 1
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBox"]
 margin_top = 18.0
 margin_right = 592.0
-margin_bottom = 321.0
+margin_bottom = 269.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 collapsed = true
 
 [node name="TreeScroll" type="ScrollContainer" parent="MarginContainer/VBox/HSplitContainer"]
 margin_right = 290.0
-margin_bottom = 303.0
+margin_bottom = 251.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -80,7 +82,7 @@ scroll_deadzone = 24
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/HSplitContainer/TreeScroll"]
 margin_right = 290.0
-margin_bottom = 303.0
+margin_bottom = 251.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
@@ -88,22 +90,73 @@ script = ExtResource( 4 )
 [node name="PropertyScroll" type="ScrollContainer" parent="MarginContainer/VBox/HSplitContainer"]
 margin_left = 302.0
 margin_right = 592.0
-margin_bottom = 303.0
+margin_bottom = 251.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/HSplitContainer/PropertyScroll"]
 margin_right = 290.0
-margin_bottom = 303.0
+margin_bottom = 251.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 3 )
 
-[node name="FilterBox" type="LineEdit" parent="MarginContainer/VBox"]
-margin_top = 325.0
+[node name="BatchAddVBox" type="VBoxContainer" parent="MarginContainer/VBox"]
+margin_top = 273.0
 margin_right = 592.0
-margin_bottom = 341.0
+margin_bottom = 313.0
+script = ExtResource( 6 )
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBox/BatchAddVBox"]
+margin_right = 592.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBox/BatchAddVBox/HBox"]
+margin_right = 572.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
 text = "property"
 caret_blink = true
 caret_blink_speed = 0.5
+
+[node name="ValidityIcon" type="TextureRect" parent="MarginContainer/VBox/BatchAddVBox/HBox"]
+margin_left = 576.0
+margin_right = 592.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="MarginContainer/VBox/BatchAddVBox"]
+margin_left = 186.0
+margin_top = 20.0
+margin_right = 406.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 220, 20 )
+size_flags_horizontal = 4
+text = "Add property to selected nodes"
+clip_text = true
+
+[node name="FinishHBox" type="HBoxContainer" parent="MarginContainer/VBox"]
+margin_top = 317.0
+margin_right = 592.0
+margin_bottom = 341.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Button" type="Button" parent="MarginContainer/VBox/FinishHBox"]
+margin_right = 63.0
+margin_bottom = 24.0
+text = "Batch key"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBox/FinishHBox"]
+margin_left = 79.0
+margin_right = 122.0
+margin_bottom = 24.0
+text = "Cancel"

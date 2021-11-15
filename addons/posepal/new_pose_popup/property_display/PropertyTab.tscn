@@ -6,7 +6,6 @@
 [ext_resource path="res://addons/posepal/new_pose_popup/property_display/NewPropertyHBox.gd" type="Script" id=6]
 [ext_resource path="res://addons/posepal/new_pose_popup/property_display/PropertyContainer.gd" type="Script" id=7]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 
 [sub_resource type="Theme" id=2]
@@ -27,12 +26,16 @@ __meta__ = {
 }
 
 [node name="NodePropertyTab" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_left = 0.0
+margin_right = 398.0
+margin_bottom = 34.0
 path_to_expandableControl = NodePath("..")
 
 [node name="ExpandVBox" type="VBoxContainer" parent="."]
-margin_top = 28.0
+margin_top = 38.0
 margin_right = 398.0
-margin_bottom = 158.0
+margin_bottom = 162.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -68,8 +71,8 @@ margin_left = 324.0
 margin_right = 398.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 74, 0 )
-custom_styles/normal = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 3 )
 text = "New"
 icon = ExtResource( 5 )
 expand_icon = true
@@ -77,7 +80,7 @@ expand_icon = true
 [node name="Panel" type="Panel" parent="ExpandVBox"]
 margin_top = 28.0
 margin_right = 398.0
-margin_bottom = 130.0
+margin_bottom = 124.0
 rect_min_size = Vector2( 0, 96 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -97,7 +100,7 @@ __meta__ = {
 
 [node name="PropertyContainer" type="VBoxContainer" parent="ExpandVBox/Panel/ScrollContainer"]
 margin_right = 388.0
-margin_bottom = 98.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 7 )

@@ -15,10 +15,14 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	var propertyDisplay: Control = SCN_PropertyDisplay.instance()
 #	propertyDisplay.nodeItem = nodeItem
 	
+	var editedSceneRoot = get_tree().edited_scene_root
+	var poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
+	
 	var node = nodeItem.node
 	propertyDisplay.node = node
 	propertyDisplay.title = node.name
 	propertyDisplay.display_id = child_id
+	propertyDisplay.node_nodepath = poseSceneRoot.get_path_to(node)
 	
 	# Find adequate child_id
 	var prev_child: Node = null

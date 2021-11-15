@@ -6,6 +6,8 @@
 [node name="PropertyItem" type="HBoxContainer"]
 margin_right = 72.0
 margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -22,5 +24,7 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="."]
 margin_left = 20.0
 margin_top = 1.0
-margin_right = 20.0
+margin_right = 74.0
 margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "property"

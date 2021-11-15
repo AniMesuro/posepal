@@ -5,6 +5,7 @@ export var expand :bool= false setget _set_expand
 export var node_nodepath :String= "Node" setget _set_node_nodepath
 export var node_type :String= "Node" setget _set_node_type
 var pose :Dictionary setget _set_pose,_get_pose
+var node: Node
 
 var nodeRef :Node
 
