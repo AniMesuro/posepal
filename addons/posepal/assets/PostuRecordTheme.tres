@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=18 format=2]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.282353, 0.262745, 0.25098, 1 )
@@ -19,8 +19,15 @@ bg_color = Color( 0.282353, 0.262745, 0.25098, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=17]
 
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.137255, 0.133333, 0.12549, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.117996, 0.117996, 0.144531, 1 )
+bg_color = Color( 0.192157, 0.188235, 0.180392, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -86,6 +93,7 @@ CheckBox/styles/hover = SubResource( 15 )
 CheckBox/styles/normal = SubResource( 16 )
 CheckButton/styles/normal = SubResource( 17 )
 Label/fonts/font = null
+LineEdit/styles/focus = SubResource( 20 )
 LineEdit/styles/normal = SubResource( 2 )
 MenuButton/colors/font_color = Color( 0.996078, 0.984314, 0.984314, 1 )
 MenuButton/styles/hover = SubResource( 10 )

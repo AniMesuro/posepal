@@ -44,7 +44,6 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 		if first: move_child(propertyDisplay, 0)
 	
 	if propertyDisplay.node_nodepath in unselectedPropertyData.keys():
-		print("Propertyies = ",unselectedPropertyData[propertyDisplay.node_nodepath])
 		for property in unselectedPropertyData[propertyDisplay.node_nodepath]:
 			propertyDisplay.add_propertyItem(property)
 		unselectedPropertyData.erase(propertyDisplay.node_nodepath)
@@ -93,9 +92,6 @@ func remove_propertyDisplay(node: Node):
 			for i in all_properties.size():
 				var property: String = all_properties[i]
 #				print('89 property ',property)
-#				unselectedPropertyData[ch.node_nodepath].push_back(property)
 				unselectedPropertyData[ch.node_nodepath][i] = property
-#				print(unselectedPropertyData[ch.node_nodepath].size())
 			ch.queue_free()
-			print("full unsel ",unselectedPropertyData)
 			return

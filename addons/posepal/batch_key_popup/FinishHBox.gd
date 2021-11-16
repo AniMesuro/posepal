@@ -33,6 +33,7 @@ func _on_OkButton_pressed():
 				anim.track_set_path(tr_property, property_path)
 			
 			var key_value = node.get(property)
+			
 			anim.track_insert_key(tr_property, current_time, key_value)
 			
 	owner.queue_free()
