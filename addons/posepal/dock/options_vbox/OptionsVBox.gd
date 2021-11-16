@@ -34,15 +34,18 @@ func _on_BatchKeyBtn_pressed():
 			break
 	var newPoseButton: Button = $"../../../../ExtraHBox/PoseCreationVBox/NewPoseButton"
 	
-	if !is_instance_valid(currentAnimOptionButton):
-		if is_instance_valid(newPoseButton.animationPlayer):
-			current_edited_animPlayer = newPoseButton.animationPlayer
+	if !is_instance_valid(current_edited_animPlayer):
+		# PoseAnimationPlayer should be child of NewPoseButton
+		var poseButton_children: Array = newPoseButton.get_children()
+		print("posebutton children ",poseButton_children)
+		if poseButton_children.size() > 0:
+			current_edited_animPlayer = newPoseButton.get_children()[0]
 			
-	if !is_instance_valid(currentAnimOptionButton):
+	if !is_instance_valid(current_edited_animPlayer):
 		if is_instance_valid(owner.poselib_animPlayer):
 			current_edited_animPlayer = owner.poselib_animPlayer
 	
-	if !is_instance_valid(currentAnimOptionButton):
+	if !is_instance_valid(current_edited_animPlayer):
 		print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
 		return
 #	else:

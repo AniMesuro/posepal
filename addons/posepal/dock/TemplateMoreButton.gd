@@ -51,6 +51,7 @@ func _on_id_pressed(id: int):
 			if owner.poselib_template == 'default':
 				return
 			poselib.poseData.erase(owner.poselib_template)
+			poselib.templateData.erase(owner.poselib_template)
 			owner.poselib_template = 'default'
 			owner.emit_signal("issued_forced_selection")
 			owner.save_poseData()
@@ -86,7 +87,8 @@ func _on_name_settled(new_name: String, id: int):
 
 func is_name_valid(new_name: String):
 	var poselib: RES_PoseLibrary = owner.current_poselib
-	if new_name == 'default' or new_name == '' or (new_name in poselib.templateData.keys()):
+	if (new_name == 'default') or (new_name == '') or (new_name in poselib.templateData.keys()):
+		print('no')
 		return false
 	return true
 
