@@ -51,13 +51,13 @@ func fill_nodes():
 
 func add_node_item(parentItem: Node, node: Node) -> Node:
 	var nodeItem: HBoxContainer = SCN_NodeItem.instance()
-	nodeItem.node_type = node.get_class()
 	nodeItem.node_name = node.name
 #	nodeItem.node_nodepath = poseSceneRoot.get_path_to(node)
 	nodeItem.node = node
 	nodeItem.parentItem = parentItem
 	nodeItem.child_id = get_child_count()
 	add_child(nodeItem)
+	nodeItem.node_type = node.get_class()
 	nodeItem.is_expanded = true
 	nodeItem.connect("checked_node", self, "_on_checked_node")
 	if is_instance_valid(parentItem):

@@ -13,7 +13,7 @@ var parentItem: Node
 var childrenItems: Array = [] setget _set_childrenItems
 var propertyDisplay: Control
 
-var pluginInstance: EditorPlugin
+var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorInterface: EditorInterface
 var editorControl: Control
 
@@ -38,6 +38,8 @@ func _ready() -> void:
 	self.is_expanded = is_expanded
 	var checkButton: CheckButton = $CheckButton
 	checkButton.connect("pressed", self, "_on_CheckButton_pressed")
+	var icon: TextureRect = $Icon
+#	icon.texture = 
 
 func _set_nesting_level(new_nesting_level: int):
 	if !is_inside_tree():
@@ -60,14 +62,15 @@ func _set_nesting_level(new_nesting_level: int):
 
 func _set_node_type(new_node_type :String):
 	if !is_inside_tree(): return
-	if is_instance_valid(self): return
+#	if is_instance_valid(self): return
+	print('set_type')
 	if !Engine.editor_hint: return
 	
 	var icon: TextureRect = $Icon
 	if type_exists(new_node_type):
-		icon.texture = pluginInstance.editorControl.get_icon(new_node_type, "EditorIcons")
+		icon.texture = self.pluginInstance.editorControl.get_icon(new_node_type, "EditorIcons")
 	else:
-		icon.texture = pluginInstance.editorControl.get_icon("Node","EditorIcons")
+		icon.texture = self.pluginInstance.editorControl.get_icon("Node","EditorIcons")
 	
 	node_type = new_node_type
 
@@ -124,3 +127,9 @@ func _set_childrenItems(new_childrenItems: Array):
 	else:
 		self.is_expanded = true
 #		expandButton.rect_size.y = 24
+
+func _get_pluginInstance():
+	if is_instance_valid(pluginInstance):
+		return pluginInstance
+	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
+	return pluginInstance
