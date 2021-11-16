@@ -4,7 +4,7 @@ extends HBoxContainer
 const TEX_IconValid :StreamTexture= preload("res://addons/posepal/assets/icons/icon_yes.png")
 const TEX_IconInvalid :StreamTexture= preload("res://addons/posepal/assets/icons/icon_not.png")
 
-const SCN_PropertyItem: PackedScene = preload("res://addons/posepal/batch_key_popup/property_display/PropertyItem.tscn")
+#const SCN_PropertyItem: PackedScene = preload("res://addons/posepal/batch_key_popup/property_display/PropertyItem.tscn")
 
 var is_property_valid: bool = false setget _set_is_property_valid
 
@@ -17,17 +17,8 @@ func _ready() -> void:
 func text_confirm(text: String):
 	if !is_property_valid:
 		return
-	# Instance PropertyItem
-	# Only if property valid on Node.
-	var propertyItem: Control = SCN_PropertyItem.instance()
-	var lineEdit: LineEdit = $"LineEdit"
-#	print('aaaaaaa ',propertyItem.property)
-	var propertyContainer: GridContainer = $"../../../PropertyContainer"
-	propertyContainer.add_child(propertyItem)
-	propertyItem.property = text
-	lineEdit.text = ""
+	owner.add_propertyItem(text)
 	self.is_property_valid = false
-	
 
 func _on_text_changed(new_text: String):
 	# Check validity

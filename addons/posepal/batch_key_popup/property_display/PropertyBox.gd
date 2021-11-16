@@ -14,7 +14,8 @@ func fill_properties():
 func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	var propertyDisplay: Control = SCN_PropertyDisplay.instance()
 #	propertyDisplay.nodeItem = nodeItem
-	
+	var batchAddVBox: VBoxContainer = $"../../../BatchAddVBox"
+	var batchAddLineEdit: LineEdit = $"../../../BatchAddVBox/HBox/LineEdit"
 	var editedSceneRoot = get_tree().edited_scene_root
 	var poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
 	
@@ -24,7 +25,7 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	propertyDisplay.display_id = child_id
 	propertyDisplay.node_nodepath = poseSceneRoot.get_path_to(node)
 	
-	# Find adequate child_id
+		# Find adequate child_id
 	var prev_child: Node = null
 	var first: bool = false
 	
@@ -39,6 +40,12 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	else:
 		add_child(propertyDisplay)
 		if first: move_child(propertyDisplay, 0)
+	
+	var node_valid: bool = propertyDisplay.validate_batch_property(batchAddLineEdit.text)
+	if (batchAddVBox.valid_state == batchAddVBox.ValidState.INVALID) && node_valid:
+		batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
+	elif (batchAddVBox.valid_state == batchAddVBox.ValidState.VALID) && !node_valid:
+		batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
 #	sort_children()
 
 func sort_children():

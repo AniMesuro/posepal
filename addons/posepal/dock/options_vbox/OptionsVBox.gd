@@ -1,7 +1,7 @@
 tool
 extends VBoxContainer
 
-const SCN_CustomScene: PackedScene = preload("res://addons/posepal/custom_pose/CustomPose.tscn")
+const SCN_BatchKeyPopup: PackedScene = preload("res://addons/posepal/batch_key_popup/BatchKeyPopup.tscn")
 
 var batchKeyBtn: Button
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _on_BatchKeyBtn_pressed():
 		owner.issue_warning("animplayeredit_empty")
 	else:
 		print("batch key")
-		var batchKeyPopup: Control = SCN_CustomScene.instance()
+		var batchKeyPopup: Control = SCN_BatchKeyPopup.instance()
 		batchKeyPopup.posepalDock = owner
 		batchKeyBtn.add_child(batchKeyPopup)
 		batchKeyPopup.owner = owner

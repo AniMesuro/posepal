@@ -119,16 +119,16 @@ __meta__ = {
 margin_right = 572.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "property"
+placeholder_text = "Property"
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="ValidityIcon" type="TextureRect" parent="MarginContainer/VBox/BatchAddVBox/HBox"]
+[node name="ValidityIcon" type="TextureButton" parent="MarginContainer/VBox/BatchAddVBox/HBox"]
 margin_left = 576.0
 margin_right = 592.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
-texture = ExtResource( 5 )
+texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
@@ -141,6 +141,10 @@ rect_min_size = Vector2( 220, 20 )
 size_flags_horizontal = 4
 text = "Add property to selected nodes"
 clip_text = true
+
+[node name="InactivityTimer" type="Timer" parent="MarginContainer/VBox/BatchAddVBox"]
+wait_time = 3.0
+one_shot = true
 
 [node name="FinishHBox" type="HBoxContainer" parent="MarginContainer/VBox"]
 margin_top = 317.0
