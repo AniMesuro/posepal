@@ -24,6 +24,7 @@ func _on_pressed():
 		popupMenu.add_item('Create',Items.CREATE)
 		popupMenu.add_item('Rename',Items.RENAME)
 		popupMenu.add_item('Erase',Items.ERASE)
+		popupMenu.add_item('Apply',Items.APPLY)
 
 func _on_id_pressed(id: int):
 	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
@@ -55,6 +56,8 @@ func _on_id_pressed(id: int):
 			owner.poselib_template = 'default'
 			owner.emit_signal("issued_forced_selection")
 			owner.save_poseData()
+		Items.APPLY:
+			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
 
 
 func _on_name_settled(new_name: String, id: int):

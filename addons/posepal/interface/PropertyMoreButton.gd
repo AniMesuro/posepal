@@ -7,7 +7,8 @@ enum Items {
 	EDIT,
 	CREATE,
 	RENAME,
-	ERASE
+	ERASE,
+	APPLY
 }
 
 var popupMenu :PopupMenu
