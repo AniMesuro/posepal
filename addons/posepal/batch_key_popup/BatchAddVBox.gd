@@ -27,12 +27,20 @@ func _ready() -> void:
 func confirm_property(text: String):
 	if valid_state == ValidState.INVALID:
 		return
+	if valid_state == ValidState.WAITING:
+		$InactivityTimer.stop()
+		_check_validity()
 	var propertyBox: VBoxContainer = $"../HSplitContainer/PropertyScroll/VBox"
+		
 	for propertyDisplay in propertyBox.get_children():
+		var propertyContainer: Control = propertyDisplay.get_node("PropertyContainer")
+		for propertyItem in propertyContainer.get_children():
+			if propertyItem.property == text:
+				continue
 		if propertyDisplay.is_valid_for_batch_property:
 			propertyDisplay.add_propertyItem(text)
 	$"HBox/LineEdit".text = ""
-	
+	self.valid_state == ValidState.INVALID
 
 func _check_validity():
 	# Check validity of property in all nodes.
@@ -44,7 +52,15 @@ func _check_validity():
 	var invalid_nodepaths: PoolStringArray
 	for propertyDisplay in propertyBox.get_children():
 		if new_property in propertyDisplay.node:
-			valid_nodepaths.append(propertyDisplay.node_nodepath)
+			var is_duplicate: bool = false
+			var propertyContainer: Control = propertyDisplay.get_node("PropertyContainer")
+			for propertyItem in propertyContainer.get_children():
+				if propertyItem.property == new_property:
+					is_duplicate = true
+					break
+			
+			if !is_duplicate:
+				valid_nodepaths.append(propertyDisplay.node_nodepath)
 			propertyDisplay.is_valid_for_batch_property = true
 		else:
 			invalid_nodepaths.append(propertyDisplay.node_nodepath)
@@ -56,8 +72,7 @@ func _check_validity():
 	else:
 		self.valid_state = ValidState.INVALID
 	
-	print('VALID ', valid_nodepaths, """
-INVALID """, invalid_nodepaths)
+	
 	
 
 func _set_valid_state(new_valid_state: int):
@@ -89,7 +104,7 @@ func _on_text_changed(new_text: String):
 	# Timer of few seconds until no change was made.
 	var inactivityTimer: Timer = $InactivityTimer
 #	print(inactivityTimer.time_left)
-	inactivityTimer.start(2.5)
+	inactivityTimer.start(2)
 	if valid_state != ValidState.WAITING:
 		self.valid_state = ValidState.WAITING
 #	print(inactivityTimer.time_left)
