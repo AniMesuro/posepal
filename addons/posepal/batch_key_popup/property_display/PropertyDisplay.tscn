@@ -9,8 +9,9 @@
 [ext_resource path="res://addons/posepal/batch_key_popup/property_display/AddHBox.gd" type="Script" id=7]
 
 [node name="PropertyDisplay" type="VBoxContainer"]
-margin_right = 271.0
-margin_bottom = 40.0
+anchor_right = 0.141
+margin_right = -0.384003
+margin_bottom = 68.0
 size_flags_horizontal = 3
 script = ExtResource( 3 )
 __meta__ = {
@@ -18,17 +19,17 @@ __meta__ = {
 }
 
 [node name="NodeTab" type="PanelContainer" parent="."]
-margin_right = 271.0
+margin_right = 144.0
 margin_bottom = 36.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NodeTab"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 264.0
+margin_right = 137.0
 margin_bottom = 29.0
 
 [node name="TabHBox" type="HBoxContainer" parent="NodeTab/VBoxContainer"]
-margin_right = 257.0
+margin_right = 130.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 script = ExtResource( 4 )
@@ -38,18 +39,19 @@ __meta__ = {
 _expandableControl = NodePath("../../../PropertyContainer")
 
 [node name="ExpandButton" type="ToolButton" parent="NodeTab/VBoxContainer/TabHBox"]
-margin_right = 237.0
+margin_right = 110.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Node"
 icon = ExtResource( 2 )
+clip_text = true
 align = 0
 expand_icon = true
 
 [node name="BatchValidIcon" type="TextureRect" parent="NodeTab/VBoxContainer/TabHBox"]
 visible = false
-margin_left = 221.0
-margin_right = 237.0
+margin_left = 94.0
+margin_right = 110.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 16, 0 )
 texture = ExtResource( 1 )
@@ -60,8 +62,8 @@ __meta__ = {
 }
 
 [node name="AddPropertyButton" type="TextureButton" parent="NodeTab/VBoxContainer/TabHBox"]
-margin_left = 241.0
-margin_right = 257.0
+margin_left = 114.0
+margin_right = 130.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 16, 0 )
 size_flags_vertical = 3
@@ -75,7 +77,7 @@ __meta__ = {
 [node name="AddHBox" type="HBoxContainer" parent="NodeTab/VBoxContainer"]
 visible = false
 margin_top = 26.0
-margin_right = 257.0
+margin_right = 130.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -83,20 +85,23 @@ script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="NodeTab/VBoxContainer/AddHBox"]
 margin_top = 5.0
-margin_right = 83.0
+margin_right = 28.0
 margin_bottom = 19.0
-text = "Add property"
+rect_min_size = Vector2( 28, 0 )
+size_flags_horizontal = 0
+text = "Add"
+valign = 1
 
 [node name="LineEdit" type="LineEdit" parent="NodeTab/VBoxContainer/AddHBox"]
-margin_left = 87.0
-margin_right = 229.0
+margin_left = 32.0
+margin_right = 102.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Button" type="Button" parent="NodeTab/VBoxContainer/AddHBox"]
-margin_left = 233.0
-margin_right = 257.0
+margin_left = 106.0
+margin_right = 130.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 icon = ExtResource( 5 )
@@ -104,6 +109,6 @@ expand_icon = true
 
 [node name="PropertyContainer" type="GridContainer" parent="."]
 margin_top = 40.0
-margin_right = 271.0
+margin_right = 144.0
 margin_bottom = 40.0
 columns = 2

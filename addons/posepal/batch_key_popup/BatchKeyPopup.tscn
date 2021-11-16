@@ -17,10 +17,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -192.0
-margin_top = -140.5
-margin_right = 192.0
-margin_bottom = 140.5
+margin_left = -301.0
+margin_top = -172.5
+margin_right = 301.0
+margin_bottom = 172.5
 rect_min_size = Vector2( 250, 152 )
 theme = ExtResource( 1 )
 popup_exclusive = true
@@ -37,8 +37,8 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-margin_right = 384.0
-margin_bottom = 281.0
+margin_right = 602.0
+margin_bottom = 345.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -50,8 +50,8 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 374.0
-margin_bottom = 271.0
+margin_right = 592.0
+margin_bottom = 335.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -59,26 +59,26 @@ __meta__ = {
 }
 
 [node name="TitleBar" parent="PanelContainer/MarginContainer/VBox" instance=ExtResource( 8 )]
-margin_right = 364.0
+margin_right = 582.0
 title_name = "Batch Key"
 icon_texture = ExtResource( 10 )
 window_path = NodePath("../../../..")
 
 [node name="TitleHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox"]
 margin_top = 28.0
-margin_right = 364.0
+margin_right = 582.0
 margin_bottom = 42.0
 
 [node name="NodeLabel" type="Label" parent="PanelContainer/MarginContainer/VBox/TitleHBox"]
-margin_right = 180.0
+margin_right = 289.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Nodes"
 align = 1
 
 [node name="PropertyLabel" type="Label" parent="PanelContainer/MarginContainer/VBox/TitleHBox"]
-margin_left = 184.0
-margin_right = 364.0
+margin_left = 293.0
+margin_right = 582.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Properties"
@@ -86,57 +86,61 @@ align = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBox"]
 margin_top = 46.0
-margin_right = 364.0
-margin_bottom = 189.0
+margin_right = 582.0
+margin_bottom = 253.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+split_offset = 4
 collapsed = true
+dragger_visibility = 2
 
 [node name="TreeScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer"]
-margin_right = 176.0
-margin_bottom = 143.0
+margin_right = 291.0
+margin_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 scroll_deadzone = 24
 
 [node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer/TreeScroll"]
-margin_right = 176.0
-margin_bottom = 143.0
+margin_right = 291.0
+margin_bottom = 207.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
 
 [node name="PropertyScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer"]
-margin_left = 188.0
-margin_right = 364.0
-margin_bottom = 143.0
+margin_left = 291.0
+margin_right = 582.0
+margin_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer/PropertyScroll"]
-margin_right = 176.0
-margin_bottom = 143.0
+margin_right = 291.0
+margin_bottom = 207.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 3 )
 
 [node name="BatchAddVBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBox"]
-margin_top = 193.0
-margin_right = 364.0
-margin_bottom = 233.0
+margin_top = 257.0
+margin_right = 582.0
+margin_bottom = 297.0
 script = ExtResource( 6 )
 
 [node name="HBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox/BatchAddVBox"]
-margin_right = 364.0
+margin_right = 582.0
 margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBox/BatchAddVBox/HBox"]
-margin_right = 344.0
+margin_right = 562.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 placeholder_text = "Property"
@@ -144,8 +148,8 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="ValidityIcon" type="TextureButton" parent="PanelContainer/MarginContainer/VBox/BatchAddVBox/HBox"]
-margin_left = 348.0
-margin_right = 364.0
+margin_left = 566.0
+margin_right = 582.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
 texture_normal = ExtResource( 5 )
@@ -153,9 +157,9 @@ expand = true
 stretch_mode = 6
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBox/BatchAddVBox"]
-margin_left = 72.0
+margin_left = 181.0
 margin_top = 20.0
-margin_right = 292.0
+margin_right = 401.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 220, 20 )
 size_flags_horizontal = 4
@@ -167,9 +171,9 @@ wait_time = 3.0
 one_shot = true
 
 [node name="FinishHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox"]
-margin_top = 237.0
-margin_right = 364.0
-margin_bottom = 261.0
+margin_top = 301.0
+margin_right = 582.0
+margin_bottom = 325.0
 rect_min_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 custom_constants/separation = 16

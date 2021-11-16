@@ -72,6 +72,7 @@ func clear():
 	owner_filepath = "res://"
 	poseData = {"default": {"default": []}}
 	filterData = {"none": {}}
+	templateData = {"default": {}}
 
 
 #func store_pose(pose_key: String):

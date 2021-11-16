@@ -26,11 +26,11 @@ func fill_previews():
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
-	print('starting to fill')
+#	print('starting to fill')
 	# <TODO> Limit preview maximum by 9 for each page. 
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-		print('poselib resource not valid')
+#		print('poselib resource not valid')
 #	if owner.poseData == {}:
 		return
 #	if !owner.poseData.has('collections'):
