@@ -16,6 +16,7 @@ var following :bool= false
 var mouse_offset :Vector2
 var window_position :Vector2
 var window_size :Vector2
+var window_min_size :Vector2
 var distance_to_edge :Vector2
 var window_distance :Vector2
 
@@ -166,6 +167,7 @@ func _set_windowRect(value :NodePath= _windowRect):
 			modulate = Color.white
 #	print("windowRect doesn't have handler reference variables. Please define references on ",windowRect.name," or use another Control node")
 
+#var start_window_position: Vector2
 func _on_RectHandler_gui_input(event :InputEvent):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == BUTTON_LEFT:
@@ -173,7 +175,9 @@ func _on_RectHandler_gui_input(event :InputEvent):
 			#assumes Scene owner is a window.
 			
 			window_position  = windowRect.rect_global_position
+#			start_window_position  = windowRect.rect_global_position
 			window_size = windowRect.rect_size
+			window_min_size = windowRect.rect_min_size
 			
 			last_mouse_position = get_global_mouse_position() 
 			last_size = windowRect.rect_size #+ mouse_offset

@@ -195,6 +195,7 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		animationPlayer.queue_free()
 	var newPoseButton: Button = $NewPoseButton
 	animationPlayer = AnimationPlayer.new()#owner.get_node("AnimationPlayer")
+	animationPlayer.name = "PoseAnimationPlayer"
 	newPoseButton.add_child(animationPlayer)
 	for anim in animationPlayer.get_animation_list():
 		animationPlayer.remove_animation(anim)

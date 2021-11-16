@@ -3,7 +3,7 @@ extends HBoxContainer
 
 export (String) var title_name setget _set_title_name
 export (StreamTexture) var icon_texture setget _set_icon_texture
-
+export var show_icon: bool = false
 #Node which will move along with mouse.
 export (NodePath) var window_path = NodePath()
 var windowRect :Control

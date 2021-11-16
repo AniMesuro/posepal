@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/assets/LipsyncImporterTheme.tres" type="Theme" id=2]
 [ext_resource path="res://addons/posepal/interface/AskNamePopup.gd" type="Script" id=3]
+[ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=4]
 
 [node name="AskNamePopup" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 26.0
-margin_right = -598.0
-margin_bottom = -400.0
+margin_left = 312.0
+margin_top = 167.498
+margin_right = -312.0
+margin_bottom = -232.502
 rect_min_size = Vector2( 400, 200 )
 theme = ExtResource( 2 )
 script = ExtResource( 3 )
@@ -40,24 +43,26 @@ __meta__ = {
 [node name="Titlebar" parent="Panel/VBox" instance=ExtResource( 1 )]
 margin_right = 360.0
 grow_horizontal = 0
+title_name = "New Name"
+icon_texture = ExtResource( 4 )
 window_path = NodePath("../../..")
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
-margin_top = 44.0
+margin_top = 28.0
 margin_right = 360.0
-margin_bottom = 48.0
+margin_bottom = 32.0
 
 [node name="Label" type="Label" parent="Panel/VBox"]
-margin_top = 52.0
+margin_top = 36.0
 margin_right = 360.0
-margin_bottom = 72.0
+margin_bottom = 56.0
 text = "New name:"
 autowrap = true
 
 [node name="LineEdit" type="LineEdit" parent="Panel/VBox"]
-margin_top = 76.0
+margin_top = 60.0
 margin_right = 360.0
-margin_bottom = 98.0
+margin_bottom = 82.0
 placeholder_text = "Please insert new name here."
 caret_blink = true
 caret_blink_speed = 0.5
@@ -66,7 +71,7 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="Panel/VBox"]
-margin_top = 102.0
+margin_top = 86.0
 margin_right = 360.0
-margin_bottom = 122.0
+margin_bottom = 106.0
 text = "Done"

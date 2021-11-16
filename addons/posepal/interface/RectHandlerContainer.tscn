@@ -3,9 +3,8 @@
 [ext_resource path="res://addons/posepal/interface/RectHandler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/interface/RectHandlerContainer.gd" type="Script" id=2]
 
-
-
 [node name="RectHandlerContainer" type="Control"]
+modulate = Color( 1, 1, 1, 0 )
 mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {
