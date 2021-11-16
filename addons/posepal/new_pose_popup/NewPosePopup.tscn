@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/posepal/interface/RectHandlerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/posepal/assets/icons/icon_new.png" type="Texture" id=3]
 [ext_resource path="res://addons/posepal/interface/ResizableWindow.gd" type="Script" id=4]
 [ext_resource path="res://addons/posepal/assets/LipsyncImporterTheme.tres" type="Theme" id=5]
 [ext_resource path="res://addons/posepal/new_pose_popup/NewPosePopup.gd" type="Script" id=6]
@@ -12,7 +11,6 @@
 [ext_resource path="res://addons/posepal/new_pose_popup/property_display/PropertyDisplay.gd" type="Script" id=12]
 
 [node name="NewPosePopup" type="Popup"]
-visible = true
 margin_right = 418.0
 margin_bottom = 460.0
 rect_min_size = Vector2( 182, 162 )
@@ -46,12 +44,11 @@ __meta__ = {
 
 [node name="TitleBar" parent="Panel/VBox" instance=ExtResource( 2 )]
 margin_right = 398.0
-title_name = "New Pose: x"
-icon_texture = ExtResource( 3 )
+title_name = ""
 window_path = NodePath("../../..")
 
 [node name="TabContainer" type="TabContainer" parent="Panel/VBox"]
-margin_top = 44.0
+margin_top = 28.0
 margin_right = 398.0
 margin_bottom = 396.0
 size_flags_horizontal = 3
@@ -68,7 +65,7 @@ size_flags_vertical = 3
 
 [node name="TreeDisplay" type="VBoxContainer" parent="Panel/VBox/TabContainer/Nodes"]
 margin_right = 398.0
-margin_bottom = 328.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 9 )
@@ -83,7 +80,7 @@ size_flags_vertical = 3
 
 [node name="PropertyDisplay" type="VBoxContainer" parent="Panel/VBox/TabContainer/Properties"]
 margin_right = 398.0
-margin_bottom = 328.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 12 )
@@ -105,29 +102,24 @@ text = "Done"
 script = ExtResource( 7 )
 
 [node name="RectHandlerContainer" parent="." instance=ExtResource( 1 )]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 _windowRect = NodePath("..")
 
 [node name="HandlerTop" parent="RectHandlerContainer" index="0"]
-margin_right = 418.0
+modulate = Color( 1, 1, 1, 1 )
 _windowRect = NodePath("../..")
 
 [node name="HandlerBottom" parent="RectHandlerContainer" index="1"]
-margin_top = 450.0
-margin_right = 418.0
-margin_bottom = 460.0
+modulate = Color( 1, 1, 1, 1 )
 _windowRect = NodePath("../..")
 
 [node name="HandlerLeft" parent="RectHandlerContainer" index="2"]
-margin_bottom = 460.0
+modulate = Color( 1, 1, 1, 1 )
 _windowRect = NodePath("../..")
 
 [node name="HandlerRight" parent="RectHandlerContainer" index="3"]
-margin_left = 408.0
-margin_right = 418.0
-margin_bottom = 460.0
+modulate = Color( 1, 1, 1, 1 )
 _windowRect = NodePath("../..")
 
 [editable path="RectHandlerContainer"]

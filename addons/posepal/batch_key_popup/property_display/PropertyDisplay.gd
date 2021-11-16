@@ -21,6 +21,14 @@ func add_propertyItem(text: String):
 	propertyItem.property = text
 	lineEdit.text = ""
 
+func get_properties() -> PoolStringArray:
+	var properties: PoolStringArray = []
+	var propertyContainer: GridContainer = $"PropertyContainer"
+	for propertyItem in propertyContainer.get_children():
+		properties.append(propertyItem.property)
+	return properties
+		
+
 func validate_batch_property(batch_property: String) -> bool:
 	if batch_property in node:
 		self.is_valid_for_batch_property = true

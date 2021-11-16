@@ -187,5 +187,4 @@ margin_bottom = 24.0
 text = "Cancel"
 
 [node name="RectHandlerContainer" parent="." instance=ExtResource( 9 )]
-modulate = Color( 1, 1, 1, 1 )
 _windowRect = NodePath("..")
