@@ -35,7 +35,7 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 		var ch: Node = get_child(i)
 		if propertyDisplay.display_id < ch.display_id:
 			if i >0: prev_child = get_child(i-1); else: first = true
-			print(node.name,' ',i)
+#			print(node.name,' ',i)
 			break
 	if is_instance_valid(prev_child):
 		add_child_below_node(prev_child, propertyDisplay)#new_child_id)
@@ -80,7 +80,7 @@ func sort_children():
 
 
 func remove_propertyDisplay(node: Node):
-	print('remove ',node)
+#	print('remove ',node)
 	for ch in get_children():
 		if ch.node == node:
 #			var editedSceneRoot = get_tree().edited_scene_root

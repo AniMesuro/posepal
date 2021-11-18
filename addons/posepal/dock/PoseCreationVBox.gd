@@ -217,7 +217,7 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	_hide_editorSceneTabs()
 	selected_animation = pose_name
 #	Should move time cursor to 0.0 but doesn't work.
-	
+	anim.length = 0.01
 	animationPlayer.advance(0.01)
 	animationPlayer.seek(0.01, true)
 	
@@ -442,7 +442,9 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 #	var is_empty: bool = false
 	print('pose type =',pose_type)
 	if current_pose_type == PoseType.NORMAL:
-		if pose_id > poselib.poseData[owner.poselib_template][owner.poselib_collection].size() - 1:
+		if (pose_id == -1
+		or pose_id > poselib.poseData[owner.poselib_template][owner.poselib_collection].size() - 1):
+#		if pose_id > poselib.poseData[owner.poselib_template][owner.poselib_collection].size() - 1:
 			poselib.poseData[owner.poselib_template][owner.poselib_collection].append({})
 #			is_empty = true
 		else:

@@ -18,6 +18,7 @@ var is_being_edited: bool = false setget _set_is_being_edited
 #export var frame :StreamTexture= load("res://icon.png") setget _set_frame
 
 var filterPose: Dictionary
+var templatePose: Dictionary
 
 var askNamePopup: Popup
 var askIDPopup: Popup
@@ -42,6 +43,7 @@ func _ready() -> void:
 	owner = get_parent().owner
 	var poselib: Resource = owner.current_poselib
 	filterPose = poselib.filterData[owner.poselib_filter]
+	templatePose = poselib.templateData[owner.poselib_template]
 	#print('----FILTERPPOSE-----\n',filterPose)
 
 #var full_rect :Rect2 # old
@@ -245,14 +247,14 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 #		_ch.scale = Vector2(1.1,1.1) #thumbnailViewport.size
 #		print('_ch scale ',_ch.scale)
 	
-	if my_nodepath in filterPose:
-		for property in filterPose[my_nodepath]:
-			var _copy_from_filter: bool = true
+	if my_nodepath in templatePose:
+		for property in templatePose[my_nodepath]:
+			var _copy_from_template: bool = true
 			if pose.has(my_nodepath):
 				if pose[my_nodepath].has(property):
-					_copy_from_filter = false
-			if property in _ch && _copy_from_filter:
-				_ch.set(property, filterPose[my_nodepath][property]['val'])
+					_copy_from_template = false
+			if property in _ch && _copy_from_template:
+				_ch.set(property, templatePose[my_nodepath][property]['val'])
 	
 	if my_nodepath in pose:
 		for property in pose[my_nodepath]:
