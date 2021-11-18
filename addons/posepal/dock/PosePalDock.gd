@@ -35,11 +35,12 @@ var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
 var posePalette: GridContainer setget ,_get_posePalette
+var poseCreationVBox: VBoxContainer setget ,_get_poseCreationVBox
 func _enter_tree() -> void:
 #	pluginInstance = _get_pluginInstance()
 	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
 	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
-	
+	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
 #	yield(get_tree(), "idle_frame")
 	if get_tree().edited_scene_root == self:
 		return
@@ -60,19 +61,6 @@ func _ready() -> void:
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 	
 
-func _get_pluginInstance() -> EditorPlugin:
-	if is_instance_valid(pluginInstance):
-		return pluginInstance
-	if get_tree().get_nodes_in_group("plugin posepal").size() == 0:
-		queue_free()
-		return null
-	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
-	return pluginInstance
-
-func _get_editorControl() -> Control:
-	if is_instance_valid(editorControl):
-		return editorControl
-	return self.pluginInstance.get_editor_interface().get_base_control()
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root
@@ -104,112 +92,6 @@ func fix_warning(warning :String):
 func issue_warning(warning :String):
 	emit_signal("warning_issued", warning)
 
-func _on_pose_selected(pose_id :int):
-#	if !is_instance_valid(pluginInstance):
-#		pluginInstance = _get_pluginInstance()
-	
-	if !is_instance_valid(poselib_animPlayer):
-		issue_warning('animplayer_invalid')
-		return
-	if !is_instance_valid(self.pluginInstance.animationPlayerEditor):
-		pluginInstance._get_editor_references()
-	
-	if !poselib_animPlayer.has_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text):
-		return
-	print("current anim =",self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
-	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
-	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
-	
-	if !is_instance_valid(current_poselib):
-		print('error n1')
-		return
-	if !current_poselib.poseData.has(poselib_template):
-		print('error n1')
-		return
-	if !current_poselib.poseData[poselib_template].has(poselib_collection):
-		print('error n2')
-		return
-	if pose_id > current_poselib.poseData[poselib_template][poselib_collection].size():
-		print('posedata not have ',pose_id)
-		return
-	
-	print(current_poselib.poseData)
-	for nodepath in current_poselib.poseData[poselib_template][poselib_collection][pose_id]:
-		print(nodepath)
-		if nodepath == "_name":
-			return
-#		print('nodepath ', nodepath)
-		var node: Node = animRoot.get_node(nodepath)
-#		print('root ',node)
-		
-		for property in current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]:
-			
-			var track_path :String= str(animRoot.get_path_to(node))+':'+property
-			var tr_property :int= anim.find_track(track_path)
-			if tr_property == -1:
-				tr_property = anim.add_track(Animation.TYPE_VALUE)
-				anim.track_set_path(tr_property, track_path)
-#			var anim.track_find_key(
-			var _key_time :float= float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
-			
-			var key_value
-			# Converts the json values to corresponding type.
-			match typeof(node.get(property)):
-#				TYPE_VECTOR2: #position, scale
-#					key_value = Vector2(
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][0],
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][1])
-#				TYPE_OBJECT: # texture
-#					if property != "texture":
-#						return
-#					var f: File = File.new()
-#					if f.file_exists['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val']):
-#						match poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'].get_extension():
-#							'png', 'jpg':
-#								key_value = load(poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'])
-#							_:
-#								return
-				_:
-					key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['val']
-#			Selects key before current_key and changes its transition for "in"
-			var key_last :int= anim.track_find_key(tr_property, _key_time - 0.01, false)
-			if key_last != -1:
-				if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('in'):
-					anim.track_set_key_transition(tr_property, key_last, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['in'])
-			if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('out'):
-				anim.track_insert_key(tr_property, _key_time, key_value, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['out'])
-			#
-			
-	
-	print('pose_id =',pose_id)
-
-func _on_pose_created(pose :Dictionary, pose_key :String):
-#	pluginInstance = _get_pluginInstance()
-#	var poseFile_path = pluginInstance.tscn_set_poseFile(poselib_scene, poselib_scene.get_basename().get_file()) # Pose File has  same name as scene (though there will be an id for how many dupplicates there are)
-	print("posepath = ",poseFile_path)
-	
-	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
-	save_poseData()
-	
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
-	posePalette.fill_previews()
-	# Get PoseFile
-#	var f :File= File.new()
-#	var selected_scene :Node= get_tree().edited_scene_root.get_node(poselib_scene)
-#	if selected_scene.has_meta('_plPoseLib_poseFile'):
-#		if f.file_exists(selected_scene.get_meta('_plPoseLib_poseFile')):
-#			if selected_scene.get_meta('_plPoseLib_poseFile').get_extension() == 'pose':
-#				poseFile_path = selected_scene.get_meta('_plPoseLib_poseFile')
-				
-#				return
-#	if poseFile_path
-	# Save PoseFile
-#	f.open(
-
-# load_poseData
-
-#func create_poselib():
-	
 
 func load_poseData() -> void:
 	# Checks if owner's posefile is valid
@@ -299,7 +181,9 @@ func save_poseData():
 			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 #			print('filename pieces ',filename_pieces)
 			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+			&& (filename_pieces[2] == "res")):
+#			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+				
 #			if selectedScene.get_meta('_plPoseLib_poseFile').get_extension() == 'poselib':
 				
 				poseFile_path = selectedScene.get_meta('_plPoseLib_poseFile')
@@ -309,7 +193,7 @@ func save_poseData():
 	if !is_poseFile_valid:
 		var available_path: String = "#"
 		for i in 100:
-			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.tres"
+			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.res"
 			if f.file_exists(available_path):
 				continue
 			selectedScene.set_meta('_plPoseLib_poseFile', available_path)
@@ -398,6 +282,34 @@ func save_poseData():
 #										json_poseData['collections'][col][collection][pose][nodepath][property]['val'] = poseData['collections'][col][collection][pose][nodepath][property]['val'].resource_path
 #
 #	return json_poseData
+
+# Attempt to
+func get_selected_animationPlayer() -> AnimationPlayer:
+	# PoseAnimationPlayer is prioritized.
+	var currentAnimOptionButton: OptionButton = self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+	var editorInterface: EditorInterface = pluginInstance.get_editor_interface()
+	var editorSelection: EditorSelection = editorInterface.get_selection()
+	for selectedNode in editorSelection.get_selected_nodes():
+		if selectedNode.get_class() != 'AnimationPlayer':
+			continue
+		var animPlayer: AnimationPlayer = selectedNode
+		if animPlayer.assigned_animation == currentAnimOptionButton.text:
+			return animPlayer
+	
+	var newPoseButton: Button = self.poseCreationVBox.get_node("NewPoseButton")
+	# PoseAnimationPlayer should be child of NewPoseButton
+	var poseButton_children: Array = newPoseButton.get_children()
+	if poseButton_children.size() > 0:
+		var animPlayer: AnimationPlayer = newPoseButton.get_children()[0]
+		if animPlayer.assigned_animation == currentAnimOptionButton.text:
+			return animPlayer
+		
+	if is_instance_valid(poselib_animPlayer):
+		if poselib_animPlayer.assigned_animation == currentAnimOptionButton.text:
+			return poselib_animPlayer
+
+	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
+	return null
 
 func get_editor_poseData(jsonPoseData :Dictionary) -> Dictionary:
 #	print('jsonPoseData = ',jsonPoseData)
@@ -491,4 +403,129 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 func _get_posePalette():
 	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
 	return posePalette
+	
+
+func _get_pluginInstance() -> EditorPlugin:
+	if is_instance_valid(pluginInstance):
+		return pluginInstance
+	if get_tree().get_nodes_in_group("plugin posepal").size() == 0:
+		queue_free()
+		return null
+	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
+	return pluginInstance
+
+func _get_poseCreationVBox() -> VBoxContainer:
+	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
+	return poseCreationVBox
+
+func _get_editorControl() -> Control:
+	if is_instance_valid(editorControl):
+		return editorControl
+	return self.pluginInstance.get_editor_interface().get_base_control()
+
+func _on_pose_selected(pose_id :int):
+#	if !is_instance_valid(pluginInstance):
+#		pluginInstance = _get_pluginInstance()
+	
+	if !is_instance_valid(poselib_animPlayer):
+		issue_warning('animplayer_invalid')
+		return
+	if !is_instance_valid(self.pluginInstance.animationPlayerEditor):
+		pluginInstance._get_editor_references()
+	
+	if !poselib_animPlayer.has_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text):
+		return
+	print("current anim =",self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
+	
+	if !is_instance_valid(current_poselib):
+		print('error n1')
+		return
+	if !current_poselib.poseData.has(poselib_template):
+		print('error n1')
+		return
+	if !current_poselib.poseData[poselib_template].has(poselib_collection):
+		print('error n2')
+		return
+	if pose_id > current_poselib.poseData[poselib_template][poselib_collection].size():
+		print('posedata not have ',pose_id)
+		return
+	
+#	print(current_poselib.poseData)
+	for nodepath in current_poselib.poseData[poselib_template][poselib_collection][pose_id]:
+		print(nodepath)
+		if nodepath == "_name":
+			return
+#		print('nodepath ', nodepath)
+		var node: Node = animRoot.get_node(nodepath)
+#		print('root ',node)
+		
+		for property in current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]:
+			
+			var track_path :String= str(animRoot.get_path_to(node))+':'+property
+			var tr_property :int= anim.find_track(track_path)
+			if tr_property == -1:
+				tr_property = anim.add_track(Animation.TYPE_VALUE)
+				anim.track_set_path(tr_property, track_path)
+#			var anim.track_find_key(
+			var _key_time :float= float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
+			
+			var key_value
+			# Converts the json values to corresponding type.
+			match typeof(node.get(property)):
+#				TYPE_VECTOR2: #position, scale
+#					key_value = Vector2(
+#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][0],
+#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][1])
+#				TYPE_OBJECT: # texture
+#					if property != "texture":
+#						return
+#					var f: File = File.new()
+#					if f.file_exists['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val']):
+#						match poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'].get_extension():
+#							'png', 'jpg':
+#								key_value = load(poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'])
+#							_:
+#								return
+				_:
+					key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['val']
+#			Selects key before current_key and changes its transition for "in"
+			var key_last :int= anim.track_find_key(tr_property, _key_time - 0.01, false)
+			if key_last != -1:
+				if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('in'):
+					anim.track_set_key_transition(tr_property, key_last, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['in'])
+			if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('out'):
+				anim.track_insert_key(tr_property, _key_time, key_value, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['out'])
+			#
+			
+	
+	print('pose_id =',pose_id)
+
+func _on_pose_created(pose :Dictionary, pose_key :String):
+#	pluginInstance = _get_pluginInstance()
+#	var poseFile_path = pluginInstance.tscn_set_poseFile(poselib_scene, poselib_scene.get_basename().get_file()) # Pose File has  same name as scene (though there will be an id for how many dupplicates there are)
+	print("posepath = ",poseFile_path)
+	
+	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
+	save_poseData()
+	
+	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette.fill_previews()
+	# Get PoseFile
+#	var f :File= File.new()
+#	var selected_scene :Node= get_tree().edited_scene_root.get_node(poselib_scene)
+#	if selected_scene.has_meta('_plPoseLib_poseFile'):
+#		if f.file_exists(selected_scene.get_meta('_plPoseLib_poseFile')):
+#			if selected_scene.get_meta('_plPoseLib_poseFile').get_extension() == 'pose':
+#				poseFile_path = selected_scene.get_meta('_plPoseLib_poseFile')
+				
+#				return
+#	if poseFile_path
+	# Save PoseFile
+#	f.open(
+
+# load_poseData
+
+#func create_poselib():
 	

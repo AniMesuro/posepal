@@ -15,13 +15,15 @@ var animationPlayerEditor :Node
 var animationPlayerEditor_CurrentTime_LineEdit :LineEdit
 var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
 
+var editorSceneTabs: Tabs setget ,_get_EditorSceneTabs
+
 var posePalDock :Control
 var editorControl :Control
 
 func _enter_tree() -> void:
 	add_to_group(plugin_group)
 	
-	
+	self.editorSceneTabs.visible = true
 #	yield(get_tree(), "idle_frame")
 
 func _ready() -> void:
@@ -38,6 +40,8 @@ func _exit_tree() -> void:
 	if !is_instance_valid(posePalDock):
 		return
 	remove_control_from_docks(posePalDock)
+	
+	self.editorSceneTabs.visible = true
 
 
 func _get_editor_references():
@@ -56,7 +60,7 @@ func _get_editor_references():
 #		print(get_tree().get_nodes_in_group('_vp_unhandled_key_input1235'))
 		if node.get_class() == 'AnimationPlayerEditor':
 			animationPlayerEditor = node
-			print("[PosePal] Acquired Editor's AnimationPlayerEditor reference")
+#			print("[PosePal] Acquired Editor's AnimationPlayerEditor reference")
 			break
 	if !is_instance_valid(animationPlayerEditor):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor reference")
@@ -91,11 +95,30 @@ func _get_editor_references():
 	if !is_instance_valid(animationPlayerEditor_CurrentAnimation_OptionButton):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/OptionButton reference")
 		return
+	
+	self.editorSceneTabs
 
 # As reading tscn is a bit expensive, there should be a temporary variable that
 # returns poseFile is referenced in tscn and its path.
 func tscn_has_poseFile(tscn_path :String):
 	pass
 
-
-
+func _get_EditorSceneTabs():
+	var editorExpandButton: ToolButton
+	
+	for node in get_tree().get_nodes_in_group('_vp_unhandled_input1235'):
+		if !node is ToolButton:
+			continue
+		if node.hint_tooltip == "Toggle distraction-free mode.":
+			editorExpandButton = node
+			break
+	if is_instance_valid(editorExpandButton):
+		for child in editorExpandButton.get_parent().get_children():
+			if !child is Tabs:
+				continue
+			editorSceneTabs = child
+			break
+	if is_instance_valid(editorSceneTabs):
+		print("[PosePal] Acquired Editor's Scene Tabs reference.")
+	
+	return editorSceneTabs

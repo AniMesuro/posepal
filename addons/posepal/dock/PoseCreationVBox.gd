@@ -103,7 +103,8 @@ func _on_NewPoseButton_pressed():
 		owner.issue_warning('lacking_parameters')
 	if owner.poselib_collection == '':
 		owner.issue_warning('lacking_parameters')
-		
+	
+	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -132,7 +133,7 @@ func _on_NewPoseButton_pressed():
 		
 		save_pose(selected_pose_id)
 		self.posegen_mode = PoseGenMode.CREATE
-		
+		_show_editorSceneTabs()
 #		owner.save_poseData()
 #		owner.load_poseData()
 		owner.posePalette.fill_previews()
@@ -166,6 +167,8 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		elif poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has('_name'):
 			pose_name = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]['_name']
 	current_pose_type = pose_type
+	
+	
 	
 #	Reference Editor Nodes
 	var editorInterface: EditorInterface = owner.pluginInstance.get_editor_interface()
@@ -209,6 +212,8 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	editorSelection.clear()
 	editorSelection.add_node(animationPlayer)
 	
+	
+	_hide_editorSceneTabs()
 	selected_animation = pose_name
 #	Should move time cursor to 0.0 but doesn't work.
 	animationPlayer.advance(0.1)
@@ -556,6 +561,27 @@ func are_parameters_valid() -> bool:
 		return false
 	return true
 
+func _hide_editorSceneTabs():
+	var sceneTabs: Tabs = owner.pluginInstance.editorSceneTabs 
+	print(sceneTabs)
+#	if !is_instance_valid(sceneTabs):
+#		owner.pluginInstance._get_editor_references()
+#		sceneTabs = owner.pluginInstance.editorSceneTabs
+	sceneTabs.visible = false
+#		return
+#	if !is_instance_valid(sceneTabs):
+#	print("[PosePal] Couldn't hide Scene Tabs. Please do not change scene while editing a pose because it can crash Godot.")
+
+func _show_editorSceneTabs():
+	var sceneTabs: Tabs = owner.pluginInstance.editorSceneTabs 
+#	print(sceneTabs)
+#	if !is_instance_valid(sceneTabs):
+#		owner.pluginInstance._get_editor_references()
+#		sceneTabs = owner.pluginInstance.editorSceneTabs
+	sceneTabs.visible = true
+#		return
+#	print("[PosePal] Couldn't show Scene Tabs. Try disabling and re-enabling PosePal.")
+
 # Godot crashes when edited scene changes while pose is still being edited.
 func _on_scene_changed(_sceneRoot: Node):
 	#return
@@ -605,6 +631,7 @@ func _on_CancelPoseButton_pressed():
 	if !_do_queue_select_poselib_animplayer:
 		return
 	_select_queued_poselib_animplayer()
+	_show_editorSceneTabs()
 
 func _select_queued_poselib_animplayer():
 	_do_queue_select_poselib_animplayer = false

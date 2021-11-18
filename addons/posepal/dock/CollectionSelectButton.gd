@@ -67,7 +67,7 @@ func _reset_selection():
 
 func _on_issued_forced_selection():
 	var poselib: RES_PoseLibrary = owner.current_poselib
-	_reset_selection()
+#	_reset_selection()
 	if !is_instance_valid(poselib):
 #	if owner.poseData == {}:
 		return

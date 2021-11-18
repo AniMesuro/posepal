@@ -70,7 +70,7 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="VSplit"]
 margin_right = 330.0
-margin_bottom = 565.0
+margin_bottom = 566.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
@@ -85,7 +85,7 @@ scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib"]
 margin_right = 330.0
-margin_bottom = 547.0
+margin_bottom = 548.0
 rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -348,7 +348,7 @@ icon = ExtResource( 23 )
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 170.0
 margin_right = 329.0
-margin_bottom = 547.0
+margin_bottom = 548.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 24 )
@@ -370,7 +370,7 @@ scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="VSplit/TabContainer/Palette"]
 margin_right = 330.0
-margin_bottom = 547.0
+margin_bottom = 548.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 2
@@ -379,7 +379,7 @@ columns = 8
 script = ExtResource( 4 )
 
 [node name="ExtraHBox" type="HBoxContainer" parent="VSplit"]
-margin_top = 565.0
+margin_top = 566.0
 margin_right = 330.0
 margin_bottom = 600.0
 grow_vertical = 0
@@ -391,7 +391,7 @@ __meta__ = {
 
 [node name="PoseCreationVBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
 margin_right = 64.0
-margin_bottom = 35.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 script = ExtResource( 20 )
@@ -435,10 +435,11 @@ script = ExtResource( 5 )
 [node name="VBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
 margin_left = 68.0
 margin_right = 329.0
-margin_bottom = 35.0
+margin_bottom = 34.0
 size_flags_horizontal = 3
 
 [node name="PageHBox" type="HBoxContainer" parent="VSplit/ExtraHBox/VBox"]
+visible = false
 margin_right = 261.0
 margin_bottom = 15.0
 rect_clip_content = true
@@ -494,9 +495,8 @@ size_flags_vertical = 3
 text = ">>"
 
 [node name="ZoomHBox" type="HBoxContainer" parent="VSplit/ExtraHBox/VBox"]
-margin_top = 19.0
 margin_right = 261.0
-margin_bottom = 35.0
+margin_bottom = 16.0
 grow_vertical = 0
 rect_min_size = Vector2( 16, 0 )
 rect_clip_content = true

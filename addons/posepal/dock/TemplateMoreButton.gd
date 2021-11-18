@@ -3,6 +3,36 @@ extends "res://addons/posepal/interface/PropertyMoreButton.gd"
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
+func is_name_valid(new_name: String):
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	if (new_name == 'default') or (new_name == '') or (new_name in poselib.templateData.keys()):
+		print('no')
+		return false
+	return true
+
+func key_template_pose():
+	var animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	if !is_instance_valid(animPlayer):
+#		print("[PosePal] Can't key because selected AnimationPlayer not found.")
+		return
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	
+	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
+	
+	for nodepath in poselib.templateData[owner.poselib_template]:
+		var node: Node = animRoot.get_node(nodepath)
+		for property in poselib.templateData[owner.poselib_template][nodepath]:
+			var track_path :String= str(animRoot.get_path_to(node))+':'+property
+			var tr_property :int= anim.find_track(track_path)
+			if tr_property == -1:
+				tr_property = anim.add_track(Animation.TYPE_VALUE)
+				anim.track_set_path(tr_property, track_path)
+			var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
+			var key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
+#			print("keyvalu ",key_value)
+			anim.track_insert_key(tr_property, current_time, key_value)
+
 func _on_pressed():
 	popupMenu = get_popup()
 	if !_is_selected_scene_valid():
@@ -21,10 +51,11 @@ func _on_pressed():
 		popupMenu.add_item('Create', Items.CREATE)
 	else:
 		popupMenu.add_item('Edit', Items.EDIT)
-		popupMenu.add_item('Create',Items.CREATE)
-		popupMenu.add_item('Rename',Items.RENAME)
-		popupMenu.add_item('Erase',Items.ERASE)
-		popupMenu.add_item('Apply',Items.APPLY)
+		popupMenu.add_item('Create', Items.CREATE)
+		popupMenu.add_item('Rename', Items.RENAME)
+		popupMenu.add_item('Erase', Items.ERASE)
+		popupMenu.add_item('Apply', Items.APPLY)
+		popupMenu.add_item('Key', Items.KEY)
 
 func _on_id_pressed(id: int):
 	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
@@ -58,6 +89,9 @@ func _on_id_pressed(id: int):
 			owner.save_poseData()
 		Items.APPLY:
 			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+		Items.KEY:
+			key_template_pose()
+			
 
 
 func _on_name_settled(new_name: String, id: int):
@@ -88,11 +122,6 @@ func _on_name_settled(new_name: String, id: int):
 			owner.emit_signal("issued_forced_selection")
 	owner.save_poseData()
 
-func is_name_valid(new_name: String):
-	var poselib: RES_PoseLibrary = owner.current_poselib
-	if (new_name == 'default') or (new_name == '') or (new_name in poselib.templateData.keys()):
-		print('no')
-		return false
-	return true
+
 
 
