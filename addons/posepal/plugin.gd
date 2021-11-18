@@ -118,7 +118,7 @@ func _get_EditorSceneTabs():
 				continue
 			editorSceneTabs = child
 			break
-	if is_instance_valid(editorSceneTabs):
-		print("[PosePal] Acquired Editor's Scene Tabs reference.")
+#	if is_instance_valid(editorSceneTabs):
+#		print("[PosePal] Acquired Editor's Scene Tabs reference.")
 	
 	return editorSceneTabs

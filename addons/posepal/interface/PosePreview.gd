@@ -522,6 +522,7 @@ func _on_PopupMenu_id_selected(id: int):
 			print('posecrea ',poseCreationVBox)
 #			print('edit pose =',pose_key)
 			owner.load_poseData()
+			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
 			poseCreationVBox.edit_pose(pose_id)
 			self.is_being_edited = true
 			if !poseCreationVBox.is_connected("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled"):
