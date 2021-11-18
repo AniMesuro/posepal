@@ -30,8 +30,10 @@ func get_properties() -> PoolStringArray:
 		
 
 func validate_batch_property(batch_property: String) -> bool:
-	if batch_property in node:
-		self.is_valid_for_batch_property = true
+	is_valid_for_batch_property = false
+	if (batch_property in node):
+		if !batch_property in get_properties():
+			self.is_valid_for_batch_property = true
 	else:
 		self.is_valid_for_batch_property = false
 	return is_valid_for_batch_property

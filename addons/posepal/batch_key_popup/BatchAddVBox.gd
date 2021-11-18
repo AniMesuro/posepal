@@ -25,11 +25,11 @@ func _ready() -> void:
 
 
 func confirm_property(text: String):
-	if valid_state == ValidState.INVALID:
-		return
 	if valid_state == ValidState.WAITING:
 		$InactivityTimer.stop()
 		_check_validity()
+	if valid_state == ValidState.INVALID:
+		return
 	var propertyBox: VBoxContainer = $"../HSplitContainer/PropertyScroll/VBox"
 		
 	for propertyDisplay in propertyBox.get_children():
