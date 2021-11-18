@@ -47,6 +47,8 @@ func _on_id_pressed(id: int):
 			menuButton.is_being_edited = true
 			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
 				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
+			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
+				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
 		Items.CREATE:
 			ask_for_name("Please insert the name for the new filter pose.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])

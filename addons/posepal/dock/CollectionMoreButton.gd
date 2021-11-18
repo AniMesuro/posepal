@@ -20,8 +20,8 @@ func _on_pressed():
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
 #		return
 		popupMenu.add_item('Create', Items.CREATE)
-	elif owner.poselib_collection == 'default':
-		popupMenu.add_item('Create', Items.CREATE)
+#	elif owner.poselib_collection == 'default':
+#		popupMenu.add_item('Create', Items.CREATE)
 	else:
 		popupMenu.add_item('Create',Items.CREATE)
 		popupMenu.add_item('Rename',Items.RENAME)

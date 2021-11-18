@@ -2,6 +2,7 @@ tool
 extends VBoxContainer
 
 signal pose_editing_canceled
+signal pose_editing_saved
 
 # This script reference is just for autocompletion.
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
@@ -134,9 +135,10 @@ func _on_NewPoseButton_pressed():
 		
 		save_pose(selected_pose_id)
 		self.posegen_mode = PoseGenMode.CREATE
+		emit_signal("pose_editing_saved")
 		_show_editorSceneTabs()
-#		owner.save_poseData()
-#		owner.load_poseData()
+		
+		# [] Fill all for changes of 1 is overkill. Should replace with a regenerate function in future.
 		owner.posePalette.fill_previews()
 ##	#	#	#	#	#	#	#	#	#	#	#	#
 
