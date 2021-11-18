@@ -516,6 +516,7 @@ func _on_PopupMenu_id_selected(id: int):
 #	print('poseCreationVBox ',poseCreationVBox)
 	match id:
 		PopupItems.APPLY:
+			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
 			poseCreationVBox.apply_pose(pose_id, 0)
 		PopupItems.EDIT:
 			print('posecrea ',poseCreationVBox)

@@ -317,7 +317,6 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	var pose: Dictionary
 	if pose_type == -1: pose_type = current_pose_type
 	if pose_type == PoseType.NORMAL:
-		print('alllll poses = ',poselib.poseData[owner.poselib_template][owner.poselib_collection])
 		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 	elif pose_type == PoseType.FILTER:
 		pose = poselib.filterData[owner.poselib_filter]
