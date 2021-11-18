@@ -74,7 +74,8 @@ func _on_id_selected(id :int):
 		if f.file_exists(selected_scene.get_meta('_plPoseLib_poseFile')):
 			var filename_pieces: PoolStringArray = selected_scene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+			&& (filename_pieces[2] == "res")):
+#			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				owner.poseFile_path = selected_scene.get_meta('_plPoseLib_poseFile')
 				is_poseFile_valid = true
 	
@@ -90,24 +91,24 @@ func _on_id_selected(id :int):
 	# OLD WAY # JSON SAVE
 	return
 #	Create default group and face to PoseData if PoseFile invalid.
-	if is_poseFile_valid:
-		owner.load_poseData()
-	
-	if !owner.poseData.has('groups'):
-		owner.poseData['groups'] = {}
-	if !owner.poseData['groups'].has('all'):
-		owner.poseData['groups']['all'] = {}
-	if !owner.poseData.has('collections'):
-		owner.poseData['collections'] = {}
-	if !owner.poseData['collections'].has('default'):
-		owner.poseData['collections']['default'] = {}
-	if !owner.poseData['collections']['default'].has('default'):
-		owner.poseData['collections']['default']['default'] = {}
-		
-	owner.poselib_template = 'default'
-	owner.poselib_collection = 'default'
-	owner.poselib_template = 'all'
-	owner.emit_signal("issued_forced_selection")
+#	if is_poseFile_valid:
+#		owner.load_poseData()
+#
+#	if !owner.poseData.has('groups'):
+#		owner.poseData['groups'] = {}
+#	if !owner.poseData['groups'].has('all'):
+#		owner.poseData['groups']['all'] = {}
+#	if !owner.poseData.has('collections'):
+#		owner.poseData['collections'] = {}
+#	if !owner.poseData['collections'].has('default'):
+#		owner.poseData['collections']['default'] = {}
+#	if !owner.poseData['collections']['default'].has('default'):
+#		owner.poseData['collections']['default']['default'] = {}
+#
+#	owner.poselib_template = 'default'
+#	owner.poselib_collection = 'default'
+#	owner.poselib_template = 'all'
+#	owner.emit_signal("issued_forced_selection")
 #	print('scene select =',owner.poseData['groups'])
 #	else:
 #		owner.load_poseData()

@@ -73,6 +73,7 @@ func _set_posegen_mode(new_mode :int):
 # DESELECT_ANIM	
 
 func _on_PoseLibrary_updated_reference(reference :String):
+	_show_editorSceneTabs()
 	self.posegen_mode = PoseGenMode.CREATE
 	if is_instance_valid(animationPlayer):
 		animationPlayer.queue_free()
@@ -216,8 +217,9 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	_hide_editorSceneTabs()
 	selected_animation = pose_name
 #	Should move time cursor to 0.0 but doesn't work.
-	animationPlayer.advance(0.1)
-	animationPlayer.seek(0.1, true)
+	
+	animationPlayer.advance(0.01)
+	animationPlayer.seek(0.01, true)
 	
 	print('anim position =',animationPlayer.current_animation_position)
 #	anim.
@@ -625,13 +627,13 @@ func _on_scene_changed(_sceneRoot: Node):
 
 
 func _on_CancelPoseButton_pressed():
+	_show_editorSceneTabs()
 	print('canceling')
 	emit_signal( "pose_editing_canceled")
 	self.posegen_mode = PoseGenMode.CREATE
 	if !_do_queue_select_poselib_animplayer:
 		return
 	_select_queued_poselib_animplayer()
-	_show_editorSceneTabs()
 
 func _select_queued_poselib_animplayer():
 	_do_queue_select_poselib_animplayer = false

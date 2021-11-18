@@ -66,6 +66,9 @@ func _set_node_type(new_node_type :String):
 	print('set_type')
 	if !Engine.editor_hint: return
 	
+	if !is_instance_valid(self.pluginInstance.editorControl):
+		pluginInstance.editorControl = pluginInstance.get_editor_interface().get_base_control()
+	
 	var icon: TextureRect = $Icon
 	if type_exists(new_node_type):
 		icon.texture = self.pluginInstance.editorControl.get_icon(new_node_type, "EditorIcons")
