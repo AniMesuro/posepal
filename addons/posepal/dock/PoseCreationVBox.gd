@@ -213,7 +213,6 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	editorSelection.clear()
 	editorSelection.add_node(animationPlayer)
 	
-	
 	_hide_editorSceneTabs()
 	selected_animation = pose_name
 #	Should move time cursor to 0.0 but doesn't work.

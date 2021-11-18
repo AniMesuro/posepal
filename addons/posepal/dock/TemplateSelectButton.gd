@@ -3,6 +3,8 @@ extends "res://addons/posepal/interface/PropertyMenu.gd"
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
+var is_being_edited: bool = false setget _set_is_being_edited
+
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
@@ -63,3 +65,8 @@ func _reset_selection():
 	
 	owner.poselib_template = ""
 
+func _set_is_being_edited(value: bool):
+	pass
+
+func _on_PoseCreationVBox_pose_editing_canceled():
+	self.is_being_edited = false

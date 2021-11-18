@@ -108,6 +108,10 @@ func _on_name_settled(new_name: String, id: int):
 			owner.poselib_template = new_name
 			owner.emit_signal("issued_forced_selection")
 			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			var menuButton: MenuButton = $"../MenuButton"
+			menuButton.is_being_edited = true
+			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
+				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
 		Items.RENAME:
 			if !is_name_valid(new_name):
 				return

@@ -58,6 +58,9 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	if !owner.poselib_collection in poselib.poseData[owner.poselib_template].keys():
 		_reset_selection()
 		return
+	if reference == "poselib_template":
+		_reset_selection()
+		return
 
 func _reset_selection():
 	text = msg_no_selection

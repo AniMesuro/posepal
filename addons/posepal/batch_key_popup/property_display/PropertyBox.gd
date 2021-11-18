@@ -48,11 +48,11 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 			propertyDisplay.add_propertyItem(property)
 		unselectedPropertyData.erase(propertyDisplay.node_nodepath)
 	
-	var node_valid: bool = propertyDisplay.validate_batch_property(batchAddLineEdit.text)
-	if (batchAddVBox.valid_state == batchAddVBox.ValidState.INVALID) && node_valid:
-		batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
-	elif (batchAddVBox.valid_state == batchAddVBox.ValidState.VALID) && !node_valid:
-		batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
+		var node_valid: bool = propertyDisplay.validate_batch_property(batchAddLineEdit.text)
+		if (batchAddVBox.valid_state == batchAddVBox.ValidState.INVALID) && node_valid:
+			batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
+		elif (batchAddVBox.valid_state == batchAddVBox.ValidState.VALID) && !node_valid:
+			batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
 #	sort_children()
 
 func sort_children():
