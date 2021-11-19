@@ -1,0 +1,250 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://addons/posepal/interface/RectHandlerContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/posepal/assets/LipsyncImporterTheme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/posepal/file_selector_preview/ZoomHbox.gd" type="Script" id=4]
+[ext_resource path="res://addons/posepal/assets/icons/icon_expand.png" type="Texture" id=5]
+[ext_resource path="res://addons/posepal/assets/icons/icon_about.png" type="Texture" id=6]
+[ext_resource path="res://addons/posepal/file_selector_preview/PathHBox.gd" type="Script" id=7]
+[ext_resource path="res://addons/posepal/file_selector_preview/FileSelectorPreview.gd" type="Script" id=8]
+[ext_resource path="res://addons/posepal/file_selector_preview/FileContainer.gd" type="Script" id=9]
+[ext_resource path="res://addons/posepal/file_selector_preview/FileHBox.gd" type="Script" id=10]
+[ext_resource path="res://addons/posepal/file_selector_preview/ButtonHBox.gd" type="Script" id=11]
+[ext_resource path="res://addons/posepal/assets/icons/icon_return.png" type="Texture" id=12]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.321569, 0.317647, 0.380392, 1 )
+
+[sub_resource type="Image" id=4]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 0, 221, 221, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 222, 222, 222, 0, 223, 223, 223, 57, 223, 223, 223, 177, 223, 223, 223, 228, 223, 223, 223, 234, 223, 223, 223, 185, 221, 221, 221, 61, 221, 221, 221, 0, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 222, 222, 222, 0, 222, 222, 222, 118, 223, 223, 223, 253, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 222, 222, 222, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 223, 223, 223, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 56, 223, 223, 223, 251, 222, 222, 222, 247, 222, 222, 222, 116, 223, 223, 223, 24, 220, 220, 220, 22, 223, 223, 223, 115, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 222, 222, 222, 0, 222, 222, 222, 174, 223, 223, 223, 254, 222, 222, 222, 116, 222, 222, 222, 0, 223, 223, 223, 0, 220, 220, 220, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 224, 223, 223, 223, 254, 223, 223, 223, 24, 223, 223, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 223, 223, 223, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 229, 223, 223, 223, 254, 214, 214, 214, 19, 214, 214, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 24, 223, 223, 223, 254, 223, 223, 223, 0, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 179, 223, 223, 223, 254, 223, 223, 223, 115, 222, 222, 222, 0, 223, 223, 223, 0, 223, 223, 223, 0, 222, 222, 222, 0, 222, 222, 222, 116, 223, 223, 223, 254, 222, 222, 222, 0, 223, 223, 223, 0, 223, 223, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 223, 223, 0, 223, 223, 223, 57, 223, 223, 223, 252, 223, 223, 223, 246, 222, 222, 222, 116, 223, 223, 223, 24, 223, 223, 223, 24, 222, 222, 222, 116, 223, 223, 223, 246, 223, 223, 223, 254, 222, 222, 222, 86, 218, 218, 218, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 222, 222, 222, 0, 222, 222, 222, 118, 223, 223, 223, 253, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 254, 223, 223, 223, 209, 214, 214, 214, 19, 214, 214, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 220, 220, 220, 0, 219, 219, 219, 58, 223, 223, 223, 177, 223, 223, 223, 228, 223, 223, 223, 237, 222, 222, 222, 183, 223, 223, 223, 80, 223, 223, 223, 209, 223, 223, 223, 254, 223, 223, 223, 208, 214, 214, 214, 19, 214, 214, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 219, 219, 0, 223, 223, 223, 0, 223, 223, 223, 0, 223, 223, 223, 0, 222, 222, 222, 0, 220, 220, 220, 0, 218, 218, 218, 21, 223, 223, 223, 209, 223, 223, 223, 254, 222, 222, 222, 207, 214, 214, 214, 19, 214, 214, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 218, 218, 0, 218, 218, 218, 21, 223, 223, 223, 210, 223, 223, 223, 254, 222, 222, 222, 206, 214, 214, 214, 19, 214, 214, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 218, 218, 0, 218, 218, 218, 21, 223, 223, 223, 211, 223, 223, 223, 228, 219, 219, 219, 36, 219, 219, 219, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 218, 218, 0, 218, 218, 218, 21, 218, 218, 218, 35, 218, 218, 218, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 218, 218, 0, 218, 218, 218, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=3]
+flags = 0
+flags = 0
+image = SubResource( 4 )
+size = Vector2( 16, 16 )
+
+[node name="FileSelectorPreview" type="Control"]
+margin_right = 336.0
+margin_bottom = 453.0
+rect_min_size = Vector2( 332, 266 )
+theme = ExtResource( 2 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -61.0
+rect_min_size = Vector2( 334, 266 )
+rect_clip_content = true
+mouse_filter = 1
+size_flags_stretch_ratio = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+margin_right = 314.0
+margin_bottom = 433.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleBar" parent="Panel/Margin/VBox" instance=ExtResource( 3 )]
+margin_right = 314.0
+margin_bottom = 40.0
+title_name = "Select an Image File"
+icon_texture = ExtResource( 6 )
+window_path = NodePath("../../..")
+
+[node name="PathHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 44.0
+margin_right = 314.0
+margin_bottom = 74.0
+script = ExtResource( 7 )
+
+[node name="ReturnButton" type="TextureButton" parent="Panel/Margin/VBox/PathHBox"]
+margin_right = 24.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 24, 24 )
+size_flags_vertical = 3
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="LineEdit" type="LineEdit" parent="Panel/Margin/VBox/PathHBox"]
+margin_left = 28.0
+margin_right = 314.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "res://"
+
+[node name="FilePanel" type="Panel" parent="Panel/Margin/VBox"]
+margin_top = 78.0
+margin_right = 314.0
+margin_bottom = 347.0
+rect_clip_content = true
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Margin/VBox/FilePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = false
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileContainer" type="GridContainer" parent="Panel/Margin/VBox/FilePanel/ScrollContainer"]
+margin_right = 212.0
+margin_bottom = 415.0
+size_flags_stretch_ratio = 0.0
+columns = 2
+script = ExtResource( 9 )
+
+[node name="ZoomHbox" type="HBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 351.0
+margin_right = 314.0
+margin_bottom = 375.0
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource( 4 )
+
+[node name="ZoomIcon" type="TextureRect" parent="Panel/Margin/VBox/ZoomHbox"]
+margin_left = 158.0
+margin_right = 182.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+texture = SubResource( 3 )
+expand = true
+
+[node name="HSlider" type="HSlider" parent="Panel/Margin/VBox/ZoomHbox"]
+margin_left = 186.0
+margin_top = 4.0
+margin_right = 314.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_vertical = 4
+min_value = 10.0
+max_value = 50.0
+value = 13.0
+
+[node name="FileHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 379.0
+margin_right = 314.0
+margin_bottom = 409.0
+size_flags_horizontal = 3
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Panel/Margin/VBox/FileHBox"]
+margin_top = 5.0
+margin_right = 50.0
+margin_bottom = 25.0
+text = "File:"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/Margin/VBox/FileHBox"]
+margin_left = 54.0
+margin_right = 186.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+
+[node name="ExtensionMenu" type="MenuButton" parent="Panel/Margin/VBox/FileHBox"]
+margin_left = 190.0
+margin_right = 314.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 72, 24 )
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "* All Images"
+icon = ExtResource( 5 )
+flat = false
+expand_icon = true
+items = [ "* All Images", null, 0, false, false, 0, 0, null, "", false, "* All Images", null, 0, false, false, 1, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
+margin_top = 413.0
+margin_right = 314.0
+margin_bottom = 433.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/separation = 20
+script = ExtResource( 11 )
+
+[node name="OkButton" type="Button" parent="Panel/Margin/VBox/ButtonHBox"]
+margin_right = 147.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_constants/hseparation = 0
+text = "Ok"
+
+[node name="CancelButton" type="Button" parent="Panel/Margin/VBox/ButtonHBox"]
+margin_left = 167.0
+margin_right = 314.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_constants/hseparation = 0
+text = "Cancel"
+
+[node name="RectHandlerContainer" parent="Panel" instance=ExtResource( 1 )]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+_windowRect = NodePath("../..")
+
+[node name="HandlerTop" parent="Panel/RectHandlerContainer" index="0"]
+modulate = Color( 1, 1, 1, 1 )
+margin_right = 336.0
+handler_direction = 0
+debug_mode = false
+_windowRect = NodePath("../../..")
+
+[node name="HandlerBottom" parent="Panel/RectHandlerContainer" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+margin_top = 443.0
+margin_right = 336.0
+margin_bottom = 453.0
+debug_mode = false
+_windowRect = NodePath("../../..")
+
+[node name="HandlerLeft" parent="Panel/RectHandlerContainer" index="2"]
+modulate = Color( 1, 1, 1, 1 )
+margin_bottom = 453.0
+debug_mode = false
+_windowRect = NodePath("../../..")
+
+[node name="HandlerRight" parent="Panel/RectHandlerContainer" index="3"]
+modulate = Color( 1, 1, 1, 1 )
+margin_left = 326.0
+margin_right = 336.0
+margin_bottom = 453.0
+debug_mode = false
+_windowRect = NodePath("../../..")
+
+[editable path="Panel/RectHandlerContainer"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://addons/rhubarb_lipsync_integration/file_selector_preview/FileIcon.gd" type="Script" id=2]
+
+[node name="FileIcon" type="VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 60, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Preview" type="TextureButton" parent="."]
+margin_right = 200.0
+margin_bottom = 162.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+margin_top = 166.0
+margin_right = 200.0
+margin_bottom = 180.0
+grow_vertical = 0
+size_flags_horizontal = 5
+size_flags_vertical = 11
+size_flags_stretch_ratio = 0.0
+text = "icon.png"
+align = 1
+valign = 2
+autowrap = true
