@@ -24,7 +24,7 @@ var poselib_template: String = "" # Stores subcollections.
 var poselib_collection: String = "" # Stores pose data.
 var poselib_animPlayer: AnimationPlayer # AnimationPlayer selected on Animation panel.
 
-
+#var interactiveLoader: ResourceInteractiveLoader
 var poseFile_path: String = ""
 # Old - JSON
 var poseData: Dictionary = {}
@@ -112,7 +112,26 @@ func load_poseData() -> void:
 		var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
 		current_poselib.owner_filepath = sceneNode.filename
 		return
-	current_poselib = load(poseFile_path)
+		
+	## DEBUG
+#	interactiveLoader = ResourceLoader.load_interactive(poseFile_path)
+#	if interactiveLoader == null:
+#		print('error at ResourceInteractiveLoader')
+#		return
+#	set_process(true)
+
+	ResourceLoader.set_abort_on_missing_resources(true)
+	current_poselib = ResourceLoader.load(poseFile_path)
+	var dependencies: PoolStringArray = ResourceLoader.get_dependencies(poseFile_path)
+#	print('dependencies: ',dependencies)
+	
+#	var resourceFormatLoader: ResourceFormatLoader = ResourceFormatLoader.new()
+#	resourceFormatLoader.rename_dependencies(poseFile_path, '')
+	
+#	current_poselib = load(poseFile_path)
+	
+#	print('dependencies:', ResourceLoader.get_dependencies(poseFile_path))
+	
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):
 #		current_poselib.load_lib(poseFile_path)
@@ -167,6 +186,35 @@ func load_poseData() -> void:
 #		save_poseData()
 	return
 
+#var time_max = 100 # msec
+#func _process(delta: float):
+#	print('process')
+#	if !is_instance_valid(interactiveLoader):
+#		print('loder invalid')
+#		set_process(false)
+#		return
+#	var t = OS.get_ticks_msec()
+#	# Use "time_max" to control for how long we block this thread.
+#	while OS.get_ticks_msec() < t + time_max:
+#		# Poll your loader.
+#		var err = interactiveLoader.poll()
+#		print('stgc ',interactiveLoader.get_stage_count())
+#
+#		if err == ERR_FILE_EOF: # Finished loading.
+#			var resource = interactiveLoader.get_resource()
+#			print(resource.resource_path)
+#			interactiveLoader = null
+#			current_poselib = resource
+##			set_new_scene(resource)
+#			break
+#		elif err == OK:
+#			print('progress ok')
+##			update_progress()
+#		else: # Error during loading.
+#			print('error 198')
+#			interactiveLoader = null
+#		break
+
 func save_poseData():
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
@@ -181,7 +229,8 @@ func save_poseData():
 			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 #			print('filename pieces ',filename_pieces)
 			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "res")):
+			&& (filename_pieces[2] == "tres")):
+#			&& (filename_pieces[2] == "res")):
 #			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				
 #			if selectedScene.get_meta('_plPoseLib_poseFile').get_extension() == 'poselib':
@@ -193,7 +242,7 @@ func save_poseData():
 	if !is_poseFile_valid:
 		var available_path: String = "#"
 		for i in 100:
-			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.res"
+			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.tres"
 			if f.file_exists(available_path):
 				continue
 			selectedScene.set_meta('_plPoseLib_poseFile', available_path)
@@ -207,7 +256,9 @@ func save_poseData():
 	if is_instance_valid(current_poselib):
 #		print('poselib res saving')
 #		print('poselib exts ',ResourceSaver.get_recognized_extensions(current_poselib))
+		current_poselib.prepare_saving_external_resources()
 		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
+		current_poselib.prepare_loading_external_resources()
 		if err != OK:
 			print('saving didnt succeed, error ',err)
 		else:

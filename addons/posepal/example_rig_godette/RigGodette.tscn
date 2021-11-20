@@ -15169,7 +15169,7 @@ tracks/167/keys = {
 [node name="RigGodette" type="Node2D"]
 position = Vector2( 492, -655 )
 __meta__ = {
-"_plPoseLib_poseFile": "res://addons/posepal/.poselibs/RigGodette_1.poselib.res"
+"_plPoseLib_poseFile": "res://addons/posepal/.poselibs/RigGodette_2.poselib.tres"
 }
 
 [node name="TorsoBottom" type="Sprite" parent="."]

@@ -106,6 +106,10 @@ func _on_NewPoseButton_pressed():
 	if owner.poselib_collection == '':
 		owner.issue_warning('lacking_parameters')
 	
+	#DEBUG
+#	owner.save_poseData()
+#	print('saved')
+#	return
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
@@ -282,32 +286,40 @@ func _on_EditedSceneRoot_tree_exiting():
 #	posegen_mode = PoseGenMode.CREATE
 
 # poseData_
-#func to_key_value(pose: Dictionary, node_path: String, property: String):
-#	var editedSceneRoot: Node= get_tree().edited_scene_root
-#	var poseSceneRoot: Node= editedSceneRoot.get_node(owner.poselib_scene)
-#	var animNode: Node= poseSceneRoot.get_node_or_null(node_path)
-##	var pose: Dictionary = owner.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
-#	var value = pose[node_path][property]['val']#owner.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+func to_key_value(pose: Dictionary, node_path: String, property: String, f: File):
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	var editedSceneRoot: Node= get_tree().edited_scene_root
+	var poseSceneRoot: Node= editedSceneRoot.get_node(owner.poselib_scene)
+	var animNode: Node= poseSceneRoot.get_node_or_null(node_path)
+#	var pose: Dictionary = owner.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+	var value = pose[node_path][property]['val']#owner.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+	
 #
-##	var key_value
-#	match typeof(animNode.get(property)):
+#	var key_value
+	match typeof(animNode.get(property)):
 #		TYPE_VECTOR2:
 #			return Vector2(
 #				value[0],
 #				value[1]
 #				)
-#		TYPE_OBJECT:
-#			if property == 'texture':
+		TYPE_OBJECT:
+			if property == 'texture':
 #				var f: File = File.new()
-#				if f.file_exists(value):
-#					match value.get_extension():
-#						'png','jpg':
+				var path: String =  poselib.external_resources[value][0]
+				if f.file_exists(path):
+					match path.get_extension():
+						'png','jpg':
+							return poselib.external_resources[value][2]
 #							return load(value)
-#						_:
-#							return null
-#		_:
-#			return value
-#	return null
+						_:
+							return null
+		_:
+			return value
+	return null
+
+#func to_ext_id(resource: Resource):
+#	var poselib: RES_PoseLibrary = owner.current_poselib
+#	poselib.get_ext_id()
 
 func apply_pose(pose_id: int, pose_type: int = -1):
 	print('applying pose')
@@ -318,10 +330,16 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	var pose: Dictionary
 	if pose_type == -1: pose_type = current_pose_type
 	if pose_type == PoseType.NORMAL:
+		if owner.poselib_template == '':
+			return
+		if owner.poselib_collection == '':
+			return
 		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 	elif pose_type == PoseType.FILTER:
 		pose = poselib.filterData[owner.poselib_filter]
 	else:
+		if owner.poselib_template == '':
+			return
 		pose = poselib.templateData[owner.poselib_template]
 	
 	
@@ -382,7 +400,10 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 			var tr_property: int = anim.add_track(Animation.TYPE_VALUE)
 			anim.track_set_path(tr_property, str(poseSceneRoot.get_path_to(animNode)) + ':' + property)
 			
-			var key_value = value#to_key_value(pose, node_path, property)
+#			var key_value = value
+			var f = File.new()
+			var key_value = to_key_value(pose, node_path, property, f)
+			
 #			match typeof(animNode.get(property)):
 #				TYPE_VECTOR2:
 #					key_value = Vector2(
@@ -435,6 +456,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		return
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
+	print('ext ',poselib.external_resources)
 	if !is_instance_valid(poselib):
 		return
 	
@@ -483,11 +505,11 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 #		print('last key found ', last_key, Anim.track_get_key_time(i, last_key))
 #		var key_in :int= Anim.track_find_key(i, -60.0, false) # Previous Key
 		
-		
+		var node: Node = poseSceneRoot.get_node(node_path)
 		# -1 didn't find
 		if key_out != -1:
 			if Anim.track_get_key_time(i, key_out) >= 0.0:
-				_save_track_property_to_poseData(i, pose_id, node_path, track_path.get_subname(0), key_out, key_in)
+				_save_track_property_to_poseData(i, pose_id, node_path, node, track_path.get_subname(0), key_out, key_in)
 #		owner.poseData[owner.poselib_template][owner.poselib_collection][currentAnimOptionButton.text][node_path][property_path.get_subname(0)]['val'] = Anim.track_get_key_value(i, key_out)
 	
 #	print('PoseData = ', poselib.poseData)
@@ -495,7 +517,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	owner.save_poseData()
 	animationPlayer.remove_animation(currentAnimOptionButton.text)
 	animationPlayer.queue_free()
-	
+	print('poselib ext ',poselib.external_resources)
 	if _do_queue_select_poselib_animplayer:
 		_select_queued_poselib_animplayer()
 #	anim = null
@@ -507,7 +529,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 #		print('track ',i,' = ',property_path,'\n',path_subnames,'\n',node_path)
 #		print('save track ', i,' ', track_path,'\nsave prop ',i,' ', property_path)
 
-func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path: String, property: String, key_out: float = 1.0, key_in: float = -1.0):
+func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path: String, node: Node, property: String, key_out: float = 1.0, key_in: float = -1.0):
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -522,8 +544,13 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path] = {}
 		
 		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property] = {}
-
-		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+		
+		
+#		print('=== ',node.get(property))
+		if typeof(node.get(property)) != TYPE_OBJECT:
+			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+		else:
+			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['val'] = poselib.get_ext_id(anim.track_get_key_value(track_index, key_out))
 		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
@@ -535,7 +562,10 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 			poselib.filterData[owner.poselib_filter][node_path] = {}
 		poselib.filterData[owner.poselib_filter][node_path][property] = {}
 		
-		poselib.filterData[owner.poselib_filter][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+		if typeof(node.get(property)) != TYPE_OBJECT:
+			poselib.filterData[owner.poselib_filter][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+		else:
+			poselib.filterData[owner.poselib_filter][node_path][property]['val'] = poselib.get_ext_id(anim.track_get_key_value(track_index, key_out))
 		poselib.filterData[owner.poselib_filter][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
@@ -545,7 +575,10 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 			poselib.templateData[owner.poselib_template][node_path] = {}
 		poselib.templateData[owner.poselib_template][node_path][property] = {}
 		
-		poselib.templateData[owner.poselib_template][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+		if typeof(node.get(property)) != TYPE_OBJECT:
+			poselib.templateData[owner.poselib_template][node_path][property]['val'] = poselib.get_ext_id(anim.track_get_key_value(track_index, key_out))
+		else:
+			poselib.templateData[owner.poselib_template][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
 #		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 
 func are_parameters_valid() -> bool:

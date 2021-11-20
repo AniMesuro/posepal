@@ -1,4 +1,4 @@
-#tool
+tool
 extends Resource
 
 #########  EXAMPLE TEMPLATE   #########
@@ -43,11 +43,13 @@ export var scene_shortcuts: Dictionary = {} # Node shortcuts ex. {0:"/Head/Eyes"
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
 export var templateData: Dictionary = {"default": {}}
+export var external_resources: Array = []
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
+
 
 func _init() -> void:
 	print(self,' poselib created.')
-	
+	prepare_loading_external_resources()
 	# <TODO> Check if all paths in scene_nodes are valid.
 #	var poseRoot: Node
 #	var undefined_shortcuts: Array = []
@@ -68,12 +70,49 @@ func _init() -> void:
 #func load_lib(poselib_filepath: String):
 #	ResourceLoader.load(poselib_filepath)
 
+# Resources don't track dependency, so it'll store only paths again.
+func prepare_loading_external_resources():
+	print('preparing exts')
+#	yield()
+	for i in external_resources.size():
+		var ext_path: String = external_resources[i][0]
+		var ext_type: String = external_resources[i][1]
+		print(ext_path)
+		
+		if ResourceLoader.exists(ext_path, ext_type):
+			external_resources[i].resize(3)
+			external_resources[i][2] = ResourceLoader.load(ext_path, ext_type)
+			print(external_resources[i][2])
+	print(external_resources)
+
+func prepare_saving_external_resources():
+	# Delete all actual resource references.
+	for i in external_resources.size():
+		external_resources[i].resize(2)
+#
+#func prepare_to_load():
+#	pass
+
 func clear():
 	owner_filepath = "res://"
 	poseData = {"default": {"default": []}}
 	filterData = {"none": {}}
 	templateData = {"default": {}}
 
+func get_ext_resource(id: int):
+	if external_resources.size() <= id:
+		return null
+	return external_resources[id][2]
+
+func get_ext_id(res: Resource):
+	for i in external_resources.size():
+		var ext: Array = external_resources[i]
+		if res.resource_path == ext[0]:
+			return i
+	external_resources.append([res.resource_path, res.get_class(), res])
+	var id = external_resources.size()
+	print('get_ext_id ',external_resources)
+	return id;
 
 #func store_pose(pose_key: String):
 #	poseData
