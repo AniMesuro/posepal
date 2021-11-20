@@ -1,5 +1,6 @@
-# PostuRecord
-PostuRecord is a Godot add-on by AniMesuro that allows storing a group of scene properties into a pose, managing a Pose Library for using in animation.
+# PosePal
+PosePal is a Godot add-on by AniMesuro that allows storing a group of scene properties into Pose Librarys for use in 2D animation.
+The project is a work in progress, so it may have bugs and it can crash Godot.
 
 ## Pose Library
 A Pose Library is a Resource bound to a scene that stores pose templates and collections.
@@ -7,35 +8,40 @@ Poselibs are bound to scenes by the meta variable "_plPoseLib_poseFile" in the s
 A poselib file will have the ".poselib.tres" or ".poselib.res" extension.
 
 ## Poses
-Poses are records of data that store the state of a scene by storing selected properties. Usually used for character animation, but any kind of property can be saved.
+Poses are records of data that store the state of a scene by storing selected properties. Usually used for character animation, but most kind of properties can be saved. (Unless tests are proven otherwise)
 
-## Filter Pose
-Filter Poses are a special kind of pose that does not stores values. These are used to filter only poses that change selected nodes.
-Filter poses are also used as a template when the pose is created. The properties are gotten from the filter pose, but the values get overwritten by the scene node's current property.
+## Filter
+Filters are a special kind of pose that do not stores values. These are used to filter only poses that change selected nodes from a filter.
 
 ## Templates
-Templates are poses that are used as a base for all poses inside a collection. Therefore all poses created inside this template will copy the template's properties unless overwritten. A template can have dupplicated template pose, but can't have a dupplucated template name.
+Templates are poses that are used as a base for all poses inside a collection. Therefore all poses created inside this template will copy the template's properties unless overwritten. A template can have duplicated template pose, but can't have a duplicated template name.
 
 ## Collections
-Collections store poses
-
-Collections store subcollections and Subcollections store poses.
-This design is made to incentivize users to categorize their poses as much as possible.
+Collections store poses directly. They're used to organize lots of poses.
 
 ## Pose Previews
-These are thumbnail visualizations of the scene but overtwritten by the pose. The generation of thumbnails is expensive because they need to instance a ghost version of the scene with only visual data (transforms, texture, z_index)
+These are thumbnail visualizations of the scene but overwritten by the pose. The generation of thumbnails is expensive because they need to instance a ghost version of the scene with only visual data (transforms, texture, z_index, etc.)
 
 ## Page System
-The page system is made to optimize pose thumbnail generation. Previews are costly to generate, so the palette is limited to show only 9 per page.
+Not working yet.
 
-## Bake/Write/Batch-key Pose
+## Pose Options Tab
+This tab should hold settings that could help managing poses. Currently it holds one button.
+
+### Batch-key Pose
 Keying properties for the pose is time consuming, so there is a shortcut to batch key all properties that have a track in the scene.
-
--- Maybe it'd be more useful as a separate plugin 
+When you press the button on the Pose Options tab, you can select which nodes will key a written property.
+The code for finding the user selected AnimationPlayer is dumb, so it's advisable to check the window title if it matches the Animation name.
 
 ## Godette Example Rig
-GodetteRig is an example scene that comes bounded to a PoseLib. She has 3 directions: (Left, 3/4 Left and Front).
-The PoseLib comes with default poses to demonstrate the add-on's capabilities.
+GodetteRig is an example scene that comes bounded to a PoseLib. She has 8 directions: (Left, 3/4 Left, Front, 3/4 Right, Right, 3/4 Back Right, Back and 3/4 Back Left).
+The PoseLib comes with default poses to demonstrate the add-on's basic capabilities.
+Both the assets and the poselib is subject to change.
 
 ## Limitations:
-PosePal does not support 3D scenes, and bone animation.
+- PosePal does not support 3D scenes, and bone animation.
+- Changing the edited scene as you're diting a pose crashes Godot, so the Scene Tabs is invisible as you do so.
+- Changing nodes names and nodepaths will confuse the poselib.
+- Changing resources (Images)'s paths will confuse the poselib.
+
+The add-on is not very stable, so it's advisable not use in production.
