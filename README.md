@@ -1,6 +1,15 @@
-# PosePal
+# ![PosePal Icon](addons/posepal/plugin_icon.png) PosePal
 PosePal is a Godot add-on by AniMesuro that allows storing a group of scene properties into Pose Librarys for use in 2D animation.
 The project is a work in progress, so it may have bugs and it can crash Godot.
+
+## Usage
+- On the Parameters tab, click on poselib and select the owner of a scene. A poselib resource is created, but it will only save after changes are made to it.
+- Select a filter. The default one is "none", which tracks all nodes inside the edited pose root.
+- Select a template. The default is "default", which has no base properties.
+- Select a collection. The default is "default", which stores poses.
+- Clicking on New pose, you can key properties from different nodes so that they're stored into the pose.
+- Click save. A new pose is created at the tab "Palette".
+- Select an AnimationPlayer from the scene. Choose a time and click on the pose. It will key it on the animation.
 
 ## Pose Library
 A Pose Library is a Resource bound to a scene that stores pose templates and collections.
