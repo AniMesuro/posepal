@@ -1,7 +1,33 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=18 format=2]
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.282353, 0.262745, 0.25098, 1 )
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.128906, 0.121227, 0.0981903, 1 )
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0196078, 0.00392157, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.282353, 0.262745, 0.25098, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.137255, 0.133333, 0.12549, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.117996, 0.117996, 0.144531, 1 )
+bg_color = Color( 0.192157, 0.188235, 0.180392, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -51,8 +77,23 @@ content_margin_bottom = 2.0
 bg_color = Color( 0.52549, 0.454902, 0.313726, 1 )
 expand_margin_top = 3.0
 
+[sub_resource type="StyleBoxFlat" id=19]
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.788235, 0.760784, 0.705882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+border_width_left = 1
+border_color = Color( 0.183838, 0.171204, 0.234375, 1 )
+
 [resource]
+Button/styles/hover = SubResource( 18 )
+Button/styles/normal = SubResource( 14 )
+CheckBox/styles/hover = SubResource( 15 )
+CheckBox/styles/normal = SubResource( 16 )
+CheckButton/styles/normal = SubResource( 17 )
 Label/fonts/font = null
+LineEdit/styles/focus = SubResource( 20 )
 LineEdit/styles/normal = SubResource( 2 )
 MenuButton/colors/font_color = Color( 0.996078, 0.984314, 0.984314, 1 )
 MenuButton/styles/hover = SubResource( 10 )
@@ -63,3 +104,7 @@ TabContainer/styles/panel = SubResource( 5 )
 TabContainer/styles/tab_bg = SubResource( 6 )
 TabContainer/styles/tab_disabled = SubResource( 7 )
 TabContainer/styles/tab_fg = SubResource( 8 )
+ToolButton/styles/hover = SubResource( 19 )
+TooltipPanel/styles/panel = SubResource( 13 )
+VSeparator/constants/separation = 1
+VSeparator/styles/separator = SubResource( 12 )

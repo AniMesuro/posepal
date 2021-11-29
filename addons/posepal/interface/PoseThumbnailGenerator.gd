@@ -8,7 +8,7 @@ enum ThumbnailProgressionMode {
 	AUTOMATIC, # Generate next pose
 	MANUAL # Wait for user cluck to generate.
 }
-var thumbnail_progression_mode: int = ThumbnailProgressionMode.AUTOMATIC
+var thumbnail_progression_mode: int = ThumbnailProgressionMode.MANUAL
 
 enum PopupItems {
 	EDIT
@@ -32,6 +32,7 @@ var poseSceneRoot: Node
 #var is_being_edited: bool = false setget _set_is_being_edited
 #export var frame :StreamTexture= load("res://icon.png") setget _set_frame
 var queued_poses: Array = []
+var current_pose_queueid: int = -1
 var is_generating: bool = false
 var has_dummy_scene_created: bool = false
 var dummyRoot: Node
@@ -54,12 +55,13 @@ func _ready() -> void:
 		return
 	thumbnailButton = $ThumbnailButton
 	label = $Label
-#	connect( "mouse_entered", self, "_on_mouse_entered")
-#	connect( "mouse_exited", self, "_on_mouse_exited")
-#	thumbnailButton.connect("pressed", self, "_on_pressed", [Input.get_mouse_button_mask()])
+	if thumbnail_progression_mode == ThumbnailProgressionMode.MANUAL:
+#		connect( "mouse_entered", self, "_on_mouse_entered")
+#		connect( "mouse_exited", self, "_on_mouse_exited")
+		thumbnailButton.connect("pressed", self, "_on_pressed", [Input.get_mouse_button_mask()])
+		thumbnailButton.button_mask = BUTTON_LEFT | BUTTON_RIGHT
+		thumbnailButton.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	thumbnailButton.modulate = Color.white
-#	thumbnailButton.button_mask = BUTTON_LEFT | BUTTON_RIGHT
-	thumbnailButton.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	owner = get_parent().owner
 	var poselib: Resource = owner.current_poselib
 	filterPose = poselib.filterData[owner.poselib_filter]
@@ -639,10 +641,23 @@ func get_used_rect(points: PoolVector2Array) -> Rect2:
 #	if (s.position.y - p.y) < lowest_point.y:
 #		lowest_point.y = (s.position.y - p.y)
 
-#func _on_pressed(input_button_mask: int):
-##	Generate next pose on queue
-#	if thumbnail_progression_mode == ThumbnailProgressionMode.MANUAL && !is_generating:
-#		generate_next_pose()
+func _on_pressed(input_button_mask: int):
+#	Generate next pose on queue
+	print(queued_poses.size())
+	if thumbnail_progression_mode == ThumbnailProgressionMode.MANUAL && !is_generating:
+		generate_next_pose()
+
+func generate_next_pose():
+	current_pose_queueid +=1
+	if current_pose_queueid > queued_poses.size():
+		return
+	var pose_pair: Array = queued_poses[current_pose_queueid]
+	var pose = pose_pair[0]
+	var pose_id = pose_pair[1]
+	queued_poses[current_pose_queueid].resize(4)
+	queued_poses[current_pose_queueid][QueuedPoseData.USED_RECT] = Rect2()
+	queued_poses[current_pose_queueid][QueuedPoseData.USED_POINTS] = PoolVector2Array()
+	_generate_thumbnail(pose, pose_id, current_pose_queueid)
 
 func do_automatic_thumbnail_progression():
 	for i in queued_poses.size():
@@ -657,6 +672,8 @@ func do_automatic_thumbnail_progression():
 	print_tree()
 	
 	queued_poses.clear()
+
+#func generate_nex
 
 #func _do_generation_progression():
 #	match thumbnail_progression_mode:
@@ -759,8 +776,8 @@ func _on_PopupMenu_hide():
 #	if is_being_edited:
 #		return
 #	modulate = Color(.7,.7,1)
-	
-	
+#
+#
 #func _on_mouse_exited():
 #	if is_being_edited:
 #		return
