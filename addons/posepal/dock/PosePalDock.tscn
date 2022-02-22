@@ -359,6 +359,38 @@ margin_bottom = 15.0
 hint_tooltip = "Batch keys into an Animation."
 text = "Batch key"
 
+[node name="IgnoreScenePoseChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsVBox"]
+margin_top = 19.0
+margin_right = 329.0
+margin_bottom = 35.0
+text = "Ignore scene pose"
+
+[node name="KeyTemplateChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsVBox"]
+margin_top = 39.0
+margin_right = 329.0
+margin_bottom = 55.0
+text = "Key template"
+
+[node name="DontKeyDuplicateChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsVBox"]
+margin_top = 59.0
+margin_right = 329.0
+margin_bottom = 75.0
+text = "Don't key on duplicate"
+
+[node name="QueueKeyTimeBtn" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsVBox"]
+margin_top = 79.0
+margin_right = 329.0
+margin_bottom = 94.0
+hint_tooltip = "Batch keys into an Animation."
+text = "Queue key at time"
+
+[node name="SliceToggleAudioButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsVBox"]
+visible = false
+margin_top = 79.0
+margin_right = 329.0
+margin_bottom = 94.0
+text = "Slice toggle audio key"
+
 [node name="Palette" type="ScrollContainer" parent="VSplit/TabContainer"]
 visible = false
 anchor_right = 1.0

@@ -551,17 +551,22 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 func are_parameters_valid() -> bool:
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
+		print('no poselib res')
 		return false
 	
 #	if !owner.poseData.has('collections'):
 #		return false
 	if !poselib.poseData.has(owner.poselib_template):
+		print('1')
 		return false
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
+		print('2')
 		return false
 	if !poselib.filterData.has(owner.poselib_filter):
+		print('3')
 		return false
 	if !poselib.templateData.has(owner.poselib_template):
+		print('4')
 		return false
 	return true
 

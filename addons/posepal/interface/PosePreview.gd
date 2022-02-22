@@ -135,7 +135,7 @@ func _generate_thumbnail():
 	var visibleRect: ColorRect = ColorRect.new()
 	thumbnailViewport.add_child(visibleRect)
 	visibleRect.set_as_toplevel(true)
-	visibleRect.color = Color(0,1,1,.2)
+	visibleRect.color = Color.transparent#Color(0,1,1,.2)
 	visibleRect.show_behind_parent = true
 	#visibleRect.rect_scale = _rt.scale *2
 #	visibleRect.rect_position = _rt.position
@@ -212,20 +212,23 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_ch = Sprite.new()
 				if is_instance_valid(ch.texture):
 #						_ch.texture = ch.texture
-					if ch.visible:
+					if ch.visible && !(owner.optionsData.ignore_scene_pose):
 						_ch.texture = ch.texture
 						_ch.offset = ch.offset
 				else:
 					_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
-					
-				_ch.offset = ch.offset
-				_ch.flip_h = ch.flip_h
-				_ch.flip_v = ch.flip_v
+				
+				if !(owner.optionsData.ignore_scene_pose):
+					_ch.offset = ch.offset
+					_ch.flip_h = ch.flip_h
+					_ch.flip_v = ch.flip_v
+					_ch.z_index = ch.z_index
 #				var s:Sprite
-				_ch.z_index = ch.z_index
 #				_ch.z_as_relative = ch.z_as_relative
 			'AnimatedSprite':
 				_ch = AnimatedSprite.new()
+				_ch.frames = ch.frames
+				
 			'TextureRect':
 				_ch = TextureRect.new()
 				_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")

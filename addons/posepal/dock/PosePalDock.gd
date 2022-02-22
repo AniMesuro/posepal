@@ -25,9 +25,19 @@ var poselib_collection: String = "" # Stores pose data.
 var poselib_animPlayer: AnimationPlayer # AnimationPlayer selected on Animation panel.
 
 
+var optionsData: Dictionary = {
+	'ignore_scene_pose': false,
+	'key_template': false,
+	'dont_key_duplicate': false
+}
+
+
 var poseFile_path: String = ""
 # Old - JSON
 var poseData: Dictionary = {}
+
+var queuedPoseData: Dictionary = {}
+var queued_key_time: float = -1.0
 
 # New - Resource
 var current_poselib: RES_PoseLibrary
@@ -59,8 +69,13 @@ func _ready() -> void:
 		return
 	connect("pose_selected", self, "_on_pose_selected")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
+#	connect("script_changed", self, "_on_script_changed")
 	
 
+#func _on_script_changed():
+#	for option in optionsData:
+#		var optionsHBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
+#		optionsHBox.refresh_ui()
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root
@@ -423,10 +438,98 @@ func _get_editorControl() -> Control:
 		return editorControl
 	return self.pluginInstance.get_editor_interface().get_base_control()
 
-func _on_pose_selected(pose_id :int):
-#	if !is_instance_valid(pluginInstance):
-#		pluginInstance = _get_pluginInstance()
+func _key_queued_pose(final_pose: Dictionary):
+	if queuedPoseData.size() == 0:
+		return
+	if !is_instance_valid(poselib_animPlayer):
+		issue_warning('animplayer_invalid')
+		return
+	if !is_instance_valid(self.pluginInstance.animationPlayerEditor):
+		pluginInstance._get_editor_references()
+	if !poselib_animPlayer.has_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text):
+		return
+		
+#	print("current anim =",self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
 	
+	
+#	var final_pose: Dictionary
+#	if optionsData.key_template:
+#		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
+#	final_pose = current_poselib.poseData[poselib_template][poselib_collection][final_pose_id].duplicate(true)
+	print('fin size ',final_pose.size())
+	print(final_pose.keys())
+#	if final_pose.has('_name'):
+#		final_pose.erase('_name')
+		
+	for nodepath in queuedPoseData.keys():
+		for property in queuedPoseData[nodepath].keys():
+			var track_path: String = nodepath +':'+ property
+			var tr: int = anim.find_track(track_path)
+			if tr == -1:
+				continue
+#			var track_path: NodePath = nodepath + ':' + queuedPoseData[nodepath] #currentAnimation.track_get_path(tr) # (@@@)/./Sprite:position
+#		var property: String = queuedPoseData[nodepath]
+#		var path_subnames: NodePath = track_path.get_concatenated_subnames() # :position
+#		var node_path: String = str(track_path).trim_suffix(str(path_subnames)).rstrip(':') # Sprite
+#		if node_path == '':
+#			node_path = '.'
+#		if queuedPoseData[nodepath] == null:
+#			continue
+#		print('@@@finalpose ',str(path_subnames).rstrip(':'))
+			if !final_pose.has(nodepath):
+				continue
+#			if final_pose[nodepath]
+#			print(final_pose[nodepath].keys())
+#			print(final_pose[nodepath].keys()[0])
+			
+#			print(final_pose[nodepath].keys().has(property))
+#			print(property in final_pose[nodepath].keys())
+#			print(property in final_pose[nodepath])
+#			print(final_pose[nodepath].keys().has("position"))
+			
+#			if final_pose[nodepath].keys().has(get(property)):
+#				print('aaaa')
+#			if !final_pose[nodepath].has(property):
+#				print('ulllll')
+#			print('finalpose ',property,' ', final_pose[nodepath].get(property))
+#			print('finalpose ',property,' ', current_poselib.poseData[poselib_template][poselib_collection][final_pose_id].get(property))
+			
+			
+#			if final_pose[nodepath].get(property)==null:
+#				continue
+				
+#			print('passed ',final_pose[nodepath][property])
+#			print(final_pose[nodepath])
+#
+#			if property in final_pose[nodepath].keys():
+#				print(final_pose[nodepath][property])
+#			print('passed1 ',final_pose[nodepath][property]['val'])
+			var _can_continue: bool = false
+			if optionsData.dont_key_duplicate:
+				for prop in final_pose[nodepath].keys():
+#					print('prop ',nodepath,' ',prop)
+#					print(final_pose[nodepath][prop])
+#					print()
+					if prop != property:
+						continue
+					if queuedPoseData[nodepath][property] == final_pose[nodepath][prop]['val']:#final_pose[nodepath][property]['val']:
+#						print('fpose ',nodepath,' ',prop)
+						_can_continue = true
+						break
+			if _can_continue:
+				continue
+			anim.track_insert_key(tr, queued_key_time, queuedPoseData[nodepath][property])
+	
+	
+	
+	
+	var optionsVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
+	optionsVBox.is_pose_queued = false
+	
+
+func _on_pose_selected(pose_id :int):
 	if !is_instance_valid(poselib_animPlayer):
 		issue_warning('animplayer_invalid')
 		return
@@ -453,54 +556,63 @@ func _on_pose_selected(pose_id :int):
 		return
 	
 #	print(current_poselib.poseData)
-	for nodepath in current_poselib.poseData[poselib_template][poselib_collection][pose_id]:
-		print(nodepath)
-		if nodepath == "_name":
-			return
-#		print('nodepath ', nodepath)
+	var final_pose: Dictionary
+	if optionsData.key_template:
+		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
+		for nodepath in final_pose:
+			for property in final_pose[nodepath]:
+				final_pose[nodepath][property]['out'] = 0.0
+#		print('fin ',final_pose)
+		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
+		print('___template key___')
+		for nodepath in _pose:
+#			print('@@'+nodepath)
+			if !final_pose.has(nodepath):
+				final_pose[nodepath] = {}
+			for property in _pose[nodepath]:
+#				print('___add_property')
+				final_pose[nodepath][property] = _pose[nodepath][property]
+		print('finalpose = ', final_pose.size(),'\n pose = ',_pose.size())
+#		print('@finalpose =',final_pose)
+#		print('@_pose =',_pose)
+	else:
+		final_pose = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate()
+	if final_pose.has('_name'):
+		final_pose.erase('_name')
+	
+	if queuedPoseData.size() > 0:
+		_key_queued_pose(final_pose)
+	
+	for nodepath in final_pose:
 		var node: Node = animRoot.get_node(nodepath)
-#		print('root ',node)
 		
-		for property in current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]:
-			
+		for property in final_pose[nodepath]:
 			var track_path :String= str(animRoot.get_path_to(node))+':'+property
 			var tr_property :int= anim.find_track(track_path)
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-#			var anim.track_find_key(
 			var _key_time :float= float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			
 			var key_value
 			# Converts the json values to corresponding type.
-			match typeof(node.get(property)):
-#				TYPE_VECTOR2: #position, scale
-#					key_value = Vector2(
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][0],
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][1])
-#				TYPE_OBJECT: # texture
-#					if property != "texture":
-#						return
-#					var f: File = File.new()
-#					if f.file_exists['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val']):
-#						match poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'].get_extension():
-#							'png', 'jpg':
-#								key_value = load(poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'])
-#							_:
-#								return
-				_:
-					key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['val']
+#			match typeof(node.get(property)):
+#				_:
+			key_value = final_pose[nodepath][property]['val']
 #			Selects key before current_key and changes its transition for "in"
 			var key_last :int= anim.track_find_key(tr_property, _key_time - 0.01, false)
 			if key_last != -1:
-				if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('in'):
-					anim.track_set_key_transition(tr_property, key_last, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['in'])
-			if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('out'):
-				anim.track_insert_key(tr_property, _key_time, key_value, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['out'])
+				if optionsData.dont_key_duplicate:
+					if anim.track_get_key_value(tr_property, key_last) == key_value:
+						continue
+				if final_pose[nodepath][property].has('in'):
+					anim.track_set_key_transition(tr_property, key_last, final_pose[nodepath][property]['in'])
+			if final_pose[nodepath][property].has('out'):
+				anim.track_insert_key(tr_property, _key_time, key_value, final_pose[nodepath][property]['out'])
 			#
 			
 	
-	print('pose_id =',pose_id)
+#	print('pose_id =',pose_id)
 
 func _on_pose_created(pose :Dictionary, pose_key :String):
 #	pluginInstance = _get_pluginInstance()
