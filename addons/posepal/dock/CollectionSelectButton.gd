@@ -34,7 +34,7 @@ func _on_id_selected(id :int):
 	
 	owner.emit_signal("updated_reference", owner_reference)
 	var posePalette :GridContainer= owner.posePalette#get_node("VBox/PoseContainer/PosePalette")
-	posePalette.fill_previews()
+#	posePalette.fill_previews()
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	owner.load_poseData()

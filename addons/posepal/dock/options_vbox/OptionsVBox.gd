@@ -184,6 +184,9 @@ func _on_KeyTemplateChk_pressed():
 func _on_QueueKeyTimeBtn_pressed():
 	if get_posegen_mode() == 2: # SAVE - Editing pose.
 		return
+	if owner.poselib_scene == '':
+		print('[PosePal] poselib_scene not selected.')
+		return
 	# check if animation is selected.
 	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton

@@ -412,11 +412,11 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 #		fix_warning('edited_scene_invalid')
 	
 	
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = self._get_posePalette()#$"VSplit/TabContainer/Palette/GridContainer"
 	posePalette.fill_previews()
 
 func _get_posePalette():
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = $"VSplit/TabContainer/Pallete/ScrollContainer/GridContainer"
 	return posePalette
 	
 

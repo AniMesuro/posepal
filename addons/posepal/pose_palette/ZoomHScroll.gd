@@ -10,8 +10,8 @@ func _ready() -> void:
 		return
 	
 	connect("value_changed", self, "_on_value_changed")
-	posePalette = owner.get_node("VSplit/TabContainer/Palette/GridContainer")
-	poseContainer = owner.get_node("VSplit/TabContainer/Palette")
+	posePalette = owner._get_posePalette()
+	poseContainer = owner._get_posePalette().get_parent()
 	
 	poseContainer.connect("resized", self, "_on_PoseContainer_resized")
 	_update_frame_sizes()
