@@ -46,9 +46,9 @@ func fill_previews(limit_by_page: bool = true):#true):
 	var pageHBox: HBoxContainer = $"../../PageHBox"
 	
 	
-#	if pageHBox.current_page == -1:
-#		pageHBox.current_page = 0
 	pageHBox.update_pages()#update_NumButton_item_list()
+	if pageHBox.current_page == -1:
+		pageHBox.current_page = 0
 	
 	var pose_range: Array = []
 	if !limit_by_page:

@@ -13,6 +13,8 @@ func _ready() -> void:
 	
 	$FirstButton.connect("pressed", self, "_on_FirstButton_pressed")
 	$LastButton.connect("pressed", self, "_on_LastButton_pressed")
+	$PreviousButton.connect("pressed", self, "_on_PreviousButton_pressed")
+	$NextButton.connect("pressed", self, "_on_NextButton_pressed")
 
 func _set_current_page(new_current_page: int):
 	if current_page == new_current_page:
@@ -52,6 +54,14 @@ func _on_LastButton_pressed():
 #	if page_count < 0:
 #		return
 	self.current_page = page_count-1
+
+func _on_PreviousButton_pressed():
+	if current_page -1 > -1:
+		self.current_page -= 1
+
+func _on_NextButton_pressed():
+	if current_page + 1 < page_count:
+		self.current_page += 1
 
 func update_NumButton_item_list():
 	var poselib: RES_PoseLibrary = owner.current_poselib
