@@ -49,7 +49,7 @@ var poseCreationVBox: VBoxContainer setget ,_get_poseCreationVBox
 func _enter_tree() -> void:
 #	pluginInstance = _get_pluginInstance()
 	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+#	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
 	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
 #	yield(get_tree(), "idle_frame")
 	if get_tree().edited_scene_root == self:
@@ -413,7 +413,8 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 	
 	
 	posePalette = self._get_posePalette()#$"VSplit/TabContainer/Palette/GridContainer"
-	posePalette.fill_previews()
+	if is_instance_valid(posePalette):
+		posePalette.fill_previews()
 
 func _get_posePalette():
 	posePalette = $"VSplit/TabContainer/Pallete/ScrollContainer/GridContainer"
@@ -622,7 +623,7 @@ func _on_pose_created(pose :Dictionary, pose_key :String):
 	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
 	save_poseData()
 	
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = self.posePalette
 	posePalette.fill_previews()
 	# Get PoseFile
 #	var f :File= File.new()

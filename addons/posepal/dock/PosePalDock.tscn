@@ -78,7 +78,6 @@ tab_align = 0
 script = ExtResource( 25 )
 
 [node name="PoseLib" type="ScrollContainer" parent="VSplit/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 18.0
@@ -351,7 +350,7 @@ icon = ExtResource( 23 )
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 170.0
 margin_right = 329.0
-margin_bottom = 547.0
+margin_bottom = 548.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 24 )
@@ -395,6 +394,7 @@ margin_bottom = 94.0
 text = "Slice toggle audio key"
 
 [node name="Pallete" type="VBoxContainer" parent="VSplit/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 18.0

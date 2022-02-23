@@ -14,7 +14,7 @@ func update_display():
 
 func _ready() -> void:
 	_fix_PoseCreationVBox_ref()
-	pageHBox = owner.get_node("VSplit/ExtraHBox/VBox/PageHBox")
+#	pageHBox = 
 
 var poseCreationVBox: VBoxContainer
 func _fix_PoseCreationVBox_ref() -> void:
