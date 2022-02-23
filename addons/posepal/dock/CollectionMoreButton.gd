@@ -34,10 +34,12 @@ func _on_id_pressed(id: int):
 	match id:
 		Items.CREATE:
 			ask_for_name("Please insert the name of the new subcollection.")
+			return
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
 		Items.RENAME:
 			if owner.poselib_collection == 'default':
 				return
+			return
 			ask_for_name("Please insert the new name of the" + owner.poselib_collection + " subcollection.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
 		Items.ERASE:
@@ -50,6 +52,8 @@ func _on_id_pressed(id: int):
 
 
 func _on_name_settled(new_name: String, id: int):
+	print('hey')
+	return
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return

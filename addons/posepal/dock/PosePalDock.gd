@@ -117,17 +117,17 @@ func load_poseData() -> void:
 #		current_poselib = null
 #		return
 	
-#	var extension: String = poseFile_path.get_extension()
-#	if extension != "poselib":
-#		return
-	var f: File = File.new()
-	if !f.file_exists(poseFile_path):
-		current_poselib = RES_PoseLibrary.new()
-#		wf_current_poselib = weakref(current_poselib)
-		var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
-		current_poselib.owner_filepath = sceneNode.filename
-		return
-	current_poselib = load(poseFile_path)
+#	If the poslib is created at the first time, it will only save to file
+#	When the first pose is saved.
+	if !is_instance_valid(current_poselib):
+		var f: File = File.new()
+		if !f.file_exists(poseFile_path):
+			current_poselib = RES_PoseLibrary.new()
+	#		wf_current_poselib = weakref(current_poselib)
+			var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
+			current_poselib.owner_filepath = sceneNode.filename
+			return
+		current_poselib = load(poseFile_path)
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):
 #		current_poselib.load_lib(poseFile_path)
@@ -135,52 +135,8 @@ func load_poseData() -> void:
 #		current_poselib = RES_PoseLibrary.new()
 #		current_poselib.load_lib(poseFile_path)
 	
-	# OLD #
 	return
-# Checks if own property is valid.
-#	print('loading')
-	# Checks if scene is selected
-	if poselib_scene == "":
-#		print('error')
-		return
-	# Checks if owner's posefile is valid
-	if poseFile_path == "":
-#		print('error')
-		return
-#	var f: File = File.new()
-	if !f.file_exists(poseFile_path):
-#		print(poseFile_path,' doesnt exist')
-		return
-	f.open(poseFile_path, f.READ)
-	var poseFile_text :String= f.get_as_text()
-	f.close()
-	
-	var jsonResult :JSONParseResult= JSON.parse(poseFile_text)
-	if jsonResult.error != OK:
-		print('json not ok')
-		return
-	poseData = get_editor_poseData(jsonResult.result)
-	
-	if !poseData.has('groups'):
-		poseData['groups'] = {}
-#		save_poseData()
-	if !poseData['groups'].has('all'):
-		poseData['groups']['all'] = {}
-#		save_poseData()
-	if !poseData.has('collections'):
-		poseData['collections'] = {}
-#		poseData['collections']['default'] = {}
-#		poseData['collections']['default']['default'] = {}
-#		save_poseData()
-#		return
-	if !poseData['collections'].has('default'):
-		poseData['collections']['default'] = {}
-#		poseData['collections']['default']['default'] = {}
-#		save_poseData()
-	if !poseData['collections']['default'].has('default'):
-		poseData['collections']['default']['default'] = {}
-#		save_poseData()
-	return
+
 
 func save_poseData():
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
@@ -412,7 +368,7 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 #		fix_warning('edited_scene_invalid')
 	
 	
-	posePalette = self._get_posePalette()#$"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = self.posePalette#$"VSplit/TabContainer/Palette/GridContainer"
 	if is_instance_valid(posePalette):
 		posePalette.fill_previews()
 
