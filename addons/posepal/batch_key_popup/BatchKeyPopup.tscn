@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/posepal/batch_key_popup/BatchKeyPopup.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/posepal/interface/RectHandlerContainer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=10]
+[ext_resource path="res://addons/posepal/batch_key_popup/SelectAllCheck.gd" type="Script" id=11]
 
 [node name="BatchKeyPopup" type="Popup"]
 visible = true
@@ -67,25 +68,37 @@ window_path = NodePath("../../../..")
 [node name="TitleHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox"]
 margin_top = 28.0
 margin_right = 582.0
-margin_bottom = 42.0
+margin_bottom = 44.0
+
+[node name="SelectAllCheck" type="CheckBox" parent="PanelContainer/MarginContainer/VBox/TitleHBox"]
+margin_right = 16.0
+margin_bottom = 16.0
+hint_tooltip = "Select All"
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NodeLabel" type="Label" parent="PanelContainer/MarginContainer/VBox/TitleHBox"]
-margin_right = 289.0
-margin_bottom = 14.0
+margin_left = 20.0
+margin_top = 1.0
+margin_right = 299.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 text = "Nodes"
 align = 1
 
 [node name="PropertyLabel" type="Label" parent="PanelContainer/MarginContainer/VBox/TitleHBox"]
-margin_left = 293.0
+margin_left = 303.0
+margin_top = 1.0
 margin_right = 582.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 text = "Properties"
 align = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBox"]
-margin_top = 46.0
+margin_top = 48.0
 margin_right = 582.0
 margin_bottom = 253.0
 size_flags_horizontal = 3
@@ -96,7 +109,7 @@ dragger_visibility = 2
 
 [node name="TreeScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer"]
 margin_right = 291.0
-margin_bottom = 207.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -104,7 +117,7 @@ scroll_deadzone = 24
 
 [node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer/TreeScroll"]
 margin_right = 291.0
-margin_bottom = 207.0
+margin_bottom = 205.0
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -113,14 +126,14 @@ script = ExtResource( 4 )
 [node name="PropertyScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer"]
 margin_left = 291.0
 margin_right = 582.0
-margin_bottom = 207.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBox/HSplitContainer/PropertyScroll"]
 margin_right = 291.0
-margin_bottom = 207.0
+margin_bottom = 205.0
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -396,6 +396,7 @@ margin_right = 379.0
 margin_bottom = 20.0
 path_to_expandableControl = NodePath("../PreviewVBox")
 text = "Preview"
+is_locked = false
 
 [node name="PreviewVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 20.0
@@ -415,6 +416,7 @@ margin_right = 379.0
 margin_bottom = 56.0
 path_to_expandableControl = NodePath("../KeyingVBox")
 text = "Keying"
+is_locked = false
 
 [node name="KeyingVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 56.0
