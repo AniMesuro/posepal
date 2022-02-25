@@ -20,6 +20,7 @@ func key_template_pose():
 	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
 	
+	print('key templaet')
 	for nodepath in poselib.templateData[owner.poselib_template]:
 		var node: Node = animRoot.get_node(nodepath)
 		for property in poselib.templateData[owner.poselib_template][nodepath]:

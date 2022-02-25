@@ -41,20 +41,21 @@ func fill_previews(limit_by_page: bool = true):#true):
 	var editedSceneRoot: Node = get_tree().edited_scene_root
 	if !is_instance_valid(editedSceneRoot.get_node(owner.poselib_scene)):
 		return
-		
-	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
-	var pageHBox: HBoxContainer = $"../../PageHBox"
 	
+	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
+	var pose_count: int = collection.size()
+	if pose_count == 0:
+		return
+	var pageHBox: HBoxContainer = $"../../PageHBox"
 	
 	pageHBox.update_pages()#update_NumButton_item_list()
 	if pageHBox.current_page == -1:
 		pageHBox.current_page = 0
-	
+		
 	var pose_range: Array = []
 	if !limit_by_page:
 		pose_range = range(collection.size())
 	else:
-		var pose_count: int = collection.size()
 #		pageHBox.current_page
 #		pose_range = range(1, 1+9)
 		pose_range = range(

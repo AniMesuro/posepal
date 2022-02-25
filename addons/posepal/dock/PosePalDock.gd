@@ -119,15 +119,20 @@ func load_poseData() -> void:
 	
 #	If the poslib is created at the first time, it will only save to file
 #	When the first pose is saved.
-	if !is_instance_valid(current_poselib):
-		var f: File = File.new()
-		if !f.file_exists(poseFile_path):
+	var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
+#	if is_instance_valid(current_poselib):
+#		if current_poselib.owner_filepath != sceneNode.filename:
+#			current_poselib.queue_free()
+
+#	if !is_instance_valid(current_poselib):
+	var f: File = File.new()
+	if !f.file_exists(poseFile_path):
+		if !is_instance_valid(current_poselib):
 			current_poselib = RES_PoseLibrary.new()
-	#		wf_current_poselib = weakref(current_poselib)
-			var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
 			current_poselib.owner_filepath = sceneNode.filename
-			return
-		current_poselib = load(poseFile_path)
+		return
+	current_poselib = load(poseFile_path)
+#	else:
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):
 #		current_poselib.load_lib(poseFile_path)
@@ -279,7 +284,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if poselib_animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return poselib_animPlayer
 
-	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
+#	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
 	return null
 
 func get_editor_poseData(jsonPoseData :Dictionary) -> Dictionary:
@@ -482,8 +487,9 @@ func _key_queued_pose(final_pose: Dictionary):
 	
 	
 	
-	var optionsVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
-	optionsVBox.is_pose_queued = false
+#	var optionsVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
+	var optionKeyingVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"
+	optionKeyingVBox.is_pose_queued = false
 	
 
 func _on_pose_selected(pose_id :int):

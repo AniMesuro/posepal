@@ -68,6 +68,8 @@ func _set_posegen_mode(new_mode :int):
 			newPoseButton.icon = TEX_IconSave
 			cancelPoseButton.visible = true
 			cancelPoseButton.connect("pressed", self, "_on_CancelPoseButton_pressed")
+			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
+			poseCreationColumn.locked = true
 	posegen_mode = new_mode
 
 # owner_reference (reference)
@@ -390,17 +392,23 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 			if pose[node_path][property].has('out'):
 				transition_out = pose[node_path][property]['out']
 			elif pose_type == PoseType.NORMAL:
-				if poselib.templateData[owner.poselib_template].has('out'):
-					transition_out = poselib.templateData[owner.poselib_template]['out']
+				if poselib.templateData[owner.poselib_template].has(node_path):
+					if poselib.templateData[owner.poselib_template][node_path].has(property):
+						if poselib.templateData[owner.poselib_template][node_path][property].has('out'):
+							transition_out = poselib.templateData[owner.poselib_template][node_path][property]['out']
 			
 			if pose[node_path][property].has('in'):
 				transition_in = pose[node_path][property]['in']
 				anim.track_insert_key(tr_property, -1.0, key_value, transition_in)
 			
 			anim.track_insert_key(tr_property, 0.0, key_value, transition_out)
-#			if pose_type == PoseType.NORMAL:
-#				if poselib.templateData[owner.poselib_template].has('upmo'):
-#					anim.value_track_set_update_mode(tr_property, poselib.templateData[owner.poselib_template]['upmo'])
+			if pose_type == PoseType.NORMAL or pose_type == PoseType.TEMPLATE:
+				if poselib.templateData[owner.poselib_template].has(node_path):
+					if poselib.templateData[owner.poselib_template][node_path].has(property):
+						if poselib.templateData[owner.poselib_template][node_path][property].has('upmo'):
+							anim.value_track_set_update_mode(tr_property,
+							  poselib.templateData[owner.poselib_template][node_path][property]['upmo'])
+			
 	
 	self.posegen_mode = PoseGenMode.SAVE
 	return true # returns true if loading was succesful
