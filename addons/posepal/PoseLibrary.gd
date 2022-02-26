@@ -37,19 +37,23 @@ extends Resource
 # Scene path
 export var owner_filepath: String = "res://"
 
-export var scene_shortcuts: Dictionary = {} # Node shortcuts ex. {0:"/Head/Eyes"}
+enum ReferenceType {
+	PATH,
+	RESOURCE
+}
+export var resourceReferences: Dictionary = {} # Node shortcuts ex. {0: ["/Head/Eyes", SttreamTexture:1234]]}
 # poses should store shortcuts instead of nodepaths so it's safe from node modification.
 
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
 export var templateData: Dictionary = {"default": {}}
-export var external_resources: Array = []
+#export var resourceReferences: Array = []
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 
 
 func _init() -> void:
 	print(self,' poselib created.')
-	prepare_loading_external_resources()
+	prepare_loading_resourceReferences()
 	# <TODO> Check if all paths in scene_nodes are valid.
 #	var poseRoot: Node
 #	var undefined_shortcuts: Array = []
@@ -71,24 +75,24 @@ func _init() -> void:
 #	ResourceLoader.load(poselib_filepath)
 
 # Resources don't track dependency, so it'll store only paths again.
-func prepare_loading_external_resources():
+func prepare_loading_resourceReferences():
 	print('preparing exts')
 #	yield()
-	for i in external_resources.size():
-		var ext_path: String = external_resources[i][0]
-		var ext_type: String = external_resources[i][1]
-		print(ext_path)
+	for i in resourceReferences.size():
+		var path: String = resourceReferences[i][ReferenceType.PATH]
+		var res: String = resourceReferences[i][ReferenceType.RESOURCE]
+		print(path)
 		
-		if ResourceLoader.exists(ext_path, ext_type):
-			external_resources[i].resize(3)
-			external_resources[i][2] = ResourceLoader.load(ext_path, ext_type)
-			print(external_resources[i][2])
-	print(external_resources)
+		if ResourceLoader.exists(path):
+			resourceReferences[i].resize(2)
+			resourceReferences[i][ReferenceType.RESOURCE] = ResourceLoader.load(path)
+#			print(resourceReferences[i][2])
+	print(resourceReferences)
 
-func prepare_saving_external_resources():
+func prepare_saving_resourceReferences():
 	# Delete all actual resource references.
-	for i in external_resources.size():
-		external_resources[i].resize(2)
+	for i in resourceReferences.size():
+		resourceReferences[i].resize(2)
 #
 #func prepare_to_load():
 #	pass
@@ -99,19 +103,27 @@ func clear():
 	filterData = {"none": {}}
 	templateData = {"default": {}}
 
-func get_ext_resource(id: int):
-	if external_resources.size() <= id:
+func get_res_from_id(id: int):
+	if resourceReferences.size() <= id:
 		return null
-	return external_resources[id][2]
+	return resourceReferences[id][ReferenceType.RESOURCE]
 
-func get_ext_id(res: Resource):
-	for i in external_resources.size():
-		var ext: Array = external_resources[i]
-		if res.resource_path == ext[0]:
+func get_id_from_path(path: String):
+	var res_pairs: Array = resourceReferences.values()
+	for i in res_pairs.size():
+		var res_pair = res_pairs[i]
+		if res_pair[ReferenceType.PATH] == path:
 			return i
-	external_resources.append([res.resource_path, res.get_class(), res])
-	var id = external_resources.size()
-	print('get_ext_id ',external_resources)
+
+func get_id_from_res(res: Resource):
+	var res_pairs: Array = resourceReferences.values()
+	for i in res_pairs.size():
+		var res_pair = res_pairs[i]
+		if res_pair[i][ReferenceType.RESOURCE] == res:
+			return i
+	var id = resourceReferences.size()
+	resourceReferences[id] = [res.resource_path, res]
+	print('get_ext_id ',resourceReferences)
 	return id;
 
 #func store_pose(pose_key: String):

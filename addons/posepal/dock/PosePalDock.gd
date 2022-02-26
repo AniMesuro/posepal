@@ -194,9 +194,9 @@ func save_poseData():
 	if is_instance_valid(current_poselib):
 		print('poselib res saving ',poseFile_path)
 #		print('poselib exts ',ResourceSaver.get_recognized_extensions(current_poselib))
-		current_poselib.prepare_saving_external_resources()
+		current_poselib.prepare_saving_resourceReferences()
 		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
-		current_poselib.prepare_loading_external_resources()
+		current_poselib.prepare_loading_resourceReferences()
 		if err != OK:
 			print('saving didnt succeed, error ',err)
 		else:
