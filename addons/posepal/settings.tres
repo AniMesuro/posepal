@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-poselib_extension = 1
+poselib_extension = 0

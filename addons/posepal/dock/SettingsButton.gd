@@ -10,6 +10,7 @@ func _ready() -> void:
 func _on_pressed():
 	var settingsPopup: Popup = SCN_SettingsPopup.instance()
 	add_child(settingsPopup)
+	settingsPopup.posepalDock = owner
 
 
 

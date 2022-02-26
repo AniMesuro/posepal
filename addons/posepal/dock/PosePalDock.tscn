@@ -606,9 +606,10 @@ __meta__ = {
 }
 
 [node name="PoseCreationHBox" type="HBoxContainer" parent="VSplit/ExtraHBox"]
-margin_right = 129.0
+margin_right = 140.0
 margin_bottom = 15.0
 size_flags_horizontal = 2
+custom_constants/separation = 10
 script = ExtResource( 20 )
 
 [node name="NewPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationHBox"]
@@ -620,18 +621,17 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 text = "New Pose"
 icon = ExtResource( 10 )
-align = 0
 expand_icon = true
 
 [node name="CancelPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationHBox"]
-margin_left = 86.0
-margin_right = 129.0
+margin_left = 92.0
+margin_right = 140.0
 margin_bottom = 15.0
+rect_min_size = Vector2( 48, 0 )
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 text = "Cancel"
-align = 0
 expand_icon = true
 
 [node name="WarningIcon" type="TextureRect" parent="VSplit/ExtraHBox"]

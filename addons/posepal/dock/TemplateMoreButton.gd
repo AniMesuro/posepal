@@ -59,7 +59,7 @@ func _on_pressed():
 		popupMenu.add_item('Key', Items.KEY)
 
 func _on_id_pressed(id: int):
-	var poseCreationHBox = owner.get_node("VSplit/ExtraHBox/poseCreationHBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -102,7 +102,7 @@ func _on_id_pressed(id: int):
 
 
 func _on_name_settled(new_name: String, id: int):
-	var poseCreationHBox = owner.get_node("VSplit/ExtraHBox/poseCreationHBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return

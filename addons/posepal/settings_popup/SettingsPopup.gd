@@ -4,6 +4,7 @@ extends WindowDialog
 const RES_PosePalSettings: Script = preload("res://addons/posepal/PosePalSettings.gd")
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
+var posepalDock: Control
 
 func _enter_tree() -> void:
 	show()
@@ -21,12 +22,7 @@ func _ready() -> void:
 	var saveButton: Button = $"MarginCon/VBox/SaveButton"
 	saveButton.connect("pressed", self, "_on_saveButton_pressed")
 	
-	_setup_options()
 	load_settings()
-	
-func _setup_options():
-	var extensionMenu: MenuButton = $"MarginCon/VBox/ExtensionHBox/MenuButton"
-	var popupMenu: PopupMenu = extensionMenu.get_popup()
 	
 
 func _get_pluginInstance() -> EditorPlugin:
@@ -41,4 +37,12 @@ func _get_pluginInstance() -> EditorPlugin:
 func _on_saveButton_pressed():
 	var settings: RES_PosePalSettings = self.pluginInstance.settings
 	settings.poselib_extension = $"MarginCon/VBox/ExtensionHBox".selected_id
+	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
+	posepalDock.save_poseData()
+	
+	
+		
+		
+	
+	
 	queue_free()

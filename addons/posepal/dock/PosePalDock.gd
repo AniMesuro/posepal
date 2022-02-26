@@ -155,24 +155,32 @@ func save_poseData():
 	var f: File = File.new()
 	var is_poseFile_valid: bool = false
 	if selectedScene.has_meta('_plPoseLib_poseFile'):
-		if f.file_exists(selectedScene.get_meta('_plPoseLib_poseFile')):
-			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
+		var scene_posefile: String = selectedScene.get_meta('_plPoseLib_poseFile')
+		if f.file_exists(scene_posefile):
+			var filename_pieces: PoolStringArray = scene_posefile.get_file().split(".", false, 2)
 #			print('filename pieces ',filename_pieces)
-			if (filename_pieces[1] == "poselib"
+			var user_extension: String = settings.PoselibExtensions.keys()[settings.poselib_extension]
+			print('user chosen ',user_extension)
+			if filename_pieces[1] == "poselib":
+				if filename_pieces[2] == user_extension:
 #			&& (filename_pieces[2] == "res")):
-			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+#			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				
 #			if selectedScene.get_meta('_plPoseLib_poseFile').get_extension() == 'poselib':
 				
-				poseFile_path = selectedScene.get_meta('_plPoseLib_poseFile')
-				is_poseFile_valid = true
+					poseFile_path = scene_posefile
+					is_poseFile_valid = true
+				else:
+					poseFile_path = "res://addons/posepal/.poselibs/"+filename_pieces[0]+'.'+filename_pieces[1]+'.'+user_extension
+					is_poseFile_valid = true
+					selectedScene.set_meta('_plPoseLib_poseFile', poseFile_path)
 	
 	# Reference FilePath to scene's metadata.
 	if !is_poseFile_valid:
 		var available_path: String = "#"
-		var user_extension = settings.PoselibExtensions[settings.poselib_extension]
+		var user_extension = settings.PoselibExtensions.keys()[settings.poselib_extension]
 		for i in 100:
-			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.res"
+			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
 			if f.file_exists(available_path):
 				continue
 			selectedScene.set_meta('_plPoseLib_poseFile', available_path)
@@ -184,7 +192,7 @@ func save_poseData():
 	
 	# NEW # RESOURCE SAVE
 	if is_instance_valid(current_poselib):
-#		print('poselib res saving')
+		print('poselib res saving ',poseFile_path)
 #		print('poselib exts ',ResourceSaver.get_recognized_extensions(current_poselib))
 		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
 		if err != OK:
