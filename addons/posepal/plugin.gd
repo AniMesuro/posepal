@@ -22,7 +22,7 @@ var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
 
 var editorSceneTabs: Tabs setget ,_get_EditorSceneTabs
 
-var settings: Resource
+var settings: Resource setget ,_get_settings
 var posePalDock :Control
 var editorControl :Control
 
@@ -41,6 +41,12 @@ func _ready() -> void:
 	_get_editor_references()
 	
 	settings = load("res://addons/posepal/settings.tres")
+
+func _get_settings():
+	if !is_instance_valid(settings):
+		settings = load("res://addons/posepal/settings.tres")
+	
+	return settings
 
 func _exit_tree() -> void:
 	self.editorSceneTabs.visible = true
@@ -73,18 +79,9 @@ func _get_editor_references():
 	if !is_instance_valid(self):
 		print('plugin not valid')
 	
-#	var animpled: Node = instance_from_id(9861)
-#	print(animpled, animpled.name, animpled.get_groups())
-#	return
-	# AnimationPlayerEditor
-	# < 3.2 used _vp_unhandled_key_input1176.
-#	var sceneTimer: SceneTreeTimer = get
-	for node in get_tree().get_nodes_in_group('_vp_unhandled_key_input1235'):
-#		print(get_tree().get_nodes_in_group('_vp_unhandled_key_input1235'))
-		if node.get_class() == 'AnimationPlayerEditor':
-			animationPlayerEditor = node
-			print("[PosePal] Acquired Editor's AnimationPlayerEditor reference")
-			break
+#	used to reference AnimationPlayerEditor from group '_vp_unhandled_key_input1235',
+#	but it always changes for each Godot version.
+	animationPlayerEditor = _select_from_child_ids(_get_editorVBox(), [1, 1, 1, 0, 0, 1, 0, 1])
 	if !is_instance_valid(animationPlayerEditor):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor reference")
 		return
@@ -137,21 +134,20 @@ func tscn_has_poseFile(tscn_path :String):
 	pass
 
 func _get_EditorSceneTabs():
-	var editorExpandButton: ToolButton
-	
-	for node in get_tree().get_nodes_in_group('_vp_unhandled_input1235'):
-		if !node is ToolButton:
-			continue
-		if node.hint_tooltip == "Toggle distraction-free mode.":
-			editorExpandButton = node
-			break
-	if is_instance_valid(editorExpandButton):
-		for child in editorExpandButton.get_parent().get_children():
-			if !child is Tabs:
-				continue
-			editorSceneTabs = child
-			break
-#	if is_instance_valid(editorSceneTabs):
-#		print("[PosePal] Acquired Editor's Scene Tabs reference.")
-	
-	return editorSceneTabs
+	return _select_from_child_ids(_get_editorVBox(), [1, 1, 1, 0, 0, 0, 0, 0, 1])
+
+func _select_from_child_ids(current_node: Node, child_ids: PoolIntArray):
+	var last_child: Node = current_node
+	while child_ids.size() != 0:
+		last_child = last_child.get_child(child_ids[0])
+		child_ids.remove(0)
+		if child_ids.size() == 0:
+			return last_child
+	return null
+
+func _get_editorVBox():
+	var _editorControl: Control = get_editor_interface().get_base_control()
+	for child in _editorControl.get_children():
+		if child.get_class() == 'VBoxContainer':
+#			print('vbox ',child)
+			return child
