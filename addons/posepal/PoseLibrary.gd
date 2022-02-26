@@ -35,7 +35,7 @@ extends Resource
 #########  TEMPLATE   #########
 
 # Scene path
-var owner_filepath: String = "res://"
+export var owner_filepath: String = "res://"
 
 export var scene_shortcuts: Dictionary = {} # Node shortcuts ex. {0:"/Head/Eyes"}
 # poses should store shortcuts instead of nodepaths so it's safe from node modification.

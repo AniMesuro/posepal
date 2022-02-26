@@ -78,5 +78,8 @@ func _on_checked_node(nodeItem: Control, child_id: int , value: bool):
 		propertyBox.remove_propertyDisplay(node)
 	
 	
+func _select_all_nodes():
+	pass
 
-
+func _deselect_all_nodes():
+	pass

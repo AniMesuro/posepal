@@ -74,9 +74,8 @@ func _on_id_selected(id :int):
 		if f.file_exists(selected_scene.get_meta('_plPoseLib_poseFile')):
 			var filename_pieces: PoolStringArray = selected_scene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "tres")):
 #			&& (filename_pieces[2] == "res")):
-#			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				owner.poseFile_path = selected_scene.get_meta('_plPoseLib_poseFile')
 				is_poseFile_valid = true
 	

@@ -11,7 +11,7 @@ var unselectedPropertyData: Dictionary = {}
 
 func fill_properties():
 	return
-	SCN_PropertyItem.instance()
+#	SCN_PropertyItem.instance()
 
 func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	var propertyDisplay: Control = SCN_PropertyDisplay.instance()

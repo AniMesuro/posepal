@@ -13,6 +13,7 @@ signal issued_forced_selection
 #signal pose_created (pose, pose_key)
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
+const RES_PosePalSettings: Script = preload("res://addons/posepal/PosePalSettings.gd")
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorControl: Control setget ,_get_editorControl
@@ -24,10 +25,20 @@ var poselib_template: String = "" # Stores subcollections.
 var poselib_collection: String = "" # Stores pose data.
 var poselib_animPlayer: AnimationPlayer # AnimationPlayer selected on Animation panel.
 
-#var interactiveLoader: ResourceInteractiveLoader
+
+var optionsData: Dictionary = {
+	'ignore_scene_pose': false,
+	'key_template': false,
+	'dont_key_duplicate': false
+}
+
+
 var poseFile_path: String = ""
 # Old - JSON
 var poseData: Dictionary = {}
+
+var queuedPoseData: Dictionary = {}
+var queued_key_time: float = -1.0
 
 # New - Resource
 var current_poselib: RES_PoseLibrary
@@ -35,12 +46,12 @@ var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
 var posePalette: GridContainer setget ,_get_posePalette
-var poseCreationVBox: VBoxContainer setget ,_get_poseCreationVBox
+var poseCreationHBox: HBoxContainer setget ,_get_poseCreationHBox
 func _enter_tree() -> void:
 #	pluginInstance = _get_pluginInstance()
 	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
-	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
+#	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
 #	yield(get_tree(), "idle_frame")
 	if get_tree().edited_scene_root == self:
 		return
@@ -59,8 +70,13 @@ func _ready() -> void:
 		return
 	connect("pose_selected", self, "_on_pose_selected")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
+#	connect("script_changed", self, "_on_script_changed")
 	
 
+#func _on_script_changed():
+#	for option in optionsData:
+#		var optionsHBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
+#		optionsHBox.refresh_ui()
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root
@@ -102,36 +118,22 @@ func load_poseData() -> void:
 #		current_poselib = null
 #		return
 	
-#	var extension: String = poseFile_path.get_extension()
-#	if extension != "poselib":
-#		return
+#	If the poslib is created at the first time, it will only save to file
+#	When the first pose is saved.
+	var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
+#	if is_instance_valid(current_poselib):
+#		if current_poselib.owner_filepath != sceneNode.filename:
+#			current_poselib.queue_free()
+
+#	if !is_instance_valid(current_poselib):
 	var f: File = File.new()
 	if !f.file_exists(poseFile_path):
-		current_poselib = RES_PoseLibrary.new()
-#		wf_current_poselib = weakref(current_poselib)
-		var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
-		current_poselib.owner_filepath = sceneNode.filename
+		if !is_instance_valid(current_poselib):
+			current_poselib = RES_PoseLibrary.new()
+			current_poselib.owner_filepath = sceneNode.filename
 		return
-		
-	## DEBUG
-#	interactiveLoader = ResourceLoader.load_interactive(poseFile_path)
-#	if interactiveLoader == null:
-#		print('error at ResourceInteractiveLoader')
-#		return
-#	set_process(true)
-
-	ResourceLoader.set_abort_on_missing_resources(true)
-	current_poselib = ResourceLoader.load(poseFile_path)
-	var dependencies: PoolStringArray = ResourceLoader.get_dependencies(poseFile_path)
-#	print('dependencies: ',dependencies)
-	
-#	var resourceFormatLoader: ResourceFormatLoader = ResourceFormatLoader.new()
-#	resourceFormatLoader.rename_dependencies(poseFile_path, '')
-	
-#	current_poselib = load(poseFile_path)
-	
-#	print('dependencies:', ResourceLoader.get_dependencies(poseFile_path))
-	
+	current_poselib = load(poseFile_path)
+#	else:
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):
 #		current_poselib.load_lib(poseFile_path)
@@ -139,110 +141,46 @@ func load_poseData() -> void:
 #		current_poselib = RES_PoseLibrary.new()
 #		current_poselib.load_lib(poseFile_path)
 	
-	# OLD #
-	return
-# Checks if own property is valid.
-#	print('loading')
-	# Checks if scene is selected
-	if poselib_scene == "":
-#		print('error')
-		return
-	# Checks if owner's posefile is valid
-	if poseFile_path == "":
-#		print('error')
-		return
-#	var f: File = File.new()
-	if !f.file_exists(poseFile_path):
-#		print(poseFile_path,' doesnt exist')
-		return
-	f.open(poseFile_path, f.READ)
-	var poseFile_text :String= f.get_as_text()
-	f.close()
-	
-	var jsonResult :JSONParseResult= JSON.parse(poseFile_text)
-	if jsonResult.error != OK:
-		print('json not ok')
-		return
-	poseData = get_editor_poseData(jsonResult.result)
-	
-	if !poseData.has('groups'):
-		poseData['groups'] = {}
-#		save_poseData()
-	if !poseData['groups'].has('all'):
-		poseData['groups']['all'] = {}
-#		save_poseData()
-	if !poseData.has('collections'):
-		poseData['collections'] = {}
-#		poseData['collections']['default'] = {}
-#		poseData['collections']['default']['default'] = {}
-#		save_poseData()
-#		return
-	if !poseData['collections'].has('default'):
-		poseData['collections']['default'] = {}
-#		poseData['collections']['default']['default'] = {}
-#		save_poseData()
-	if !poseData['collections']['default'].has('default'):
-		poseData['collections']['default']['default'] = {}
-#		save_poseData()
 	return
 
-#var time_max = 100 # msec
-#func _process(delta: float):
-#	print('process')
-#	if !is_instance_valid(interactiveLoader):
-#		print('loder invalid')
-#		set_process(false)
-#		return
-#	var t = OS.get_ticks_msec()
-#	# Use "time_max" to control for how long we block this thread.
-#	while OS.get_ticks_msec() < t + time_max:
-#		# Poll your loader.
-#		var err = interactiveLoader.poll()
-#		print('stgc ',interactiveLoader.get_stage_count())
-#
-#		if err == ERR_FILE_EOF: # Finished loading.
-#			var resource = interactiveLoader.get_resource()
-#			print(resource.resource_path)
-#			interactiveLoader = null
-#			current_poselib = resource
-##			set_new_scene(resource)
-#			break
-#		elif err == OK:
-#			print('progress ok')
-##			update_progress()
-#		else: # Error during loading.
-#			print('error 198')
-#			interactiveLoader = null
-#		break
 
 func save_poseData():
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
 		return
+	var settings: RES_PosePalSettings = self.pluginInstance.settings
 	
 	print('saving poselib')
 	# Get FilePath.
 	var f: File = File.new()
 	var is_poseFile_valid: bool = false
 	if selectedScene.has_meta('_plPoseLib_poseFile'):
-		if f.file_exists(selectedScene.get_meta('_plPoseLib_poseFile')):
-			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
+		var scene_posefile: String = selectedScene.get_meta('_plPoseLib_poseFile')
+		if f.file_exists(scene_posefile):
+			var filename_pieces: PoolStringArray = scene_posefile.get_file().split(".", false, 2)
 #			print('filename pieces ',filename_pieces)
-			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "tres")):
+			var user_extension: String = settings.PoselibExtensions.keys()[settings.poselib_extension]
+			print('user chosen ',user_extension)
+			if filename_pieces[1] == "poselib":
+				if filename_pieces[2] == user_extension:
 #			&& (filename_pieces[2] == "res")):
 #			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				
 #			if selectedScene.get_meta('_plPoseLib_poseFile').get_extension() == 'poselib':
 				
-				poseFile_path = selectedScene.get_meta('_plPoseLib_poseFile')
-				is_poseFile_valid = true
+					poseFile_path = scene_posefile
+					is_poseFile_valid = true
+				else:
+					poseFile_path = "res://addons/posepal/.poselibs/"+filename_pieces[0]+'.'+filename_pieces[1]+'.'+user_extension
+					is_poseFile_valid = true
+					selectedScene.set_meta('_plPoseLib_poseFile', poseFile_path)
 	
 	# Reference FilePath to scene's metadata.
 	if !is_poseFile_valid:
 		var available_path: String = "#"
+		var user_extension = settings.PoselibExtensions.keys()[settings.poselib_extension]
 		for i in 100:
-			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.tres"
+			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
 			if f.file_exists(available_path):
 				continue
 			selectedScene.set_meta('_plPoseLib_poseFile', available_path)
@@ -254,7 +192,7 @@ func save_poseData():
 	
 	# NEW # RESOURCE SAVE
 	if is_instance_valid(current_poselib):
-#		print('poselib res saving')
+		print('poselib res saving ',poseFile_path)
 #		print('poselib exts ',ResourceSaver.get_recognized_extensions(current_poselib))
 		current_poselib.prepare_saving_external_resources()
 		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
@@ -347,7 +285,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return animPlayer
 	
-	var newPoseButton: Button = self.poseCreationVBox.get_node("NewPoseButton")
+	var newPoseButton: Button = self.poseCreationHBox.get_node("NewPoseButton")
 	# PoseAnimationPlayer should be child of NewPoseButton
 	var poseButton_children: Array = newPoseButton.get_children()
 	if poseButton_children.size() > 0:
@@ -359,7 +297,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if poselib_animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return poselib_animPlayer
 
-	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
+#	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
 	return null
 
 func get_editor_poseData(jsonPoseData :Dictionary) -> Dictionary:
@@ -448,11 +386,12 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 #		fix_warning('edited_scene_invalid')
 	
 	
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
-	posePalette.fill_previews()
+	posePalette = self.posePalette#$"VSplit/TabContainer/Palette/GridContainer"
+	if is_instance_valid(posePalette):
+		posePalette.fill_previews()
 
 func _get_posePalette():
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = $"VSplit/TabContainer/Pallete/ScrollContainer/GridContainer"
 	return posePalette
 	
 
@@ -465,19 +404,108 @@ func _get_pluginInstance() -> EditorPlugin:
 	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 	return pluginInstance
 
-func _get_poseCreationVBox() -> VBoxContainer:
-	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
-	return poseCreationVBox
+func _get_poseCreationHBox() -> HBoxContainer:
+	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
+	return poseCreationHBox
 
 func _get_editorControl() -> Control:
-	if is_instance_valid(editorControl):
-		return editorControl
+#	if is_instance_valid(editorControl):
+#		return editorControl
 	return self.pluginInstance.get_editor_interface().get_base_control()
 
-func _on_pose_selected(pose_id :int):
-#	if !is_instance_valid(pluginInstance):
-#		pluginInstance = _get_pluginInstance()
+func _key_queued_pose(final_pose: Dictionary):
+	if queuedPoseData.size() == 0:
+		return
+	if !is_instance_valid(poselib_animPlayer):
+		issue_warning('animplayer_invalid')
+		return
+	if !is_instance_valid(self.pluginInstance.animationPlayerEditor):
+		pluginInstance._get_editor_references()
+	if !poselib_animPlayer.has_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text):
+		return
+		
+#	print("current anim =",self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
+	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
 	
+	
+#	var final_pose: Dictionary
+#	if optionsData.key_template:
+#		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
+#	final_pose = current_poselib.poseData[poselib_template][poselib_collection][final_pose_id].duplicate(true)
+	print('fin size ',final_pose.size())
+	print(final_pose.keys())
+#	if final_pose.has('_name'):
+#		final_pose.erase('_name')
+		
+	for nodepath in queuedPoseData.keys():
+		for property in queuedPoseData[nodepath].keys():
+			var track_path: String = nodepath +':'+ property
+			var tr: int = anim.find_track(track_path)
+			if tr == -1:
+				continue
+#			var track_path: NodePath = nodepath + ':' + queuedPoseData[nodepath] #currentAnimation.track_get_path(tr) # (@@@)/./Sprite:position
+#		var property: String = queuedPoseData[nodepath]
+#		var path_subnames: NodePath = track_path.get_concatenated_subnames() # :position
+#		var node_path: String = str(track_path).trim_suffix(str(path_subnames)).rstrip(':') # Sprite
+#		if node_path == '':
+#			node_path = '.'
+#		if queuedPoseData[nodepath] == null:
+#			continue
+#		print('@@@finalpose ',str(path_subnames).rstrip(':'))
+			if !final_pose.has(nodepath):
+				continue
+#			if final_pose[nodepath]
+#			print(final_pose[nodepath].keys())
+#			print(final_pose[nodepath].keys()[0])
+			
+#			print(final_pose[nodepath].keys().has(property))
+#			print(property in final_pose[nodepath].keys())
+#			print(property in final_pose[nodepath])
+#			print(final_pose[nodepath].keys().has("position"))
+			
+#			if final_pose[nodepath].keys().has(get(property)):
+#				print('aaaa')
+#			if !final_pose[nodepath].has(property):
+#				print('ulllll')
+#			print('finalpose ',property,' ', final_pose[nodepath].get(property))
+#			print('finalpose ',property,' ', current_poselib.poseData[poselib_template][poselib_collection][final_pose_id].get(property))
+			
+			
+#			if final_pose[nodepath].get(property)==null:
+#				continue
+				
+#			print('passed ',final_pose[nodepath][property])
+#			print(final_pose[nodepath])
+#
+#			if property in final_pose[nodepath].keys():
+#				print(final_pose[nodepath][property])
+#			print('passed1 ',final_pose[nodepath][property]['val'])
+			var _can_continue: bool = false
+			if optionsData.dont_key_duplicate:
+				for prop in final_pose[nodepath].keys():
+#					print('prop ',nodepath,' ',prop)
+#					print(final_pose[nodepath][prop])
+#					print()
+					if prop != property:
+						continue
+					if queuedPoseData[nodepath][property] == final_pose[nodepath][prop]['val']:#final_pose[nodepath][property]['val']:
+#						print('fpose ',nodepath,' ',prop)
+						_can_continue = true
+						break
+			if _can_continue:
+				continue
+			anim.track_insert_key(tr, queued_key_time, queuedPoseData[nodepath][property])
+	
+	
+	
+	
+#	var optionsVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsVBox"
+	var optionKeyingVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"
+	optionKeyingVBox.is_pose_queued = false
+	
+
+func _on_pose_selected(pose_id :int):
 	if !is_instance_valid(poselib_animPlayer):
 		issue_warning('animplayer_invalid')
 		return
@@ -504,54 +532,63 @@ func _on_pose_selected(pose_id :int):
 		return
 	
 #	print(current_poselib.poseData)
-	for nodepath in current_poselib.poseData[poselib_template][poselib_collection][pose_id]:
-		print(nodepath)
-		if nodepath == "_name":
-			return
-#		print('nodepath ', nodepath)
+	var final_pose: Dictionary
+	if optionsData.key_template:
+		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
+		for nodepath in final_pose:
+			for property in final_pose[nodepath]:
+				final_pose[nodepath][property]['out'] = 0.0
+#		print('fin ',final_pose)
+		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
+		print('___template key___')
+		for nodepath in _pose:
+#			print('@@'+nodepath)
+			if !final_pose.has(nodepath):
+				final_pose[nodepath] = {}
+			for property in _pose[nodepath]:
+#				print('___add_property')
+				final_pose[nodepath][property] = _pose[nodepath][property]
+		print('finalpose = ', final_pose.size(),'\n pose = ',_pose.size())
+#		print('@finalpose =',final_pose)
+#		print('@_pose =',_pose)
+	else:
+		final_pose = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate()
+	if final_pose.has('_name'):
+		final_pose.erase('_name')
+	
+	if queuedPoseData.size() > 0:
+		_key_queued_pose(final_pose)
+	
+	for nodepath in final_pose:
 		var node: Node = animRoot.get_node(nodepath)
-#		print('root ',node)
 		
-		for property in current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]:
-			
+		for property in final_pose[nodepath]:
 			var track_path :String= str(animRoot.get_path_to(node))+':'+property
 			var tr_property :int= anim.find_track(track_path)
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-#			var anim.track_find_key(
 			var _key_time :float= float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			
 			var key_value
 			# Converts the json values to corresponding type.
-			match typeof(node.get(property)):
-#				TYPE_VECTOR2: #position, scale
-#					key_value = Vector2(
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][0],
-#						poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'][1])
-#				TYPE_OBJECT: # texture
-#					if property != "texture":
-#						return
-#					var f: File = File.new()
-#					if f.file_exists['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val']):
-#						match poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'].get_extension():
-#							'png', 'jpg':
-#								key_value = load(poseData['collections'][poselib_template][poselib_collection][pose_key][nodepath][property]['val'])
-#							_:
-#								return
-				_:
-					key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['val']
+#			match typeof(node.get(property)):
+#				_:
+			key_value = final_pose[nodepath][property]['val']
 #			Selects key before current_key and changes its transition for "in"
 			var key_last :int= anim.track_find_key(tr_property, _key_time - 0.01, false)
 			if key_last != -1:
-				if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('in'):
-					anim.track_set_key_transition(tr_property, key_last, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['in'])
-			if current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property].has('out'):
-				anim.track_insert_key(tr_property, _key_time, key_value, current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath][property]['out'])
+				if optionsData.dont_key_duplicate:
+					if anim.track_get_key_value(tr_property, key_last) == key_value:
+						continue
+				if final_pose[nodepath][property].has('in'):
+					anim.track_set_key_transition(tr_property, key_last, final_pose[nodepath][property]['in'])
+			if final_pose[nodepath][property].has('out'):
+				anim.track_insert_key(tr_property, _key_time, key_value, final_pose[nodepath][property]['out'])
 			#
 			
 	
-	print('pose_id =',pose_id)
+#	print('pose_id =',pose_id)
 
 func _on_pose_created(pose :Dictionary, pose_key :String):
 #	pluginInstance = _get_pluginInstance()
@@ -561,7 +598,7 @@ func _on_pose_created(pose :Dictionary, pose_key :String):
 	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
 	save_poseData()
 	
-	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
+	posePalette = self.posePalette
 	posePalette.fill_previews()
 	# Get PoseFile
 #	var f :File= File.new()

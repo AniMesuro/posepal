@@ -13,28 +13,24 @@ func update_display():
 	pass
 
 func _ready() -> void:
-	_fix_PoseCreationVBox_ref()
-	pageHBox = owner.get_node("VSplit/ExtraHBox/VBox/PageHBox")
+	_fix_PoseCreationHBox_ref()
+#	pageHBox = 
 
-var poseCreationVBox: VBoxContainer
-func _fix_PoseCreationVBox_ref() -> void:
-	poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+var poseCreationHBox: HBoxContainer
+func _fix_PoseCreationHBox_ref() -> void:
+	poseCreationHBox = owner.get_node("VSplit/ExtraHBox/PoseCreationHBox")
 	
 
 # [] Todo generate 1 dummy scene then just pose and print 9 times.
-func fill_previews():
+func fill_previews(limit_by_page: bool = true):#true):
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
 #	print('starting to fill')
-	# <TODO> Limit preview maximum by 9 for each page. 
+	# <TODO> Limit preview maximum by 9 or 10 for each page. 
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#		print('poselib resource not valid')
-#	if owner.poseData == {}:
 		return
-#	if !owner.poseData.has('collections'):
-#		return
 	if !poselib.filterData.has(owner.poselib_filter):
 		print('')
 		return
@@ -47,7 +43,28 @@ func fill_previews():
 		return
 	
 	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
-	for pose_id in collection.size():
+	var pose_count: int = collection.size()
+	if pose_count == 0:
+		return
+	pageHBox = $"../../HBox/PageHBox"
+	
+	pageHBox.update_pages()#update_NumButton_item_list()
+	if pageHBox.current_page == -1:
+		pageHBox.current_page = 0
+		
+	var pose_range: Array = []
+	if !limit_by_page:
+		pose_range = range(collection.size())
+	else:
+#		pageHBox.current_page
+#		pose_range = range(1, 1+9)
+		pose_range = range(
+			pageHBox.current_page * pageHBox.page_size,
+			min(pageHBox.current_page* pageHBox.page_size + pageHBox.page_size, pose_count))
+		
+#		pose_range = range(pose_count* .1, pose_count * .1+9)
+#	var pose_range = range(first_pose_id, last_pose_id)
+	for pose_id in pose_range:#collection.size():
 		var pose: Dictionary = collection[pose_id]
 		# Ignore if pose doesn't have all nodes from Filter pose.
 		if owner.poselib_filter != 'none':
@@ -78,7 +95,7 @@ func fill_previews():
 		posePreview._generate_thumbnail()
 			
 #		print('posekey =',posePreview.pose_key)
-	var zoomSlider :HSlider= owner.get_node('VSplit/ExtraHBox/VBox/ZoomHBox/ZoomSlider')
+	var zoomSlider: HSlider = $"../../HBox/ZoomHBox/ZoomSlider"
 	
 	zoomSlider._update_frame_sizes()
 	yield(get_tree(), "idle_frame")

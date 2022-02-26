@@ -1,13 +1,14 @@
 tool
 extends Control
 
-export var path_to_expandableControl :NodePath= NodePath('.')
-var expandableControl :Control
+export var path_to_expandableControl: NodePath = NodePath('.')
+var expandableControl: Control
 
-export var text :String setget _set_tab_text
-export var icon :StreamTexture= load('res://icon.png') setget _set_tab_icon
+export var text: String setget _set_tab_text
+#export var icon :StreamTexture= load('res://icon.png') setget _set_tab_icon
 
-export var expand :bool= true setget _set_expand
+export var is_locked: bool = true setget _set_is_locked
+export var expand: bool = true setget _set_expand
 
 func _set_tab_text(new_text :String):
 #	if !is_inside_tree():
@@ -17,28 +18,28 @@ func _set_tab_text(new_text :String):
 #		print('text=newtext')
 #		return
 	text = new_text
-	var label :Label= get_node_or_null("TabHBox/Label")
+	var label :Label= get_node_or_null("Label")
 	if !is_instance_valid(label):
 #		print('label not valid')
 		return
 	label.text = new_text
 
-func _set_tab_icon(new_icon :StreamTexture):
+#func _set_tab_icon(new_icon :StreamTexture):
 #	if !is_inside_tree():
 #		return
 #	if icon == new_icon:
 #		return
-	icon = new_icon
-	if !is_inside_tree():
-#		print('outside tree')
-		yield(self, "tree_entered")
-#	yield(get_tree(), "idle_frame")
-	var iconRect :TextureRect= get_node_or_null("TabHBox/Icon")
-	if !is_instance_valid(iconRect):
-#		pass
-		print('iconRect invalid')
-		return
-	iconRect.texture = new_icon
+#	icon = new_icon
+#	if !is_inside_tree():
+##		print('outside tree')
+#		yield(self, "tree_entered")
+##	yield(get_tree(), "idle_frame")
+#	var iconRect :TextureRect= get_node_or_null("TabHBox/Icon")
+#	if !is_instance_valid(iconRect):
+##		pass
+#		print('iconRect invalid')
+#		return
+#	iconRect.texture = new_icon
 #	print('iconrect ',iconRect.texture)
 
 func _ready() -> void:
@@ -72,6 +73,8 @@ func _input(event: InputEvent) -> void:
 #		is_inside_tab = true
 	
 	if mouseInput.button_index == BUTTON_LEFT:
+		if is_locked:
+			return
 		if mouseInput.pressed && !just_pressed:# && is_inside_tab:
 			self.expand = !self.expand
 			just_pressed = true
@@ -90,9 +93,21 @@ func _set_expand(new_expand :bool):
 			return
 		if "visible" in expandableControl:
 			expandableControl.visible = new_expand
-			var expandIcon :TextureRect= $TabHBox/ExpandIcon
+			var expandIcon :TextureRect= $ExpandIcon
 			expandIcon.flip_v = new_expand
 			
 			# debug svae button
-			if new_expand:
-				owner.save_poseData()
+#			if new_expand:
+#				owner.save_poseData()
+
+func _set_is_locked(new_is_locked: bool):
+	if is_locked == new_is_locked:
+		return
+	
+	is_locked = new_is_locked
+	if is_locked:
+		self.expand = false
+		visible = false
+	else:
+		self.expand = true
+		visible = true

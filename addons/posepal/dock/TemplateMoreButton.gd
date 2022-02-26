@@ -20,6 +20,7 @@ func key_template_pose():
 	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
 	
+	print('key templaet')
 	for nodepath in poselib.templateData[owner.poselib_template]:
 		var node: Node = animRoot.get_node(nodepath)
 		for property in poselib.templateData[owner.poselib_template][nodepath]:
@@ -58,7 +59,7 @@ func _on_pressed():
 		popupMenu.add_item('Key', Items.KEY)
 
 func _on_id_pressed(id: int):
-	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -69,13 +70,13 @@ func _on_id_pressed(id: int):
 		Items.EDIT:
 			# Edit Filter pose
 			owner.load_poseData()
-			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
-			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
-				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
+			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 		Items.CREATE:
 			ask_for_name("Please insert the name of the new template.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
@@ -94,14 +95,14 @@ func _on_id_pressed(id: int):
 			owner.emit_signal("issued_forced_selection")
 			owner.save_poseData()
 		Items.APPLY:
-			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.apply_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 		Items.KEY:
 			key_template_pose()
 			
 
 
 func _on_name_settled(new_name: String, id: int):
-	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -113,13 +114,13 @@ func _on_name_settled(new_name: String, id: int):
 			poselib.templateData[new_name] = {}
 			owner.poselib_template = new_name
 			owner.emit_signal("issued_forced_selection")
-			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
-			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
-				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled")
+			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved")
 				
 		Items.RENAME:
 			if !is_name_valid(new_name):

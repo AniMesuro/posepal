@@ -11,7 +11,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 handler_size = 10
-_windowRect = NodePath(".")
 
 [node name="HandlerTop" parent="." instance=ExtResource( 1 )]
 margin_top = 0.0

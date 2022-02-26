@@ -9,14 +9,20 @@ const plugin_group: String = "plugin posepal"
 const SCN_PosePalDock: PackedScene = preload("res://addons/posepal/dock/PosePalDock.tscn")
 
 
-
 # Editor References
 var animationPlayerEditor :Node
 var animationPlayerEditor_CurrentTime_LineEdit :LineEdit
 var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
 
+#var animationTimelineEdit: Node
+#var animationTrackEditor: Node
+#var animationTrackScrollContainerVBox: VBoxContainer
+#var customTrack: Control
+#var customQueueKeyMarker: TextureRect
+
 var editorSceneTabs: Tabs setget ,_get_EditorSceneTabs
 
+var settings: Resource
 var posePalDock :Control
 var editorControl :Control
 
@@ -34,14 +40,31 @@ func _ready() -> void:
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, posePalDock)
 	_get_editor_references()
 	
-	
+	settings = load("res://addons/posepal/settings.tres")
 
 func _exit_tree() -> void:
+	self.editorSceneTabs.visible = true
+	
+	# Get AnimationTrack's custom queue_key marker.
+#	if !is_instance_valid(animationPlayerEditor):
+#		for node in get_tree().get_nodes_in_group('_vp_unhandled_key_input1235'):
+#			if node.get_class() == 'AnimationPlayerEditor':
+#				animationPlayerEditor = node
+#				break
+#		for child in animationPlayerEditor.get_children():
+#			if child.get_class() == 'AnimationTrackEditor':
+#				animationTrackEditor = child
+#				break
+#		animationTimelineEdit = animationTrackEditor.get_child(0
+#	).get_child(0).get_child(0).get_child(0)
+#	if animationTimelineEdit.get_child(0).has_node('CustomQueueKeyMarker'):
+#		animationTimelineEdit.get_child(0).get_node('CustomQueueKeyMarker').queue_free()
+	
+	
 	if !is_instance_valid(posePalDock):
 		return
 	remove_control_from_docks(posePalDock)
 	
-	self.editorSceneTabs.visible = true
 
 
 func _get_editor_references():
@@ -60,7 +83,7 @@ func _get_editor_references():
 #		print(get_tree().get_nodes_in_group('_vp_unhandled_key_input1235'))
 		if node.get_class() == 'AnimationPlayerEditor':
 			animationPlayerEditor = node
-#			print("[PosePal] Acquired Editor's AnimationPlayerEditor reference")
+			print("[PosePal] Acquired Editor's AnimationPlayerEditor reference")
 			break
 	if !is_instance_valid(animationPlayerEditor):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor reference")
@@ -68,13 +91,22 @@ func _get_editor_references():
 	
 	# Get HBoxContainer
 	var _hBox :HBoxContainer
-	for child in animationPlayerEditor.get_children():
+	var _children: Array = animationPlayerEditor.get_children()
+	for child in _children:
 		if child.get_class() == 'HBoxContainer':
 			_hBox = child
 			break
+#	for child in _children:
+#		if child.get_class() == 'AnimationTrackEditor':
+#			animationTrackEditor = child
+#			print('trackedit ',animationTimelineEdit)
+#			break
+	_children = []
+	
 	if !is_instance_valid(_hBox):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer reference")
 		return
+	
 	
 	# Get SpinBox -- current_time
 	var _spinBox :SpinBox
@@ -95,6 +127,7 @@ func _get_editor_references():
 	if !is_instance_valid(animationPlayerEditor_CurrentAnimation_OptionButton):
 		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/OptionButton reference")
 		return
+	
 	
 	self.editorSceneTabs
 

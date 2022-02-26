@@ -17,12 +17,10 @@ var editorControl: Control setget ,_get_editorControl
 
 var posepalDock: Control
 func _enter_tree() -> void:
-	
 	show()
 	visible = true
 
 func _ready() -> void:
-	
 	# Load scene tree on nodeVBox
 	pass
 
@@ -46,5 +44,5 @@ func _set_current_edited_animPlayer(new_current_edited_animPlayer: AnimationPlay
 		return
 	if !is_instance_valid(current_edited_animPlayer):
 		return
-	var titleBar: HBoxContainer = $"PanelContainer/MarginContainer/VBox/TitleBar"
+	var titleBar: HBoxContainer = $"MarginContainer/VBox/TitleBar"
 	titleBar.title_name = "Batch key to: "+ new_current_edited_animPlayer.name+ " / "+ new_current_edited_animPlayer.assigned_animation
