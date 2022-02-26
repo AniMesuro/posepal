@@ -2,9 +2,9 @@ tool
 extends "res://addons/posepal/interface/PropertyMoreButton.gd"
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
-#var poseCreationVBox: VBoxContainer
+#var poseCreationHBox: HBoxContainer
 #func _ready() -> void:
-#	var poseCreationVBox = $"../../../ExtraHBox/PoseCreationVBox"#owner.get_node("VBox/ExtraHBox/PoseCreationVBox")
+#	var poseCreationHBox = $"../../../ExtraHBox/poseCreationHBox"#owner.get_node("VBox/ExtraHBox/poseCreationHBox")
 	
 
 func _on_pressed():
@@ -31,7 +31,7 @@ func _on_pressed():
 		popupMenu.add_item('Erase',Items.ERASE)
 
 func _on_id_pressed(id: int):
-	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+	var poseCreationHBox = owner.get_node("VSplit/ExtraHBox/poseCreationHBox")
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -42,13 +42,13 @@ func _on_id_pressed(id: int):
 		Items.EDIT:
 			# Edit Filter pose
 			owner.load_poseData()
-			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.FILTER)
+			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.FILTER)
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
-			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
-				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled")
+			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved")
 		Items.CREATE:
 			ask_for_name("Please insert the name for the new filter pose.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])

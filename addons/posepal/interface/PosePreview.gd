@@ -23,7 +23,7 @@ var templatePose: Dictionary
 var askNamePopup: Popup
 var askIDPopup: Popup
 
-#var poseCreationVBox: VBoxContainer
+#var poseCreationHBox: HBoxContainer
 var popupMenu: PopupMenu
 
 var thumbnailButton: TextureButton
@@ -502,9 +502,9 @@ func _on_PopupMenu_hide():
 #		modulate = Color(.7,.7,1)
 
 func _on_PopupMenu_id_selected(id: int):
-	if !is_instance_valid(get_parent().poseCreationVBox):
-		get_parent()._fix_PoseCreationVBox_ref()
-	var poseCreationVBox: VBoxContainer = get_parent().poseCreationVBox
+	if !is_instance_valid(get_parent().poseCreationHBox):
+		get_parent()._fix_poseCreationHBox_ref()
+	var poseCreationHBox: HBoxContainer = get_parent().poseCreationHBox
 	
 	print('pose selected ',pose_id, ':',pose_name)
 	if pose_id == -1:
@@ -516,23 +516,23 @@ func _on_PopupMenu_id_selected(id: int):
 	var poselib: Resource = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	print('poseCreationVBox ',poseCreationVBox)
+#	print('poseCreationHBox ',poseCreationHBox)
 	match id:
 		PopupItems.APPLY:
-			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
-			poseCreationVBox.apply_pose(pose_id, 0)
+			poseCreationHBox.apply_pose(0, poseCreationHBox.PoseType.TEMPLATE)
+			poseCreationHBox.apply_pose(pose_id, 0)
 		PopupItems.EDIT:
-			print('posecrea ',poseCreationVBox)
+			print('posecrea ',poseCreationHBox)
 #			print('edit pose =',pose_key)
 			owner.load_poseData()
-			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
-			poseCreationVBox.edit_pose(pose_id)
+			poseCreationHBox.apply_pose(0, poseCreationHBox.PoseType.TEMPLATE)
+			poseCreationHBox.edit_pose(pose_id)
 			self.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
 			else: print('[PosePal] signal pose_editing_canceled already connected')
-#			poseCreationVBox.posegen_mode = poseCreationVBox.PoseGenMode.SAVE
-#			print('poseCreationVBox posegen =',poseCreationVBox.posegen_mode)
+#			poseCreationHBox.posegen_mode = poseCreationHBox.PoseGenMode.SAVE
+#			print('poseCreationHBox posegen =',poseCreationHBox.posegen_mode)
 		PopupItems.ERASE:
 			poselib.poseData[owner.poselib_template][owner.poselib_collection].remove(pose_id)
 			posePalette.fill_previews()
@@ -556,10 +556,10 @@ func _on_PopupMenu_id_selected(id: int):
 			ask_for_id("Please insert the new id for pose "+str(pose_id))
 			askIDPopup.connect('id_settled', self, '_on_id_settled')
 			
-func _on_PoseCreationVBox_pose_editing_canceled():
+func _on_poseCreationHBox_pose_editing_canceled():
 	self.is_being_edited = false
-#	if poseCreationVBox.is_connected("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled"):
-	get_parent().poseCreationVBox.disconnect("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled")
+#	if poseCreationHBox.is_connected("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled"):
+	get_parent().poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
 
 func _set_is_being_edited(value: bool):
 	if !value:

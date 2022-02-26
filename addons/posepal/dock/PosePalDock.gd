@@ -13,6 +13,7 @@ signal issued_forced_selection
 #signal pose_created (pose, pose_key)
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
+const RES_PosePalSettings: Script = preload("res://addons/posepal/PosePalSettings.gd")
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorControl: Control setget ,_get_editorControl
@@ -45,12 +46,12 @@ var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
 var posePalette: GridContainer setget ,_get_posePalette
-var poseCreationVBox: VBoxContainer setget ,_get_poseCreationVBox
+var poseCreationHBox: HBoxContainer setget ,_get_poseCreationHBox
 func _enter_tree() -> void:
 #	pluginInstance = _get_pluginInstance()
 	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
 #	posePalette = $"VSplit/TabContainer/Palette/GridContainer"
-	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
+	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
 #	yield(get_tree(), "idle_frame")
 	if get_tree().edited_scene_root == self:
 		return
@@ -147,6 +148,7 @@ func save_poseData():
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
 		return
+	var settings: RES_PosePalSettings = self.pluginInstance.settings
 	
 	print('saving poselib')
 	# Get FilePath.
@@ -157,8 +159,8 @@ func save_poseData():
 			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 #			print('filename pieces ',filename_pieces)
 			if (filename_pieces[1] == "poselib"
-			&& (filename_pieces[2] == "res")):
-#			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
+#			&& (filename_pieces[2] == "res")):
+			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				
 #			if selectedScene.get_meta('_plPoseLib_poseFile').get_extension() == 'poselib':
 				
@@ -168,6 +170,7 @@ func save_poseData():
 	# Reference FilePath to scene's metadata.
 	if !is_poseFile_valid:
 		var available_path: String = "#"
+		var user_extension = settings.PoselibExtensions[settings.poselib_extension]
 		for i in 100:
 			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib.res"
 			if f.file_exists(available_path):
@@ -272,7 +275,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return animPlayer
 	
-	var newPoseButton: Button = self.poseCreationVBox.get_node("NewPoseButton")
+	var newPoseButton: Button = self.poseCreationHBox.get_node("NewPoseButton")
 	# PoseAnimationPlayer should be child of NewPoseButton
 	var poseButton_children: Array = newPoseButton.get_children()
 	if poseButton_children.size() > 0:
@@ -391,13 +394,13 @@ func _get_pluginInstance() -> EditorPlugin:
 	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 	return pluginInstance
 
-func _get_poseCreationVBox() -> VBoxContainer:
-	poseCreationVBox = $"VSplit/ExtraHBox/PoseCreationVBox"
-	return poseCreationVBox
+func _get_poseCreationHBox() -> HBoxContainer:
+	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
+	return poseCreationHBox
 
 func _get_editorControl() -> Control:
-	if is_instance_valid(editorControl):
-		return editorControl
+#	if is_instance_valid(editorControl):
+#		return editorControl
 	return self.pluginInstance.get_editor_interface().get_base_control()
 
 func _key_queued_pose(final_pose: Dictionary):

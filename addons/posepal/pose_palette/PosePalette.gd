@@ -13,12 +13,12 @@ func update_display():
 	pass
 
 func _ready() -> void:
-	_fix_PoseCreationVBox_ref()
+	_fix_PoseCreationHBox_ref()
 #	pageHBox = 
 
-var poseCreationVBox: VBoxContainer
-func _fix_PoseCreationVBox_ref() -> void:
-	poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+var poseCreationHBox: HBoxContainer
+func _fix_PoseCreationHBox_ref() -> void:
+	poseCreationHBox = owner.get_node("VSplit/ExtraHBox/PoseCreationHBox")
 	
 
 # [] Todo generate 1 dummy scene then just pose and print 9 times.
@@ -46,7 +46,7 @@ func fill_previews(limit_by_page: bool = true):#true):
 	var pose_count: int = collection.size()
 	if pose_count == 0:
 		return
-	var pageHBox: HBoxContainer = $"../../PageHBox"
+	pageHBox = $"../../HBox/PageHBox"
 	
 	pageHBox.update_pages()#update_NumButton_item_list()
 	if pageHBox.current_page == -1:
@@ -95,7 +95,7 @@ func fill_previews(limit_by_page: bool = true):#true):
 		posePreview._generate_thumbnail()
 			
 #		print('posekey =',posePreview.pose_key)
-	var zoomSlider :HSlider= owner.get_node('VSplit/ExtraHBox/VBox/ZoomHBox/ZoomSlider')
+	var zoomSlider: HSlider = $"../../HBox/ZoomHBox/ZoomSlider"
 	
 	zoomSlider._update_frame_sizes()
 	yield(get_tree(), "idle_frame")

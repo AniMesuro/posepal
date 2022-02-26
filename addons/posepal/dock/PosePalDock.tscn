@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://addons/posepal/interface/NodeMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/interface/ExpandableTab.tscn" type="PackedScene" id=2]
@@ -28,6 +28,8 @@
 [ext_resource path="res://addons/posepal/dock/options_vbox/KeyingVBox.gd" type="Script" id=26]
 [ext_resource path="res://addons/posepal/dock/options_vbox/PoseCreationVBox.gd" type="Script" id=27]
 [ext_resource path="res://addons/posepal/dock/options_vbox/PreviewVBox.gd" type="Script" id=28]
+[ext_resource path="res://addons/posepal/assets/icons/icon_settings.png" type="Texture" id=29]
+[ext_resource path="res://addons/posepal/dock/SettingsButton.gd" type="Script" id=30]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -74,7 +76,7 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="VSplit"]
 margin_right = 399.0
-margin_bottom = 566.0
+margin_bottom = 585.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
@@ -90,7 +92,7 @@ scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib"]
 margin_right = 399.0
-margin_bottom = 548.0
+margin_bottom = 567.0
 rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -351,7 +353,7 @@ text = "Pose Options"
 [node name="OptionsMargin" type="MarginContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 170.0
 margin_right = 399.0
-margin_bottom = 548.0
+margin_bottom = 567.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -361,7 +363,7 @@ custom_constants/margin_left = 10
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin"]
 margin_left = 10.0
 margin_right = 389.0
-margin_bottom = 378.0
+margin_bottom = 397.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -478,15 +480,15 @@ anchor_bottom = 1.0
 margin_top = 18.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VSplit/TabContainer/Pallete"]
-margin_right = 329.0
-margin_bottom = 529.0
+margin_right = 399.0
+margin_bottom = 547.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="VSplit/TabContainer/Pallete/ScrollContainer"]
-margin_right = 329.0
-margin_bottom = 529.0
+margin_right = 399.0
+margin_bottom = 547.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 2
@@ -494,37 +496,42 @@ custom_constants/hseparation = 2
 columns = 8
 script = ExtResource( 4 )
 
-[node name="PageHBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete"]
-margin_top = 533.0
-margin_right = 329.0
-margin_bottom = 548.0
+[node name="HBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete"]
+margin_top = 551.0
+margin_right = 399.0
+margin_bottom = 567.0
+
+[node name="PageHBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete/HBox"]
+margin_right = 263.0
+margin_bottom = 16.0
 rect_clip_content = true
+size_flags_horizontal = 3
 alignment = 2
 script = ExtResource( 19 )
 
-[node name="FirstButton" type="Button" parent="VSplit/TabContainer/Pallete/PageHBox"]
+[node name="FirstButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
 margin_right = 17.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 hint_tooltip = "First"
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "<<"
 
-[node name="PreviousButton" type="Button" parent="VSplit/TabContainer/Pallete/PageHBox"]
+[node name="PreviousButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
 margin_left = 21.0
 margin_right = 30.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 hint_tooltip = "First"
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "<"
 
-[node name="NumButton" type="OptionButton" parent="VSplit/TabContainer/Pallete/PageHBox"]
+[node name="NumButton" type="OptionButton" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
 margin_left = 34.0
-margin_right = 295.0
-margin_bottom = 15.0
+margin_right = 229.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "1"
 align = 1
@@ -533,98 +540,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextButton" type="Button" parent="VSplit/TabContainer/Pallete/PageHBox"]
-margin_left = 299.0
-margin_right = 308.0
-margin_bottom = 15.0
+[node name="NextButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
+margin_left = 233.0
+margin_right = 242.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = ">"
 
-[node name="LastButton" type="Button" parent="VSplit/TabContainer/Pallete/PageHBox"]
-margin_left = 312.0
-margin_right = 329.0
-margin_bottom = 15.0
+[node name="LastButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
+margin_left = 246.0
+margin_right = 263.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = ">>"
 
-[node name="ExtraHBox" type="HBoxContainer" parent="VSplit"]
-margin_top = 566.0
+[node name="ZoomHBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete/HBox"]
+margin_left = 267.0
 margin_right = 399.0
-margin_bottom = 600.0
-grow_vertical = 0
-rect_clip_content = true
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PoseCreationVBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
-margin_right = 64.0
-margin_bottom = 34.0
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
-script = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NewPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationVBox"]
-margin_right = 64.0
-margin_bottom = 15.0
-rect_clip_content = true
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-text = "New Pose"
-icon = ExtResource( 10 )
-align = 0
-expand_icon = true
-
-[node name="CancelPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationVBox"]
-margin_top = 19.0
-margin_right = 64.0
-margin_bottom = 34.0
-rect_clip_content = true
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-text = "Cancel"
-align = 0
-expand_icon = true
-
-[node name="WarningIcon" type="TextureRect" parent="VSplit/ExtraHBox"]
-visible = false
-margin_left = 79.0
-margin_right = 99.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 20, 20 )
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 5
-script = ExtResource( 5 )
-
-[node name="VBox" type="VBoxContainer" parent="VSplit/ExtraHBox"]
-margin_left = 68.0
-margin_right = 399.0
-margin_bottom = 34.0
-size_flags_horizontal = 3
-
-[node name="ZoomHBox" type="HBoxContainer" parent="VSplit/ExtraHBox/VBox"]
-margin_right = 331.0
 margin_bottom = 16.0
 grow_vertical = 0
 rect_min_size = Vector2( 16, 0 )
 rect_clip_content = true
-size_flags_horizontal = 11
-size_flags_stretch_ratio = 0.1
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ZoomIcon" type="TextureRect" parent="VSplit/ExtraHBox/VBox/ZoomHBox"]
+[node name="ZoomIcon" type="TextureRect" parent="VSplit/TabContainer/Pallete/HBox/ZoomHBox"]
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
@@ -632,9 +580,9 @@ texture = SubResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="ZoomSlider" type="HSlider" parent="VSplit/ExtraHBox/VBox/ZoomHBox"]
+[node name="ZoomSlider" type="HSlider" parent="VSplit/TabContainer/Pallete/HBox/ZoomHBox"]
 margin_left = 20.0
-margin_right = 331.0
+margin_right = 132.0
 margin_bottom = 16.0
 grow_horizontal = 0
 rect_clip_content = true
@@ -645,3 +593,66 @@ min_value = 5.0
 max_value = 20.0
 value = 5.0
 script = ExtResource( 9 )
+
+[node name="ExtraHBox" type="HBoxContainer" parent="VSplit"]
+margin_top = 585.0
+margin_right = 399.0
+margin_bottom = 600.0
+grow_vertical = 0
+rect_clip_content = true
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PoseCreationHBox" type="HBoxContainer" parent="VSplit/ExtraHBox"]
+margin_right = 129.0
+margin_bottom = 15.0
+size_flags_horizontal = 2
+script = ExtResource( 20 )
+
+[node name="NewPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationHBox"]
+margin_right = 82.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 82, 0 )
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "New Pose"
+icon = ExtResource( 10 )
+align = 0
+expand_icon = true
+
+[node name="CancelPoseButton" type="Button" parent="VSplit/ExtraHBox/PoseCreationHBox"]
+margin_left = 86.0
+margin_right = 129.0
+margin_bottom = 15.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Cancel"
+align = 0
+expand_icon = true
+
+[node name="WarningIcon" type="TextureRect" parent="VSplit/ExtraHBox"]
+visible = false
+margin_left = 311.0
+margin_right = 327.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 5 )
+
+[node name="SettingsButton" type="Button" parent="VSplit/ExtraHBox"]
+margin_left = 384.0
+margin_right = 399.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 0 )
+icon = ExtResource( 29 )
+expand_icon = true
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -22,6 +22,7 @@ var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
 
 var editorSceneTabs: Tabs setget ,_get_EditorSceneTabs
 
+var settings: Resource
 var posePalDock :Control
 var editorControl :Control
 
@@ -38,6 +39,8 @@ func _ready() -> void:
 	posePalDock.editorControl = editorControl
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, posePalDock)
 	_get_editor_references()
+	
+	settings = load("res://addons/posepal/settings.tres")
 
 func _exit_tree() -> void:
 	self.editorSceneTabs.visible = true

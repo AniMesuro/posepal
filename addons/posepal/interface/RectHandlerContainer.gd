@@ -2,7 +2,7 @@ tool
 extends Control
 
 export var handler_size :int setget set_handler_size
-export var _windowRect :NodePath setget _set_windowRect
+export var _windowRect :NodePath = '.' setget _set_windowRect
 
 var _visible :bool= false setget set_pseudovisible
 
@@ -31,19 +31,28 @@ func _enter_tree() -> void:
 
 func _set_windowRect(value :NodePath):
 	if !is_inside_tree():
-		yield(self, "tree_entered")
+#		yield(self, "tree_entered")
+		return
 	if !is_instance_valid(self):
 		return
-	var _window = get_node(value)
+	var _window = get_node_or_null(value)
 	if !is_instance_valid(_window):
+		_windowRect = '..'
 		return
-	
 	_windowRect = value
 	for child in get_children():
 		if !child is ReferenceRect:
 			continue
 		child._windowRect = child.get_path_to(_window)
 	
+#func _on_windowRect_renamed(_window):
+#	if !is_instance_valid(_window):
+#		return
+#	print('renamed to ',_window.name)
+#	for child in get_children():
+#		if !child is ReferenceRect:
+#			continue
+#		child._windowRect = '.'
 
 func set_handler_size(value :int):
 	handler_size = value

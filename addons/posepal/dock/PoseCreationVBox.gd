@@ -1,5 +1,5 @@
 tool
-extends VBoxContainer
+extends HBoxContainer
 
 signal pose_editing_canceled
 signal pose_editing_saved

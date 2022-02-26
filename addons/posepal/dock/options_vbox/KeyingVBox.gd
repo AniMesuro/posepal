@@ -118,7 +118,7 @@ func _on_BatchKeyBtn_pressed():
 		if animPlayer.assigned_animation == currentAnimOptionButton.text:
 			current_edited_animPlayer = animPlayer
 			break
-	var newPoseButton: Button = $"../../../../../../ExtraHBox/PoseCreationVBox/NewPoseButton"
+	var newPoseButton: Button = $"../../../../../../ExtraHBox/PoseCreationHBox/NewPoseButton"
 	
 	
 	if !is_instance_valid(current_edited_animPlayer):
