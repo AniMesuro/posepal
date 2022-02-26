@@ -64,14 +64,14 @@ func _set_posegen_mode(new_mode :int):
 			if is_instance_valid(animationPlayer):
 				animationPlayer.queue_free()
 			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
-			poseCreationColumn.is_locked = false
+			poseCreationColumn.is_locked = true
 		PoseGenMode.SAVE:
 			newPoseButton.text = "Save Pose"
 			newPoseButton.icon = TEX_IconSave
 			cancelPoseButton.visible = true
 			cancelPoseButton.connect("pressed", self, "_on_CancelPoseButton_pressed")
 			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
-			poseCreationColumn.is_locked = true
+			poseCreationColumn.is_locked = false
 	posegen_mode = new_mode
 
 # owner_reference (reference)
