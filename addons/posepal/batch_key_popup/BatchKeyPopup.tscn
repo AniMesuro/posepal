@@ -8,7 +8,7 @@
 [ext_resource path="res://addons/posepal/batch_key_popup/BatchAddVBox.gd" type="Script" id=6]
 [ext_resource path="res://addons/posepal/batch_key_popup/FinishHBox.gd" type="Script" id=7]
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=10]
+[ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=9]
 [ext_resource path="res://addons/posepal/batch_key_popup/SelectAllCheck.gd" type="Script" id=11]
 
 [node name="BatchKeyPopup" type="WindowDialog"]
@@ -26,9 +26,6 @@ theme = ExtResource( 1 )
 popup_exclusive = true
 resizable = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -54,8 +51,8 @@ __meta__ = {
 
 [node name="TitleBar" parent="MarginContainer/VBox" instance=ExtResource( 8 )]
 margin_right = 582.0
-title_name = "Batch Key"
-icon_texture = ExtResource( 10 )
+title_name = "Batch key to: "
+icon_texture = ExtResource( 9 )
 window_path = NodePath("../../..")
 
 [node name="TitleHBox" type="HBoxContainer" parent="MarginContainer/VBox"]
@@ -109,6 +106,7 @@ scroll_horizontal_enabled = false
 scroll_deadzone = 24
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/VBox/HSplitContainer/TreeScroll"]
+visible = false
 margin_right = 291.0
 margin_bottom = 205.0
 rect_clip_content = true

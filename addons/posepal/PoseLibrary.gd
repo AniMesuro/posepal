@@ -1,13 +1,25 @@
 tool
 extends Resource
 
+
 #########  EXAMPLE TEMPLATE   #########
-#filterData: {# Stores direct poses
-#	'none': null # Serves only as a tag to ignore filters.
-#	'head': { # Filter poses are called by names instead of ids.
-#		"TTorso/Head": {}
-#		
-#		
+#available_res_id: 1 # Available id to append to resourceReferences.
+#resourceReferences: {0: ['res://*.png']} -- Custom Resource references to make resource files moving possible.
+#filterData: { -- Stores direct poses
+#	'none': null -- Serves only as a tag to ignore filters.
+#	'head': { -- Filter poses are called by names instead of ids.
+#		"TTorso/Head": {
+#		}
+#	}
+#templateData: { -- Stores direct poses
+#	'default': {} -- Default template has no 
+#	'head': { -- Filter poses are called by names instead of ids.
+#		"TTorso/Head": {
+#			"texture":
+#				'valr': 0 -- Resource ref id (custom, not from godot)
+#				'out': 0.0 -- Transition out
+#				'upmo' -- Track update_mode
+#		}
 #	}
 #PoseData: { # Stores collections
 #	'default': { # Stores subcollections
