@@ -133,6 +133,8 @@ func load_poseData() -> void:
 			current_poselib.owner_filepath = sceneNode.filename
 		return
 	current_poselib = load(poseFile_path)
+	current_poselib.setup()
+#	print('loaded poselib, refs ',current_poselib.resourceReferences.size())
 #	else:
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):

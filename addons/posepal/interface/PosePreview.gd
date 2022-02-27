@@ -260,11 +260,13 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_ch.set(property, templatePose[my_nodepath][property]['val'])
 	
 	if my_nodepath in pose:
+		var poselib: Resource = get_parent().owner.current_poselib
 		for property in pose[my_nodepath]:
 			
 			if property in _ch:
 				if property == 'texture':
-					_ch.set('texture', pose[my_nodepath]['texture']['val'])
+					
+					_ch.set('texture', poselib.get_res_from_id(pose[my_nodepath]['texture']['valr']))
 					#_ch.set('texture', load(pose[my_nodepath]['texture']['val']))
 					
 				else:
