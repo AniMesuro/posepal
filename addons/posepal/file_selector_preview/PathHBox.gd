@@ -29,7 +29,7 @@ func _on_text_entered(new_text :String):
 		owner.current_dir = new_text
 		owner.current_file = new_text.get_file()
 		
-		var fileContainer :GridContainer= $"../FilePanel/ScrollContainer/FileContainer"
+		var fileContainer: GridContainer = $"../FilePanel/ScrollContainer/FileContainer"
 		for fileIcon in fileContainer.get_children():
 			if fileIcon.file_name == owner.current_file:
 				fileContainer.selectedFileIcon = fileIcon

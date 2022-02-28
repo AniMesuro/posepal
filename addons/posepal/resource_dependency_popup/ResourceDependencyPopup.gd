@@ -5,7 +5,6 @@ var posePalDock: Control
 
 var is_first_time: bool = true
 func _enter_tree() -> void:
-	show()
 	visible = true
 	if !is_first_time:
 		return
@@ -19,6 +18,7 @@ func _enter_tree() -> void:
 	if !is_instance_valid(posePalDock.current_poselib):
 		queue_free()
 		return
+	popup_centered()
 	var poselib: Resource = posePalDock.current_poselib
-	print(poselib.get_res_paths())
+	$MarginCon/VBox/VBox/ScrollCon/FileVBox.old_paths = poselib.get_res_paths()
 

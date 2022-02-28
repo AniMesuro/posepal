@@ -1,7 +1,7 @@
 tool
 extends HBoxContainer
 
-var hSlider :HSlider
+var hSlider: HSlider
 
 func _ready() -> void:
 	hSlider = $HSlider

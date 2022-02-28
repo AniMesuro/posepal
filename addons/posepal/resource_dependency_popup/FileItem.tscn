@@ -5,12 +5,13 @@
 [ext_resource path="res://addons/posepal/resource_dependency_popup/FileItem.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxLine" id=2]
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.113725, 0.113725, 0.113725, 1 )
 vertical = true
 
 [node name="FileItem" type="HBoxContainer"]
-margin_right = 356.0
+margin_right = 387.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 96, 0 )
 size_flags_horizontal = 3
 script = ExtResource( 3 )
 
@@ -24,27 +25,31 @@ stretch_mode = 6
 
 [node name="OldPathLabel" type="Label" parent="."]
 margin_left = 18.0
-margin_right = 172.0
+margin_right = 187.0
 margin_bottom = 14.0
+mouse_filter = 1
 size_flags_horizontal = 3
 text = "res://icon.png"
+clip_text = true
 
 [node name="VSeparator" type="VSeparator" parent="."]
-margin_left = 176.0
-margin_right = 180.0
+margin_left = 191.0
+margin_right = 195.0
 margin_bottom = 14.0
 custom_styles/separator = SubResource( 2 )
 
 [node name="PathLabel" type="Label" parent="."]
-margin_left = 184.0
-margin_right = 338.0
+margin_left = 199.0
+margin_right = 369.0
 margin_bottom = 14.0
+mouse_filter = 1
 size_flags_horizontal = 3
 text = "res://icon.png"
+clip_text = true
 
 [node name="OpenButton" type="TextureButton" parent="."]
-margin_left = 342.0
-margin_right = 356.0
+margin_left = 373.0
+margin_right = 387.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 14, 0 )
 texture_normal = ExtResource( 1 )

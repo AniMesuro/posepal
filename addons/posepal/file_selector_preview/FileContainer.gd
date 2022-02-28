@@ -1,8 +1,8 @@
 tool
 extends GridContainer
 
-const SCN_FileIcon :PackedScene= preload("res://addons/rhubarb_lipsync_integration/file_selector_preview/FileIcon.tscn")
-const TEX_IconFolder :StreamTexture= preload("res://addons/rhubarb_lipsync_integration/assets/icons/icon_folder.png")
+const SCN_FileIcon :PackedScene= preload("res://addons/posepal/file_selector_preview/FileIcon.tscn")
+const TEX_IconFolder :StreamTexture= preload("res://addons/posepal/assets/icons/icon_folder.png")
 
 var fileSelectorPreview :Control
 var selectedFileIcon = null setget _set_selectedFileIcon

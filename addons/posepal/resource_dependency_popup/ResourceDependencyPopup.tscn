@@ -1,16 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=2]
 [ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=3]
 [ext_resource path="res://addons/posepal/resource_dependency_popup/FileItem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/posepal/resource_dependency_popup/FileVBox.gd" type="Script" id=5]
 [ext_resource path="res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.gd" type="Script" id=6]
 
-[sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 2.0
-bg_color = Color( 0.196078, 0.164706, 0.164706, 1 )
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 10.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.164706, 0.152941, 0.14902, 1 )
+
+[sub_resource type="Theme" id=4]
+Label/colors/font_color = Color( 0.815686, 0.815686, 0.815686, 1 )
 
 [node name="ResourceDependencyPopup" type="WindowDialog"]
 visible = true
@@ -18,12 +26,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -138.0
-margin_top = -80.0
-margin_right = 309.0
-margin_bottom = 197.0
+margin_left = -224.0
+margin_top = -139.0
+margin_right = 223.0
+margin_bottom = 138.0
 rect_min_size = Vector2( 277, 175 )
+input_pass_on_modal_close_click = false
 theme = ExtResource( 2 )
+popup_exclusive = true
 resizable = true
 script = ExtResource( 6 )
 
@@ -49,31 +59,71 @@ icon_texture = ExtResource( 3 )
 window_path = NodePath("../../..")
 
 [node name="GuessButton" type="Button" parent="MarginCon/VBox"]
-margin_left = 297.0
+margin_left = 287.0
 margin_top = 28.0
 margin_right = 407.0
 margin_bottom = 43.0
+rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 10
 text = "Guess new paths"
 
-[node name="ScrollCon" type="ScrollContainer" parent="MarginCon/VBox"]
+[node name="VBox" type="VBoxContainer" parent="MarginCon/VBox"]
 margin_top = 47.0
 margin_right = 407.0
 margin_bottom = 243.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = SubResource( 1 )
+custom_constants/separation = 0
 
-[node name="FileVBox" type="VBoxContainer" parent="MarginCon/VBox/ScrollCon"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 405.0
+[node name="PanelCon" type="PanelContainer" parent="MarginCon/VBox/VBox"]
+margin_right = 407.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBox" type="HBoxContainer" parent="MarginCon/VBox/VBox/PanelCon"]
+margin_right = 407.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 12 )
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginCon/VBox/VBox/PanelCon/HBox"]
+margin_top = 1.0
+margin_right = 201.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "Current path"
+align = 1
+
+[node name="Label2" type="Label" parent="MarginCon/VBox/VBox/PanelCon/HBox"]
+margin_left = 205.0
+margin_top = 1.0
+margin_right = 407.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "New path"
+align = 1
+
+[node name="ScrollCon" type="ScrollContainer" parent="MarginCon/VBox/VBox"]
+margin_top = 16.0
+margin_right = 407.0
 margin_bottom = 196.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/bg = SubResource( 3 )
 
-[node name="FileItem" parent="MarginCon/VBox/ScrollCon/FileVBox" instance=ExtResource( 4 )]
-margin_right = 403.0
+[node name="FileVBox" type="VBoxContainer" parent="MarginCon/VBox/VBox/ScrollCon"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 402.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 5 )
+
+[node name="FileItem" parent="MarginCon/VBox/VBox/ScrollCon/FileVBox" instance=ExtResource( 4 )]
+margin_right = 392.0
+theme = SubResource( 4 )
 
 [node name="Button" type="Button" parent="MarginCon/VBox"]
 margin_top = 247.0
@@ -81,3 +131,13 @@ margin_right = 407.0
 margin_bottom = 262.0
 size_flags_vertical = 8
 text = "Ok"
+
+[node name="FileDialog" type="FileDialog" parent="MarginCon/VBox/Button"]
+visible = true
+margin_left = -24.0
+margin_top = 52.0
+margin_right = 305.0
+margin_bottom = 274.0
+window_title = "Open a File"
+mode = 0
+filters = PoolStringArray( "png", "jpg", "jpeg" )
