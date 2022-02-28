@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://addons/posepal/interface/NodeMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/interface/ExpandableTab.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://addons/posepal/dock/options_vbox/KeyingVBox.gd" type="Script" id=26]
 [ext_resource path="res://addons/posepal/dock/options_vbox/PoseCreationVBox.gd" type="Script" id=27]
 [ext_resource path="res://addons/posepal/dock/options_vbox/PreviewVBox.gd" type="Script" id=28]
+[ext_resource path="res://addons/posepal/dock/options_vbox/MiscVBox.gd" type="Script" id=29]
 [ext_resource path="res://addons/posepal/dock/SettingsButton.gd" type="Script" id=30]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -466,24 +467,29 @@ hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-visible = false
 anchor_right = 0.0
 margin_top = 118.0
 margin_right = 379.0
 margin_bottom = 138.0
 path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
-expand = false
+is_locked = false
 
 [node name="MiscVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
-visible = false
 margin_top = 138.0
 margin_right = 379.0
-margin_bottom = 153.0
+margin_bottom = 172.0
+script = ExtResource( 29 )
 
-[node name="SliceToggleAudioButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
+[node name="FileDependencyButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
 margin_right = 379.0
 margin_bottom = 15.0
+text = "Debug file dependency"
+
+[node name="SliceToggleAudioButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
+margin_top = 19.0
+margin_right = 379.0
+margin_bottom = 34.0
 text = "Slice toggle audio key"
 
 [node name="Pallete" type="VBoxContainer" parent="VSplit/TabContainer"]
@@ -515,7 +521,7 @@ margin_right = 399.0
 margin_bottom = 567.0
 
 [node name="PageHBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete/HBox"]
-margin_right = 263.0
+margin_right = 197.0
 margin_bottom = 16.0
 rect_clip_content = true
 size_flags_horizontal = 3
@@ -543,7 +549,7 @@ text = "<"
 
 [node name="NumButton" type="OptionButton" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
 margin_left = 34.0
-margin_right = 229.0
+margin_right = 163.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 text = "1"
@@ -554,8 +560,8 @@ __meta__ = {
 }
 
 [node name="NextButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
-margin_left = 233.0
-margin_right = 242.0
+margin_left = 167.0
+margin_right = 176.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 0
@@ -563,8 +569,8 @@ size_flags_vertical = 3
 text = ">"
 
 [node name="LastButton" type="Button" parent="VSplit/TabContainer/Pallete/HBox/PageHBox"]
-margin_left = 246.0
-margin_right = 263.0
+margin_left = 180.0
+margin_right = 197.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 0
@@ -572,14 +578,13 @@ size_flags_vertical = 3
 text = ">>"
 
 [node name="ZoomHBox" type="HBoxContainer" parent="VSplit/TabContainer/Pallete/HBox"]
-margin_left = 267.0
+margin_left = 201.0
 margin_right = 399.0
 margin_bottom = 16.0
 grow_vertical = 0
 rect_min_size = Vector2( 16, 0 )
 rect_clip_content = true
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -595,7 +600,7 @@ stretch_mode = 6
 
 [node name="ZoomSlider" type="HSlider" parent="VSplit/TabContainer/Pallete/HBox/ZoomHBox"]
 margin_left = 20.0
-margin_right = 132.0
+margin_right = 198.0
 margin_bottom = 16.0
 grow_horizontal = 0
 rect_clip_content = true

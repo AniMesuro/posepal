@@ -157,4 +157,10 @@ func get_id_from_res(res: Resource):
 	print('get_ext_id ',resourceReferences)
 	return id;
 
-	
+func get_res_paths() -> PoolStringArray:
+	var res_paths: PoolStringArray = []
+	var res_pairs: Array = resourceReferences.values()
+	for i in res_pairs.size():
+		var res_pair: Array = res_pairs[i]
+		res_paths.append(res_pair[ReferenceType.PATH])
+	return res_paths
