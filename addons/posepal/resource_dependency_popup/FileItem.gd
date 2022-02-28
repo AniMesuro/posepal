@@ -17,6 +17,8 @@ func _enter_tree() -> void:
 	
 	var extension: String = old_path.get_extension()
 	_get_icon_from_extension(extension)
+	if File.new().file_exists(old_path):
+		self.new_path = old_path
 
 func _get_icon_from_extension(_extension: String):
 	var editorControl: Control = get_parent().owner.posePalDock.pluginInstance.editorControl
@@ -39,7 +41,12 @@ func _on_OpenButton_pressed():
 	print('pure_file ',pure_file,' ',extension)
 	fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray([extension]),
 	"* All files", "Select new path for "+pure_file)
-#	access , _filters , all_filters_option = "* All files", dialog_title = "Please select a file."
+	fileSelectorPreview.connect("file_selected", self, "_on_file_selected")
+
+func _on_file_selected(filepath: String):
+	if filepath.get_extension() != extension:
+		return
+	self.new_path = filepath
 
 func _set_new_path(_new_path: String):
 	new_path = _new_path

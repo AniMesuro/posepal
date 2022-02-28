@@ -265,9 +265,11 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			
 			if property in _ch:
 				if property == 'texture':
-					
-					_ch.set('texture', poselib.get_res_from_id(pose[my_nodepath]['texture']['valr']))
-					#_ch.set('texture', load(pose[my_nodepath]['texture']['val']))
+					if !poselib.get_res_from_id(pose[my_nodepath]['texture'].has('valr')):
+						_ch.set('texture', poselib.get_res_from_id(pose[my_nodepath]['texture']['valr']))
+					else:
+						_ch.set(property, pose[my_nodepath][property]['val'])
+#						_ch.set('texture', load(pose[my_nodepath]['texture']['val']))
 					
 				else:
 					_ch.set(property, pose[my_nodepath][property]['val'])

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=2]
 [ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=3]
-[ext_resource path="res://addons/posepal/resource_dependency_popup/FileItem.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/posepal/resource_dependency_popup/FileVBox.gd" type="Script" id=5]
 [ext_resource path="res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.gd" type="Script" id=6]
 
@@ -16,9 +15,6 @@ content_margin_right = 5.0
 content_margin_top = 5.0
 content_margin_bottom = 5.0
 bg_color = Color( 0.164706, 0.152941, 0.14902, 1 )
-
-[sub_resource type="Theme" id=4]
-Label/colors/font_color = Color( 0.815686, 0.815686, 0.815686, 1 )
 
 [node name="ResourceDependencyPopup" type="WindowDialog"]
 visible = true
@@ -44,13 +40,14 @@ mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_top = 5
 custom_constants/margin_left = 20
-custom_constants/margin_bottom = 10
+custom_constants/margin_bottom = 25
 
 [node name="VBox" type="VBoxContainer" parent="MarginCon"]
 margin_left = 20.0
 margin_top = 5.0
 margin_right = 427.0
-margin_bottom = 267.0
+margin_bottom = 252.0
+custom_constants/separation = 10
 
 [node name="TitleBar" parent="MarginCon/VBox" instance=ExtResource( 1 )]
 margin_right = 407.0
@@ -60,17 +57,17 @@ window_path = NodePath("../../..")
 
 [node name="GuessButton" type="Button" parent="MarginCon/VBox"]
 margin_left = 287.0
-margin_top = 28.0
+margin_top = 34.0
 margin_right = 407.0
-margin_bottom = 43.0
+margin_bottom = 49.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 10
 text = "Guess new paths"
 
 [node name="VBox" type="VBoxContainer" parent="MarginCon/VBox"]
-margin_top = 47.0
+margin_top = 59.0
 margin_right = 407.0
-margin_bottom = 243.0
+margin_bottom = 222.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -107,7 +104,7 @@ align = 1
 [node name="ScrollCon" type="ScrollContainer" parent="MarginCon/VBox/VBox"]
 margin_top = 16.0
 margin_right = 407.0
-margin_bottom = 196.0
+margin_bottom = 163.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 3 )
@@ -116,28 +113,14 @@ custom_styles/bg = SubResource( 3 )
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 402.0
-margin_bottom = 175.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
 
-[node name="FileItem" parent="MarginCon/VBox/VBox/ScrollCon/FileVBox" instance=ExtResource( 4 )]
-margin_right = 392.0
-theme = SubResource( 4 )
-
-[node name="Button" type="Button" parent="MarginCon/VBox"]
-margin_top = 247.0
+[node name="OkButton" type="Button" parent="MarginCon/VBox"]
+margin_top = 232.0
 margin_right = 407.0
-margin_bottom = 262.0
+margin_bottom = 247.0
 size_flags_vertical = 8
 text = "Ok"
-
-[node name="FileDialog" type="FileDialog" parent="MarginCon/VBox/Button"]
-visible = true
-margin_left = -24.0
-margin_top = 52.0
-margin_right = 305.0
-margin_bottom = 274.0
-window_title = "Open a File"
-mode = 0
-filters = PoolStringArray( "png", "jpg", "jpeg" )
