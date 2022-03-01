@@ -38,15 +38,16 @@ func _on_pressed():
 	
 	var unique_old_dirs: Array = [] # ['res://head/', 'res://torso/', 'res://bottom/']
 	var unique_old_ids: Array = [] # [[0,1,2], [3,4], [5,6]] - paralel to unique_old_dirs
-	for i in owner.old_paths.size():
-		var old_path: String = owner.old_paths[i]
+#	for i in owner.old_paths.size():
+	for k in poselib.resourceReferences.keys():
+		var old_path: String = poselib.resourceReferences[k]
 		var old_dir: String = old_path.get_base_dir()
 		var sib_id: int = unique_old_dirs.find(old_dir)
 		if sib_id != -1:#unique_old_dirs.has(old_dir):
-			unique_old_ids[sib_id].append(i)
+			unique_old_ids[sib_id].append(k)
 		else:
 			unique_old_dirs.append(old_dir)
-			unique_old_ids.append([i])
+			unique_old_ids.append([k])
 #	print('unique old ',unique_old_dirs,'\n',unique_old_ids)
 	
 	for siblings_id in unique_old_ids.size(): # ids with same directory [0,1,2]

@@ -54,7 +54,7 @@ enum ReferenceType {
 	RESOURCE
 }
 export var resourceReferences:  Dictionary = {} # Resource path ref ex. {0: "res://eyes.png"}
-#var resourceReferences_res: 	Dictionary = {} # Resource ref ex. {0: [StreamTexture:1234]}
+var resourceReferences_res: 	Dictionary = {} # Resource ref ex. {0: [StreamTexture:1234]}
 export var available_res_id: int = 0
 # poses should store shortcuts instead of nodepaths so it's safe from node modification.
 var is_references_valid: bool = false
@@ -98,23 +98,34 @@ func setup():
 func prepare_loading_resourceReferences():
 #	print('preparing exts ',resourceReferences.size())
 	is_references_valid = true
+	if resourceReferences.size() == 0:
+		return
+	if resourceReferences.values()[0] is Array:
+		for k in resourceReferences.keys():
+			resourceReferences[k] = resourceReferences[k][0]
+#			print('pair ',resourceReferences[k])
+#	print(resourceReferences)
+#	return
+	
 	for k in resourceReferences.keys():
-		var path: String = resourceReferences[k][ReferenceType.PATH]
+		var path: String = resourceReferences[k]
+		#[ReferenceType.PATH]
 #		var res: String = resourceReferences[i][ReferenceType.RESOURCE]
 #		print(path)
 		
 		if ResourceLoader.exists(path):
-			resourceReferences[k].resize(2)
-			resourceReferences[k][ReferenceType.RESOURCE] = ResourceLoader.load(path)
+#			resourceReferences[k].resize(2)
+			resourceReferences_res[k] = ResourceLoader.load(path)
 		else:
 			print('file not exists ', resourceReferences[k])
 			is_references_valid = false
-	print(resourceReferences)
+	print('res res ',resourceReferences_res)
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.
-	for k in resourceReferences.keys():
-		resourceReferences[k].resize(1)
+#	for k in resourceReferences.keys():
+#		resourceReferences[k].resize(1)
+	pass
 
 func clear():
 	owner_filepath = "res://"
@@ -126,25 +137,26 @@ func get_res_from_id(id: int):
 	if !resourceReferences.has(id):
 		return null
 	var res: Resource
-	if resourceReferences[id].size() != 1:
-		 res = resourceReferences[id][ReferenceType.RESOURCE]
+	if resourceReferences_res.has(id):#[id].size() != 1:
+		res = resourceReferences_res[id]
 	else:
-		res = load(resourceReferences[id][ReferenceType.PATH])
+		res = load(resourceReferences[id])
 	return res
 
 func get_id_from_path(path: String):
 #	var res_pairs: Array = resourceReferences.values()
 	for k in resourceReferences.keys():
-		var res_pair = resourceReferences[k]
-		if res_pair[ReferenceType.PATH] == path:
+		var res_path = resourceReferences[k]
+		if res_path == path:
 			return k
 
 func get_id_from_res(res: Resource):
 #	var res_pairs: Array = resourceReferences.values()
 	for k in resourceReferences.keys():
-		var res_pair: Array = resourceReferences[k]
-		print('respair ',res_pair)
-		if res_pair[ReferenceType.PATH] == res.resource_path:
+#		var res_pair: Array = resourceReferences[k]
+		var res_path: String = resourceReferences[k]
+#		print('respair ',res_pair)
+		if res_path == res.resource_path:
 			return k
 	var id: int	
 	var max_iter: int = 100
@@ -154,12 +166,12 @@ func get_id_from_res(res: Resource):
 		iter += 1
 	id = available_res_id + iter
 	available_res_id = id + 1
-	resourceReferences[id] = [res.resource_path, res]
-	print('get_ext_id ',resourceReferences)
+	resourceReferences[id] = res.resource_path#[res.resource_path, res]
+#	print('get_ext_id ',resourceReferences)
 	return id;
 	
-func get_res_paths() -> PoolStringArray:
-	var paths: PoolStringArray = []
-	for pair in resourceReferences.values():
-		paths.append(pair[ReferenceType.PATH])
-	return paths
+func get_res_paths() -> Array:
+#	var paths: PoolStringArray = []
+#	for pair in resourceReferences.values():
+#		paths.append(pair[ReferenceType.PATH])
+	return resourceReferences.values()

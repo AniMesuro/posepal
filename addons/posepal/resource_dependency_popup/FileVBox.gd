@@ -9,13 +9,15 @@ var children_as_dict: Dictionary = {}
 func _enter_tree() -> void:
 	if get_tree().edited_scene_root == self:
 		return
+	if get_tree().edited_scene_root == get_parent().owner:
+		return
 	fill_files()
 
 func fill_files():
 	var old_paths = owner.old_paths
 	var poselib: Resource = owner.poselib
 	for k in poselib.resourceReferences.keys():
-		var path: String = poselib.resourceReferences[k][0]
+		var path: String = poselib.resourceReferences[k]#[0]
 		var item: HBoxContainer = SCN_FileItem.instance()
 		item.old_path = path
 		item.res_id = k

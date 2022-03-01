@@ -40,19 +40,19 @@ func _resolve_dependencies():
 	var f: File = File.new()
 	var poselib: RES_PoseLibrary = posePalDock.current_poselib
 	for k in poselib.resourceReferences.keys():
-		var res_pair = poselib.resourceReferences[k]
+		var res_path = poselib.resourceReferences[k]
 		print(fileVBox.children_as_dict,'\n I wanna get ',k)
 		print(fileVBox.children_as_dict.get(k))
 #		print(poselib.resourceReferences[k])
 		if !fileVBox.children_as_dict.has(k):
 			continue
-		if res_pair[poselib.ReferenceType.PATH] != fileVBox.children_as_dict[k].old_path:
+		if res_path != fileVBox.children_as_dict[k].old_path:
 			continue
 		var new_path = fileVBox.children_as_dict[k].new_path
 		if !f.file_exists(new_path):
 			continue
 		print('newpath ',new_path)
-		res_pair[poselib.ReferenceType.PATH] = new_path
+		poselib.resourceReferences[k] = new_path
 	
 	print('resolved dependencies ',poselib.resourceReferences)
 	
