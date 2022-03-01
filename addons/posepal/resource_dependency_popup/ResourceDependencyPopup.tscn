@@ -62,6 +62,8 @@ margin_top = 34.0
 margin_right = 407.0
 margin_bottom = 49.0
 rect_min_size = Vector2( 120, 0 )
+hint_tooltip = "Only works if you fix a path manually first.
+It works by comparing each unique path."
 size_flags_horizontal = 10
 text = "Guess new paths"
 script = ExtResource( 4 )

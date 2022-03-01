@@ -116,9 +116,11 @@ func _on_NewPoseButton_pressed():
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
+		_show_editorSceneTabs()
 		return
 	if !poselib.is_references_valid:
 		owner.issue_warning('broken_dependencies')
+		_show_editorSceneTabs()
 		return
 	if posegen_mode == PoseGenMode.CREATE:
 		apply_pose(0, PoseType.TEMPLATE)
@@ -149,7 +151,10 @@ func _on_NewPoseButton_pressed():
 		_show_editorSceneTabs()
 		
 		# [] Fill all for changes of 1 is overkill. Should replace with a regenerate function in future.
-		owner.posePalette.fill_previews()
+		
+		var pageHBox = $"../../TabContainer/Pallete/HBox/PageHBox"
+		pageHBox.current_page = pageHBox.page_count-1
+#		owner.posePalette.fill_previews()
 ##	#	#	#	#	#	#	#	#	#	#	#	#
 
 
@@ -467,18 +472,20 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	# Create pose if pose doesn't exist at pose data.
 #	var is_empty: bool = false
 	print('pose type =',pose_type)
+	var is_pose_new: bool = false
 	if current_pose_type == PoseType.NORMAL:
 		if (pose_id == -1
 		or pose_id > poselib.poseData[owner.poselib_template][owner.poselib_collection].size() - 1):
 #		if pose_id > poselib.poseData[owner.poselib_template][owner.poselib_collection].size() - 1:
 			poselib.poseData[owner.poselib_template][owner.poselib_collection].append({})
+			is_pose_new = true
 #			is_empty = true
 		else:
 			if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has('_name'):
 				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id] = {}
 			else:
 				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id] = {'_name':
-					poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]['_name']}
+				  poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]['_name']}
 	elif current_pose_type == PoseType.FILTER:
 		poselib.filterData[owner.poselib_filter] = {}
 #		if !owner.poselib_filter in poselib.filterData:
@@ -519,6 +526,13 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 #	print('PoseData = ', poselib.poseData)
 #	print('owner PoseData = ', owner.current_poselib.poseData)
 	owner.save_poseData()
+	if is_pose_new:
+		owner.emit_signal('pose_created', pose_id)
+#		var pageHBox: = $"../../TabContainer/Pallete/HBox/PageHBox"
+#		pageHBox.current_page = pageHBox.page_count-1
+#		print('curpage ',pageHBox.current_page)
+	
+	# Focus new pose on palette.
 	animationPlayer.remove_animation(currentAnimOptionButton.text)
 	animationPlayer.queue_free()
 #	print('poselib ext ',poselib.resourceReferences_path)

@@ -10,7 +10,7 @@ signal warning_issued (warning_message)
 signal warning_fixed (warning_message)
 
 signal issued_forced_selection
-#signal pose_created (pose, pose_key)
+signal pose_created (pose_id)
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 const RES_PosePalSettings: Script = preload("res://addons/posepal/PosePalSettings.gd")
@@ -69,6 +69,7 @@ func _ready() -> void:
 	if get_tree().edited_scene_root == self:
 		return
 	connect("pose_selected", self, "_on_pose_selected")
+	connect("pose_created", self, "_on_pose_created")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 #	connect("script_changed", self, "_on_script_changed")
 	
@@ -594,16 +595,17 @@ func _on_pose_selected(pose_id :int):
 	
 #	print('pose_id =',pose_id)
 
-func _on_pose_created(pose :Dictionary, pose_key :String):
+func _on_pose_created(pose_id: int):# :Dictionary, pose_key :String):
 #	pluginInstance = _get_pluginInstance()
 #	var poseFile_path = pluginInstance.tscn_set_poseFile(poselib_scene, poselib_scene.get_basename().get_file()) # Pose File has  same name as scene (though there will be an id for how many dupplicates there are)
-	print("posepath = ",poseFile_path)
+	print("posecreated = ",pose_id)
+#
+#	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
+#	save_poseData()
+#
+#	posePalette = self.posePalette
+#	posePalette.fill_previews()
 	
-	poseData['collections'][poselib_template][poselib_collection][pose_key] = pose
-	save_poseData()
-	
-	posePalette = self.posePalette
-	posePalette.fill_previews()
 	# Get PoseFile
 #	var f :File= File.new()
 #	var selected_scene :Node= get_tree().edited_scene_root.get_node(poselib_scene)

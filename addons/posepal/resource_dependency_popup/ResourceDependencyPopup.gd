@@ -33,6 +33,7 @@ func _ready() -> void:
 
 func _on_OkButton_pressed():
 	_resolve_dependencies()
+	posePalDock.save_poseData()
 	queue_free()
 
 func _resolve_dependencies():
@@ -41,8 +42,8 @@ func _resolve_dependencies():
 	var poselib: RES_PoseLibrary = posePalDock.current_poselib
 	for k in poselib.resourceReferences.keys():
 		var res_path = poselib.resourceReferences[k]
-		print(fileVBox.children_as_dict,'\n I wanna get ',k)
-		print(fileVBox.children_as_dict.get(k))
+#		print(fileVBox.children_as_dict,'\n I wanna get ',k)
+#		print(fileVBox.children_as_dict.get(k))
 #		print(poselib.resourceReferences[k])
 		if !fileVBox.children_as_dict.has(k):
 			continue
@@ -51,8 +52,8 @@ func _resolve_dependencies():
 		var new_path = fileVBox.children_as_dict[k].new_path
 		if !f.file_exists(new_path):
 			continue
-		print('newpath ',new_path)
+#		print('newpath ',new_path)
 		poselib.resourceReferences[k] = new_path
 	
-	print('resolved dependencies ',poselib.resourceReferences)
+#	print('resolved dependencies ',poselib.resourceReferences)
 	

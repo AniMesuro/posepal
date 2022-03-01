@@ -26,8 +26,6 @@ func fill_previews(limit_by_page: bool = true):#true):
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
-	print('starting to fill')
-	# <TODO> Limit preview maximum by 9 or 10 for each page. 
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
