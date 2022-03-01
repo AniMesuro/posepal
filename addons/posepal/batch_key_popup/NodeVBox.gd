@@ -22,6 +22,7 @@ func fill_nodes():
 	if !is_inside_tree():
 		print('treedisplay outside tree')
 		return
+	print('filling nodes')
 	if get_tree().edited_scene_root == owner: return
 	var editedSceneRoot = get_tree().edited_scene_root
 	poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
@@ -48,6 +49,7 @@ func fill_nodes():
 						
 						for child_e in child_d.get_children():
 							var _child_e = add_node_item(_child_d, child_e)
+	
 
 func add_node_item(parentItem: Node, node: Node) -> Node:
 	var nodeItem: HBoxContainer = SCN_NodeItem.instance()
@@ -60,6 +62,7 @@ func add_node_item(parentItem: Node, node: Node) -> Node:
 	nodeItem.node_type = node.get_class()
 	nodeItem.is_expanded = true
 	nodeItem.connect("checked_node", self, "_on_checked_node")
+	print('adding ',node)
 	if is_instance_valid(parentItem):
 		parentItem.childrenItems.resize(parentItem.childrenItems.size()+1)
 		parentItem.childrenItems[-1] = nodeItem

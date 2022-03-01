@@ -11,7 +11,7 @@ func _ready() -> void:
 		popupMenu.add_item(extension)
 	$MenuButton.connect("pressed", self, "_on_pressed")
 	popupMenu.connect("id_pressed", self, "_on_id_pressed")
-	print(settings.PoselibExtensions.keys()[settings.poselib_extension])
+#	print(settings.PoselibExtensions.keys()[settings.poselib_extension])
 
 func _on_pressed():
 	pass

@@ -63,7 +63,6 @@ func _set_nesting_level(new_nesting_level: int):
 func _set_node_type(new_node_type :String):
 	if !is_inside_tree(): return
 #	if is_instance_valid(self): return
-	print('set_type')
 	if !Engine.editor_hint: return
 	
 	if !is_instance_valid(self.pluginInstance.editorControl):

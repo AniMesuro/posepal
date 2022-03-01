@@ -21,9 +21,6 @@ rect_min_size = Vector2( 260, 95 )
 theme = ExtResource( 3 )
 resizable = true
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginCon" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -67,9 +64,11 @@ margin_left = 101.0
 margin_right = 149.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 48, 0 )
+text = "tres"
 icon = ExtResource( 2 )
 flat = false
 expand_icon = true
+items = [ "tres", null, 0, false, false, 0, 0, null, "", false, "res", null, 0, false, false, 1, 0, null, "", false ]
 
 [node name="SaveButton" type="Button" parent="MarginCon/VBox"]
 margin_top = 103.0

@@ -117,9 +117,8 @@ func prepare_loading_resourceReferences():
 #			resourceReferences[k].resize(2)
 			resourceReferences_res[k] = ResourceLoader.load(path)
 		else:
-			print('file not exists ', resourceReferences[k])
+#			print('file not exists ', resourceReferences[k])
 			is_references_valid = false
-	print('res res ',resourceReferences_res)
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.

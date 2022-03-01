@@ -6,7 +6,8 @@ func _ready() -> void:
 
 func _on_pressed():
 	var nodesVBox: VBoxContainer = $"../../HSplitContainer/TreeScroll/VBox"
-	
+	print(nodesVBox.get_children())
+	return
 	#Check if there are unchecked NodeItems
 #	if pressed:
 	var has_unchecked_nodes: bool = false

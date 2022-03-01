@@ -29,8 +29,8 @@ func _on_KeyTemplateChk_pressed():
 func _on_QueueKeyTimeBtn_pressed():
 	if get_parent().get_posegen_mode() == 2: # SAVE - Editing pose.
 		return
-	if owner.poselib_scene == '':
-		print('[PosePal] poselib_scene not selected.')
+	if (owner.poselib_scene == '' or owner.poselib_filter == ''
+	or  owner.poselib_template == '' or owner.poselib_collection == ''):
 		return
 	# check if animation is selected.
 	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
@@ -97,9 +97,11 @@ func _on_QueueKeyTimeBtn_pressed():
 func _on_BatchKeyBtn_pressed():
 	# open batch key popup
 	# should be disabled if no (generally) animationplayer selected and no poseroot selected.
+	
 	if owner.poselib_scene == '':
 		print('[PosePal] poselib_scene not selected.')
 		return
+	
 	var editedSceneRoot: Node = get_tree().edited_scene_root
 	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
 	var currentAnimOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
@@ -110,27 +112,28 @@ func _on_BatchKeyBtn_pressed():
 		return
 		
 	
-	var current_edited_animPlayer: AnimationPlayer = null
-	for selectedNode in editorSelection.get_selected_nodes():
-		if selectedNode.get_class() != 'AnimationPlayer':
-			continue
-		var animPlayer: AnimationPlayer = selectedNode
-		if animPlayer.assigned_animation == currentAnimOptionButton.text:
-			current_edited_animPlayer = animPlayer
-			break
+	var current_edited_animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	
+#	for selectedNode in editorSelection.get_selected_nodes():
+#		if selectedNode.get_class() != 'AnimationPlayer':
+#			continue
+#		var animPlayer: AnimationPlayer = selectedNode
+#		if animPlayer.assigned_animation == currentAnimOptionButton.text:
+#			current_edited_animPlayer = animPlayer
+#			break
 	var newPoseButton: Button = $"../../../../../../ExtraHBox/PoseCreationHBox/NewPoseButton"
 	
 	
-	if !is_instance_valid(current_edited_animPlayer):
-		# PoseAnimationPlayer should be child of NewPoseButton
-		var poseButton_children: Array = newPoseButton.get_children()
-		print("posebutton children ",poseButton_children)
-		if poseButton_children.size() > 0:
-			current_edited_animPlayer = newPoseButton.get_children()[0]
+#	if !is_instance_valid(current_edited_animPlayer):
+#		# PoseAnimationPlayer should be child of NewPoseButton
+#		var poseButton_children: Array = newPoseButton.get_children()
+#		print("posebutton children ",poseButton_children)
+#		if poseButton_children.size() > 0:
+#			current_edited_animPlayer = newPoseButton.get_children()[0]
 			
-	if !is_instance_valid(current_edited_animPlayer):
-		if is_instance_valid(owner.poselib_animPlayer):
-			current_edited_animPlayer = owner.poselib_animPlayer
+#	if !is_instance_valid(current_edited_animPlayer):
+#		if is_instance_valid(owner.poselib_animPlayer):
+#			current_edited_animPlayer = owner.poselib_animPlayer
 	
 	if !is_instance_valid(current_edited_animPlayer):
 		print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
