@@ -3,8 +3,8 @@ extends Resource
 
 
 #########  EXAMPLE TEMPLATE   #########
-#available_res_id: 1 # Available id to append to resourceReferences.
-#resourceReferences: {0: ['res://*.png']} -- Custom Resource references to make resource files moving possible.
+#available_res_id: 1 # Available id to append to resourceReferences_path.
+#resourceReferences_path: {0: ['res://*.png']} -- Custom Resource references to make resource files moving possible.
 #filterData: { -- Stores direct poses
 #	'none': null -- Serves only as a tag to ignore filters.
 #	'head': { -- Filter poses are called by names instead of ids.
@@ -53,24 +53,27 @@ enum ReferenceType {
 	PATH,
 	RESOURCE
 }
-export var resourceReferences: Dictionary = {} # Node shortcuts ex. {0: ["/Head/Eyes", SttreamTexture:1234]]}
+export var resourceReferences:  Dictionary = {} # Resource path ref ex. {0: "res://eyes.png"}
+#var resourceReferences_res: 	Dictionary = {} # Resource ref ex. {0: [StreamTexture:1234]}
 export var available_res_id: int = 0
 # poses should store shortcuts instead of nodepaths so it's safe from node modification.
+var is_references_valid: bool = false
 
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
 export var templateData: Dictionary = {"default": {}}
-#export var resourceReferences: Array = []
+#export var resourceReferences_path: Array = []
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 
 func setup():
 	prepare_loading_resourceReferences()
+	
 
 #func _init() -> void:
 #	print('pl valid ',is_instance_valid(self))
 #	print(self,' poselib created.')
 #	prepare_loading_resourceReferences()
-#	print(resourceReferences)
+#	print(resourceReferences_path)
 	# <TODO> Check if all paths in scene_nodes are valid.
 #	var poseRoot: Node
 #	var undefined_shortcuts: Array = []
@@ -94,26 +97,24 @@ func setup():
 # Resources don't track dependency, so it'll store only paths again.
 func prepare_loading_resourceReferences():
 #	print('preparing exts ',resourceReferences.size())
-#	yield()
-	for i in resourceReferences.size():
-		var path: String = resourceReferences[i][ReferenceType.PATH]
+	is_references_valid = true
+	for k in resourceReferences.keys():
+		var path: String = resourceReferences[k][ReferenceType.PATH]
 #		var res: String = resourceReferences[i][ReferenceType.RESOURCE]
 #		print(path)
 		
 		if ResourceLoader.exists(path):
-			resourceReferences[i].resize(2)
-			resourceReferences[i][ReferenceType.RESOURCE] = ResourceLoader.load(path)
+			resourceReferences[k].resize(2)
+			resourceReferences[k][ReferenceType.RESOURCE] = ResourceLoader.load(path)
 		else:
-			print('file not exists ', resourceReferences[i])
+			print('file not exists ', resourceReferences[k])
+			is_references_valid = false
 	print(resourceReferences)
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.
-	for i in resourceReferences.size():
-		resourceReferences[i].resize(1)
-#
-#func prepare_to_load():
-#	pass
+	for k in resourceReferences.keys():
+		resourceReferences[k].resize(1)
 
 func clear():
 	owner_filepath = "res://"
@@ -122,7 +123,7 @@ func clear():
 	templateData = {"default": {}}
 
 func get_res_from_id(id: int):
-	if resourceReferences.size() <= id:
+	if !resourceReferences.has(id):
 		return null
 	var res: Resource
 	if resourceReferences[id].size() != 1:
@@ -132,19 +133,19 @@ func get_res_from_id(id: int):
 	return res
 
 func get_id_from_path(path: String):
-	var res_pairs: Array = resourceReferences.values()
-	for i in res_pairs.size():
-		var res_pair = res_pairs[i]
+#	var res_pairs: Array = resourceReferences.values()
+	for k in resourceReferences.keys():
+		var res_pair = resourceReferences[k]
 		if res_pair[ReferenceType.PATH] == path:
-			return i
+			return k
 
 func get_id_from_res(res: Resource):
-	var res_pairs: Array = resourceReferences.values()
-	for i in res_pairs.size():
-		var res_pair: Array = res_pairs[i]
+#	var res_pairs: Array = resourceReferences.values()
+	for k in resourceReferences.keys():
+		var res_pair: Array = resourceReferences[k]
 		print('respair ',res_pair)
 		if res_pair[ReferenceType.PATH] == res.resource_path:
-			return i
+			return k
 	var id: int	
 	var max_iter: int = 100
 	var iter: int = 0
@@ -156,11 +157,9 @@ func get_id_from_res(res: Resource):
 	resourceReferences[id] = [res.resource_path, res]
 	print('get_ext_id ',resourceReferences)
 	return id;
-
+	
 func get_res_paths() -> PoolStringArray:
-	var res_paths: PoolStringArray = []
-	var res_pairs: Array = resourceReferences.values()
-	for i in res_pairs.size():
-		var res_pair: Array = res_pairs[i]
-		res_paths.append(res_pair[ReferenceType.PATH])
-	return res_paths
+	var paths: PoolStringArray = []
+	for pair in resourceReferences.values():
+		paths.append(pair[ReferenceType.PATH])
+	return paths

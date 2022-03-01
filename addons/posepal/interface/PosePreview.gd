@@ -265,7 +265,9 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			
 			if property in _ch:
 				if property == 'texture':
-					if !poselib.get_res_from_id(pose[my_nodepath]['texture'].has('valr')):
+					if pose[my_nodepath]['texture'].has('valr'):
+						if !pose[my_nodepath]['texture'].has('valr'):
+							continue
 						_ch.set('texture', poselib.get_res_from_id(pose[my_nodepath]['texture']['valr']))
 					else:
 						_ch.set(property, pose[my_nodepath][property]['val'])
@@ -507,7 +509,7 @@ func _on_PopupMenu_hide():
 
 func _on_PopupMenu_id_selected(id: int):
 	if !is_instance_valid(get_parent().poseCreationHBox):
-		get_parent()._fix_poseCreationHBox_ref()
+		get_parent()._fix_PoseCreationHBox_ref()
 	var poseCreationHBox: HBoxContainer = get_parent().poseCreationHBox
 	
 	print('pose selected ',pose_id, ':',pose_name)
@@ -538,6 +540,7 @@ func _on_PopupMenu_id_selected(id: int):
 #			poseCreationHBox.posegen_mode = poseCreationHBox.PoseGenMode.SAVE
 #			print('poseCreationHBox posegen =',poseCreationHBox.posegen_mode)
 		PopupItems.ERASE:
+			print('eee')
 			poselib.poseData[owner.poselib_template][owner.poselib_collection].remove(pose_id)
 			posePalette.fill_previews()
 			owner.save_poseData()

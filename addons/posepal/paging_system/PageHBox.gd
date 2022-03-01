@@ -32,7 +32,7 @@ func _set_current_page(new_current_page: int):
 	#_update_NumButton_item_list()
 #	numButton.select(new_current_page)
 	
-		$"../../ScrollContainer/GridContainer".fill_previews()
+	$"../../ScrollContainer/GridContainer".fill_previews()
 
 func _on_FirstButton_pressed():
 	var poselib: RES_PoseLibrary = owner.current_poselib

@@ -4,9 +4,10 @@ extends WindowDialog
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 var old_paths: PoolStringArray = []
-var new_paths: PoolStringArray = []
+#var new_paths: PoolStringArray = []
 
 var posePalDock: Control
+var poselib: RES_PoseLibrary
 
 var is_first_time: bool = true
 func _enter_tree() -> void:
@@ -24,7 +25,7 @@ func _enter_tree() -> void:
 		queue_free()
 		return
 	popup_centered()
-	var poselib: RES_PoseLibrary = posePalDock.current_poselib
+	poselib = posePalDock.current_poselib
 	old_paths = poselib.get_res_paths()
 
 func _ready() -> void:
@@ -38,13 +39,19 @@ func _resolve_dependencies():
 	var fileVBox: VBoxContainer = $"MarginCon/VBox/VBox/ScrollCon/FileVBox"
 	var f: File = File.new()
 	var poselib: RES_PoseLibrary = posePalDock.current_poselib
-	for i in poselib.resourceReferences.size():
-		var res_pair = poselib.resourceReferences[i]
-		if res_pair[poselib.ReferenceType.PATH] != old_paths[i]:
+	for k in poselib.resourceReferences.keys():
+		var res_pair = poselib.resourceReferences[k]
+		print(fileVBox.children_as_dict,'\n I wanna get ',k)
+		print(fileVBox.children_as_dict.get(k))
+#		print(poselib.resourceReferences[k])
+		if !fileVBox.children_as_dict.has(k):
 			continue
-		var new_path = fileVBox.get_child(i).new_path
+		if res_pair[poselib.ReferenceType.PATH] != fileVBox.children_as_dict[k].old_path:
+			continue
+		var new_path = fileVBox.children_as_dict[k].new_path
 		if !f.file_exists(new_path):
 			continue
+		print('newpath ',new_path)
 		res_pair[poselib.ReferenceType.PATH] = new_path
 	
 	print('resolved dependencies ',poselib.resourceReferences)

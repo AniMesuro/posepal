@@ -134,7 +134,9 @@ func load_poseData() -> void:
 		return
 	current_poselib = load(poseFile_path)
 	current_poselib.setup()
-#	print('loaded poselib, refs ',current_poselib.resourceReferences.size())
+	current_poselib.owner_filepath = sceneNode.filename
+#	print('loaded poselib, refs ',current_poselib.resourceReferences_path,'\n',current_poselib.resourceReferences_resources)
+
 #	else:
 #	wf_current_poselib = weakref(current_poselib)
 #	if is_instance_valid(current_poselib):

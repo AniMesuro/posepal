@@ -10,6 +10,7 @@ var WarningText: Dictionary = {
 	'lacking_parameters': "Required parameters not selected.",
 	'scene_not_selected': "No Scene is selected.",
 	'cant_change_default_parameter': "Default parameters can't be renamed or deleted.",
+	'broken_dependencies': "Resources from poselib have invalid paths.",
 	
 	'cant_frame': "Could not add keyframe because owner lacks parameters.",
 	'animplayeredit_empty': "Could not add keyframe because Animation is not selected on AnimationPlayerEditor.",

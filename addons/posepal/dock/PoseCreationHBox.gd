@@ -109,7 +109,6 @@ func _on_NewPoseButton_pressed():
 		owner.issue_warning('lacking_parameters')
 	if owner.poselib_collection == '':
 		owner.issue_warning('lacking_parameters')
-	
 	#DEBUG
 #	owner.save_poseData()
 #	print('saved')
@@ -117,6 +116,9 @@ func _on_NewPoseButton_pressed():
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
+		return
+	if !poselib.is_references_valid:
+		owner.issue_warning('broken_dependencies')
 		return
 	if posegen_mode == PoseGenMode.CREATE:
 		apply_pose(0, PoseType.TEMPLATE)
@@ -314,7 +316,7 @@ func to_key_value(pose: Dictionary, node_path: String, property: String, f: File
 				if f.file_exists(path):
 					match path.get_extension():
 						'png','jpg':
-							return poselib.resourceReferences[ref_id][poselib.ReferenceType]
+							return poselib.resourceReferences_resources[ref_id]
 #							return load(value)
 						_:
 							return null
@@ -405,7 +407,8 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 				value = pose[node_path][property]['val']
 			else:
 				print('prop has no val ',pose[node_path][property])
-				value = poselib.get_res_from_id(pose[node_path][property]['valr'])
+				if pose[node_path][property].has('valr'):
+					value = poselib.get_res_from_id(pose[node_path][property]['valr'])
 			
 			var tr_property: int = anim.add_track(Animation.TYPE_VALUE)
 			anim.track_set_path(tr_property, str(poseSceneRoot.get_path_to(animNode)) + ':' + property)
@@ -457,7 +460,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		return
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
-	print('ext ',poselib.resourceReferences)
+#	print('ext ',poselib.resourceReferences)
 	if !is_instance_valid(poselib):
 		return
 	
@@ -518,7 +521,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	owner.save_poseData()
 	animationPlayer.remove_animation(currentAnimOptionButton.text)
 	animationPlayer.queue_free()
-	print('poselib ext ',poselib.resourceReferences)
+#	print('poselib ext ',poselib.resourceReferences_path)
 	if _do_queue_select_poselib_animplayer:
 		_select_queued_poselib_animplayer()
 

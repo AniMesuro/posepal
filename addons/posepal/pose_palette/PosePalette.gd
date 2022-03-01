@@ -9,8 +9,8 @@ const SCN_PosePreview: PackedScene= preload("res://addons/posepal/interface/Pose
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 # Updates PosePallette display to show each PosePreview
-func update_display():
-	pass
+#func update_display():
+#	pass
 
 func _ready() -> void:
 	_fix_PoseCreationHBox_ref()
@@ -26,13 +26,14 @@ func fill_previews(limit_by_page: bool = true):#true):
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
-#	print('starting to fill')
+	print('starting to fill')
 	# <TODO> Limit preview maximum by 9 or 10 for each page. 
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
+	if !poselib.is_references_valid:
+		return
 	if !poselib.filterData.has(owner.poselib_filter):
-		print('')
 		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
@@ -44,6 +45,7 @@ func fill_previews(limit_by_page: bool = true):#true):
 	
 	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
 	var pose_count: int = collection.size()
+	print('posecount ',pose_count)
 	if pose_count == 0:
 		return
 	pageHBox = $"../../HBox/PageHBox"

@@ -1,11 +1,15 @@
 tool
 extends HBoxContainer
 
+signal fixed_path (child_id)
+
 const SCN_FileSelectorPreview: PackedScene = preload("res://addons/posepal/file_selector_preview/FileSelectorPreview.tscn")
 
 var old_path: String = ''
 var new_path: String = '' setget _set_new_path
+var pure_name: String = ''
 var extension: String = ''
+var res_id: int = -1
 
 var fileSelectorPreview: Control
 func _enter_tree() -> void:
@@ -42,13 +46,28 @@ func _on_OpenButton_pressed():
 	fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray([extension]),
 	"* All files", "Select new path for "+pure_file)
 	fileSelectorPreview.connect("file_selected", self, "_on_file_selected")
+	
+	var d:Directory=Directory.new()
+	var valid_directory: String = old_path.get_base_dir()+'/'
+	print('valdir start ',valid_directory)
+	while !d.dir_exists(valid_directory):
+		valid_directory = valid_directory.trim_suffix(valid_directory.split('/',false)[-1])
+		print('valdir ',valid_directory)
+	fileSelectorPreview.current_dir = valid_directory
 
 func _on_file_selected(filepath: String):
 	if filepath.get_extension() != extension:
 		return
 	self.new_path = filepath
+	emit_signal("fixed_path", get_index())
 
 func _set_new_path(_new_path: String):
 	new_path = _new_path
 	$PathLabel.text = new_path
 	$PathLabel.hint_tooltip = new_path
+	
+	var f:File=File.new()
+	if f.file_exists(new_path):
+		$PathLabel.modulate = Color.white
+		return
+	$PathLabel.modulate = Color.red
