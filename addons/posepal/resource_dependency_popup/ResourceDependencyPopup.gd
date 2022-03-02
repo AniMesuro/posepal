@@ -31,13 +31,16 @@ func _enter_tree() -> void:
 	old_paths = poselib.get_res_paths()
 
 func _ready() -> void:
-	$MarginCon/VBox/OkButton.connect("pressed", self, "_on_OkButton_pressed")
+	$MarginCon/VBox/OkHBox/OkButton.connect("pressed", self, "_on_OkButton_pressed")
 
 func _on_OkButton_pressed():
 	var has_broken: bool = _resolve_dependencies()
 	posePalDock.save_poseData()
 	emit_signal("ok_pressed", has_broken)
 	queue_free()
+
+func fix_warning():
+	$"MarginCon/VBox/OkHBox/WarningIcon".visible = false
 
 func _resolve_dependencies() -> bool:
 	var fileVBox: VBoxContainer = $"MarginCon/VBox/VBox/ScrollCon/FileVBox"

@@ -86,10 +86,7 @@ func _on_id_selected(id :int):
 			resourceDependencyPopup.connect("ok_pressed", self, "_on_ResourceDependencyPopup_ok_pressed", [id], CONNECT_ONESHOT)
 			return
 			
-	owner.fix_warning('scene_not_selected')
-	text = popup.get_item_text(id)
-	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
-	owner.emit_signal("updated_reference", owner_reference)
+	_select_scene(id)
 		
 #	if is_poseFile_valid:
 #		owner.load_poseData()
@@ -168,11 +165,14 @@ func _select_scene(id: int):
 	text = popup.get_item_text(id)
 	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
 	owner.emit_signal("updated_reference", owner_reference)
+#	var poselib: Resource = owner.current_poselib
+#	print('is there missing dep? ', poselib.prepare_loading_resourceReferences())
 
 func _on_ResourceDependencyPopup_ok_pressed(has_missing_dependencies: bool, id: int):
 	if has_missing_dependencies:
 		return
 	_select_scene(id)
+#	print('owner scene ',owner.poselib_scene)
 
 func _reset_selection():
 	text = msg_no_selection

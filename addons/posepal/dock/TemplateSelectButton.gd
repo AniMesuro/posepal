@@ -13,15 +13,17 @@ func _on_pressed():
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
+		print('poselib n v')
 		return
 	if !poselib.is_references_valid:
+		print('ref not al')
 		return
 #	if owner.poseData != {}:
 #		if !poselib.poseData.has('collections'):
 #			_reset_selection()
 #			return
-		for collection in poselib.poseData.keys():
-			popup.add_item(collection)
+	for collection in poselib.poseData.keys():
+		popup.add_item(collection)
 
 func _on_id_selected(id :int):
 	var poselib: RES_PoseLibrary = owner.current_poselib

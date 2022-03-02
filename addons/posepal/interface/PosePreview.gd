@@ -251,13 +251,18 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 #		print('_ch scale ',_ch.scale)
 	
 	if my_nodepath in templatePose:
+		var poselib: Resource = get_parent().owner.current_poselib
 		for property in templatePose[my_nodepath]:
 			var _copy_from_template: bool = true
 			if pose.has(my_nodepath):
 				if pose[my_nodepath].has(property):
 					_copy_from_template = false
 			if property in _ch && _copy_from_template:
-				_ch.set(property, templatePose[my_nodepath][property]['val'])
+				if !_ch.get(property) is Object:
+					_ch.set(property, templatePose[my_nodepath][property]['val'])
+				else:
+					_ch.set(property, poselib.get_res_from_id(templatePose[my_nodepath][property]['valr']))
+					
 	
 	if my_nodepath in pose:
 		var poselib: Resource = get_parent().owner.current_poselib

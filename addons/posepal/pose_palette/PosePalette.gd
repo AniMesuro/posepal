@@ -49,8 +49,9 @@ func fill_previews(limit_by_page: bool = true):#true):
 	pageHBox = $"../../HBox/PageHBox"
 	
 	pageHBox.update_pages()#update_NumButton_item_list()
-	if pageHBox.current_page == -1:
-		pageHBox.current_page = 0
+	if pageHBox.current_page < 0:
+		pageHBox.set('current_page', 0)
+		return
 		
 	var pose_range: Array = []
 	if !limit_by_page:
@@ -58,10 +59,11 @@ func fill_previews(limit_by_page: bool = true):#true):
 	else:
 #		pageHBox.current_page
 #		pose_range = range(1, 1+9)
+#		print(pageHBox.current_page,'/',pose_count)
 		pose_range = range(
 			pageHBox.current_page * pageHBox.page_size,
 			min(pageHBox.current_page* pageHBox.page_size + pageHBox.page_size, pose_count))
-		
+#		print('poserange ',pose_range)
 #		pose_range = range(pose_count* .1, pose_count * .1+9)
 #	var pose_range = range(first_pose_id, last_pose_id)
 	for pose_id in pose_range:#collection.size():

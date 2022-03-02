@@ -4,8 +4,6 @@ extends Button
 func _ready() -> void:
 	connect("pressed", self, "_on_pressed")
 	
-#	disabled = false
-
 # Currently this button only works if user selects the first 
 func _on_pressed():
 	var poselib: Resource = owner.posePalDock.current_poselib
@@ -63,13 +61,17 @@ func _on_pressed():
 		if fixed_dir == '':
 			continue
 		for k in fileItems_unfixed.keys():
-			var fileItem: HBoxContainer = fileItems_unfixed[k]
+			var fileItem: PanelContainer = fileItems_unfixed[k]
 #			print('pure name ', fileItem.pure_name)
 			var new_path: String = fixed_dir+fileItem.pure_name
 #			print('new_path: ',new_path)
 			if f.file_exists(new_path):
 				fileItem.new_path = new_path
+				fileItem.display_state = 2
+				fileItems_unfixed.erase(k)
 #				print('exists')
+	if fileItems_unfixed.size() == 0:
+		pass
 	return
 		
 #		for res_id in siblings:

@@ -18,7 +18,7 @@ func fill_files():
 	var poselib: Resource = owner.poselib
 	for k in poselib.resourceReferences.keys():
 		var path: String = poselib.resourceReferences[k]#[0]
-		var item: HBoxContainer = SCN_FileItem.instance()
+		var item: PanelContainer = SCN_FileItem.instance()
 		item.old_path = path
 		item.res_id = k
 		item.pure_name = path.split('/',false)[-1]
