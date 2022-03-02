@@ -110,11 +110,11 @@ func issue_warning(warning :String):
 	emit_signal("warning_issued", warning)
 
 
-func load_poseData() -> void:
+func load_poseData() -> int:
 	# Checks if owner's posefile is valid
 	if poselib_scene == "":
 		current_poselib = null
-		return
+		return FAILED
 #	if poseFile_path == "":
 #		current_poselib = null
 #		return
@@ -122,9 +122,6 @@ func load_poseData() -> void:
 #	If the poslib is created at the first time, it will only save to file
 #	When the first pose is saved.
 	var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
-#	if is_instance_valid(current_poselib):
-#		if current_poselib.owner_filepath != sceneNode.filename:
-#			current_poselib.queue_free()
 
 #	if !is_instance_valid(current_poselib):
 	var f: File = File.new()
@@ -132,9 +129,9 @@ func load_poseData() -> void:
 		if !is_instance_valid(current_poselib):
 			current_poselib = RES_PoseLibrary.new()
 			current_poselib.owner_filepath = sceneNode.filename
-		return
+		return OK
 	current_poselib = load(poseFile_path)
-	current_poselib.setup()
+	var err: int = current_poselib.prepare_loading_resourceReferences()
 	current_poselib.owner_filepath = sceneNode.filename
 #	print('loaded poselib, refs ',current_poselib.resourceReferences_path,'\n',current_poselib.resourceReferences_resources)
 
@@ -146,7 +143,7 @@ func load_poseData() -> void:
 #		current_poselib = RES_PoseLibrary.new()
 #		current_poselib.load_lib(poseFile_path)
 	
-	return
+	return err
 
 
 func save_poseData():

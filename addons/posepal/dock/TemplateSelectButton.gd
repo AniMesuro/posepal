@@ -12,7 +12,10 @@ func _on_pressed():
 	owner.load_poseData()
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
-	if is_instance_valid(poselib):
+	if !is_instance_valid(poselib):
+		return
+	if !poselib.is_references_valid:
+		return
 #	if owner.poseData != {}:
 #		if !poselib.poseData.has('collections'):
 #			_reset_selection()

@@ -1,7 +1,7 @@
 tool
 extends "res://addons/posepal/interface/PropertyMenu.gd"
 
-
+const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.tscn") 
 
 #var scene_paths :PoolStringArray
 var scene_nodepaths :PoolStringArray
@@ -60,11 +60,6 @@ func get_child_scenes() -> PoolStringArray:
 	return scene_nodepaths
 
 func _on_id_selected(id :int):
-	owner.poselib_scene = scene_nodepaths[id]
-	owner.fix_warning('scene_not_selected')
-	text = popup.get_item_text(id)
-	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
-	owner.emit_signal("updated_reference", owner_reference)
 	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
 	
 #	Only read poseFile
@@ -82,14 +77,26 @@ func _on_id_selected(id :int):
 	# NEW WAY # RESOURCE SAVE
 	if is_poseFile_valid:
 		print('loading scene poselib')
-		owner.load_poseData()
+		owner.poselib_scene = scene_nodepaths[id]
+		var err: int = owner.load_poseData()
+		if err == ERR_FILE_MISSING_DEPENDENCIES:
+			var resourceDependencyPopup: WindowDialog = SCN_ResourceDependencyPopup.instance()
+			resourceDependencyPopup.posePalDock = owner
+			add_child(resourceDependencyPopup)
+			resourceDependencyPopup.connect("ok_pressed", self, "_on_ResourceDependencyPopup_ok_pressed", [id], CONNECT_ONESHOT)
+			return
+			
+	owner.fix_warning('scene_not_selected')
+	text = popup.get_item_text(id)
+	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
+	owner.emit_signal("updated_reference", owner_reference)
+		
 #	if is_poseFile_valid:
 #		owner.load_poseData()
 #	else:
 #		owner.current_poselib = owner.RES_PoseLibrary.new()
 	
 	# OLD WAY # JSON SAVE
-	return
 #	Create default group and face to PoseData if PoseFile invalid.
 #	if is_poseFile_valid:
 #		owner.load_poseData()
@@ -154,6 +161,18 @@ func _on_PoseLibrary_updated_reference(reference :String):
 
 func _on_issued_forced_selection():
 	pass
+
+func _select_scene(id: int):
+	popup = get_popup()
+	owner.fix_warning('scene_not_selected')
+	text = popup.get_item_text(id)
+	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
+	owner.emit_signal("updated_reference", owner_reference)
+
+func _on_ResourceDependencyPopup_ok_pressed(has_missing_dependencies: bool, id: int):
+	if has_missing_dependencies:
+		return
+	_select_scene(id)
 
 func _reset_selection():
 	text = msg_no_selection

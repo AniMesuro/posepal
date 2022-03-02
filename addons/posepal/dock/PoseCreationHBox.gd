@@ -118,10 +118,10 @@ func _on_NewPoseButton_pressed():
 	if !is_instance_valid(poselib):
 		_show_editorSceneTabs()
 		return
-	if !poselib.is_references_valid:
-		owner.issue_warning('broken_dependencies')
-		_show_editorSceneTabs()
-		return
+#	if !poselib.is_references_valid:
+#		owner.issue_warning('broken_dependencies')
+#		_show_editorSceneTabs()
+#		return
 	if posegen_mode == PoseGenMode.CREATE:
 		apply_pose(0, PoseType.TEMPLATE)
 		owner.load_poseData()
@@ -342,11 +342,10 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	var pose: Dictionary
 	if pose_type == -1: pose_type = current_pose_type
 	if pose_type == PoseType.NORMAL:
-		if owner.poselib_template == '':
+		if owner.poselib_template == '' or owner.poselib_collection == '':
 			return
-		if owner.poselib_collection == '':
-			return
-		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].duplicate()
+		pose.erase('_name')
 	elif pose_type == PoseType.FILTER:
 		pose = poselib.filterData[owner.poselib_filter]
 	else:
@@ -359,16 +358,18 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
 #		var animRoot: Node = animationPlayer.root_node
 	for node_path in pose.keys():
-		if node_path == "_name":
-			continue
+#		if node_path == "_name":
+#			continue
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
 			break
 		for property in pose[node_path]:
 			var value
 			if !pose[node_path][property].has('val'):
-				break
-			value = pose[node_path][property]['val']
+				value = poselib.get_res_from_id(pose[node_path][property]['valr'])
+				
+			else:
+				value = pose[node_path][property]['val']
 			animNode.set(property, value)
 			
 

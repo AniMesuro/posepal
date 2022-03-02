@@ -32,6 +32,7 @@ func _on_pressed():
 
 func _on_id_pressed(id: int):
 	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
+	print(poseCreationHBox)
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -46,9 +47,9 @@ func _on_id_pressed(id: int):
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
 			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
-				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled")
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
 			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
-				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved")
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 		Items.CREATE:
 			ask_for_name("Please insert the name for the new filter pose.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])

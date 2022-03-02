@@ -1,6 +1,8 @@
 tool
 extends WindowDialog
 
+signal ok_pressed (has_missing_dependencies)
+
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 var old_paths: PoolStringArray = []
@@ -32,14 +34,16 @@ func _ready() -> void:
 	$MarginCon/VBox/OkButton.connect("pressed", self, "_on_OkButton_pressed")
 
 func _on_OkButton_pressed():
-	_resolve_dependencies()
+	var has_broken: bool = _resolve_dependencies()
 	posePalDock.save_poseData()
+	emit_signal("ok_pressed", has_broken)
 	queue_free()
 
-func _resolve_dependencies():
+func _resolve_dependencies() -> bool:
 	var fileVBox: VBoxContainer = $"MarginCon/VBox/VBox/ScrollCon/FileVBox"
 	var f: File = File.new()
 	var poselib: RES_PoseLibrary = posePalDock.current_poselib
+	var has_broken_dependencies: bool = false
 	for k in poselib.resourceReferences.keys():
 		var res_path = poselib.resourceReferences[k]
 #		print(fileVBox.children_as_dict,'\n I wanna get ',k)
@@ -51,9 +55,10 @@ func _resolve_dependencies():
 			continue
 		var new_path = fileVBox.children_as_dict[k].new_path
 		if !f.file_exists(new_path):
+			has_broken_dependencies = true
 			continue
 #		print('newpath ',new_path)
 		poselib.resourceReferences[k] = new_path
-	
+	return has_broken_dependencies
 #	print('resolved dependencies ',poselib.resourceReferences)
 	

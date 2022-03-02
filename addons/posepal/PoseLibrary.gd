@@ -94,12 +94,14 @@ func setup():
 #func load_lib(poselib_filepath: String):
 #	ResourceLoader.load(poselib_filepath)
 
+
+# 0 OK 
 # Resources don't track dependency, so it'll store only paths again.
-func prepare_loading_resourceReferences():
+func prepare_loading_resourceReferences() -> int:
 #	print('preparing exts ',resourceReferences.size())
 	is_references_valid = true
 	if resourceReferences.size() == 0:
-		return
+		return FAILED
 	if resourceReferences.values()[0] is Array:
 		for k in resourceReferences.keys():
 			resourceReferences[k] = resourceReferences[k][0]
@@ -119,6 +121,8 @@ func prepare_loading_resourceReferences():
 		else:
 #			print('file not exists ', resourceReferences[k])
 			is_references_valid = false
+			return ERR_FILE_MISSING_DEPENDENCIES
+	return OK
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.

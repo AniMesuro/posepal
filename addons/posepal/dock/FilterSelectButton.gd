@@ -10,8 +10,11 @@ func _on_pressed():
 	popup.clear()
 	
 	owner.load_poseData()
+	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
+		return
+	if !poselib.is_references_valid:
 		return
 #	if owner.poseData != {}:
 #		if !owner.poseData.has('groups'):
@@ -85,13 +88,14 @@ func _set_is_being_edited(value: bool):
 
 func _on_poseCreationHBox_pose_editing_canceled():
 	self.is_being_edited = false
-	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/poseCreationHBox"
+	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
+	
 	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
 	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 
 func _on_poseCreationHBox_pose_editing_saved():
 	self.is_being_edited = false
-	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/poseCreationHBox"
+	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
 	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 
