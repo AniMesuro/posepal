@@ -83,7 +83,7 @@ func _get_editor_references():
 #	but it always changes for each Godot version.
 	animationPlayerEditor = _select_from_child_ids(_get_editorVBox(), [1, 1, 1, 0, 0, 1, 0, 1])
 	if !is_instance_valid(animationPlayerEditor):
-		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor reference")
+		print("[posepal] Couldn't get Editor's AnimationPlayerEditor reference")
 		return
 	
 	# Get HBoxContainer
@@ -101,7 +101,7 @@ func _get_editor_references():
 	_children = []
 	
 	if !is_instance_valid(_hBox):
-		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer reference")
+		print("[posepal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer reference")
 		return
 	
 	
@@ -113,7 +113,7 @@ func _get_editor_references():
 			animationPlayerEditor_CurrentTime_LineEdit = _spinBox.get_line_edit()
 			break
 	if !is_instance_valid(_spinBox):
-		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/SpinBox reference")
+		print("[posepal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/SpinBox reference")
 		return
 	
 	# Get OptionButton -- current_animation
@@ -122,7 +122,7 @@ func _get_editor_references():
 			animationPlayerEditor_CurrentAnimation_OptionButton = child
 			break
 	if !is_instance_valid(animationPlayerEditor_CurrentAnimation_OptionButton):
-		print("[PosePal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/OptionButton reference")
+		print("[posepal] Couldn't get Editor's AnimationPlayerEditor/HBoxContainer/OptionButton reference")
 		return
 	
 	

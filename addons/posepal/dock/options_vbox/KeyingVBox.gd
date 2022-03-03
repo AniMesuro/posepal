@@ -99,7 +99,7 @@ func _on_BatchKeyBtn_pressed():
 	# should be disabled if no (generally) animationplayer selected and no poseroot selected.
 	
 	if owner.poselib_scene == '':
-		print('[PosePal] poselib_scene not selected.')
+		print('[posepal] poselib_scene not selected.')
 		return
 	
 	var editedSceneRoot: Node = get_tree().edited_scene_root
@@ -136,7 +136,7 @@ func _on_BatchKeyBtn_pressed():
 #			current_edited_animPlayer = owner.poselib_animPlayer
 	
 	if !is_instance_valid(current_edited_animPlayer):
-		print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
+		print('[posepal] No AnimationPlayer found in AnimationPlayerEditor')
 		return
 #	else:
 	print("batch key")

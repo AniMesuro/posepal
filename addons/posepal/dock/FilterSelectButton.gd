@@ -87,15 +87,16 @@ func _set_is_being_edited(value: bool):
 	is_being_edited = value
 
 func _on_poseCreationHBox_pose_editing_canceled():
+	print('_on_poseCreationHBox_pose_editing_canceled')
 	self.is_being_edited = false
 	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	
-	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
-	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
+#	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
+#	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 
 func _on_poseCreationHBox_pose_editing_saved():
 	self.is_being_edited = false
 	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
-	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
-	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
+#	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
+#	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 

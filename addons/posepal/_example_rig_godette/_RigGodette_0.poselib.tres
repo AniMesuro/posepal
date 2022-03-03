@@ -1361,6 +1361,98 @@ filterData = {
 }
 },
 "none": {
+},
+"upper": {
+"TorsoBottom": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/ArmRTop": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Bag": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/LArmTop": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck/Head": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck/Head/Eyes": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck/Head/Fringe": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+},
+"TorsoBottom/TorsoTop/Neck/Head/Mouth": {
+"visible": {
+"out": 1.0,
+"val": true
+}
+}
 }
 }
 templateData = {

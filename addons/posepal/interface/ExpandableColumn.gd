@@ -1,5 +1,5 @@
 tool
-extends Control
+extends PanelContainer
 
 export var path_to_expandableControl: NodePath = NodePath('.')
 var expandableControl: Control
@@ -18,7 +18,7 @@ func _set_tab_text(new_text :String):
 #		print('text=newtext')
 #		return
 	text = new_text
-	var label :Label= get_node_or_null("Label")
+	var label: Label = $"HBox/Label"
 	if !is_instance_valid(label):
 #		print('label not valid')
 		return
@@ -51,7 +51,9 @@ func _ready() -> void:
 	connect("mouse_entered", self, "_on_mouse_entered")
 	connect("mouse_exited", self, "_on_mouse_exited")
 	set_process_input(false)
-
+	
+#	yield(get_tree(), "idle_frame")
+	
 func _on_mouse_entered():
 	set_process_input(true)
 	
@@ -86,15 +88,18 @@ func _set_expand(new_expand :bool):
 #	if get_tree().edited_scene_root
 	if !is_inside_tree():
 		return
+	if is_locked:
+		expand = false
+	
 	
 	expandableControl = get_node(path_to_expandableControl)
 	if is_instance_valid(expandableControl):
 		if expandableControl == self:
 			return
 		if "visible" in expandableControl:
-			expandableControl.visible = new_expand
-			var expandIcon :TextureRect= $ExpandIcon
-			expandIcon.flip_v = new_expand
+			expandableControl.visible = expand
+			var expandIcon :TextureRect= $HBox/ExpandIcon
+			expandIcon.flip_v = expand
 			
 			# debug svae button
 #			if new_expand:
@@ -109,5 +114,5 @@ func _set_is_locked(new_is_locked: bool):
 		self.expand = false
 		visible = false
 	else:
-		self.expand = true
+		self.expand = expand
 		visible = true

@@ -14,6 +14,10 @@ func _ready() -> void:
 	owner.connect('updated_reference', self, '_on_PoseLibrary_updated_reference')
 	owner.connect("issued_forced_selection", self, "_on_issued_forced_selection")
 
+	if owner.debug_mode:
+		$"MiscColumn".is_locked = false
+	else:
+		$"MiscColumn".is_locked = true
 
 
 func _on_IgnoreScenePoseChk_pressed():

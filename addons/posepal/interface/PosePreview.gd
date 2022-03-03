@@ -540,8 +540,8 @@ func _on_PopupMenu_id_selected(id: int):
 			poseCreationHBox.edit_pose(pose_id)
 			self.is_being_edited = true
 			if !poseCreationHBox.is_connected("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled"):
-				poseCreationHBox.connect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
-			else: print('[PosePal] signal pose_editing_canceled already connected')
+				poseCreationHBox.connect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
+			else: print('[posepal] signal pose_editing_canceled already connected')
 #			poseCreationHBox.posegen_mode = poseCreationHBox.PoseGenMode.SAVE
 #			print('poseCreationHBox posegen =',poseCreationHBox.posegen_mode)
 		PopupItems.ERASE:
@@ -571,7 +571,7 @@ func _on_PopupMenu_id_selected(id: int):
 func _on_poseCreationHBox_pose_editing_canceled():
 	self.is_being_edited = false
 #	if poseCreationHBox.is_connected("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled"):
-	get_parent().poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
+#	get_parent().poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
 
 func _set_is_being_edited(value: bool):
 	if !value:

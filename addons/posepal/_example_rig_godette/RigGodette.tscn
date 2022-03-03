@@ -11253,6 +11253,78 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "banan (copy)"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TorsoBottom/LLegTop:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TorsoBottom/LLegTop/LLegBottom:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TorsoBottom/RLegTop:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 30.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TorsoBottom/RLegTop/RLegBottom:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TorsoBottom/TorsoTop/ArmRTop:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 150.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TorsoBottom/TorsoTop/LArmTop:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -150.0 ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "front"
@@ -15308,129 +15380,146 @@ tracks/167/keys = {
 }
 
 [node name="RigGodette" type="Node2D"]
-position = Vector2( 10, -8 )
+position = Vector2( -556, 570 )
 __meta__ = {
 "_plPoseLib_poseFile": "res://addons/posepal/_example_rig_godette/_RigGodette_0.poselib.tres"
 }
 
 [node name="TorsoBottom" type="Sprite" parent="."]
-texture = ExtResource( 75 )
+texture = ExtResource( 62 )
 offset = Vector2( -0.797424, 8.24968 )
+flip_h = true
 
 [node name="TorsoTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( -1.52588e-05, -24 )
-texture = ExtResource( 17 )
-offset = Vector2( 1.96904, -85.615 )
+position = Vector2( 18, -33 )
+texture = ExtResource( 4 )
+offset = Vector2( -17.031, -93.615 )
+flip_h = true
 
 [node name="Neck" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( -1, -165 )
-texture = ExtResource( 6 )
-offset = Vector2( -0.01403, -42.1606 )
+position = Vector2( -42, -173 )
+texture = ExtResource( 3 )
+offset = Vector2( 5.98597, -34.1606 )
+flip_h = true
 
 [node name="Head" type="Sprite" parent="TorsoBottom/TorsoTop/Neck"]
 show_behind_parent = true
-position = Vector2( -7.62939e-06, -3.99998 )
+position = Vector2( -7.62939e-06, -22 )
 z_index = 1
-texture = ExtResource( 38 )
-offset = Vector2( 0.2601, -118.923 )
+texture = ExtResource( 71 )
+offset = Vector2( 5.2601, -93.923 )
+flip_h = true
 
 [node name="Ebrow" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -2.55108e-05, -124 )
-texture = ExtResource( 19 )
+position = Vector2( 61, -87 )
+texture = ExtResource( 20 )
+flip_h = true
 
 [node name="Eyes" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( 1.00003, -84 )
-texture = ExtResource( 2 )
+position = Vector2( 49, -57 )
+texture = ExtResource( 64 )
+flip_h = true
 
 [node name="Mouth" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -1.99997, -29 )
-texture = ExtResource( 12 )
+position = Vector2( 39.7487, -5.22971 )
+texture = ExtResource( 80 )
+flip_h = true
 
 [node name="Fringe" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( 21, -203 )
-texture = ExtResource( 88 )
-offset = Vector2( -24.7487, 47.7297 )
+position = Vector2( 20, -182 )
+texture = ExtResource( 92 )
+offset = Vector2( 27, 90.5001 )
+flip_h = true
 
 [node name="ArmRTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( -35, -129 )
+position = Vector2( -10, -148 )
+rotation = -2.35619
 z_index = -1
-texture = ExtResource( 78 )
-offset = Vector2( -22.2493, 56.2509 )
+texture = ExtResource( 72 )
+offset = Vector2( 15.7507, 56.2509 )
 flip_h = true
 
 [node name="ArmRBottom" type="Sprite" parent="TorsoBottom/TorsoTop/ArmRTop"]
-position = Vector2( -48, 112 )
-texture = ExtResource( 26 )
-offset = Vector2( -31.4386, 61.4124 )
+position = Vector2( 35.5572, 112.733 )
+texture = ExtResource( 76 )
+offset = Vector2( 24.2814, 55.5351 )
 flip_h = true
 
 [node name="RHand" type="Sprite" parent="TorsoBottom/TorsoTop/ArmRTop/ArmRBottom"]
-position = Vector2( -63, 99 )
+position = Vector2( 39.4427, 107.267 )
 z_index = -1
-texture = ExtResource( 7 )
-offset = Vector2( -22.2817, 21.1371 )
+texture = ExtResource( 14 )
+offset = Vector2( 27.7183, 23.1371 )
 flip_h = true
 
 [node name="LArmTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( 31, -128 )
-z_index = -1
-texture = ExtResource( 78 )
-offset = Vector2( 22.6395, 55.7096 )
+position = Vector2( -69, -144 )
+rotation = -3.66519
+z_index = 1
+texture = ExtResource( 21 )
+offset = Vector2( -3.3605, 59.7096 )
+flip_h = true
 
 [node name="LArmBottom" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop"]
-position = Vector2( 53, 118 )
+position = Vector2( -26, 123 )
 z_index = 1
-texture = ExtResource( 26 )
-offset = Vector2( 26.2654, 54.8525 )
+texture = ExtResource( 29 )
+offset = Vector2( -23.4073, 57.2411 )
+flip_h = true
 
 [node name="LHand" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop/LArmBottom"]
 show_behind_parent = true
-position = Vector2( 57, 95 )
+position = Vector2( -43, 114 )
 z_index = -1
-texture = ExtResource( 7 )
-offset = Vector2( 23.7694, 18.32 )
+texture = ExtResource( 36 )
+offset = Vector2( -31.4204, 26.4441 )
+flip_h = true
 
 [node name="Bag" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( 7, -11 )
+position = Vector2( -45, -3 )
 z_index = -2
-texture = ExtResource( 5 )
-offset = Vector2( -7.34009, -89.0972 )
+texture = ExtResource( 1 )
+offset = Vector2( -18.3401, -129.097 )
 
 [node name="LLegTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( 21, 10 )
-z_index = -1
-texture = ExtResource( 34 )
-offset = Vector2( 19.867, 93.5304 )
+position = Vector2( -24, 24 )
+rotation = 0.523599
+texture = ExtResource( 41 )
+offset = Vector2( -16.4857, 85.9811 )
+flip_h = true
 
 [node name="LLegBottom" type="Sprite" parent="TorsoBottom/LLegTop"]
-position = Vector2( 37, 208 )
+position = Vector2( -36, 192 )
 z_index = -1
-texture = ExtResource( 68 )
-offset = Vector2( 3.5, 97.761 )
+texture = ExtResource( 46 )
+offset = Vector2( -24.5, 96.761 )
+flip_h = true
 
 [node name="LFeet" type="Sprite" parent="TorsoBottom/LLegTop/LLegBottom"]
-position = Vector2( 11, 196 )
-texture = ExtResource( 8 )
-offset = Vector2( 9.3898, 40.346 )
+position = Vector2( -29, 217 )
+texture = ExtResource( 15 )
+offset = Vector2( 21.3898, 29.346 )
+flip_h = true
 
 [node name="RLegTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( -28, 11 )
+position = Vector2( 19, 12 )
+rotation = -0.785396
 z_index = -1
-texture = ExtResource( 34 )
-offset = Vector2( -15.6322, 92.2544 )
+texture = ExtResource( 74 )
+offset = Vector2( 4.3678, 79.2544 )
 flip_h = true
 
 [node name="RLegBottom" type="Sprite" parent="TorsoBottom/RLegTop"]
-position = Vector2( -37, 201 )
+position = Vector2( 2, 180 )
 z_index = -1
-texture = ExtResource( 68 )
-offset = Vector2( 1.71838, 101.115 )
+texture = ExtResource( 54 )
+offset = Vector2( -2.28162, 100.115 )
 flip_h = true
 
 [node name="RFeet" type="Sprite" parent="TorsoBottom/RLegTop/RLegBottom"]
-position = Vector2( -11, 207 )
-texture = ExtResource( 8 )
-offset = Vector2( -5.014, 34.8194 )
+position = Vector2( 6, 197 )
+texture = ExtResource( 16 )
+offset = Vector2( 58.2183, 13.1098 )
 flip_h = true
 
 [node name="TurnaroundReference" type="Sprite" parent="."]

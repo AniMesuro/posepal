@@ -13,7 +13,7 @@ func is_name_valid(new_name: String):
 func key_template_pose():
 	var animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	if !is_instance_valid(animPlayer):
-#		print("[PosePal] Can't key because selected AnimationPlayer not found.")
+#		print("[posepal] Can't key because selected AnimationPlayer not found.")
 		return
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	
@@ -118,9 +118,9 @@ func _on_name_settled(new_name: String, id: int):
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
 			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
-				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled")
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
 			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
-				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved")
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 				
 		Items.RENAME:
 			if !is_name_valid(new_name):

@@ -41,7 +41,7 @@ func _on_SliceToggleAudioButton_pressed():
 			continue
 		tr_audio = i
 	if tr_audio == -1:
-		print("[PosePal] Audio Track not found.")
+		print("[posepal] Audio Track not found.")
 		return
 	
 	#Get key
@@ -109,7 +109,7 @@ func _on_ClearTracksButton_pressed():
 	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
 	if !is_instance_valid(selectedAnimationPlayer):
-		print('[PosePal] AnimPlayer not referenced succesfully.')
+		print('[posepal] AnimPlayer not referenced succesfully.')
 		return
 	if currentAnimationOptionButton.text == "":
 		return

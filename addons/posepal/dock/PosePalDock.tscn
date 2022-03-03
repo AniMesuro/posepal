@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://addons/posepal/interface/NodeMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/posepal/interface/ExpandableTab.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://addons/posepal/dock/options_vbox/PreviewVBox.gd" type="Script" id=28]
 [ext_resource path="res://addons/posepal/dock/options_vbox/MiscVBox.gd" type="Script" id=29]
 [ext_resource path="res://addons/posepal/dock/SettingsButton.gd" type="Script" id=30]
+[ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=31]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -63,7 +64,7 @@ flags = 0
 image = SubResource( 7 )
 size = Vector2( 16, 16 )
 
-[node name="PosePal" type="Control"]
+[node name="posepal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -625.0
@@ -123,6 +124,7 @@ margin_bottom = 24.0
 size_flags_vertical = 1
 path_to_expandableControl = NodePath("../ParametersVBox")
 text = "Parameters"
+icon = ExtResource( 31 )
 
 [node name="ParametersVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 28.0
@@ -363,6 +365,7 @@ margin_bottom = 166.0
 size_flags_vertical = 1
 path_to_expandableControl = NodePath("../OptionsMargin/OptionsVBox")
 text = "Pose Options"
+icon = ExtResource( 31 )
 
 [node name="OptionsMargin" type="MarginContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 170.0
@@ -381,23 +384,19 @@ margin_bottom = 397.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
 script = ExtResource( 24 )
 
 [node name="PoseCreationColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
 visible = false
-anchor_right = 0.0
 margin_right = 379.0
-margin_bottom = 20.0
 path_to_expandableControl = NodePath("../PoseCreationVBox")
 text = "Pose Creation"
-expand = false
 
 [node name="PoseCreationVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 visible = false
-margin_top = 20.0
+margin_top = 21.0
 margin_right = 379.0
-margin_bottom = 35.0
+margin_bottom = 36.0
 script = ExtResource( 27 )
 
 [node name="UpdateFromTemplateButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationVBox"]
@@ -407,17 +406,16 @@ hint_tooltip = "Copies update_mode and transition from template and applies to e
 text = "Update from template"
 
 [node name="PreviewColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-anchor_right = 0.0
 margin_right = 379.0
-margin_bottom = 20.0
 path_to_expandableControl = NodePath("../PreviewVBox")
 text = "Preview"
 is_locked = false
+expand = true
 
 [node name="PreviewVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
-margin_top = 20.0
+margin_top = 21.0
 margin_right = 379.0
-margin_bottom = 36.0
+margin_bottom = 37.0
 script = ExtResource( 28 )
 
 [node name="IgnoreScenePoseChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PreviewVBox"]
@@ -426,18 +424,18 @@ margin_bottom = 16.0
 text = "Ignore scene pose"
 
 [node name="KeyingColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-anchor_right = 0.0
-margin_top = 36.0
+margin_top = 41.0
 margin_right = 379.0
-margin_bottom = 56.0
+margin_bottom = 58.0
 path_to_expandableControl = NodePath("../KeyingVBox")
 text = "Keying"
 is_locked = false
+expand = true
 
 [node name="KeyingVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
-margin_top = 56.0
+margin_top = 62.0
 margin_right = 379.0
-margin_bottom = 118.0
+margin_bottom = 124.0
 custom_constants/separation = 0
 script = ExtResource( 26 )
 
@@ -467,15 +465,15 @@ hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-anchor_right = 0.0
+visible = false
 margin_top = 118.0
-margin_right = 379.0
-margin_bottom = 138.0
+margin_right = 0.0
+margin_bottom = 134.0
 path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
-is_locked = false
 
 [node name="MiscVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
+visible = false
 margin_top = 138.0
 margin_right = 379.0
 margin_bottom = 191.0

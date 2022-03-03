@@ -1,7 +1,9 @@
 tool
 extends Control
 
-# PosePal Dock
+# posepal Dock
+export var debug_mode: bool = false
+
 
 signal updated_reference (reference_name)
 signal pose_selected (pose_id)
@@ -61,9 +63,9 @@ func _enter_tree() -> void:
 	var _dock_group: String = "plugindock posepal"
 	for dock in get_tree().get_nodes_in_group(_dock_group):
 		dock.queue_free()
-		print("PosePal cleansed invalid dock.")
+		print("posepal cleansed invalid dock.")
 	add_to_group(_dock_group)
-	wf_current_poselib = WeakRef.new()
+#	wf_current_poselib = WeakRef.new()
 
 func _ready() -> void:
 	if get_tree().edited_scene_root == self:
@@ -71,6 +73,8 @@ func _ready() -> void:
 	connect("pose_selected", self, "_on_pose_selected")
 	connect("pose_created", self, "_on_pose_created")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
+	
+	
 #	connect("script_changed", self, "_on_script_changed")
 	
 
@@ -299,7 +303,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if poselib_animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return poselib_animPlayer
 
-#	print('[PosePal] No AnimationPlayer found in AnimationPlayerEditor')
+#	print('[posepal] No AnimationPlayer found in AnimationPlayerEditor')
 	return null
 
 func get_editor_poseData(jsonPoseData :Dictionary) -> Dictionary:

@@ -36,6 +36,7 @@ func _ready() -> void:
 		return
 	var newPoseButton: Button = $NewPoseButton
 	newPoseButton.connect("pressed", self, "_on_NewPoseButton_pressed")
+	$CancelPoseButton.connect("pressed", self, "_on_CancelPoseButton_pressed")
 	owner.connect('updated_reference', self, '_on_PoseLibrary_updated_reference')
 	var pluginInstance: EditorPlugin = owner.pluginInstance
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
@@ -59,7 +60,7 @@ func _set_posegen_mode(new_mode :int):
 			newPoseButton.text = "New Pose"
 			newPoseButton.icon = TEX_IconNew
 			cancelPoseButton.visible = false
-			cancelPoseButton.disconnect("pressed", self, "_on_CancelPoseButton_pressed")
+#			cancelPoseButton.disconnect("pressed", self, "_on_CancelPoseButton_pressed")
 			selected_pose_id = -1
 			if is_instance_valid(animationPlayer):
 				animationPlayer.queue_free()
@@ -70,7 +71,6 @@ func _set_posegen_mode(new_mode :int):
 			newPoseButton.text = "Save Pose"
 			newPoseButton.icon = TEX_IconSave
 			cancelPoseButton.visible = true
-			cancelPoseButton.connect("pressed", self, "_on_CancelPoseButton_pressed")
 			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
 			poseCreationColumn.is_locked = false
 	posegen_mode = new_mode
@@ -151,6 +151,7 @@ func _on_NewPoseButton_pressed():
 		var anim: Animation= animationPlayer.get_animation(currentAnimOptionButton.text)
 		if anim.get_track_count() == 0:
 			print("[posepal] pose empty, can't save.")
+			emit_signal("pose_editing_canceled")
 			self.posegen_mode = PoseGenMode.CREATE
 			return
 #		return
@@ -285,7 +286,7 @@ func _on_EditedSceneRoot_tree_exiting():
 ##	print('edited scene is exiting tree: ',get_tree().edited_scene_root)
 	if !is_instance_valid(animationPlayer):
 		return
-	print("[PosePal] CRITICAL ERROR - Edited scene changed while pose editor is active. Please cancel changes before changing scenes.")
+	print("[posepal] CRITICAL ERROR - Edited scene changed while pose editor is active. Please cancel changes before changing scenes.")
 	animationPlayer.root_node = NodePath('..')#animationPlayer.get_path_to(self)
 	animationPlayer.clear_caches()
 	animationPlayer.clear_queue()
@@ -637,7 +638,7 @@ func _hide_editorSceneTabs():
 	sceneTabs.visible = false
 #		return
 #	if !is_instance_valid(sceneTabs):
-#	print("[PosePal] Couldn't hide Scene Tabs. Please do not change scene while editing a pose because it can crash Godot.")
+#	print("[posepal] Couldn't hide Scene Tabs. Please do not change scene while editing a pose because it can crash Godot.")
 
 func _show_editorSceneTabs():
 	var sceneTabs: Tabs = owner.pluginInstance.editorSceneTabs 
@@ -647,7 +648,7 @@ func _show_editorSceneTabs():
 #		sceneTabs = owner.pluginInstance.editorSceneTabs
 	sceneTabs.visible = true
 #		return
-#	print("[PosePal] Couldn't show Scene Tabs. Try disabling and re-enabling PosePal.")
+#	print("[posepal] Couldn't show Scene Tabs. Try disabling and re-enabling posepal.")
 
 # Godot crashes when edited scene changes while pose is still being edited.
 func _on_scene_changed(_sceneRoot: Node):
@@ -692,9 +693,9 @@ func _on_scene_changed(_sceneRoot: Node):
 
 
 func _on_CancelPoseButton_pressed():
-	_show_editorSceneTabs()
+#	_show_editorSceneTabs()
 	print('canceling')
-	emit_signal( "pose_editing_canceled")
+	emit_signal("pose_editing_canceled")
 	self.posegen_mode = PoseGenMode.CREATE
 	if !_do_queue_select_poselib_animplayer:
 		return

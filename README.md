@@ -1,9 +1,9 @@
-# ![PosePal Icon](addons/posepal/plugin_icon.png) PosePal
-PosePal is a Godot add-on by AniMesuro that allows storing a group of scene properties into Pose Librarys for use in 2D animation.
+# ![posepal Icon](addons/posepal/plugin_icon.png) posepal
+posepal is a Godot add-on by AniMesuro that allows storing a group of scene properties into Pose Libraries for use in 2D animation.
 The project is a work in progress, so it may have bugs and it can crash Godot.
 
 ## Installation
-Posepal is still in development, so you can only install it from the github page.
+posepal is still in development, so you can only install it from the github page.
 There's no stable release yet, so either clone it or download as a zip file and paste it on `res://addons/` of your project.
 
 ## Getting Started
@@ -35,9 +35,12 @@ A poselib file will by default be saved at `res://addons/posepal/.poselibs/` and
 
 ## Poses
 Poses are records of data that store the state of a scene by storing selected properties. Usually used for character animation, but most kind of properties can be saved. (Unless tests are proven otherwise)
+Pose editing is done through the AnimationTimelineEditor in Godot, by keying desired properties at the current time
 
 ## Filters
 Filters are a special kind of pose that do not stores values. These are used to filter only poses that change selected nodes from a filter.
+Currently you need to edit it the same way as a pose, that is by the timeline. You need to key at least one property for each node you want to filter. Filter poses only store NodePaths, so the property doesn't matter.
+You can either batch key selected nodes with a random variable or mass-select nodes in the scene and key some transform property from the toolbar.
 
 ## Templates
 Templates are poses that are used as a base for all poses inside a collection. Therefore all poses created inside this template will copy the template's properties unless overwritten. A template can have duplicated template pose, but can't have a duplicated template name.
@@ -55,7 +58,7 @@ The code for finding the user selected AnimationPlayer is dumb, so it's advisabl
 
 
 ## Limitations:
-- PosePal does not support 3D scenes, and bone animation.
+- posepal does not support 3D scenes, and bone animation.
 - Changing the edited scene as you're editing a pose crashes Godot, so the Scene Tabs is invisible as you do so.
 - Changing nodes names and nodepaths may make the poselib unusable.
 - Changing resources (Images)'s paths will confuse the poselib. The poselib will still be
