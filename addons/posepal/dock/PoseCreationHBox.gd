@@ -65,6 +65,7 @@ func _set_posegen_mode(new_mode :int):
 				animationPlayer.queue_free()
 			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
 			poseCreationColumn.is_locked = true
+			_show_editorSceneTabs()
 		PoseGenMode.SAVE:
 			newPoseButton.text = "Save Pose"
 			newPoseButton.icon = TEX_IconSave
@@ -145,16 +146,30 @@ func _on_NewPoseButton_pressed():
 	elif posegen_mode == PoseGenMode.SAVE:
 		print('save 83')
 		
+		var currentAnimOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+		print(currentAnimOptionButton.text)
+		var anim: Animation= animationPlayer.get_animation(currentAnimOptionButton.text)
+		if anim.get_track_count() == 0:
+			print("[posepal] pose empty, can't save.")
+			self.posegen_mode = PoseGenMode.CREATE
+			return
+#		return
+#		var real_pose_id: int = selected_pose_id
+#		if selected_pose_id == -1: real_pose_id = poselib.poseData[owner.poselib_template][owner.poselib_collection].size()
+#		print('poase empty?? ',real_pose_id,' ',
+#		poselib.poseData[owner.poselib_template][owner.poselib_collection][real_pose_id])
+		
 		save_pose(selected_pose_id)
-		self.posegen_mode = PoseGenMode.CREATE
 		emit_signal("pose_editing_saved")
-		_show_editorSceneTabs()
 		
 		# [] Fill all for changes of 1 is overkill. Should replace with a regenerate function in future.
 		
 		var pageHBox = $"../../TabContainer/Pallete/HBox/PageHBox"
-		pageHBox.current_page = pageHBox.page_count-1
-#		owner.posePalette.fill_previews()
+		if selected_pose_id == -1:
+			pageHBox.current_page = pageHBox.get_page_count()-1
+		else:
+			owner.posePalette.fill_previews()
+		self.posegen_mode = PoseGenMode.CREATE
 ##	#	#	#	#	#	#	#	#	#	#	#	#
 
 
@@ -185,9 +200,7 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		elif poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has('_name'):
 			pose_name = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]['_name']
 	current_pose_type = pose_type
-	
-	
-	
+			
 #	Reference Editor Nodes
 	var editorInterface: EditorInterface = owner.pluginInstance.get_editor_interface()
 	var editorSelection: EditorSelection = editorInterface.get_selection()

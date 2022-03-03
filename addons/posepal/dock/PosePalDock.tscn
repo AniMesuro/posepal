@@ -499,7 +499,6 @@ margin_bottom = 53.0
 text = "Clear all tracks"
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox/ClearTracksButton"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

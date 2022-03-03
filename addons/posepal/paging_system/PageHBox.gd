@@ -17,8 +17,8 @@ func _ready() -> void:
 	$NextButton.connect("pressed", self, "_on_NextButton_pressed")
 
 func _set_current_page(new_current_page: int):
-	if current_page == new_current_page:
-		return
+#	if current_page == new_current_page:
+#		return
 	
 	current_page = new_current_page
 	var numButton: OptionButton = $NumButton
@@ -93,21 +93,24 @@ func _reset_info():
 	current_page = -1
 
 func update_pages():	
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	get_page_count()
+	
 	var numButton: OptionButton = $NumButton
-	if poselib.poseData.size() == 0:
-		_reset_info()
-		return
-	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
-	var pose_count: int = collection.size()
-	if pose_count == 0:
-		_reset_info()
-		return
-	page_count = ceil(float(pose_count) / page_size)
 #	print('pagecnt ',page_count,' posecnt ',pose_count)
 	numButton.update_item_list()
 	if current_page > -1 && current_page < page_count:
 		numButton.select(current_page)
 	
-
+func get_page_count() -> int:
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	if poselib.poseData.size() == 0:
+		_reset_info()
+		return -1
+	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
+	var pose_count: int = collection.size()
+	if pose_count == 0:
+		_reset_info()
+		return -1
+	page_count = ceil(float(pose_count) / page_size)
+	return page_count
 
