@@ -590,7 +590,7 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		# poselib.templateData[owner.poselib_template][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
 		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
-		print('template data ',poselib.templateData[owner.poselib_template][node_path][property])
+#		print('template data ',poselib.templateData[owner.poselib_template][node_path][property])
 #		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 
 func are_parameters_valid() -> bool:

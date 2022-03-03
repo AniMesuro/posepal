@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/bag.png" type="Texture" id=1]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/front/face/face eyes.png" type="Texture" id=2]
@@ -1222,7 +1222,7 @@ tracks/93/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -430, 10 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/94/type = "value"
 tracks/94/path = NodePath("TorsoBottom:rotation_degrees")
@@ -3193,7 +3193,7 @@ tracks/95/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 429, 10 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/96/type = "value"
 tracks/96/path = NodePath("TorsoBottom:rotation_degrees")
@@ -4324,7 +4324,7 @@ tracks/23/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1780, 2 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/24/type = "value"
 tracks/24/path = NodePath("TorsoBottom:rotation_degrees")
@@ -6667,7 +6667,7 @@ tracks/83/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1050, -11 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/84/type = "value"
 tracks/84/path = NodePath("TorsoBottom:rotation_degrees")
@@ -6955,7 +6955,7 @@ tracks/107/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -4, -154 ) ]
+"values": [ Vector2( -3, -153 ) ]
 }
 tracks/108/type = "value"
 tracks/108/path = NodePath("TorsoBottom/TorsoTop/LArmTop:rotation_degrees")
@@ -7618,7 +7618,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 2.76566e-05 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("TorsoBottom:rotation_degrees")
@@ -9552,6 +9552,30 @@ tracks/161/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/162/type = "value"
+tracks/162/path = NodePath("TorsoBottom/TorsoTop/Bag:z_index")
+tracks/162/interp = 1
+tracks/162/loop_wrap = true
+tracks/162/imported = false
+tracks/162/enabled = true
+tracks/162/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ -2 ]
+}
+tracks/163/type = "value"
+tracks/163/path = NodePath("TorsoBottom/TorsoTop:z_index")
+tracks/163/interp = 1
+tracks/163/loop_wrap = true
+tracks/163/imported = false
+tracks/163/enabled = true
+tracks/163/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "back"
@@ -9817,7 +9841,7 @@ tracks/21/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1418, 5.00003 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/22/type = "value"
 tracks/22/path = NodePath("TorsoBottom:rotation_degrees")
@@ -11200,7 +11224,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 2.76566e-05 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("TorsoBottom/TorsoTop:position")
@@ -11226,6 +11250,9 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( -1, -165 ) ]
 }
+
+[sub_resource type="Animation" id=11]
+resource_name = "banan (copy)"
 
 [sub_resource type="Animation" id=10]
 resource_name = "front"
@@ -11289,6 +11316,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [  ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("TorsoBottom:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "left"
@@ -11326,7 +11365,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -738, 7.00003 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("TorsoBottom:rotation_degrees")
@@ -12910,7 +12949,7 @@ tracks/134/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 tracks/135/type = "value"
 tracks/135/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:flip_h")
@@ -13285,7 +13324,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 751, 6.00003 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("TorsoBottom:rotation_degrees")
@@ -14881,7 +14920,7 @@ tracks/135/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 tracks/136/type = "value"
 tracks/136/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:flip_h")
@@ -15275,7 +15314,6 @@ __meta__ = {
 }
 
 [node name="TorsoBottom" type="Sprite" parent="."]
-position = Vector2( 1, 2.76566e-05 )
 texture = ExtResource( 75 )
 offset = Vector2( -0.797424, 8.24968 )
 
@@ -15313,25 +15351,6 @@ position = Vector2( 21, -203 )
 texture = ExtResource( 88 )
 offset = Vector2( -24.7487, 47.7297 )
 
-[node name="LArmTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( 31, -128 )
-z_index = -1
-texture = ExtResource( 78 )
-offset = Vector2( 22.6395, 55.7096 )
-
-[node name="LArmBottom" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop"]
-position = Vector2( 53, 118 )
-z_index = 1
-texture = ExtResource( 26 )
-offset = Vector2( 26.2654, 54.8525 )
-
-[node name="LHand" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop/LArmBottom"]
-show_behind_parent = true
-position = Vector2( 57, 95 )
-z_index = -1
-texture = ExtResource( 7 )
-offset = Vector2( 23.7694, 18.32 )
-
 [node name="ArmRTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
 position = Vector2( -35, -129 )
 z_index = -1
@@ -15352,9 +15371,28 @@ texture = ExtResource( 7 )
 offset = Vector2( -22.2817, 21.1371 )
 flip_h = true
 
+[node name="LArmTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
+position = Vector2( 31, -128 )
+z_index = -1
+texture = ExtResource( 78 )
+offset = Vector2( 22.6395, 55.7096 )
+
+[node name="LArmBottom" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop"]
+position = Vector2( 53, 118 )
+z_index = 1
+texture = ExtResource( 26 )
+offset = Vector2( 26.2654, 54.8525 )
+
+[node name="LHand" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop/LArmBottom"]
+show_behind_parent = true
+position = Vector2( 57, 95 )
+z_index = -1
+texture = ExtResource( 7 )
+offset = Vector2( 23.7694, 18.32 )
+
 [node name="Bag" type="Sprite" parent="TorsoBottom/TorsoTop"]
 position = Vector2( 7, -11 )
-z_index = 1
+z_index = -2
 texture = ExtResource( 5 )
 offset = Vector2( -7.34009, -89.0972 )
 
@@ -15398,12 +15436,9 @@ flip_h = true
 [node name="TurnaroundReference" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 0.466667, 0.466667, 0.607843 )
-position = Vector2( 567, 66 )
+position = Vector2( -1277, 77 )
 z_index = 1
 texture = ExtResource( 70 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 "anims/34 left" = SubResource( 3 )
@@ -15413,6 +15448,7 @@ __meta__ = {
 anims/RESET = SubResource( 1 )
 anims/back = SubResource( 7 )
 anims/banan = SubResource( 9 )
+"anims/banan (copy)" = SubResource( 11 )
 anims/front = SubResource( 10 )
 anims/left = SubResource( 2 )
 anims/right = SubResource( 5 )

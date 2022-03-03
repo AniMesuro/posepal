@@ -4,11 +4,12 @@ extends VBoxContainer
 const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.tscn") 
 
 
-var sliceToggleAudioButton: Button
+#var sliceToggleAudioButton: Button
 func _ready() -> void:
 	$FileDependencyButton.connect("pressed", self, "_on_FileDependencyButton_pressed")
 	$SliceToggleAudioButton.connect("pressed", self, "_on_SliceToggleAudioButton_pressed")
-	
+	$ClearTracksButton.connect("pressed", self, "_on_ClearTracksButton_pressed")
+	$ClearTracksButton/ConfirmationDialog.connect("confirmed", self, "_on_ClearTracksButton_confirmed")
 
 func _on_FileDependencyButton_pressed():
 	if owner.poselib_scene == '':
@@ -102,6 +103,29 @@ func _on_SliceToggleAudioButton_pressed():
 #	|456
 #	123   |456
 #	123456|123456
+
+
+func _on_ClearTracksButton_pressed():
+	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+	if !is_instance_valid(selectedAnimationPlayer):
+		print('[PosePal] AnimPlayer not referenced succesfully.')
+		return
+	if currentAnimationOptionButton.text == "":
+		return
+	var currentAnimation: Animation = selectedAnimationPlayer.get_animation(currentAnimationOptionButton.text)
+	if currentAnimation.get_track_count() == 0:
+		return
+	
+	var confirmationDialog: ConfirmationDialog = $ClearTracksButton/ConfirmationDialog
+	confirmationDialog.popup_centered()
+	
+
+func _on_ClearTracksButton_confirmed():
+	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+	var currentAnimation: Animation = selectedAnimationPlayer.get_animation(currentAnimationOptionButton.text)
+	currentAnimation.clear()
 
 func _get_sample_length(sample: AudioStreamSample) -> float:
 	return stepify(float(sample.data.size()) / (sample.mix_rate * 4), 0.01)

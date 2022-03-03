@@ -142,9 +142,38 @@ resourceReferences = {
 133: "res://addons/posepal/_example_rig_godette/assets/front/face/face eyebrows.png",
 134: "res://addons/posepal/_example_rig_godette/assets/front/face/face eyes.png",
 135: "res://addons/posepal/_example_rig_godette/assets/front/head fringe.png",
-136: "res://addons/posepal/_example_rig_godette/assets/front/face/face mouth.png"
+136: "res://addons/posepal/_example_rig_godette/assets/front/face/face mouth.png",
+137: "res://addons/posepal/_example_rig_godette/assets/34b right/head base.png",
+138: "res://addons/posepal/_example_rig_godette/assets/34 right/head fringe.png",
+139: "res://addons/posepal/_example_rig_godette/assets/back/torso bottom.png",
+140: "res://addons/posepal/_example_rig_godette/assets/back/torso top.png",
+141: "res://addons/posepal/_example_rig_godette/assets/back/neck.png",
+142: "res://addons/posepal/_example_rig_godette/assets/back/larm top.png",
+143: "res://addons/posepal/_example_rig_godette/assets/back/larm bottom.png",
+144: "res://addons/posepal/_example_rig_godette/assets/back/larm hand.png",
+145: "res://addons/posepal/_example_rig_godette/assets/back/bag.png",
+146: "res://addons/posepal/_example_rig_godette/assets/back/lleg top.png",
+147: "res://addons/posepal/_example_rig_godette/assets/back/lleg bottom.png",
+148: "res://addons/posepal/_example_rig_godette/assets/back/lleg feet.png",
+149: "res://addons/posepal/_example_rig_godette/assets/left/torso bottom.png",
+150: "res://addons/posepal/_example_rig_godette/assets/left/torso top.png",
+151: "res://addons/posepal/_example_rig_godette/assets/left/rarm top.png",
+152: "res://addons/posepal/_example_rig_godette/assets/left/rarm bottom.png",
+153: "res://addons/posepal/_example_rig_godette/assets/left/rarm hand.png",
+154: "res://addons/posepal/_example_rig_godette/assets/left/larm top.png",
+155: "res://addons/posepal/_example_rig_godette/assets/left/larm bottom.png",
+156: "res://addons/posepal/_example_rig_godette/assets/left/larm hand.png",
+157: "res://addons/posepal/_example_rig_godette/assets/left/bag.png",
+158: "res://addons/posepal/_example_rig_godette/assets/left/lleg top.png",
+159: "res://addons/posepal/_example_rig_godette/assets/left/lleg bottom.png",
+160: "res://addons/posepal/_example_rig_godette/assets/left/lleg feet.png",
+161: "res://addons/posepal/_example_rig_godette/assets/left/rleg top.png",
+162: "res://addons/posepal/_example_rig_godette/assets/left/rleg bottom.png",
+163: "res://addons/posepal/_example_rig_godette/assets/left/rleg feet.png",
+164: "res://addons/posepal/_example_rig_godette/assets/right/head fringe.png",
+165: "res://addons/posepal/_example_rig_godette/assets/right/bag.png"
 }
-available_res_id = 137
+available_res_id = 166
 poseData = {
 "34 left": {
 "default": [ {
@@ -561,6 +590,10 @@ poseData = {
 }
 }, {
 "TorsoBottom/LLegTop": {
+"position": {
+"out": 1.0,
+"val": Vector2( -19, 30 )
+},
 "rotation_degrees": {
 "out": 1.0,
 "val": 83.1367
@@ -578,6 +611,10 @@ poseData = {
 "scale": {
 "out": 1.0,
 "val": Vector2( 1.3, 1 )
+},
+"z_index": {
+"out": 1.0,
+"val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
@@ -591,6 +628,10 @@ poseData = {
 }
 },
 "TorsoBottom/RLegTop": {
+"position": {
+"out": 1.0,
+"val": Vector2( 32, 30 )
+},
 "rotation_degrees": {
 "out": 1.0,
 "val": 97.2188
@@ -608,6 +649,10 @@ poseData = {
 "scale": {
 "out": 1.0,
 "val": Vector2( 1.2, 1 )
+},
+"z_index": {
+"out": 1.0,
+"val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
@@ -637,10 +682,22 @@ poseData = {
 "val": -30.0
 }
 },
+"TorsoBottom/LLegTop/LLegBottom": {
+"scale": {
+"out": 1.0,
+"val": Vector2( 1.1, 1 )
+}
+},
 "TorsoBottom/RLegTop": {
 "rotation_degrees": {
 "out": 1.0,
 "val": 30.0
+}
+},
+"TorsoBottom/RLegTop/RLegBottom": {
+"scale": {
+"out": 1.0,
+"val": Vector2( 0.9, 1 )
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
@@ -683,7 +740,7 @@ poseData = {
 "TorsoBottom/RLegTop": {
 "position": {
 "out": 1.0,
-"val": Vector2( -21, 39 )
+"val": Vector2( -27, 36 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -712,16 +769,24 @@ poseData = {
 "rotation_degrees": {
 "out": 1.0,
 "val": -136.109
+},
+"z_index": {
+"out": 1.0,
+"val": -2
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "offset": {
 "out": 1.0,
-"val": Vector2( 28.1612, 20.8185 )
+"val": Vector2( -13.4326, 20.9213 )
+},
+"position": {
+"out": 1.0,
+"val": Vector2( -11.3502, 85.6667 )
 },
 "texture": {
 "out": 1.0,
-"val": null
+"valr": 108
 }
 }
 } ]
@@ -3745,30 +3810,20 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 9.20258, 23.2497 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 24
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 98
 }
 },
 "TorsoBottom/LLegTop": {
@@ -3780,7 +3835,7 @@ templateData = {
 "offset": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 1.5143, 95.981 )
+"val": Vector2( -0.485701, 101.981 )
 },
 "position": {
 "out": 1.0,
@@ -3800,7 +3855,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 25
+"valr": 99
 },
 "visible": {
 "out": 1.0,
@@ -3822,12 +3877,12 @@ templateData = {
 "offset": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 3.5, 87.761 )
+"val": Vector2( 1.5, 84.761 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -5, 213 )
+"val": Vector2( -4, 217 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -3842,12 +3897,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 26
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 100
 },
 "z_index": {
 "out": 1.0,
@@ -3876,20 +3926,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 27
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 101
 },
 "z_index": {
 "out": 1.0,
@@ -3926,7 +3966,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 28
+"valr": 102
 },
 "visible": {
 "out": 1.0,
@@ -3968,12 +4008,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 29
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 103
 },
 "z_index": {
 "out": 1.0,
@@ -4002,20 +4037,10 @@ templateData = {
 "upmo": 0,
 "val": 1.17072
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 30
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 104
 },
 "z_index": {
 "out": 1.0,
@@ -4044,25 +4069,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 31
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": -1
+"valr": 105
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
@@ -4086,15 +4096,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 32
+"valr": 106
 },
 "visible": {
 "out": 1.0,
@@ -4128,20 +4133,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 33
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 107
 },
 "z_index": {
 "out": 1.0,
@@ -4170,20 +4165,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 34
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 108
 },
 "z_index": {
 "out": 1.0,
@@ -4212,20 +4197,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 35
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 109
 },
 "z_index": {
 "out": 1.0,
@@ -4247,22 +4222,17 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -4, -154 )
+"val": Vector2( -3, -153 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 36
+"valr": 110
 },
 "visible": {
 "out": 1.0,
@@ -4296,20 +4266,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 37
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 111
 },
 "z_index": {
 "out": 1.0,
@@ -4338,25 +4298,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 38
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 112
 },
 "z_index": {
 "out": 1.0,
 "upmo": 0,
-"val": 1
+"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
@@ -4380,25 +4330,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 39
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": -1
+"valr": 113
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
@@ -4422,25 +4357,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 42
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 137
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
@@ -4464,25 +4384,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 41
+"valr": 115
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
@@ -4496,6 +4406,16 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 0, 0 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -44, -80 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
 "texture": {
 "out": 1.0,
 "upmo": 0,
@@ -4503,13 +4423,8 @@ templateData = {
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
@@ -4523,20 +4438,25 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 27, 90.5001 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -30, -189 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 19
+"valr": 138
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": false
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
@@ -4550,6 +4470,16 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 0, 0 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -34, -29 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
 "texture": {
 "out": 1.0,
 "upmo": 0,
@@ -4559,35 +4489,35 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": false
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 }
 },
 "back": {
 "TorsoBottom": {
+"flip_h": {
+"out": 1.0,
+"upmo": 0,
+"val": true
+},
 "offset": {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( -0.797424, 8.24968 )
+},
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 43
+"valr": 139
 }
 },
 "TorsoBottom/LLegTop": {
@@ -4619,7 +4549,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 44
+"valr": 146
 },
 "visible": {
 "out": 1.0,
@@ -4661,12 +4591,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 45
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 147
 },
 "z_index": {
 "out": 1.0,
@@ -4703,12 +4628,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 46
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 148
 },
 "z_index": {
 "out": 1.0,
@@ -4745,7 +4665,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 44
+"valr": 146
 },
 "visible": {
 "out": 1.0,
@@ -4787,12 +4707,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 45
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 147
 },
 "z_index": {
 "out": 1.0,
@@ -4829,12 +4744,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 46
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 148
 },
 "z_index": {
 "out": 1.0,
@@ -4843,6 +4753,11 @@ templateData = {
 }
 },
 "TorsoBottom/TorsoTop": {
+"flip_h": {
+"out": 1.0,
+"upmo": 0,
+"val": true
+},
 "offset": {
 "out": 1.0,
 "upmo": 0,
@@ -4858,15 +4773,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 47
+"valr": 140
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
@@ -4890,15 +4800,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 48
+"valr": 142
 },
 "visible": {
 "out": 1.0,
@@ -4932,20 +4837,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 49
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 143
 },
 "z_index": {
 "out": 1.0,
@@ -4974,20 +4869,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 50
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 144
 },
 "z_index": {
 "out": 1.0,
@@ -5016,20 +4901,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 51
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 145
 },
 "z_index": {
 "out": 1.0,
@@ -5058,15 +4933,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 48
+"valr": 142
 },
 "visible": {
 "out": 1.0,
@@ -5100,20 +4970,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 49
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 143
 },
 "z_index": {
 "out": 1.0,
@@ -5142,20 +5002,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 50
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 144
 },
 "z_index": {
 "out": 1.0,
@@ -5184,25 +5034,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 52
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": -1
+"valr": 141
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
@@ -5226,25 +5061,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
 "valr": 53
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
@@ -5253,18 +5073,58 @@ templateData = {
 "upmo": 0,
 "val": false
 },
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 90, -80 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
+"texture": {
+"out": 1.0,
+"upmo": 0,
+"valr": 115
+},
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": false
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
+"flip_h": {
+"out": 1.0,
+"upmo": 0,
+"val": true
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -44, -80 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
+"texture": {
+"out": 1.0,
+"upmo": 0,
+"valr": 18
+},
 "visible": {
 "out": 1.0,
 "upmo": 0,
@@ -5272,6 +5132,31 @@ templateData = {
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
+"flip_h": {
+"out": 1.0,
+"upmo": 0,
+"val": true
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 27, 90.5001 )
+},
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -30, -189 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
+"texture": {
+"out": 1.0,
+"upmo": 0,
+"valr": 138
+},
 "visible": {
 "out": 1.0,
 "upmo": 0,
@@ -5279,6 +5164,31 @@ templateData = {
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
+"flip_h": {
+"out": 1.0,
+"upmo": 0,
+"val": true
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -34, -29 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 0.0
+},
+"texture": {
+"out": 1.0,
+"upmo": 0,
+"valr": 20
+},
 "visible": {
 "out": 1.0,
 "upmo": 0,
@@ -6164,25 +6074,20 @@ templateData = {
 "upmo": 0,
 "val": Vector2( -0.797424, 8.24968 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 69
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 149
 }
 },
 "TorsoBottom/LLegTop": {
@@ -6206,15 +6111,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 70
+"valr": 158
 },
 "visible": {
 "out": 1.0,
@@ -6248,20 +6148,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 71
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 159
 },
 "z_index": {
 "out": 1.0,
@@ -6290,20 +6180,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 72
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 160
 },
 "z_index": {
 "out": 1.0,
@@ -6332,15 +6212,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 73
+"valr": 161
 },
 "visible": {
 "out": 1.0,
@@ -6374,20 +6249,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 74
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 162
 },
 "z_index": {
 "out": 1.0,
@@ -6416,20 +6281,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 75
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 163
 },
 "z_index": {
 "out": 1.0,
@@ -6458,20 +6313,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 76
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 150
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
@@ -6495,15 +6340,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 77
+"valr": 151
 },
 "visible": {
 "out": 1.0,
@@ -6537,20 +6377,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 78
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 152
 },
 "z_index": {
 "out": 1.0,
@@ -6579,25 +6409,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"show_behind_parent": {
-"out": 1.0,
-"upmo": 0,
-"val": false
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 79
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 153
 },
 "z_index": {
 "out": 1.0,
@@ -6626,15 +6441,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 80
+"valr": 157
 },
 "z_index": {
 "out": 1.0,
@@ -6663,15 +6473,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 81
+"valr": 154
 },
 "visible": {
 "out": 1.0,
@@ -6705,20 +6510,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 82
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 155
 },
 "z_index": {
 "out": 1.0,
@@ -6747,25 +6542,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"show_behind_parent": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 83
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 156
 },
 "z_index": {
 "out": 1.0,
@@ -6794,25 +6574,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 84
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": -1
+"valr": 97
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
@@ -6836,24 +6601,14 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 85
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 92
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
@@ -6878,15 +6633,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 86
+"valr": 93
 },
 "visible": {
 "out": 1.0,
@@ -6915,15 +6665,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 87
+"valr": 94
 },
 "visible": {
 "out": 1.0,
@@ -6952,15 +6697,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 88
+"valr": 95
 },
 "visible": {
 "out": 1.0,
@@ -6989,15 +6729,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 89
+"valr": 96
 },
 "visible": {
 "out": 1.0,
@@ -7018,30 +6753,20 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 6.20258, 9.24968 )
 },
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 0, 0 )
+},
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 69
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 149
 }
 },
 "TorsoBottom/LLegTop": {
@@ -7065,15 +6790,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 70
+"valr": 158
 },
 "visible": {
 "out": 1.0,
@@ -7107,20 +6827,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 71
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 159
 },
 "z_index": {
 "out": 1.0,
@@ -7149,20 +6859,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 72
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 160
 },
 "z_index": {
 "out": 1.0,
@@ -7191,15 +6891,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 73
+"valr": 161
 },
 "visible": {
 "out": 1.0,
@@ -7233,20 +6928,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 74
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 162
 },
 "z_index": {
 "out": 1.0,
@@ -7275,20 +6960,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 75
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 163
 },
 "z_index": {
 "out": 1.0,
@@ -7317,25 +6992,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 76
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
+"valr": 150
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
@@ -7359,15 +7019,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 77
+"valr": 151
 },
 "visible": {
 "out": 1.0,
@@ -7401,20 +7056,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 78
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 152
 },
 "z_index": {
 "out": 1.0,
@@ -7443,20 +7088,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 79
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 153
 },
 "z_index": {
 "out": 1.0,
@@ -7485,20 +7120,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 90
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 165
 },
 "z_index": {
 "out": 1.0,
@@ -7527,15 +7152,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 81
+"valr": 154
 },
 "visible": {
 "out": 1.0,
@@ -7569,20 +7189,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 82
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 155
 },
 "z_index": {
 "out": 1.0,
@@ -7611,20 +7221,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 83
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 156
 },
 "z_index": {
 "out": 1.0,
@@ -7653,25 +7253,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 84
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": -1
+"valr": 97
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
@@ -7695,20 +7280,10 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 85
-},
-"visible": {
-"out": 1.0,
-"upmo": 0,
-"val": true
+"valr": 92
 },
 "z_index": {
 "out": 1.0,
@@ -7737,25 +7312,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 86
+"valr": 93
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
@@ -7779,25 +7344,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 87
+"valr": 94
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
@@ -7821,25 +7376,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 91
+"valr": 164
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
@@ -7863,25 +7408,15 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 89
+"valr": 96
 },
 "visible": {
 "out": 1.0,
 "upmo": 0,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 0,
-"val": 0
 }
 }
 }

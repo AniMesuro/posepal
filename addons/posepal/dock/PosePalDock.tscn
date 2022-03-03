@@ -478,7 +478,7 @@ is_locked = false
 [node name="MiscVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 138.0
 margin_right = 379.0
-margin_bottom = 172.0
+margin_bottom = 191.0
 script = ExtResource( 29 )
 
 [node name="FileDependencyButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
@@ -491,6 +491,27 @@ margin_top = 19.0
 margin_right = 379.0
 margin_bottom = 34.0
 text = "Slice toggle audio key"
+
+[node name="ClearTracksButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
+margin_top = 38.0
+margin_right = 379.0
+margin_bottom = 53.0
+text = "Clear all tracks"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox/ClearTracksButton"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -151.0
+margin_top = -43.5
+margin_right = 151.0
+margin_bottom = 43.5
+window_title = ""
+dialog_text = "===   ! ! Dangerous Task ! !   	===
+This will clear all tracks in current animation.
+Are you absolutely sure?"
 
 [node name="Pallete" type="VBoxContainer" parent="VSplit/TabContainer"]
 visible = false
