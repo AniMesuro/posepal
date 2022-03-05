@@ -61,7 +61,7 @@ These are thumbnail visualizations of the scene but overwritten by the pose. The
 ### Batch-key Popup
 Keying properties for the pose is time consuming, so there is a shortcut to batch key all properties that have a track in the scene.
 When you press the button on the Pose Options tab, you can select which nodes will key a written property.
-The code for finding the user selected AnimationPlayer is dumb, so it's advisable to check the window title if it matches the Animation name.
+The code for finding the user selected AnimationPlayer is dumb, so it's advisable to check the window title if it matches the Animation name.\
 <img src=https://images2.imgbox.com/32/e2/eUkSS720_o.png width=600>
 
 ## Limitations:
