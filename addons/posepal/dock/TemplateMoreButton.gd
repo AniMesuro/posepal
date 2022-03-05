@@ -28,7 +28,13 @@ func key_template_pose():
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
 			var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
-			var key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
+			var key_value
+			if poselib.templateData[owner.poselib_template][nodepath][property].has('val'):
+				key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
+			elif poselib.templateData[owner.poselib_template][nodepath][property].has('valr'):
+				key_value = poselib.get_res_from_id(poselib.templateData[owner.poselib_template][nodepath][property]['valr'])
+			else:
+				continue
 			anim.track_insert_key(tr_property, current_time, key_value)
 
 func _on_pressed():

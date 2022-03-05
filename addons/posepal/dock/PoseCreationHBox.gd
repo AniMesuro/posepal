@@ -60,14 +60,14 @@ func _set_posegen_mode(new_mode :int):
 			selected_pose_id = -1
 			if is_instance_valid(animationPlayer):
 				animationPlayer.queue_free()
-			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
+			var poseCreationColumn: PanelContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
 			poseCreationColumn.is_locked = true
 			_show_editorSceneTabs()
 		PoseGenMode.SAVE:
 			newPoseButton.text = "Save Pose"
 			newPoseButton.icon = TEX_IconSave
 			cancelPoseButton.visible = true
-			var poseCreationColumn: HBoxContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
+			var poseCreationColumn: PanelContainer = $"../../TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationColumn"
 			poseCreationColumn.is_locked = false
 	posegen_mode = new_mode
 
@@ -119,6 +119,7 @@ func _on_NewPoseButton_pressed():
 			pageHBox.current_page = pageHBox.get_page_count()-1
 		else:
 			owner.posePalette.fill_previews()
+		self.posegen_mode = PoseGenMode.CREATE
 
 # open pose editor | select pose | 
 func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):

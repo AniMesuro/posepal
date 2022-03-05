@@ -8,11 +8,14 @@ export var expand: bool = true setget _set_expand
 
 var expandableControl: Control
 func _set_tab_text(new_text :String):
-	text = new_text
+	if new_text == '':
+		return
+	if !is_inside_tree():
+		if is_instance_valid(self):
+			yield(self, "tree_entered")
 	var label: Label = $"HBox/Label"
 	
-	if !is_instance_valid(label):
-		return
+	text = new_text
 	label.text = new_text
 
 func _ready() -> void:

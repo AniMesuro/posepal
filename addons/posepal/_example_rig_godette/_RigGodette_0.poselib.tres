@@ -171,9 +171,10 @@ resourceReferences = {
 162: "res://addons/posepal/_example_rig_godette/assets/left/rleg bottom.png",
 163: "res://addons/posepal/_example_rig_godette/assets/left/rleg feet.png",
 164: "res://addons/posepal/_example_rig_godette/assets/right/head fringe.png",
-165: "res://addons/posepal/_example_rig_godette/assets/right/bag.png"
+165: "res://addons/posepal/_example_rig_godette/assets/right/bag.png",
+166: "res://addons/posepal/_example_rig_godette/assets/34 right/head base.png"
 }
-available_res_id = 166
+available_res_id = 167
 poseData = {
 "34 left": {
 "default": [ {
@@ -1361,98 +1362,6 @@ filterData = {
 }
 },
 "none": {
-},
-"upper": {
-"TorsoBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Bag": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Eyes": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Fringe": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Mouth": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-}
 }
 }
 templateData = {
@@ -2994,7 +2903,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 16
+"valr": 166
 },
 "visible": {
 "out": 1.0,
@@ -3110,7 +3019,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 19
+"valr": 138
 },
 "visible": {
 "out": 1.0,

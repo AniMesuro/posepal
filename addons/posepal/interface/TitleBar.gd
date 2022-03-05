@@ -6,6 +6,8 @@ export (StreamTexture) var icon_texture setget _set_icon_texture
 export var show_icon: bool = false
 export (NodePath) var window_path = NodePath('.')
 
+const TEX_BackupIcon: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
+
 var offset :Vector2
 var moving_panel :bool
 
@@ -50,9 +52,13 @@ func _set_icon_texture(value :StreamTexture):
 	if !is_inside_tree():
 		if is_instance_valid(self):
 			yield(self, "tree_entered")
+		else:
+			return
 	iconRect = $IconRect
-	if value == null:
+	if !is_instance_valid(value):
 		iconRect.visible = false
+		icon_texture = TEX_BackupIcon
+		iconRect.texture = icon_texture
 		return
 	
 	icon_texture = value

@@ -199,10 +199,12 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 					_copy_from_template = false
 					
 			if property in _ch && _copy_from_template:
-				if !_ch.get(property) is Object:
+				if templatePose[my_nodepath][property].has('val'):
 					_ch.set(property, templatePose[my_nodepath][property]['val'])
-				else:
+				if templatePose[my_nodepath][property].has('val'):
 					_ch.set(property, poselib.get_res_from_id(templatePose[my_nodepath][property]['valr']))
+				else:
+					continue
 	
 	if my_nodepath in pose:
 		var poselib: Resource = get_parent().owner.current_poselib
