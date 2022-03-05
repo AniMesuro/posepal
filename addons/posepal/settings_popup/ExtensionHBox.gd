@@ -4,6 +4,8 @@ extends HBoxContainer
 export var selected_id: int setget _set_selected_id
 
 func _ready() -> void:
+	if !is_instance_valid(owner.pluginInstance):
+		return
 	var settings: Resource = owner.pluginInstance.settings
 	var popupMenu: PopupMenu = $MenuButton.get_popup()
 	for extension in settings.PoselibExtensions:

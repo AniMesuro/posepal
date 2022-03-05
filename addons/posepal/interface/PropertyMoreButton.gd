@@ -15,6 +15,8 @@ enum Items {
 var popupMenu :PopupMenu
 var askNamePopup: Popup 
 func _ready() -> void:
+	if get_tree().edited_scene_root == get_parent().owner:
+		return
 	popupMenu = get_popup()
 	popupMenu.clear()
 	

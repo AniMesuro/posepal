@@ -14,7 +14,7 @@ signal issued_forced_selection
 signal pose_created (pose_id)
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
-const RES_PosePalSettings: Script = preload("res://addons/posepal/PosePalSettings.gd")
+const RES_PosePalSettings: GDScript = preload("res://addons/posepal/PosePalSettings.gd")
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorControl: Control setget ,_get_editorControl
@@ -37,17 +37,17 @@ var poseData: Dictionary = {}
 var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
-var current_poselib: RES_PoseLibrary
+var current_poselib: Resource
 var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
 var posePalette: GridContainer setget ,_get_posePalette
 var poseCreationHBox: HBoxContainer setget ,_get_poseCreationHBox
 func _enter_tree() -> void:
-	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
-	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
 	if get_tree().edited_scene_root == self:
 		return
+	warningIcon = $"VSplit/ExtraHBox/WarningIcon"
+	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
 	editorControl = pluginInstance.editorControl
 	
 	# Clear stray instances of invalid docks.
@@ -121,7 +121,7 @@ func save_poseData():
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
 		return
-	var settings: RES_PosePalSettings = self.pluginInstance.settings
+	var settings: Resource = self.pluginInstance.settings
 	
 	var f: File = File.new()
 	var is_poseFile_valid: bool = false
@@ -215,7 +215,7 @@ func _get_pluginInstance() -> EditorPlugin:
 	if is_instance_valid(pluginInstance):
 		return pluginInstance
 	if get_tree().get_nodes_in_group("plugin posepal").size() == 0:
-		queue_free()
+		# queue_free()
 		return null
 	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 	return pluginInstance
@@ -225,6 +225,8 @@ func _get_poseCreationHBox() -> HBoxContainer:
 	return poseCreationHBox
 
 func _get_editorControl() -> Control:
+	if !is_instance_valid(self.pluginInstance):
+		return null
 	return self.pluginInstance.get_editor_interface().get_base_control()
 
 func _key_queued_pose(final_pose: Dictionary):

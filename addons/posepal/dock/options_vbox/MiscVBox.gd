@@ -4,6 +4,8 @@ extends VBoxContainer
 const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.tscn") 
 
 func _ready() -> void:
+	if get_tree().edited_scene_root == owner:
+		return
 	$FileDependencyButton.connect("pressed", self, "_on_FileDependencyButton_pressed")
 	$SliceToggleAudioButton.connect("pressed", self, "_on_SliceToggleAudioButton_pressed")
 	$ClearTracksButton.connect("pressed", self, "_on_ClearTracksButton_pressed")
@@ -76,6 +78,8 @@ func _on_SliceToggleAudioButton_pressed():
 			currentAnimation.track_remove_key(tr_audio, key_exact_id)
 
 func _on_ClearTracksButton_pressed():
+	if !is_instance_valid(owner.pluginInstance):
+		return
 	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
 	if !is_instance_valid(selectedAnimationPlayer):

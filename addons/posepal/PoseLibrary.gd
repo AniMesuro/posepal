@@ -1,6 +1,10 @@
 tool
 extends Resource
 
+# Please do not change poselib files manually (unless for debugging)
+# Try to update it from the dock if possible.
+# ------------
+
 # Scene path
 export var owner_filepath: String = "res://"
 
