@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://addons/posepal/interface/RectHandlerContainer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/posepal/assets/LipsyncImporterTheme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/posepal/file_selector_preview/ZoomHbox.gd" type="Script" id=4]
 [ext_resource path="res://addons/posepal/assets/icons/icon_expand.png" type="Texture" id=5]
@@ -12,9 +11,6 @@
 [ext_resource path="res://addons/posepal/file_selector_preview/FileHBox.gd" type="Script" id=10]
 [ext_resource path="res://addons/posepal/file_selector_preview/ButtonHBox.gd" type="Script" id=11]
 [ext_resource path="res://addons/posepal/assets/icons/icon_return.png" type="Texture" id=12]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.321569, 0.317647, 0.380392, 1 )
 
 [sub_resource type="Image" id=4]
 data = {
@@ -31,29 +27,19 @@ flags = 0
 image = SubResource( 4 )
 size = Vector2( 16, 16 )
 
-[node name="FileSelectorPreview" type="Control"]
-margin_right = 336.0
-margin_bottom = 453.0
+[node name="FileSelectorPreview" type="WindowDialog"]
+visible = true
+margin_left = 344.0
+margin_top = 73.0
+margin_right = 680.0
+margin_bottom = 526.0
 rect_min_size = Vector2( 332, 266 )
-theme = ExtResource( 2 )
+input_pass_on_modal_close_click = false
+theme = ExtResource( 1 )
+resizable = true
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Panel" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -61.0
-rect_min_size = Vector2( 334, 266 )
-rect_clip_content = true
-mouse_filter = 1
-size_flags_stretch_ratio = 2.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -66,117 +52,114 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
-margin_right = 314.0
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_right = 316.0
 margin_bottom = 433.0
 rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleBar" parent="Panel/Margin/VBox" instance=ExtResource( 3 )]
-margin_right = 314.0
-margin_bottom = 40.0
+[node name="TitleBar" parent="Margin/VBox" instance=ExtResource( 3 )]
+margin_right = 316.0
 title_name = "Select an Image File"
 icon_texture = ExtResource( 6 )
 window_path = NodePath("../../..")
 
-[node name="PathHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
-margin_top = 44.0
-margin_right = 314.0
-margin_bottom = 74.0
+[node name="PathHBox" type="HBoxContainer" parent="Margin/VBox"]
+margin_top = 28.0
+margin_right = 316.0
+margin_bottom = 52.0
 script = ExtResource( 7 )
 
-[node name="ReturnButton" type="TextureButton" parent="Panel/Margin/VBox/PathHBox"]
+[node name="ReturnButton" type="TextureButton" parent="Margin/VBox/PathHBox"]
 margin_right = 24.0
-margin_bottom = 30.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
 size_flags_vertical = 3
 texture_normal = ExtResource( 12 )
 expand = true
 stretch_mode = 5
 
-[node name="LineEdit" type="LineEdit" parent="Panel/Margin/VBox/PathHBox"]
+[node name="LineEdit" type="LineEdit" parent="Margin/VBox/PathHBox"]
 margin_left = 28.0
-margin_right = 314.0
-margin_bottom = 30.0
+margin_right = 316.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "res://"
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="FilePanel" type="Panel" parent="Panel/Margin/VBox"]
-margin_top = 78.0
-margin_right = 314.0
-margin_bottom = 347.0
+[node name="FilePanel" type="Panel" parent="Margin/VBox"]
+margin_top = 56.0
+margin_right = 316.0
+margin_bottom = 366.0
 rect_clip_content = true
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Margin/VBox/FilePanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/VBox/FilePanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = false
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="FileContainer" type="GridContainer" parent="Panel/Margin/VBox/FilePanel/ScrollContainer"]
-margin_right = 212.0
-margin_bottom = 415.0
+[node name="FileContainer" type="GridContainer" parent="Margin/VBox/FilePanel/ScrollContainer"]
 size_flags_stretch_ratio = 0.0
 columns = 2
 script = ExtResource( 9 )
 
-[node name="ZoomHbox" type="HBoxContainer" parent="Panel/Margin/VBox"]
-margin_top = 351.0
-margin_right = 314.0
-margin_bottom = 375.0
+[node name="ZoomHbox" type="HBoxContainer" parent="Margin/VBox"]
+margin_top = 370.0
+margin_right = 316.0
+margin_bottom = 386.0
 size_flags_horizontal = 3
 alignment = 2
 script = ExtResource( 4 )
 
-[node name="ZoomIcon" type="TextureRect" parent="Panel/Margin/VBox/ZoomHbox"]
-margin_left = 158.0
-margin_right = 182.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
+[node name="ZoomIcon" type="TextureRect" parent="Margin/VBox/ZoomHbox"]
+margin_left = 168.0
+margin_right = 184.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
 texture = SubResource( 3 )
 expand = true
+stretch_mode = 6
 
-[node name="HSlider" type="HSlider" parent="Panel/Margin/VBox/ZoomHbox"]
-margin_left = 186.0
-margin_top = 4.0
-margin_right = 314.0
-margin_bottom = 20.0
+[node name="HSlider" type="HSlider" parent="Margin/VBox/ZoomHbox"]
+margin_left = 188.0
+margin_right = 316.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_vertical = 4
 min_value = 10.0
 max_value = 50.0
 value = 13.0
 
-[node name="FileHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
-margin_top = 379.0
-margin_right = 314.0
-margin_bottom = 409.0
+[node name="FileHBox" type="HBoxContainer" parent="Margin/VBox"]
+margin_top = 390.0
+margin_right = 316.0
+margin_bottom = 414.0
 size_flags_horizontal = 3
 script = ExtResource( 10 )
 
-[node name="Label" type="Label" parent="Panel/Margin/VBox/FileHBox"]
+[node name="Label" type="Label" parent="Margin/VBox/FileHBox"]
 margin_top = 5.0
-margin_right = 50.0
-margin_bottom = 25.0
+margin_right = 27.0
+margin_bottom = 19.0
 text = "File:"
 
-[node name="LineEdit" type="LineEdit" parent="Panel/Margin/VBox/FileHBox"]
-margin_left = 54.0
-margin_right = 186.0
-margin_bottom = 30.0
+[node name="LineEdit" type="LineEdit" parent="Margin/VBox/FileHBox"]
+margin_left = 31.0
+margin_right = 230.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="ExtensionMenu" type="MenuButton" parent="Panel/Margin/VBox/FileHBox"]
-margin_left = 190.0
-margin_right = 314.0
-margin_bottom = 30.0
+[node name="ExtensionMenu" type="MenuButton" parent="Margin/VBox/FileHBox"]
+margin_left = 234.0
+margin_right = 316.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 72, 24 )
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
@@ -184,67 +167,31 @@ text = "* All Images"
 icon = ExtResource( 5 )
 flat = false
 expand_icon = true
-items = [ "* All Images", null, 0, false, false, 0, 0, null, "", false, "* All Images", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "* All Images", null, 0, false, false, 0, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonHBox" type="HBoxContainer" parent="Panel/Margin/VBox"]
-margin_top = 413.0
-margin_right = 314.0
+[node name="ButtonHBox" type="HBoxContainer" parent="Margin/VBox"]
+margin_top = 418.0
+margin_right = 316.0
 margin_bottom = 433.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_constants/separation = 20
 script = ExtResource( 11 )
 
-[node name="OkButton" type="Button" parent="Panel/Margin/VBox/ButtonHBox"]
-margin_right = 147.0
-margin_bottom = 20.0
+[node name="OkButton" type="Button" parent="Margin/VBox/ButtonHBox"]
+margin_right = 148.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 custom_constants/hseparation = 0
 text = "Ok"
 
-[node name="CancelButton" type="Button" parent="Panel/Margin/VBox/ButtonHBox"]
-margin_left = 167.0
-margin_right = 314.0
-margin_bottom = 20.0
+[node name="CancelButton" type="Button" parent="Margin/VBox/ButtonHBox"]
+margin_left = 168.0
+margin_right = 316.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 custom_constants/hseparation = 0
 text = "Cancel"
-
-[node name="RectHandlerContainer" parent="Panel" instance=ExtResource( 1 )]
-size_flags_horizontal = 0
-size_flags_vertical = 0
-_windowRect = NodePath("../..")
-
-[node name="HandlerTop" parent="Panel/RectHandlerContainer" index="0"]
-modulate = Color( 1, 1, 1, 1 )
-margin_right = 336.0
-handler_direction = 0
-debug_mode = false
-_windowRect = NodePath("../../..")
-
-[node name="HandlerBottom" parent="Panel/RectHandlerContainer" index="1"]
-modulate = Color( 1, 1, 1, 1 )
-margin_top = 443.0
-margin_right = 336.0
-margin_bottom = 453.0
-debug_mode = false
-_windowRect = NodePath("../../..")
-
-[node name="HandlerLeft" parent="Panel/RectHandlerContainer" index="2"]
-modulate = Color( 1, 1, 1, 1 )
-margin_bottom = 453.0
-debug_mode = false
-_windowRect = NodePath("../../..")
-
-[node name="HandlerRight" parent="Panel/RectHandlerContainer" index="3"]
-modulate = Color( 1, 1, 1, 1 )
-margin_left = 326.0
-margin_right = 336.0
-margin_bottom = 453.0
-debug_mode = false
-_windowRect = NodePath("../../..")
-
-[editable path="Panel/RectHandlerContainer"]

@@ -16,9 +16,7 @@ func _ready() -> void:
 	button = $Panel/VBox/Button
 	lineEdit = $Panel/VBox/LineEdit
 
-#	if !button.is_connected("pressed", self, '_on_Button_pressed'):
 	button.connect("pressed", self, '_on_Button_pressed')
-#	if !lineEdit.is_connected("text_entered", self, '_on_LineEdit_entered'):
 	lineEdit.connect("text_entered", self, '_on_LineEdit_entered')
 	
 	lineEdit.grab_focus()

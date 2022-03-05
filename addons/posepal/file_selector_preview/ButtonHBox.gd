@@ -8,6 +8,7 @@ func _ready() -> void:
 func _on_OkButton_pressed():
 	var Dir :Directory= Directory.new()
 	var filepath :String= owner.current_dir + owner.current_file
+	
 	if Dir.file_exists(filepath):
 		owner.emit_signal("file_selected", filepath)
 	owner.queue_free()

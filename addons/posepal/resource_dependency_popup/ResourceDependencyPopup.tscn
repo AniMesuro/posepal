@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=3]
+[ext_resource path="res://addons/posepal/resource_dependency_popup/GuessButton.gd" type="Script" id=4]
+[ext_resource path="res://addons/posepal/resource_dependency_popup/FileVBox.gd" type="Script" id=5]
+[ext_resource path="res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.gd" type="Script" id=6]
+[ext_resource path="res://addons/posepal/assets/icons/icon_warning.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 10.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.164706, 0.152941, 0.14902, 1 )
+
+[node name="ResourceDependencyPopup" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -139.0
+margin_right = 223.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 277, 175 )
+input_pass_on_modal_close_click = false
+theme = ExtResource( 2 )
+popup_exclusive = true
+resizable = true
+script = ExtResource( 6 )
+
+[node name="MarginCon" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 5
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="MarginCon"]
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 427.0
+margin_bottom = 257.0
+custom_constants/separation = 10
+
+[node name="TitleBar" parent="MarginCon/VBox" instance=ExtResource( 1 )]
+margin_right = 407.0
+title_name = "Resource Dependency for Poselib"
+icon_texture = ExtResource( 3 )
+window_path = NodePath("../../..")
+
+[node name="GuessButton" type="Button" parent="MarginCon/VBox"]
+margin_left = 287.0
+margin_top = 34.0
+margin_right = 407.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 120, 0 )
+hint_tooltip = "Only works if you fix a path manually first.
+It works by comparing each unique path."
+size_flags_horizontal = 10
+disabled = true
+text = "Guess new paths"
+script = ExtResource( 4 )
+
+[node name="VBox" type="VBoxContainer" parent="MarginCon/VBox"]
+margin_top = 59.0
+margin_right = 407.0
+margin_bottom = 227.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="PanelCon" type="PanelContainer" parent="MarginCon/VBox/VBox"]
+margin_right = 407.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBox" type="HBoxContainer" parent="MarginCon/VBox/VBox/PanelCon"]
+margin_right = 407.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 12 )
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginCon/VBox/VBox/PanelCon/HBox"]
+margin_top = 1.0
+margin_right = 201.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "Current path"
+align = 1
+
+[node name="Label2" type="Label" parent="MarginCon/VBox/VBox/PanelCon/HBox"]
+margin_left = 205.0
+margin_top = 1.0
+margin_right = 407.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "New path"
+align = 1
+
+[node name="ScrollCon" type="ScrollContainer" parent="MarginCon/VBox/VBox"]
+margin_top = 16.0
+margin_right = 407.0
+margin_bottom = 168.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 3 )
+
+[node name="FileVBox" type="VBoxContainer" parent="MarginCon/VBox/VBox/ScrollCon"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 402.0
+margin_bottom = 147.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = ExtResource( 5 )
+
+[node name="OkHBox" type="HBoxContainer" parent="MarginCon/VBox"]
+margin_top = 237.0
+margin_right = 407.0
+margin_bottom = 252.0
+
+[node name="WarningIcon" type="TextureRect" parent="MarginCon/VBox/OkHBox"]
+margin_right = 16.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 16, 0 )
+hint_tooltip = "There are still broken paths in the list."
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="OkButton" type="Button" parent="MarginCon/VBox/OkHBox"]
+margin_left = 20.0
+margin_right = 407.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Ok"

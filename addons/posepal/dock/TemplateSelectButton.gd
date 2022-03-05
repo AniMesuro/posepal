@@ -12,13 +12,12 @@ func _on_pressed():
 	owner.load_poseData()
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
-	if is_instance_valid(poselib):
-#	if owner.poseData != {}:
-#		if !poselib.poseData.has('collections'):
-#			_reset_selection()
-#			return
-		for collection in poselib.poseData.keys():
-			popup.add_item(collection)
+	if !is_instance_valid(poselib):
+		return
+	if !poselib.is_references_valid:
+		return
+	for collection in poselib.poseData.keys():
+		popup.add_item(collection)
 
 func _on_id_selected(id :int):
 	var poselib: RES_PoseLibrary = owner.current_poselib
@@ -35,12 +34,8 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		_reset_selection()
 		return
-#	if !owner.poseData.has('collections'):
-#		_reset_selection()
-#		return
 	if !owner.poselib_template in poselib.poseData.keys():
 		_reset_selection()
 		return
@@ -48,10 +43,7 @@ func _on_PoseLibrary_updated_reference(reference :String):
 func _on_issued_forced_selection():
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		return
-#	if !owner.poseData.has('collections'):
-#		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.templateData.has(owner.poselib_template):
@@ -72,15 +64,9 @@ func _set_is_being_edited(value: bool):
 		text = owner.poselib_template
 	is_being_edited = value
 
-func _on_PoseCreationVBox_pose_editing_canceled():
+func _on_poseCreationHBox_pose_editing_canceled():
 	self.is_being_edited = false
-	var poseCreationVBox: VBoxContainer = $"../../../../../../ExtraHBox/PoseCreationVBox"
-	poseCreationVBox.disconnect("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled")
-	poseCreationVBox.disconnect("pose_editing_saved", self, "_on_PoseCreationVBox_pose_editing_saved")
 
-func _on_PoseCreationVBox_pose_editing_saved():
+func _on_poseCreationHBox_pose_editing_saved():
 	self.is_being_edited = false
-	var poseCreationVBox: VBoxContainer = $"../../../../../../ExtraHBox/PoseCreationVBox"
-	poseCreationVBox.disconnect("pose_editing_canceled", self, "_on_PoseCreationVBox_pose_editing_canceled")
-	poseCreationVBox.disconnect("pose_editing_saved", self, "_on_PoseCreationVBox_pose_editing_saved")
 	

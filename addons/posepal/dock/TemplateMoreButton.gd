@@ -6,21 +6,19 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 func is_name_valid(new_name: String):
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if (new_name == 'default') or (new_name == '') or (new_name in poselib.templateData.keys()):
-		print('no')
+		print('[posepal] Name invalid.')
 		return false
 	return true
 
 func key_template_pose():
 	var animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	if !is_instance_valid(animPlayer):
-#		print("[PosePal] Can't key because selected AnimationPlayer not found.")
 		return
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	
 	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
 	
-	print('key templaet')
 	for nodepath in poselib.templateData[owner.poselib_template]:
 		var node: Node = animRoot.get_node(nodepath)
 		for property in poselib.templateData[owner.poselib_template][nodepath]:
@@ -31,7 +29,6 @@ func key_template_pose():
 				anim.track_set_path(tr_property, track_path)
 			var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			var key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
-#			print("keyvalu ",key_value)
 			anim.track_insert_key(tr_property, current_time, key_value)
 
 func _on_pressed():
@@ -39,13 +36,9 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-#	popupMenu.rect_size = popupMenu.rect_min_size
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#		if !owner.poseData.has('collections'):
-#			owner.poseData['collections'] = {}
 	if !poselib.poseData.has(owner.poselib_template):
 		popupMenu.add_item('Create', Items.CREATE)
 	elif owner.poselib_template == 'default':
@@ -59,24 +52,20 @@ func _on_pressed():
 		popupMenu.add_item('Key', Items.KEY)
 
 func _on_id_pressed(id: int):
-	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#		if !owner.poseData.has('collections'):
-#			owner.poseData['collections'] = {}
 	match id:
 		Items.EDIT:
-			# Edit Filter pose
 			owner.load_poseData()
-			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
-			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
-				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
+			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 		Items.CREATE:
 			ask_for_name("Please insert the name of the new template.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
@@ -95,14 +84,12 @@ func _on_id_pressed(id: int):
 			owner.emit_signal("issued_forced_selection")
 			owner.save_poseData()
 		Items.APPLY:
-			poseCreationVBox.apply_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.apply_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 		Items.KEY:
 			key_template_pose()
-			
-
 
 func _on_name_settled(new_name: String, id: int):
-	var poseCreationVBox = owner.get_node("VSplit/ExtraHBox/PoseCreationVBox")
+	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -114,13 +101,13 @@ func _on_name_settled(new_name: String, id: int):
 			poselib.templateData[new_name] = {}
 			owner.poselib_template = new_name
 			owner.emit_signal("issued_forced_selection")
-			poseCreationVBox.edit_pose(0, poseCreationVBox.PoseType.TEMPLATE)
+			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 			var menuButton: MenuButton = $"../MenuButton"
 			menuButton.is_being_edited = true
-			if !poseCreationVBox.is_connected("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled"):
-				poseCreationVBox.connect("pose_editing_canceled", menuButton, "_on_PoseCreationVBox_pose_editing_canceled")
-			if !poseCreationVBox.is_connected("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved"):
-				poseCreationVBox.connect("pose_editing_saved", menuButton, "_on_PoseCreationVBox_pose_editing_saved")
+			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
+			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 				
 		Items.RENAME:
 			if !is_name_valid(new_name):
@@ -135,7 +122,3 @@ func _on_name_settled(new_name: String, id: int):
 			
 			owner.emit_signal("issued_forced_selection")
 	owner.save_poseData()
-
-
-
-

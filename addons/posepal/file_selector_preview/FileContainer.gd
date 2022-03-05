@@ -1,10 +1,10 @@
 tool
 extends GridContainer
 
-const SCN_FileIcon :PackedScene= preload("res://addons/rhubarb_lipsync_integration/file_selector_preview/FileIcon.tscn")
-const TEX_IconFolder :StreamTexture= preload("res://addons/rhubarb_lipsync_integration/assets/icons/icon_folder.png")
+const SCN_FileIcon: PackedScene = preload("res://addons/posepal/file_selector_preview/FileIcon.tscn")
+const TEX_IconFolder: StreamTexture = preload("res://addons/posepal/assets/icons/icon_folder.png")
 
-var fileSelectorPreview :Control
+var fileSelectorPreview: Control
 var selectedFileIcon = null setget _set_selectedFileIcon
 
 func _enter_tree() -> void:
@@ -12,13 +12,10 @@ func _enter_tree() -> void:
 
 func update_file_list():
 	get_parent().scroll_vertical = 0
-	#Clear children
 	for child in get_children():
 		child.queue_free()
 	
-	# Populate FileContainer with a FileIcon for each file
 	for folder in owner.dir_folders:
-		# Ignore folder if folder special directory
 		if folder == '.' or folder == '..':
 			continue
 			

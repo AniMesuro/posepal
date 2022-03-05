@@ -23,7 +23,7 @@ func setup(_file_name :String, _type :int= TYPE.file):
 	label.text = file_name
 	my_type = _type
 	# files beginning with . are not extensions
-	var preview :TextureButton= $Preview
+	var preview: TextureButton = $Preview
 	if my_type == TYPE.folder:
 		preview.texture_normal = get_parent().TEX_IconFolder
 		return

@@ -11,13 +11,9 @@ func _on_pressed():
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#		if !owner.poseData.has('collections'):
-#			_reset_selection()
-##			text = msg_no_selection
-#			return
+	if !poselib.is_references_valid:
+		return
 	if !poselib.poseData.has(owner.poselib_template):
-#			text = msg_no_selection
 		_reset_selection()
 		return
 	for collection in poselib.poseData[owner.poselib_template].keys():
@@ -30,11 +26,10 @@ func _on_id_selected(id :int):
 		return
 	text = poselib.poseData[owner.poselib_template].keys()[id]
 	icon = owner.editorControl.get_icon("Folder", "EditorIcons")
-	owner.set("poselib_collection", poselib.poseData[owner.poselib_template].keys()[id])
 	
+	owner.set("poselib_collection", poselib.poseData[owner.poselib_template].keys()[id])
 	owner.emit_signal("updated_reference", owner_reference)
-	var posePalette :GridContainer= owner.posePalette#get_node("VBox/PoseContainer/PosePalette")
-#	posePalette.fill_previews()
+	var posePalette :GridContainer= owner.posePalette
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	owner.load_poseData()
@@ -46,12 +41,8 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		_reset_selection()
 		return
-#	if !owner.poseData.has('collections'):
-#		_reset_selection()
-#		return
 	if !owner.poselib_template in poselib.poseData.keys():
 		_reset_selection()
 		return
@@ -70,17 +61,13 @@ func _reset_selection():
 
 func _on_issued_forced_selection():
 	var poselib: RES_PoseLibrary = owner.current_poselib
-#	_reset_selection()
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		return
-#	if !owner.poseData.has('collections'):
-#		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
 		return
 	text = owner.poselib_collection
 	icon = owner.editorControl.get_icon("Folder", "EditorIcons")
-	var posePalette: GridContainer= owner.posePalette#get_node("VBox/ScrollContainer/PosePalette")
+	var posePalette: GridContainer= owner.posePalette
 	posePalette.fill_previews()

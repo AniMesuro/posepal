@@ -2,7 +2,6 @@ tool
 extends VBoxContainer
 
 const SCN_PropertyDisplay: PackedScene = preload("res://addons/posepal/batch_key_popup/property_display/PropertyDisplay.tscn")
-#const SCN_NodeItem: PackedScene = preload("res://addons/posepal/batch_key_popup/NodeItem.tscn")
 const SCN_PropertyItem: PackedScene = preload("res://addons/posepal/batch_key_popup/property_display/PropertyItem.tscn")
 
 export var title: String = 'Node'
@@ -11,32 +10,29 @@ var unselectedPropertyData: Dictionary = {}
 
 func fill_properties():
 	return
-#	SCN_PropertyItem.instance()
 
 func insert_propertyDisplay(nodeItem: Control, child_id: int):
 	var propertyDisplay: Control = SCN_PropertyDisplay.instance()
-#	propertyDisplay.nodeItem = nodeItem
 	var batchAddVBox: VBoxContainer = $"../../../BatchAddVBox"
 	var batchAddLineEdit: LineEdit = $"../../../BatchAddVBox/HBox/LineEdit"
 	var editedSceneRoot = get_tree().edited_scene_root
 	var poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
-	
 	var node = nodeItem.node
+	
 	propertyDisplay.node = node
 	propertyDisplay.title = node.name
 	propertyDisplay.display_id = child_id
 	propertyDisplay.node_nodepath = poseSceneRoot.get_path_to(node)
 	
-		# Find adequate child_id
 	var prev_child: Node = null
 	var first: bool = false
 	
 	for i in get_child_count():
 		var ch: Node = get_child(i)
 		if propertyDisplay.display_id < ch.display_id:
-			if i >0: prev_child = get_child(i-1); else: first = true
-#			print(node.name,' ',i)
+			if i > 0: prev_child = get_child(i-1); else: first = true
 			break
+	
 	if is_instance_valid(prev_child):
 		add_child_below_node(prev_child, propertyDisplay)#new_child_id)
 	else:
@@ -53,7 +49,6 @@ func insert_propertyDisplay(nodeItem: Control, child_id: int):
 			batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
 		elif (batchAddVBox.valid_state == batchAddVBox.ValidState.VALID) && !node_valid:
 			batchAddVBox.valid_state = batchAddVBox.ValidState.PARTIAL
-#	sort_children()
 
 func sort_children():
 	if get_children().size() == 0: return
@@ -77,21 +72,15 @@ func sort_children():
 		var sch: Control = sorted_children[i]
 		move_child(sch, i)
 
-
-
 func remove_propertyDisplay(node: Node):
-#	print('remove ',node)
 	for ch in get_children():
 		if ch.node == node:
-#			var editedSceneRoot = get_tree().edited_scene_root
-#			var poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
 			unselectedPropertyData[ch.node_nodepath] = []
 			var all_properties: PoolStringArray = ch.get_properties()
 			unselectedPropertyData[ch.node_nodepath].resize(all_properties.size())
-#			print("full unsel ",unselectedPropertyData)
+			
 			for i in all_properties.size():
 				var property: String = all_properties[i]
-#				print('89 property ',property)
 				unselectedPropertyData[ch.node_nodepath][i] = property
 			ch.queue_free()
 			return

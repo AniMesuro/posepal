@@ -8,20 +8,13 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-#	popupMenu.rect_size = rect_min_size
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#	if !owner.poseData.has('collections'):
-#		owner.poseData['collections'] = {}
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
-#		return
 		popupMenu.add_item('Create', Items.CREATE)
-#	elif owner.poselib_collection == 'default':
-#		popupMenu.add_item('Create', Items.CREATE)
 	else:
 		popupMenu.add_item('Create',Items.CREATE)
 		popupMenu.add_item('Rename',Items.RENAME)
@@ -34,25 +27,21 @@ func _on_id_pressed(id: int):
 	match id:
 		Items.CREATE:
 			ask_for_name("Please insert the name of the new subcollection.")
-#			return
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
 		Items.RENAME:
 			if owner.poselib_collection == 'default':
 				return
 			ask_for_name("Please insert the new name of the" + owner.poselib_collection + " subcollection.")
-#			return
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])
 		Items.ERASE:
-			# Are you sure?
+			# Needs confirmation for the future.
 			if owner.poselib_collection == 'default':
 				return
 			poselib.poseData[owner.poselib_template].erase(owner.poselib_collection)
 			owner.emit_signal("issued_forced_selection")
 			owner.save_poseData()
 
-
 func _on_name_settled(new_name: String, id: int):
-	print('hey ',new_name)
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -80,4 +69,3 @@ func is_name_valid(new_name: String) -> bool:
 	or (new_name == '') or (new_name in poselib.poseData[owner.poselib_template])):
 		return false
 	return true
-		

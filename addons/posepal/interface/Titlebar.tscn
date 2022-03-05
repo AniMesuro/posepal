@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/posepal/assets/JetBrainsMono-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://addons/posepal/interface/TitleBar.gd" type="Script" id=2]
 [ext_resource path="res://addons/posepal/assets/icons/icon_not.png" type="Texture" id=3]
-[ext_resource path="res://addons/posepal/plugin_icon.png" type="Texture" id=4]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
@@ -16,17 +15,15 @@ margin_right = 357.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 title_name = "Title Name"
 icon_texture = SubResource( 1 )
+window_path = NodePath("")
 
 [node name="IconRect" type="TextureRect" parent="."]
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
-texture = ExtResource( 4 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 6
 
