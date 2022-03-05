@@ -23,9 +23,7 @@ var window_distance :Vector2
 var last_mouse_position :Vector2
 var last_size :Vector2
 
-var _visible :bool= false setget set_pseudovisible
-#var window_distance_tl :Vector2 #topleft
-#var window_distance_br :Vector2 #bottomright
+var _visible: bool = false setget set_pseudovisible
 
 var handlerContainer :Control
 export var _windowRect :NodePath setget _set_windowRect
@@ -50,9 +48,8 @@ func _enter_tree() -> void:
 func _set_handler_direction(value :int):
 	handler_direction = value
 	if _windowRect == null:
-		print(name,' path to window node is null')
+		print('[posepal]',name,' path to window node is null')
 		return
-	
 	if !is_instance_valid(self):
 		return
 	if !is_inside_tree():
@@ -67,14 +64,12 @@ func _fix_handler_rect(direction :int):
 	if !is_instance_valid(windowRect):
 		return
 	
-	
 	match direction:
 		DIRECTION.BOTTOM:
 			rect_position.x = 0
 			rect_global_position.y = windowRect.rect_global_position.y + windowRect.rect_size.y - handler_size
 			rect_size = Vector2(windowRect.rect_size.x, handler_size)
 			mouse_default_cursor_shape = Control.CURSOR_VSIZE
-			
 			distance_to_edge.y = windowRect.rect_size.y - rect_global_position.y # position from windowrect title to OS titlebar?
 		
 		DIRECTION.TOP:
@@ -82,31 +77,28 @@ func _fix_handler_rect(direction :int):
 			rect_global_position = windowRect.rect_global_position
 			rect_size = Vector2(windowRect.rect_size.x, handler_size)
 			mouse_default_cursor_shape = Control.CURSOR_VSIZE
-			
 			distance_to_edge = windowRect.rect_size - rect_global_position
+			
 		DIRECTION.RIGHT:
 			rect_position.y = 0
 			rect_global_position.x = windowRect.rect_global_position.x + windowRect.rect_size.x - handler_size
 			rect_size = Vector2(handler_size, windowRect.rect_size.y)
 			mouse_default_cursor_shape = Control.CURSOR_HSIZE
-			
 			distance_to_edge = windowRect.rect_size - rect_global_position
+			
 		DIRECTION.LEFT:
 			rect_position = Vector2(0,0)
 			rect_global_position = windowRect.rect_global_position
 			rect_size = Vector2(handler_size, windowRect.rect_size.y)
 			mouse_default_cursor_shape = Control.CURSOR_HSIZE
-			
 			distance_to_edge = windowRect.rect_size - rect_global_position
 			
 	window_distance = Vector2(
 		windowRect.rect_size.x - rect_global_position.x,
 		windowRect.rect_size.y - rect_global_position.y
 	)
-	
 
 func _set_windowRect(value :NodePath= _windowRect):
-	#if is running on editor.
 	if !is_instance_valid(self):
 		return
 	if !is_inside_tree():
@@ -115,7 +107,6 @@ func _set_windowRect(value :NodePath= _windowRect):
 		return
 	
 	var _window = get_node_or_null(value)
-	
 	if !is_instance_valid(_window):
 		return
 	if !_window is Control:
@@ -148,7 +139,6 @@ func _set_windowRect(value :NodePath= _windowRect):
 		DIRECTION.LEFT:
 			if _is_in_RectContainer():
 				handlerContainer.handlerLeft= self
-#				return
 			elif "handlerLeft" in windowRect:
 				handlerContainer.handlerLeft= self
 			else:
@@ -161,26 +151,22 @@ func _set_windowRect(value :NodePath= _windowRect):
 				handlerContainer.handlerRight = self
 			else:
 				return
+				
 	_fix_handler_rect(handler_direction)
 	if get_tree().edited_scene_root == windowRect.owner:
 		if modulate == Color.transparent:
 			modulate = Color.white
-#	print("windowRect doesn't have handler reference variables. Please define references on ",windowRect.name," or use another Control node")
 
-#var start_window_position: Vector2
 func _on_RectHandler_gui_input(event :InputEvent):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == BUTTON_LEFT:
 			mouse_offset = get_local_mouse_position()
-			#assumes Scene owner is a window.
-			
 			window_position  = windowRect.rect_global_position
-#			start_window_position  = windowRect.rect_global_position
 			window_size = windowRect.rect_size
 			window_min_size = windowRect.rect_min_size
 			
 			last_mouse_position = get_global_mouse_position() 
-			last_size = windowRect.rect_size #+ mouse_offset
+			last_size = windowRect.rect_size
 			following = !following
 
 func _is_in_RectContainer() -> bool:
@@ -188,7 +174,6 @@ func _is_in_RectContainer() -> bool:
 		return false
 	if get_parent().get_script() == null:
 		return false
-	
 	if get_parent().get_script().resource_path == "res://addons/rhubarb_lipsync_integration/interface/RectHandlerContainer.gd":
 		return true
 	return false
@@ -212,21 +197,18 @@ func _process(delta: float) -> void:
 			DIRECTION.RIGHT:
 				windowRect.rect_size.x = last_size.x - (last_mouse_position.x - get_global_mouse_position().x)
 				rect_global_position.x = window_position.x + windowRect.rect_size.x - handler_size
-#				windowRect.rect_size.x = get_global_mouse_position().x - mouse_offset.x + window_distance.x
-#				rect_global_position.x = windowRect.rect_size.x - window_distance.x
 				
 				handlerContainer.handlerTop.rect_size.x = windowRect.rect_size.x
 				handlerContainer.handlerBottom.rect_size.x = windowRect.rect_size.x
 			DIRECTION.LEFT:
 				windowRect.rect_global_position.x = get_global_mouse_position().x - mouse_offset.x
-				windowRect.rect_size.x = last_size.x + last_mouse_position.x - get_global_mouse_position().x#- mouse_offset.x
+				windowRect.rect_size.x = last_size.x + last_mouse_position.x - get_global_mouse_position().x
 
 				handlerContainer.handlerRight.rect_global_position.x = windowRect.rect_global_position.x + windowRect.rect_size.x - handler_size
 				handlerContainer.handlerTop.rect_size.x = windowRect.rect_size.x
 				handlerContainer.handlerBottom.rect_size.x= windowRect.rect_size.x
 
 # This is stupidly overcomplicated, but it works for now.
-
 func set_pseudovisible(value :bool):
 	if !is_inside_tree():
 		yield(self, "tree_entered")
@@ -241,12 +223,10 @@ func set_pseudovisible(value :bool):
 	_visible = value
 	if value:
 		if get_tree().edited_scene_root == windowRect.owner:
-#			if modulate == Color.transparent:
 			modulate = Color.white
 		else:
 			modulate = Color.transparent
 	else:
-	#	if get_tree().edited_scene_root == windowRect.owner:
 		modulate = Color.transparent
 
 func _on_visibility_changed():

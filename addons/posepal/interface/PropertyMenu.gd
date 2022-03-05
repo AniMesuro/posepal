@@ -10,8 +10,8 @@ var popup :PopupMenu
 func _ready() -> void:
 	if get_tree().edited_scene_root == self:
 		return
-	
 	popup = get_popup()
+	
 	connect("pressed", self, "_on_pressed")
 	popup.connect("id_pressed", self, "_on_id_selected")
 	owner.connect("updated_reference", self, "_on_PoseLibrary_updated_reference")
@@ -21,7 +21,3 @@ func _ready() -> void:
 func _reset_selection():
 	text = msg_no_selection
 	icon = TEX_ExpandIcon
-
-#func _on_PoseLibrary_updated_reference(reference :String):
-#	# Checks if own property is valid.
-#	if owner.get(owner_reference)

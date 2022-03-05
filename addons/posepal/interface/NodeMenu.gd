@@ -45,26 +45,18 @@ func _on_Button_pressed() -> void:
 				popup.add_item('./'+editedSceneRoot.name)
 	if edited_scene_child.size() == 0:
 		text = msg_no_selection
-#	_validate_parameters()
-
 
 func _on_PopupMenu_item_selected(id :int):
 	last_index = id
 	var item_name :String= popup.get_item_text(id)
 	text = item_name
 	hint_tooltip = text
-	
-#	if !is_instance_valid(owner.pluginInstance):
-#		owner.pluginInstance = owner._get_pluginInstance()
-	
 	icon = owner.pluginInstance.get_editor_interface().get_inspector().get_icon(node_type, "EditorIcons")
-#	print('selected ',editedSceneRoot.get_node(item_name))
+	
 	if item_name != './'+editedSceneRoot.name:
 		owner.set(owner_reference, editedSceneRoot.get_node(item_name))
 	else:
 		owner.set(owner_reference, editedSceneRoot)
-		
-	print(owner.get(owner_reference))
 	owner.emit_signal("updated_reference", owner_reference)
 
 func _on_PoseLibrary_updated_reference(reference):
@@ -87,7 +79,6 @@ func _validate_parameters():
 		text = msg_no_selection
 		icon = TEX_IconExpand
 		
-
 func _reset_selection():
 	text = msg_no_selection
 	icon = TEX_IconExpand

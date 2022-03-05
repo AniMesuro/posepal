@@ -1,8 +1,6 @@
 tool
 extends TextureRect
 
-
-
 var WarningText: Dictionary = {
 	'': "",
 	'edited_scene_invalid': "Current Edited Scene is Invalid.",
@@ -16,10 +14,10 @@ var WarningText: Dictionary = {
 	'animplayeredit_empty': "Could not add keyframe because Animation is not selected on AnimationPlayerEditor.",
 	'animsprite_empty': "AnimatedSprite lacks a SpriteFrames resource."
 }
-var current_warning: String = ''
 
 # Maybe toolhint should display all warning data instead of just current_warning?
 var warning_data: PoolStringArray = PoolStringArray([])
+var current_warning: String = ''
 
 func _enter_tree() -> void:
 	visible = false
@@ -32,8 +30,9 @@ func _enter_tree() -> void:
 # Warning added to the warning_data
 func _on_warning_issued(warning_key :String):
 	if !warning_key in WarningText:
-		print('This warning is Invalid.')
+		print('[posepal] Warning ',warning_key,' is invalid.')
 		return
+	
 	visible = true
 	hint_tooltip = WarningText[warning_key]
 	current_warning = warning_key
@@ -46,7 +45,6 @@ func _on_warning_fixed(warning_key :String):
 	if (warning_key in warning_data):
 		visible = false
 		hint_tooltip = WarningText['']
-			
 		
 		for i in warning_data.size():
 			if warning_data[i] == warning_key:

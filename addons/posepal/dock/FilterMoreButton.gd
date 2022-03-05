@@ -2,26 +2,18 @@ tool
 extends "res://addons/posepal/interface/PropertyMoreButton.gd"
 
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
-#var poseCreationHBox: HBoxContainer
-#func _ready() -> void:
-#	var poseCreationHBox = $"../../../ExtraHBox/poseCreationHBox"#owner.get_node("VBox/ExtraHBox/poseCreationHBox")
-	
 
 func _on_pressed():
 	popupMenu = get_popup()
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-#	popupMenu.rect_size = popupMenu.rect_min_size
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#	if !owner.poseData.has('groups'):
-#		owner.poseData['groups'] = {}
 	if !poselib.filterData.has(owner.poselib_filter):
 		popupMenu.add_item('Create', Items.CREATE)
-	elif owner.poselib_template == 'none': # Not recommended, but user can edit properties of a key (NOT NODES)
+	elif owner.poselib_template == 'none': 
 		popupMenu.add_item('Edit', Items.EDIT)
 		popupMenu.add_item('Create', Items.CREATE)
 	else:
@@ -32,16 +24,11 @@ func _on_pressed():
 
 func _on_id_pressed(id: int):
 	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
-	print(poseCreationHBox)
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-#	if owner.poseData != {}:
-#		if !owner.poseData.has('groups'):
-#			owner.poseData['groups'] = {}
 	match id:
 		Items.EDIT:
-			# Edit Filter pose
 			owner.load_poseData()
 			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.FILTER)
 			var menuButton: MenuButton = $"../MenuButton"
@@ -65,7 +52,6 @@ func _on_id_pressed(id: int):
 			owner.poselib_filter = 'none'
 			owner.save_poseData()
 			owner.emit_signal("issued_forced_selection")
-
 
 func _on_name_settled(new_name: String, id: int):
 	var poselib: RES_PoseLibrary = owner.current_poselib

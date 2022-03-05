@@ -13,15 +13,9 @@ func _on_pressed():
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-		print('poselib n v')
 		return
 	if !poselib.is_references_valid:
-		print('ref not al')
 		return
-#	if owner.poseData != {}:
-#		if !poselib.poseData.has('collections'):
-#			_reset_selection()
-#			return
 	for collection in poselib.poseData.keys():
 		popup.add_item(collection)
 
@@ -40,12 +34,8 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		_reset_selection()
 		return
-#	if !owner.poseData.has('collections'):
-#		_reset_selection()
-#		return
 	if !owner.poselib_template in poselib.poseData.keys():
 		_reset_selection()
 		return
@@ -53,10 +43,7 @@ func _on_PoseLibrary_updated_reference(reference :String):
 func _on_issued_forced_selection():
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
-#	if owner.poseData == {}:
 		return
-#	if !owner.poseData.has('collections'):
-#		return
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.templateData.has(owner.poselib_template):
@@ -79,14 +66,7 @@ func _set_is_being_edited(value: bool):
 
 func _on_poseCreationHBox_pose_editing_canceled():
 	self.is_being_edited = false
-#	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/poseCreationHBox"
-#	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
-#	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 
 func _on_poseCreationHBox_pose_editing_saved():
 	self.is_being_edited = false
-	
-#	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
-#	poseCreationHBox.disconnect("pose_editing_canceled", self, "_on_poseCreationHBox_pose_editing_canceled")
-#	poseCreationHBox.disconnect("pose_editing_saved", self, "_on_poseCreationHBox_pose_editing_saved")
 	

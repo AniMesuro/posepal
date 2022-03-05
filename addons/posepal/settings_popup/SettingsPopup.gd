@@ -15,15 +15,11 @@ func load_settings():
 	var extensionMenu: MenuButton = $"MarginCon/VBox/ExtensionHBox/MenuButton"
 	var extensionPopup: PopupMenu = extensionMenu.get_popup()
 	extensionMenu.text = extensionPopup.get_item_text(settings.poselib_extension)
-	
-#	print(extensionMenu.items)#select(settings.poselib_extension)
 
 func _ready() -> void:
 	var saveButton: Button = $"MarginCon/VBox/SaveButton"
 	saveButton.connect("pressed", self, "_on_saveButton_pressed")
-	
 	load_settings()
-	
 
 func _get_pluginInstance() -> EditorPlugin:
 	if is_instance_valid(pluginInstance):
@@ -39,10 +35,5 @@ func _on_saveButton_pressed():
 	settings.poselib_extension = $"MarginCon/VBox/ExtensionHBox".selected_id
 	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
 	posepalDock.save_poseData()
-	
-	
-		
-		
-	
 	
 	queue_free()

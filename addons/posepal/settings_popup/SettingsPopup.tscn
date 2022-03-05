@@ -68,7 +68,7 @@ text = "tres"
 icon = ExtResource( 2 )
 flat = false
 expand_icon = true
-items = [ "tres", null, 0, false, false, 0, 0, null, "", false, "res", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "tres", null, 0, false, false, 0, 0, null, "", false, "res", null, 0, false, false, 1, 0, null, "", false, "tres", null, 0, false, false, 2, 0, null, "", false, "res", null, 0, false, false, 3, 0, null, "", false ]
 
 [node name="SaveButton" type="Button" parent="MarginCon/VBox"]
 margin_top = 103.0

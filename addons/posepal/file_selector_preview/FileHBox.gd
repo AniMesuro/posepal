@@ -1,27 +1,26 @@
 tool
 extends HBoxContainer
 
-var all_filters_option :String= "* All Images"
+var all_filters_option: String = "* All Images"
 
 func _ready() -> void:
+	var extensionMenu: MenuButton = $ExtensionMenu
+	
 	$LineEdit.connect("text_entered", self, "_on_text_entered")
-	
-	var extensionMenu :MenuButton= $ExtensionMenu
 	extensionMenu.get_popup().connect("id_pressed", self, "_on_ExtensionMenuPopup_pressed")
-	
 	extensionMenu.get_popup().clear()
 	extensionMenu.get_popup().add_item(all_filters_option)
 	extensionMenu.text = all_filters_option
-#	owner.current_filter = "*"
+	
 func update_extensions():
-	var extensionMenu :MenuButton= $ExtensionMenu
+	var extensionMenu: MenuButton = $ExtensionMenu
 	for extension in owner.filters:
 		extensionMenu.get_popup().add_item(extension)
-
 
 func _on_text_entered(new_text :String):
 	var Dir :Directory= Directory.new()
 	var fileContainer: GridContainer = $"../FilePanel/ScrollContainer/FileContainer"
+	
 	if Dir.file_exists(owner.current_dir + new_text):
 		if new_text.get_extension() in owner.filters:
 			owner.current_file = new_text
@@ -32,8 +31,6 @@ func _on_text_entered(new_text :String):
 					break
 	else:
 		$LineEdit.text = owner.current_file
-
-	
 
 func _on_ExtensionMenuPopup_pressed(id :int):
 	var popupMenu = $ExtensionMenu.get_popup()

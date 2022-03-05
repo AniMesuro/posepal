@@ -5,7 +5,6 @@ extends WindowDialog
 signal file_selected (filepath)
 
 var starting_dir :String= "res://"
-
 var current_file: String = "" setget _set_current_file
 var current_dir: String setget _set_current_dir
 var dir_files: PoolStringArray = PoolStringArray()
@@ -27,33 +26,31 @@ func _enter_tree() -> void:
 		if child is Control:
 			editorControl = child
 			break
-	
 
 func _ready() -> void:
 	current_dir = starting_dir
-#	_list_files()
 
-var filesystem_access :int= FileDialog.ACCESS_RESOURCES
-func setup(access :int, _filters :PoolStringArray,
- all_filters_option :String= "* All files", dialog_title :String= "Please select a file."):
+var filesystem_access: int = FileDialog.ACCESS_RESOURCES
+func setup(access: int, _filters: PoolStringArray,
+ all_filters_option: String = "* All files", dialog_title: String = "Please select a file."):
 	filesystem_access = access
 	filters = _filters
+	
 	$"Margin/VBox/FileHBox".all_filters_option = all_filters_option
 	$"Margin/VBox/TitleBar".title_name = dialog_title
 	$"Margin/VBox/FileHBox".update_extensions()
 	_list_directory()
-#	$"Margin/VBox/FilePanel/ScrollContainer/FileContainer".update_file_list()
 
 func _set_current_dir(new_dir :String):
 	if current_dir.get_base_dir() == new_dir.get_base_dir():
 		$"Margin/VBox/PathHBox/LineEdit".text = current_dir
 		return
-#	var Dir :Directory= Directory.new()
 	
 	if !new_dir.ends_with('/'):
 		current_dir = new_dir.get_base_dir()+'/'
 	else:
 		current_dir = new_dir
+		
 	_list_directory()
 	$"Margin/VBox/PathHBox/LineEdit".text = current_dir
 	self.current_file = ""
@@ -68,12 +65,9 @@ func _set_current_filter(new_filter :String):
 	
 	current_filter = new_filter
 	$"Margin/VBox/FilePanel/ScrollContainer/FileContainer".update_file_list()
-	if current_filter == "*": # All filters
-		pass
 
 func _list_directory():
 	var Dir :Directory
-	# Get folders and files
 	dir_files = []
 	dir_folders = []
 	
@@ -88,6 +82,4 @@ func _list_directory():
 				dir_folders.append(file_name)
 			file_name = Dir.get_next()
 	$"Margin/VBox/FilePanel/ScrollContainer/FileContainer".update_file_list()
-	
-	
 	

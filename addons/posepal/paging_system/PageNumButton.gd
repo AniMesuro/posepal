@@ -1,8 +1,6 @@
 tool
 extends OptionButton
 
-# User will select the page from this ItemMenu 
-
 var pageHBox: HBoxContainer
 func _ready() -> void:
 	pageHBox = $".."
@@ -10,7 +8,6 @@ func _ready() -> void:
 	connect("pressed", self, "_on_pressed")
 
 func _on_item_selected(id: int):
-	# Update pose previews.
 	pageHBox = $'..'
 	pageHBox.current_page = id
 
@@ -22,7 +19,6 @@ func _on_pressed():
 		text = '-1'
 		return
 	
-	# Pagecount from current subcollection.
 	if !poselib.poseData.has(owner.poselib_template):
 		return
 	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
@@ -33,4 +29,3 @@ func update_item_list():
 	clear()
 	for i in pageHBox.page_count:
 		add_item(str(i))
-

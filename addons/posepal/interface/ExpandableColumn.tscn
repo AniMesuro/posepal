@@ -42,6 +42,5 @@ margin_bottom = 16.0
 size_flags_horizontal = 7
 size_flags_vertical = 3
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "ExpandableColumn"
 align = 1
 valign = 1

@@ -41,8 +41,6 @@ func _get_icon_from_extension(_extension: String):
 			icon_name = "StreamTexture"
 	extension = _extension
 	$HBox/FileIcon.texture = editorControl.get_icon(icon_name, "EditorIcons")
-#	add_stylebox_override('selected', )
-
 
 func _ready() -> void:
 	$HBox/OpenButton.connect("pressed", self, "_on_OpenButton_pressed")
@@ -50,9 +48,7 @@ func _ready() -> void:
 func _on_OpenButton_pressed():
 	fileSelectorPreview = SCN_FileSelectorPreview.instance()
 	$HBox/OpenButton.add_child(fileSelectorPreview)
-#	var pure_file: String = old_path.split('/', false, 100)[-1]
 	var pure_file: String = old_path.trim_prefix(old_path.get_base_dir()+'/')
-	print('pure_file ',pure_file,' ',extension)
 	fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray([extension]),
 	"* All files", "Select new path for "+pure_file)
 	fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [], CONNECT_ONESHOT)
