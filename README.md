@@ -6,6 +6,9 @@ The project is a work in progress, so it may have bugs and it can crash Godot.
 posepal is still in development, so you can only install it from the github page.
 There's no stable release yet, so either clone it or download as a zip file and paste it on `res://addons/` of your project.
 
+## Demo Video
+[![hey](https://img.youtube.com/vi/1trtx8Bv6hw/hqdefault.jpg)](https://www.youtube.com/watch?v=1trtx8Bv6hw)
+
 ## Getting Started
 - On the Parameters tab, click on poselib and select the owner of a scene. A poselib resource is created, but it will only save after changes are made to it.
 - Select a filter. The default one is "none", which tracks all nodes inside the edited pose root.
