@@ -297,7 +297,9 @@ func _on_pose_selected(pose_id :int):
 		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
 		for nodepath in final_pose:
 			for property in final_pose[nodepath]:
-				final_pose[nodepath][property]['out'] = 0.0
+				if final_pose[nodepath][property].has('out'):
+					continue
+				final_pose[nodepath][property]['out'] = 1.0
 		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
 		for nodepath in _pose:
 			if !final_pose.has(nodepath):

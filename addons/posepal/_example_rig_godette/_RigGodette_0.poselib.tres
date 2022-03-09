@@ -1844,7 +1844,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 21
+"valr": 12
 },
 "visible": {
 "out": 1.0,
@@ -2054,7 +2054,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 22
+"valr": 16
 },
 "visible": {
 "out": 1.0,
@@ -2170,7 +2170,7 @@ templateData = {
 "texture": {
 "out": 1.0,
 "upmo": 0,
-"valr": 23
+"valr": 19
 },
 "visible": {
 "out": 1.0,
