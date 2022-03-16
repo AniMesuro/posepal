@@ -107,9 +107,11 @@ func load_poseData() -> int:
 
 	var f: File = File.new()
 	if !f.file_exists(poseFile_path):
+		poseFile_path = ''
 		if !is_instance_valid(current_poselib):
 			current_poselib = RES_PoseLibrary.new()
-			current_poselib.owner_filepath = sceneNode.filename
+#			Shoudn't be necessary but it somehow still references values from previous poselibs.
+			current_poselib.clear()
 		return OK
 	current_poselib = load(poseFile_path)
 	var err: int = current_poselib.prepare_loading_resourceReferences()
@@ -143,6 +145,10 @@ func save_poseData():
 	if !is_poseFile_valid:
 		var available_path: String = "#"
 		var user_extension = settings.PoselibExtensions.keys()[settings.poselib_extension]
+		var d: Directory = Directory.new()
+		if !d.dir_exists("res://addons/posepal/.poselibs/"):
+			d.make_dir("res://addons/posepal/.poselibs/")
+
 		for i in 100:
 			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
 			if f.file_exists(available_path):
@@ -155,6 +161,7 @@ func save_poseData():
 			return
 	
 	if is_instance_valid(current_poselib):
+		current_poselib.owner_filepath = selectedScene.filename
 		current_poselib.prepare_saving_resourceReferences()
 		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
 		current_poselib.prepare_loading_resourceReferences()

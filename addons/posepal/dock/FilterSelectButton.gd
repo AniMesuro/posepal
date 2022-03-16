@@ -14,8 +14,8 @@ func _on_pressed():
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
-	if !poselib.is_references_valid:
-		return
+	# if !poselib.is_references_valid:
+	# 	return
 	for node_group in poselib.filterData.keys():
 		popup.add_item(node_group)
 	popup.rect_size = popup.rect_min_size

@@ -42,6 +42,7 @@ func get_child_scenes() -> PoolStringArray:
 
 func _on_id_selected(id :int):
 	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
+	owner.poselib_scene = scene_nodepaths[id]
 	
 #	Only read poseFile
 	var is_poseFile_valid: bool = false
@@ -55,7 +56,6 @@ func _on_id_selected(id :int):
 				is_poseFile_valid = true
 	
 	if is_poseFile_valid:
-		owner.poselib_scene = scene_nodepaths[id]
 		var err: int = owner.load_poseData()
 		if err == ERR_FILE_MISSING_DEPENDENCIES:
 			var resourceDependencyPopup: WindowDialog = SCN_ResourceDependencyPopup.instance()

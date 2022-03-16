@@ -15,7 +15,7 @@ enum ReferenceType {
 export var resourceReferences:  Dictionary = {} # Resource path ref ex. {0: "res://eyes.png"}
 var resourceReferences_res: 	Dictionary = {} # Resource ref ex. {0: [StreamTexture:1234]}
 export var available_res_id: int = 0
-var is_references_valid: bool = false
+var is_references_valid: bool = true
 
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
@@ -55,6 +55,8 @@ func clear():
 	poseData = {"default": {"default": []}}
 	filterData = {"none": {}}
 	templateData = {"default": {}}
+	available_res_id = 0
+	resourceReferences = {}
 
 func get_res_from_id(id: int):
 	if !resourceReferences.has(id):
