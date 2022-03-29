@@ -5,6 +5,8 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 func _on_pressed():
 	popupMenu = get_popup()
+	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
+	
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()

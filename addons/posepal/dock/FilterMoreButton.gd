@@ -8,6 +8,8 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
+	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
+	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return

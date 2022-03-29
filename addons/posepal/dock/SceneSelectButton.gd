@@ -8,6 +8,7 @@ var selected_scene_id :int= -1
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
+	popup.rect_min_size = Vector2(rect_size.x, 0)
 	
 	if !is_instance_valid(get_tree().edited_scene_root):
 		return

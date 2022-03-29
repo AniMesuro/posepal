@@ -29,6 +29,8 @@ func _on_Button_pressed() -> void:
 	if !is_instance_valid(popup):
 		popup = get_popup()
 	popup.clear()
+	popup.rect_min_size = Vector2(rect_size.x, 0)
+	
 	editedSceneRoot = get_tree().edited_scene_root
 	if !is_instance_valid(editedSceneRoot):
 		owner.issue_warning("edited_scene_invalid")

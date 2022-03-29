@@ -42,6 +42,8 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
+	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
+	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
 		return
@@ -103,9 +105,10 @@ func _on_name_settled(new_name: String, id: int):
 		Items.CREATE:
 			if !is_name_valid(new_name):
 				return
-			poselib.poseData[new_name] = {}
+			poselib.poseData[new_name] = {'default': []}
 			poselib.templateData[new_name] = {}
 			owner.poselib_template = new_name
+			owner.poselib_collection = 'default'
 			owner.emit_signal("issued_forced_selection")
 			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.TEMPLATE)
 			var menuButton: MenuButton = $"../MenuButton"

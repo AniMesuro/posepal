@@ -6,6 +6,7 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
+	popup.rect_min_size = Vector2(rect_size.x, 0)
 		
 	owner.load_poseData()
 	var poselib: RES_PoseLibrary = owner.current_poselib

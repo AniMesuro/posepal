@@ -8,6 +8,7 @@ var is_being_edited: bool = false setget _set_is_being_edited
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
+	popup.rect_min_size = Vector2(rect_size.x, 0)
 	
 	owner.load_poseData()
 	

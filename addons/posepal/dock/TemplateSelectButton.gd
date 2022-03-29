@@ -8,6 +8,7 @@ var is_being_edited: bool = false setget _set_is_being_edited
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
+	popup.rect_min_size = Vector2(rect_size.x, 0)
 	
 	owner.load_poseData()
 	
@@ -26,7 +27,10 @@ func _on_id_selected(id :int):
 		return
 	text = poselib.poseData.keys()[id]
 	icon = owner.editorControl.get_icon("Folder", "EditorIcons")
-	owner.set("poselib_template", poselib.poseData.keys()[id])
+	var template: String = poselib.poseData.keys()[id]
+	owner.set("poselib_template", template)
+	if poselib.poseData[template].has("default"):
+		owner.set("poselib_collection", "default")
 	owner.emit_signal("updated_reference", owner_reference)
 
 func _on_PoseLibrary_updated_reference(reference :String):

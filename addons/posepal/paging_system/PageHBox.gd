@@ -79,6 +79,8 @@ func get_page_count() -> int:
 	if poselib.poseData.size() == 0:
 		_reset_info()
 		return -1
+	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
+		return -1
 	var collection: Array = poselib.poseData[owner.poselib_template][owner.poselib_collection]
 	var pose_count: int = collection.size()
 	if pose_count == 0:
