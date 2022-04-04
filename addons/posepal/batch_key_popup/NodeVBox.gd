@@ -15,31 +15,17 @@ func fill_nodes():
 	clear_tree()
 	if !is_inside_tree():
 		return
-	if get_tree().edited_scene_root == owner: return
+	if get_tree().edited_scene_root == owner:
+		return
+		
 	var editedSceneRoot = get_tree().edited_scene_root
 	poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
 	if !is_instance_valid(poseSceneRoot):
 		return
 		
 	var _poseSceneRoot: Control = add_node_item(null, poseSceneRoot)
-	#For each child and its 5 children layers, reference itself to the poseSceneTree Array
-	for child in poseSceneRoot.get_children():
-		var _child = add_node_item(_poseSceneRoot, child)
-		
-		for child_a in child.get_children():
-			var _child_a = add_node_item(_child, child_a)
-			
-			for child_b in child_a.get_children():
-				var _child_b = add_node_item(_child_a, child_b)
-				
-				for child_c in child_b.get_children():
-					var _child_c = add_node_item(_child_b, child_c)
-					
-					for child_d in child_c.get_children():
-						var _child_d = add_node_item(_child_c, child_d)
-						
-						for child_e in child_d.get_children():
-							var _child_e = add_node_item(_child_d, child_e)
+	_add_children_items(poseSceneRoot, _poseSceneRoot, 400)
+
 
 func add_node_item(parentItem: Node, node: Node) -> Node:
 	var nodeItem: HBoxContainer = SCN_NodeItem.instance()
@@ -57,6 +43,20 @@ func add_node_item(parentItem: Node, node: Node) -> Node:
 		parentItem.childrenItems[-1] = nodeItem
 		nodeItem.nesting_level = parentItem.nesting_level+1
 	return nodeItem
+
+var _add_children_items_iter: int = 0
+func _add_children_items(parent: Node, parentItem: Node, max_iter: int = 0):
+	if max_iter >  0:
+		_add_children_items_iter = max_iter
+		
+	for child in parent.get_children():
+		if _add_children_items_iter == 0:
+			return
+		_add_children_items_iter -= 1
+		
+		var _child: Node = add_node_item(parentItem, child)
+		_add_children_items(child, _child, _add_children_items_iter)
+
 
 func _on_checked_node(nodeItem: Control, child_id: int , value: bool):
 	var node = nodeItem.node

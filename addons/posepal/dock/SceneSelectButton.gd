@@ -5,6 +5,45 @@ const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/r
 
 var scene_nodepaths :PoolStringArray
 var selected_scene_id :int= -1
+
+
+func get_child_scenes() -> PoolStringArray:
+	var editedSceneRoot :Node= get_tree().edited_scene_root
+	
+#	scene_nodepaths = PoolStringArray(["."])
+	
+	# Searches for scene nodes through 6 layers.
+#	for child in editedSceneRoot.get_children():
+#		if !(str(editedSceneRoot.get_path_to(child)) in scene_nodepaths) && child.filename != '':
+#			scene_nodepaths.append(str(editedSceneRoot.get_path_to(child)))
+#		for child_a in child.get_children():			
+#			if !(str(editedSceneRoot.get_path_to(child_a)) in scene_nodepaths) && child_a.filename != '':
+#				scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_a)))
+#			for child_b in child_a.get_children():
+#				if !(str(editedSceneRoot.get_path_to(child_b)) in scene_nodepaths) && child_b.filename != '':
+#					scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_b)))
+#				for child_c in child_b.get_children():
+#					if !(str(editedSceneRoot.get_path_to(child_c)) in scene_nodepaths) && child_c.filename != '':
+#						scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_c)))
+	_get_children_scenes_from(editedSceneRoot, editedSceneRoot, true, 400)
+	return scene_nodepaths
+
+var _scene_nodepaths_iter: int = 0
+func _get_children_scenes_from(parent: Node, editedSceneRoot: Node, is_root = false, max_iters: int = 0):
+	if is_root:
+		scene_nodepaths = PoolStringArray(["."])
+		_scene_nodepaths_iter = max_iters
+	
+	for child in parent.get_children():
+		if _scene_nodepaths_iter == 0:
+			return
+		_scene_nodepaths_iter -= 1
+		if child.filename == '':
+			continue
+#		if !(str(editedSceneRoot.get_path_to(child)) in scene_nodepaths) && child.filename != '':
+		scene_nodepaths.append(str(editedSceneRoot.get_path_to(child)))
+		_get_children_scenes_from(child, editedSceneRoot)
+
 func _on_pressed():
 	popup = get_popup()
 	popup.clear()
@@ -20,26 +59,6 @@ func _on_pressed():
 			popup.add_item(get_tree().edited_scene_root.name)
 			continue
 		popup.add_item(nodepath)
-
-func get_child_scenes() -> PoolStringArray:
-	var editedSceneRoot :Node= get_tree().edited_scene_root
-	
-	scene_nodepaths = PoolStringArray(["."])
-	
-	# Searches for scene nodes through 6 layers.
-	for child in editedSceneRoot.get_children():
-		if !(str(editedSceneRoot.get_path_to(child)) in scene_nodepaths) && child.filename != '':
-			scene_nodepaths.append(str(editedSceneRoot.get_path_to(child)))
-		for child_a in child.get_children():			
-			if !(str(editedSceneRoot.get_path_to(child_a)) in scene_nodepaths) && child_a.filename != '':
-				scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_a)))
-			for child_b in child_a.get_children():
-				if !(str(editedSceneRoot.get_path_to(child_b)) in scene_nodepaths) && child_b.filename != '':
-					scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_b)))
-				for child_c in child_b.get_children():
-					if !(str(editedSceneRoot.get_path_to(child_c)) in scene_nodepaths) && child_c.filename != '':
-						scene_nodepaths.append(str(editedSceneRoot.get_path_to(child_c)))
-	return scene_nodepaths
 
 func _on_id_selected(id :int):
 	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])

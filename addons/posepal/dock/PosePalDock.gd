@@ -67,28 +67,51 @@ func _ready() -> void:
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root
-	var edited_scene_tree :Array= []
+#	var edited_scene_tree :Array= []
 	
+#	var current_child: Node = editedSceneRoot
+#	while current_child.get_child_count() != 0:
+##		current_child = current_child
+#		edited_scene_tree.append(current_child)
+#
 	# For each child and its 5 children layers, reference itself to the edited_scene_tree Array
 	# Hacky but provides a nesting limit.
-	for child in editedSceneRoot.get_children():
-		edited_scene_tree.append(child)
+#	for child in editedSceneRoot.get_children():
+#		edited_scene_tree.append(child)
+#
+#		for child_a in child.get_children():
+#			edited_scene_tree.append(child_a)
+#
+#			for child_b in child_a.get_children():
+#				edited_scene_tree.append(child_b)
+#
+#				for child_c in child_b.get_children():
+#					edited_scene_tree.append(child_c)
+#
+#					for child_d in child_c.get_children():
+#						edited_scene_tree.append(child_d)
+#
+#						for child_e in child_d.get_children():
+#							edited_scene_tree.append(child_e)
+#	return edited_scene_tree
+#	_add_children_to_scene_tree()
+	_select_children_as_array(editedSceneRoot, true, 300)
+	return _edited_scene_nodes
+
+var _edited_scene_nodes: Array = []
+var _select_children_as_array_iter: int = 0
+func _select_children_as_array(parent: Node, is_root: bool = false, max_iters: int = 0):
+	if is_root:
+		_edited_scene_nodes = []
+		_select_children_as_array_iter = max_iters
 		
-		for child_a in child.get_children():
-			edited_scene_tree.append(child_a)
-			
-			for child_b in child_a.get_children():
-				edited_scene_tree.append(child_b)
-				
-				for child_c in child_b.get_children():
-					edited_scene_tree.append(child_c)
-					
-					for child_d in child_c.get_children():
-						edited_scene_tree.append(child_d)
-						
-						for child_e in child_d.get_children():
-							edited_scene_tree.append(child_e)
-	return edited_scene_tree
+	for child in parent.get_children():
+		if _select_children_as_array_iter == 0:
+			return
+		_select_children_as_array_iter -=1
+		
+		_edited_scene_nodes.append(child)
+		_select_children_as_array(child)
 
 func fix_warning(warning :String):
 	emit_signal("warning_fixed", warning)
@@ -182,6 +205,8 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 		if selectedNode.get_class() != 'AnimationPlayer':
 			continue
 		var animPlayer: AnimationPlayer = selectedNode
+		if currentAnimOptionButton.text == '':
+			return null
 		if animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return animPlayer
 	
@@ -249,14 +274,20 @@ func _key_queued_pose(final_pose: Dictionary):
 		
 	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
-		
+	var poseRoot: Node = get_tree().edited_scene_root.get_node(poselib_scene)
+	
+	print('finalpose ',final_pose)
+	
 	for nodepath in queuedPoseData.keys():
+		print('queued ',nodepath)
 		for property in queuedPoseData[nodepath].keys():
 			var track_path: String = nodepath +':'+ property
 			var tr: int = anim.find_track(track_path)
+#			print('track ',tr,' ',property)
 			if tr == -1:
 				continue
 			if !final_pose.has(nodepath):
+#				print('finalpose doesnt have np', nodepath)
 				continue
 			var _can_continue: bool = false
 			if optionsData.dont_key_duplicate:
@@ -287,7 +318,9 @@ func _on_pose_selected(pose_id :int):
 	if !poselib_animPlayer.has_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text):
 		return
 	var anim :Animation= poselib_animPlayer.get_animation(self.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
-	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
+	var animRoot: Node = poselib_animPlayer.get_node(poselib_animPlayer.root_node)
+	var poseRoot: Node = get_tree().edited_scene_root.get_node(poselib_scene)
+	
 	
 	if !is_instance_valid(current_poselib):
 		return
@@ -296,7 +329,7 @@ func _on_pose_selected(pose_id :int):
 	if !current_poselib.poseData[poselib_template].has(poselib_collection):
 		return
 	if pose_id > current_poselib.poseData[poselib_template][poselib_collection].size():
-		print('[poselib] posedata not have ',pose_id)
+		print('[posepal] posedata not have ',pose_id)
 		return
 	
 	var final_pose: Dictionary
@@ -306,7 +339,7 @@ func _on_pose_selected(pose_id :int):
 			for property in final_pose[nodepath]:
 				if final_pose[nodepath][property].has('out'):
 					continue
-				final_pose[nodepath][property]['out'] = 1.0
+				final_pose[nodepath][property]['out'] = 1.0 # Mabye dont override anything so godot chooses
 		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
 		for nodepath in _pose:
 			if !final_pose.has(nodepath):
@@ -322,7 +355,8 @@ func _on_pose_selected(pose_id :int):
 		_key_queued_pose(final_pose)
 	
 	for nodepath in final_pose:
-		var node: Node = animRoot.get_node(nodepath)
+#		var node: Node = animRoot.get_node(nodepath)
+		var node: Node = poseRoot.get_node(nodepath)
 		
 		for property in final_pose[nodepath]:
 			var track_path :String= str(animRoot.get_path_to(node))+':'+property
