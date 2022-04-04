@@ -2,7 +2,7 @@ tool
 extends Control
 
 # posepal Dock
-export var debug_mode: bool = false
+#export var debug_mode: bool = false
 
 signal updated_reference (reference_name)
 signal pose_selected (pose_id)
@@ -37,6 +37,7 @@ var poseData: Dictionary = {}
 var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
+var settings: Resource
 var current_poselib: Resource
 var wf_current_poselib: WeakRef
 
@@ -63,7 +64,7 @@ func _ready() -> void:
 	connect("pose_selected", self, "_on_pose_selected")
 #	connect("pose_created", self, "_on_pose_created")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
-	
+	settings = self.pluginInstance.settings
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root

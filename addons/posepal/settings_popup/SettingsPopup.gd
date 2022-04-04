@@ -1,7 +1,7 @@
 tool
 extends WindowDialog
 
-onready var RES_PosePalSettings: GDScript = load("res://addons/posepal/PosePalSettings.gd")
+const RES_PosePalSettings: GDScript = preload("res://addons/posepal/PosePalSettings.gd")
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var posepalDock: Control
@@ -15,6 +15,9 @@ func load_settings():
 	var extensionMenu: MenuButton = $"MarginCon/VBox/ExtensionHBox/MenuButton"
 	var extensionPopup: PopupMenu = extensionMenu.get_popup()
 	extensionMenu.text = extensionPopup.get_item_text(settings.poselib_extension)
+	var debugMenu: MenuButton = $"MarginCon/VBox/DebugHBox/MenuButton"
+	var debugPopup: PopupMenu = debugMenu.get_popup()
+	debugMenu.text = debugPopup.get_item_text(settings.debug_mode)
 
 func _ready() -> void:
 	if get_tree().edited_scene_root == self:
@@ -35,9 +38,10 @@ func _get_pluginInstance() -> EditorPlugin:
 	return pluginInstance
 
 func _on_saveButton_pressed():
-	var settings: Resource = self.pluginInstance.settings
+	var settings: RES_PosePalSettings = self.pluginInstance.settings
 	settings.poselib_extension = $"MarginCon/VBox/ExtensionHBox".selected_id
-	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
+	settings.debug_mode = $"MarginCon/VBox/DebugHBox".selected_id
+#	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
 	posepalDock.save_poseData()
 	
 	queue_free()

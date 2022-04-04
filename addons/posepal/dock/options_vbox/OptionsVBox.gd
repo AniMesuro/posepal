@@ -1,6 +1,8 @@
 tool
 extends VBoxContainer
 
+const RES_PosePalSettings: GDScript = preload("res://addons/posepal/PosePalSettings.gd")
+
 var ignoreScenePoseChk: CheckBox
 
 func _ready() -> void:
@@ -10,7 +12,8 @@ func _ready() -> void:
 	owner.connect('updated_reference', self, '_on_PoseLibrary_updated_reference')
 	owner.connect("issued_forced_selection", self, "_on_issued_forced_selection")
 
-	if owner.debug_mode:
+	var settings: RES_PosePalSettings = owner.settings
+	if settings.debug_mode == settings.BoolToggle.on:
 		$"MiscColumn".is_locked = false
 	else:
 		$"MiscColumn".is_locked = true

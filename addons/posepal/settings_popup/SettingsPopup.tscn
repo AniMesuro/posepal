@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://addons/posepal/settings_popup/DebugHBox.gd" type="Script" id=1]
 [ext_resource path="res://addons/posepal/assets/icons/icon_expand.png" type="Texture" id=2]
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=3]
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=4]
@@ -61,14 +62,37 @@ text = "File Extension: "
 
 [node name="MenuButton" type="MenuButton" parent="MarginCon/VBox/ExtensionHBox"]
 margin_left = 101.0
-margin_right = 149.0
+margin_right = 157.0
 margin_bottom = 16.0
-rect_min_size = Vector2( 48, 0 )
-text = "tres"
+rect_min_size = Vector2( 56, 0 )
+text = "res"
 icon = ExtResource( 2 )
 flat = false
 expand_icon = true
-items = [ "tres", null, 0, false, false, 0, 0, null, "", false, "res", null, 0, false, false, 1, 0, null, "", false, "tres", null, 0, false, false, 2, 0, null, "", false, "res", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "res", null, 0, false, false, 0, 0, null, "", false ]
+
+[node name="DebugHBox" type="HBoxContainer" parent="MarginCon/VBox"]
+margin_top = 48.0
+margin_right = 287.0
+margin_bottom = 64.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="MarginCon/VBox/DebugHBox"]
+margin_top = 1.0
+margin_right = 81.0
+margin_bottom = 15.0
+text = "Debug Mode"
+
+[node name="MenuButton" type="MenuButton" parent="MarginCon/VBox/DebugHBox"]
+margin_left = 85.0
+margin_right = 141.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 56, 0 )
+text = "Off"
+icon = ExtResource( 2 )
+flat = false
+expand_icon = true
+items = [ "Off", null, 0, false, false, 0, 0, null, "", false ]
 
 [node name="SaveButton" type="Button" parent="MarginCon/VBox"]
 margin_top = 103.0

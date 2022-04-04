@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=20 format=2]
+[gd_resource type="Theme" load_steps=21 format=2]
 
 [ext_resource path="res://addons/posepal/assets/icons/pixel.png" type="Texture" id=1]
 
@@ -47,6 +47,13 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.45793, 0.437759, 0.511719, 1 )
 border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.101563, 0.0956116, 0.0777588, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.156863, 0.14902, 0.12549, 1 )
@@ -110,6 +117,7 @@ LineEdit/styles/normal = SubResource( 2 )
 MenuButton/colors/font_color = Color( 0.996078, 0.984314, 0.984314, 1 )
 MenuButton/styles/hover = SubResource( 10 )
 MenuButton/styles/normal = SubResource( 9 )
+MenuButton/styles/pressed = SubResource( 22 )
 PanelContainer/styles/panel = SubResource( 11 )
 TabContainer/colors/font_color_fg = Color( 0.0862745, 0.0784314, 0.0745098, 1 )
 TabContainer/styles/panel = SubResource( 5 )
