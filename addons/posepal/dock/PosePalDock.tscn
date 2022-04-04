@@ -67,7 +67,7 @@ size = Vector2( 16, 16 )
 [node name="posepal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -625.0
+margin_right = -760.0
 rect_clip_content = true
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -90,7 +90,7 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="VSplit"]
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 585.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -106,7 +106,7 @@ size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib"]
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 567.0
 rect_clip_content = true
 mouse_filter = 2
@@ -119,7 +119,7 @@ __meta__ = {
 [node name="ParametersTab" parent="VSplit/TabContainer/PoseLib/VBox" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 0.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 24.0
 size_flags_vertical = 1
 path_to_expandableControl = NodePath("../ParametersVBox")
@@ -128,7 +128,7 @@ icon = ExtResource( 31 )
 
 [node name="ParametersVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 28.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 138.0
 rect_clip_content = true
 __meta__ = {
@@ -136,7 +136,7 @@ __meta__ = {
 }
 
 [node name="SceneHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 16.0
 hint_tooltip = "The poselib is referenced from the scene."
 
@@ -152,7 +152,7 @@ valign = 1
 
 [node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/SceneHBox"]
 margin_left = 55.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 16.0
 hint_tooltip = "The scene that holds the pose data."
 size_flags_horizontal = 3
@@ -172,7 +172,7 @@ owner_reference = "poselib_scene"
 
 [node name="FilterHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
 margin_top = 20.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 38.0
 hint_tooltip = "Works both as a pose template and a node filter."
 
@@ -188,7 +188,7 @@ valign = 1
 [node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/FilterHBox"]
 margin_left = 41.0
 margin_top = 1.0
-margin_right = 375.0
+margin_right = 240.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -203,8 +203,8 @@ msg_no_selection = "Select a filter"
 owner_reference = "poselib_filter"
 
 [node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/FilterHBox"]
-margin_left = 379.0
-margin_right = 399.0
+margin_left = 244.0
+margin_right = 264.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 20, 18 )
 custom_styles/pressed = SubResource( 1 )
@@ -219,7 +219,7 @@ script = ExtResource( 18 )
 
 [node name="TemplateHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
 margin_top = 42.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 60.0
 hint_tooltip = "Stores subcollections."
 size_flags_horizontal = 3
@@ -239,7 +239,7 @@ __meta__ = {
 [node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/TemplateHBox"]
 margin_left = 68.0
 margin_top = 1.0
-margin_right = 375.0
+margin_right = 240.0
 margin_bottom = 17.0
 hint_tooltip = "The group of poses"
 size_flags_horizontal = 3
@@ -255,8 +255,8 @@ msg_no_selection = "Select a template"
 owner_reference = "poselib_template"
 
 [node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/TemplateHBox"]
-margin_left = 379.0
-margin_right = 399.0
+margin_left = 244.0
+margin_right = 264.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 20, 18 )
 custom_styles/pressed = SubResource( 1 )
@@ -271,7 +271,7 @@ script = ExtResource( 8 )
 
 [node name="CollectionHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
 margin_top = 64.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 82.0
 hint_tooltip = "Stores pose data."
 size_flags_horizontal = 3
@@ -291,7 +291,7 @@ __meta__ = {
 [node name="MenuButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/CollectionHBox"]
 margin_left = 72.0
 margin_top = 1.0
-margin_right = 375.0
+margin_right = 240.0
 margin_bottom = 17.0
 hint_tooltip = "The group of poses"
 size_flags_horizontal = 3
@@ -307,8 +307,8 @@ msg_no_selection = "Select a collection"
 owner_reference = "poselib_collection"
 
 [node name="MoreButton" type="MenuButton" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/CollectionHBox"]
-margin_left = 379.0
-margin_right = 399.0
+margin_left = 244.0
+margin_right = 264.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 20, 18 )
 custom_styles/pressed = SubResource( 1 )
@@ -323,7 +323,7 @@ script = ExtResource( 14 )
 
 [node name="AnimPlayerHBox" type="HBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
 margin_top = 86.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 102.0
 hint_tooltip = "The AnimationPlayer selected in the AnimationPlayerEditor for pose editing/keying."
 size_flags_horizontal = 3
@@ -340,7 +340,7 @@ valign = 1
 
 [node name="Button" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox/AnimPlayerHBox" instance=ExtResource( 1 )]
 margin_left = 113.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 0 )
 size_flags_vertical = 4
@@ -352,7 +352,7 @@ node_type = "AnimationPlayer"
 
 [node name="HSeparator" type="HSeparator" parent="VSplit/TabContainer/PoseLib/VBox/ParametersVBox"]
 margin_top = 106.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 0, 4 )
 
@@ -360,7 +360,7 @@ rect_min_size = Vector2( 0, 4 )
 anchor_right = 0.0
 margin_left = 0.0
 margin_top = 142.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 166.0
 size_flags_vertical = 1
 path_to_expandableControl = NodePath("../OptionsMargin/OptionsVBox")
@@ -369,7 +369,7 @@ icon = ExtResource( 31 )
 
 [node name="OptionsMargin" type="MarginContainer" parent="VSplit/TabContainer/PoseLib/VBox"]
 margin_top = 170.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 567.0
 grow_horizontal = 2
 size_flags_horizontal = 3
@@ -379,7 +379,7 @@ custom_constants/margin_left = 10
 
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin"]
 margin_left = 10.0
-margin_right = 389.0
+margin_right = 254.0
 margin_bottom = 397.0
 grow_horizontal = 2
 size_flags_horizontal = 3
@@ -406,7 +406,7 @@ hint_tooltip = "Copies update_mode and transition from template and applies to e
 text = "Update from template"
 
 [node name="PreviewColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-margin_right = 379.0
+margin_right = 244.0
 path_to_expandableControl = NodePath("../PreviewVBox")
 text = "Preview"
 is_locked = false
@@ -414,18 +414,18 @@ expand = true
 
 [node name="PreviewVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 21.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 37.0
 script = ExtResource( 28 )
 
 [node name="IgnoreScenePoseChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PreviewVBox"]
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 16.0
 text = "Ignore scene pose"
 
 [node name="KeyingColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
 margin_top = 41.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 58.0
 path_to_expandableControl = NodePath("../KeyingVBox")
 text = "Keying"
@@ -434,39 +434,39 @@ expand = true
 
 [node name="KeyingVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 62.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 124.0
 custom_constants/separation = 0
 script = ExtResource( 26 )
 
 [node name="BatchKeyBtn" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"]
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 15.0
 hint_tooltip = "Batch keys into an Animation."
 text = "Batch key"
 
 [node name="KeyTemplateChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"]
 margin_top = 15.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 31.0
 text = "Key template"
 
 [node name="DontKeyDuplicateChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"]
 margin_top = 31.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 47.0
 text = "Don't key on duplicate"
 
 [node name="QueueKeyTimeBtn" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"]
 margin_top = 47.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 62.0
 hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
 margin_top = 128.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 145.0
 path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
@@ -632,7 +632,7 @@ script = ExtResource( 9 )
 
 [node name="ExtraHBox" type="HBoxContainer" parent="VSplit"]
 margin_top = 585.0
-margin_right = 399.0
+margin_right = 264.0
 margin_bottom = 600.0
 grow_vertical = 0
 rect_clip_content = true
@@ -682,8 +682,8 @@ stretch_mode = 5
 script = ExtResource( 5 )
 
 [node name="SettingsButton" type="Button" parent="VSplit/ExtraHBox"]
-margin_left = 384.0
-margin_right = 399.0
+margin_left = 249.0
+margin_right = 264.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 15, 0 )
 icon = SubResource( 5 )

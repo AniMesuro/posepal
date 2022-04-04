@@ -9,6 +9,7 @@ func _on_pressed():
 	popup = get_popup()
 	popup.clear()
 	popup.rect_min_size = Vector2(rect_size.x, 0)
+#	popup.rect_size = popup.rect_min_size
 	
 	owner.load_poseData()
 	
@@ -19,6 +20,7 @@ func _on_pressed():
 		return
 	for collection in poselib.poseData.keys():
 		popup.add_item(collection)
+	popup.set_as_minsize()
 
 func _on_id_selected(id :int):
 	var poselib: RES_PoseLibrary = owner.current_poselib

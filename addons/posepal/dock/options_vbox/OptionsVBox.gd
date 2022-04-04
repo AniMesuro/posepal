@@ -12,7 +12,7 @@ func _ready() -> void:
 	owner.connect('updated_reference', self, '_on_PoseLibrary_updated_reference')
 	owner.connect("issued_forced_selection", self, "_on_issued_forced_selection")
 
-	var settings: RES_PosePalSettings = owner.settings
+	var settings: RES_PosePalSettings = owner.pluginInstance.settings
 	if settings.debug_mode == settings.BoolToggle.on:
 		$"MiscColumn".is_locked = false
 	else:

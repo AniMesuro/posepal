@@ -48,6 +48,7 @@ func _on_pressed():
 	popup = get_popup()
 	popup.clear()
 	popup.rect_min_size = Vector2(rect_size.x, 0)
+#	popup.rect_size = popup.rect_min_size
 	
 	if !is_instance_valid(get_tree().edited_scene_root):
 		return
@@ -59,6 +60,7 @@ func _on_pressed():
 			popup.add_item(get_tree().edited_scene_root.name)
 			continue
 		popup.add_item(nodepath)
+	popup.set_as_minsize()
 
 func _on_id_selected(id :int):
 	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
