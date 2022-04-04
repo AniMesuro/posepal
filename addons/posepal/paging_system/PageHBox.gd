@@ -5,7 +5,7 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 var current_page: int = -1 setget _set_current_page
 var page_count: int = -1
-var page_size: int = 5 # Quantity of poses per page.
+var page_size: int = 9 # Quantity of poses per page.
 
 func _ready() -> void:
 	if get_tree().edited_scene_root == owner:

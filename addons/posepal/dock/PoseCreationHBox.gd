@@ -15,7 +15,7 @@ enum PoseType {
 	FILTER,  # Filter Pose - Poses with nodes outside the Filter pose will be ignored.
 	TEMPLATE # Base pose used as a template for all poses inside its collection.
 }
-var current_pose_type: int= PoseType.NORMAL
+var current_pose_type: int = PoseType.NORMAL
 
 enum PoseGenMode {
 	CREATE,
@@ -401,6 +401,17 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	if _do_queue_select_poselib_animplayer:
 		_select_queued_poselib_animplayer()
 
+func are_parameters_valid() -> bool:
+	var poselib: RES_PoseLibrary = owner.current_poselib
+	if !is_instance_valid(poselib):
+		return false
+	if (!poselib.poseData.has(owner.poselib_template) or !poselib.templateData.has(owner.poselib_template)
+	or  !poselib.filterData.has(owner.poselib_filter)):
+		return false
+	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
+		return false
+	return true
+
 func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path: String, node: Node, property: String, key_out: float = 1.0, key_in: float = -1.0):
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
@@ -451,19 +462,7 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 
-func are_parameters_valid() -> bool:
-	var poselib: RES_PoseLibrary = owner.current_poselib
-	if !is_instance_valid(poselib):
-		return false
-	if !poselib.poseData.has(owner.poselib_template):
-		return false
-	if !poselib.poseData[owner.poselib_template].has(owner.poselib_collection):
-		return false
-	if !poselib.filterData.has(owner.poselib_filter):
-		return false
-	if !poselib.templateData.has(owner.poselib_template):
-		return false
-	return true
+
 
 func _hide_editorSceneTabs():
 	var sceneTabs: Tabs = owner.pluginInstance.editorSceneTabs 

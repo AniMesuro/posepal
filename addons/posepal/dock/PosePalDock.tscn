@@ -465,12 +465,12 @@ hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-visible = false
 margin_top = 128.0
 margin_right = 379.0
 margin_bottom = 145.0
 path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
+is_locked = false
 
 [node name="MiscVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 visible = false

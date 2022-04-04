@@ -18,9 +18,12 @@ func key_template_pose():
 	
 	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
+	var poseRoot: Node = get_tree().edited_scene_root.get_node(owner.poselib_scene)
 	
 	for nodepath in poselib.templateData[owner.poselib_template]:
-		var node: Node = animRoot.get_node(nodepath)
+#		var node: Node = animRoot.get_node(nodepath)
+		var node: Node = poseRoot.get_node(nodepath)
+		
 		for property in poselib.templateData[owner.poselib_template][nodepath]:
 			var track_path :String= str(animRoot.get_path_to(node))+':'+property
 			var tr_property :int= anim.find_track(track_path)

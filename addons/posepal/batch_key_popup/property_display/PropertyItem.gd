@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func _set_property(new_property: String):
 	property = new_property
-	print('property ', property)
 	if !is_inside_tree():
 		return
 	$Label.text = new_property

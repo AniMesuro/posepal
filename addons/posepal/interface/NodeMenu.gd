@@ -51,6 +51,7 @@ func _on_Button_pressed() -> void:
 func _on_PopupMenu_item_selected(id :int):
 	last_index = id
 	var item_name :String= popup.get_item_text(id)
+#	print(item_name)
 	text = item_name
 	hint_tooltip = text
 	icon = owner.pluginInstance.get_editor_interface().get_inspector().get_icon(node_type, "EditorIcons")
@@ -66,12 +67,12 @@ func _on_PoseLibrary_updated_reference(reference):
 		text = msg_no_selection
 		icon = TEX_IconExpand
 		owner.fix_warning('lacking_nodes')
-	elif owner.get(owner_reference).owner != get_tree().edited_scene_root:
-		if owner.get(owner_reference) == get_tree().edited_scene_root:
-			return
-		text = msg_no_selection
-		icon = TEX_IconExpand
-		owner.fix_warning('lacking_nodes')
+#	elif owner.get(owner_reference).owner == get_tree().edited_scene_root:
+#		if owner.get(owner_reference) == get_tree().edited_scene_root.get_node(owner.poselib_scene):
+#			return
+#		text = msg_no_selection
+#		icon = TEX_IconExpand
+#		owner.fix_warning('lacking_nodes')
 	else:
 		owner.fix_warning("animsprite_empty")
 		owner.fix_warning('lacking_nodes')

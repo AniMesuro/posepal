@@ -51,7 +51,7 @@ func fill_previews(limit_by_page: bool = true):#true):
 	else:
 		pose_range = range(
 			pageHBox.current_page * pageHBox.page_size,
-			min(pageHBox.current_page* pageHBox.page_size + pageHBox.page_size, pose_count))
+			min(pageHBox.current_page * pageHBox.page_size + pageHBox.page_size, pose_count))
 	for pose_id in pose_range:
 		var pose: Dictionary = collection[pose_id]
 		# Ignore if pose doesn't have all nodes from Filter pose.

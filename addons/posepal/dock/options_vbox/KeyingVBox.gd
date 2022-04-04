@@ -59,7 +59,7 @@ func _on_QueueKeyTimeBtn_pressed():
 	owner.queuedPoseData = {}
 	var animRootNode: Node = selectedAnimationPlayer.get_node(selectedAnimationPlayer.root_node)
 	var _animPlayer_path: String = str(animRootNode.get_path_to(selectedAnimationPlayer))
-	print('animrootnode ',animRootNode)
+#	print('animrootnode ',animRootNode)
 	for tr in currentAnimation.get_track_count():
 		var track_path: NodePath = currentAnimation.track_get_path(tr) # (@@@)/./Sprite:position
 		var path_subnames: NodePath = track_path.get_concatenated_subnames() # :position
@@ -71,7 +71,8 @@ func _on_QueueKeyTimeBtn_pressed():
 		if !owner.queuedPoseData.has(node_path):
 			owner.queuedPoseData[node_path] = {}
 		owner.queuedPoseData[node_path][path_subnames] = animRootNode.get_node(node_path).get(path_subnames)
-		
+#		print(owner.queuedPoseData[node_path][path_subnames])
+#	print('queued ',owner.queuedPoseData.size())
 	owner.queued_key_time = current_time
 	self.is_pose_queued = true
 
@@ -128,6 +129,8 @@ func _set_is_pose_queued(new_is_pose_queued: bool):
 			return
 		var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
 		var currentAnimation: Animation = selectedAnimationPlayer.get_animation(currentAnimationOptionButton.text)
+		if !is_instance_valid(currentAnimation):
+			return
 		var tr_queue_keys: int = currentAnimation.find_track(selectedAnimationPlayer.name+':editor_description')
 		if tr_queue_keys != -1:
 			currentAnimation.remove_track(tr_queue_keys)
