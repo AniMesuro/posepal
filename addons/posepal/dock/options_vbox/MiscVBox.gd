@@ -11,6 +11,14 @@ func _ready() -> void:
 	$ClearTracksButton.connect("pressed", self, "_on_ClearTracksButton_pressed")
 	$ClearTracksButton/ConfirmationDialog.connect("confirmed", self, "_on_ClearTracksButton_confirmed")
 
+func refresh():
+	var settings: Resource = owner.pluginInstance.settings
+	if settings.debug_mode == settings.BoolToggle.on:
+		
+		$"../MiscColumn".is_locked = false
+	else:
+		$"../MiscColumn".is_locked = true
+
 func _on_FileDependencyButton_pressed():
 	if owner.poselib_scene == '':
 		return

@@ -2,7 +2,6 @@ tool
 extends Control
 
 # posepal Dock
-#export var debug_mode: bool = false
 
 signal updated_reference (reference_name)
 signal pose_selected (pose_id)
@@ -37,7 +36,7 @@ var poseData: Dictionary = {}
 var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
-var settings: Resource
+var settings: RES_PosePalSettings
 var current_poselib: Resource
 var wf_current_poselib: WeakRef
 
@@ -99,20 +98,7 @@ func get_relevant_children() -> Array:
 	_select_children_as_array(editedSceneRoot, true, 300)
 	return _edited_scene_nodes
 
-var _edited_scene_nodes: Array = []
-var _select_children_as_array_iter: int = 0
-func _select_children_as_array(parent: Node, is_root: bool = false, max_iters: int = 0):
-	if is_root:
-		_edited_scene_nodes = []
-		_select_children_as_array_iter = max_iters
-		
-	for child in parent.get_children():
-		if _select_children_as_array_iter == 0:
-			return
-		_select_children_as_array_iter -=1
-		
-		_edited_scene_nodes.append(child)
-		_select_children_as_array(child)
+
 
 func fix_warning(warning :String):
 	emit_signal("warning_fixed", warning)
@@ -224,6 +210,21 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 			return poselib_animPlayer
 
 	return null
+
+var _edited_scene_nodes: Array = []
+var _select_children_as_array_iter: int = 0
+func _select_children_as_array(parent: Node, is_root: bool = false, max_iters: int = 0):
+	if is_root:
+		_edited_scene_nodes = []
+		_select_children_as_array_iter = max_iters
+		
+	for child in parent.get_children():
+		if _select_children_as_array_iter == 0:
+			return
+		_select_children_as_array_iter -=1
+		
+		_edited_scene_nodes.append(child)
+		_select_children_as_array(child)
 
 func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 	fix_warning('*')

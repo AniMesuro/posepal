@@ -25,6 +25,7 @@ func _on_IgnoreScenePoseChk_pressed():
 func refresh_ui():
 	$KeyingVBox.refresh()
 	$PreviewVBox.refresh()
+	$MiscVBox.refresh()
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	if reference == 'poselib_scene':
