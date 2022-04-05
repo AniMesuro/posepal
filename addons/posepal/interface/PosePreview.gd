@@ -175,6 +175,9 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			'AnimatedSprite':
 				_ch = AnimatedSprite.new()
 				_ch.frames = ch.frames
+				if is_instance_valid(ch.frames):
+					_ch.animation = ch.animation
+					_ch.frame = ch.frame
 			'TextureRect':
 				_ch = TextureRect.new()
 				_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
