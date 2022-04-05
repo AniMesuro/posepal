@@ -183,6 +183,18 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
 			'Polygon2D':
 				_ch = Polygon2D.new()
+				var p: Polygon2D
+				
+				_ch.color = ch.color
+				if is_instance_valid(ch.texture):
+					_ch.offset = ch.offset
+					_ch.skeleton = ch.skeleton
+					_ch.texture = ch.texture
+					_ch.polygon = ch.polygon
+					_ch.polygons = ch.polygons
+					_ch.uv = ch.uv
+					
+					_ch.z_index = ch.z_index
 			_:
 				_ch = Node2D.new()
 		_ch.modulate = ch.modulate
