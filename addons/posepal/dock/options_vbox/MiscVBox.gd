@@ -10,6 +10,7 @@ func _ready() -> void:
 	$SliceToggleAudioButton.connect("pressed", self, "_on_SliceToggleAudioButton_pressed")
 	$ClearTracksButton.connect("pressed", self, "_on_ClearTracksButton_pressed")
 	$ClearTracksButton/ConfirmationDialog.connect("confirmed", self, "_on_ClearTracksButton_confirmed")
+	$SortTracksButton.connect("pressed", self, "_on_SortTracksButton_pressed")
 
 func refresh():
 	var settings: Resource = owner.pluginInstance.settings
@@ -104,9 +105,92 @@ func _on_ClearTracksButton_pressed():
 
 func _on_ClearTracksButton_confirmed():
 	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	if !is_instance_valid(selectedAnimationPlayer):
+		return
 	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
 	var currentAnimation: Animation = selectedAnimationPlayer.get_animation(currentAnimationOptionButton.text)
 	currentAnimation.clear()
+
+func _on_SortTracksButton_pressed():
+	var selectedAnimationPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
+	if !is_instance_valid(selectedAnimationPlayer):
+		return
+	var currentAnimationOptionButton: OptionButton = owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+	var currentAnimation: Animation = selectedAnimationPlayer.get_animation(currentAnimationOptionButton.text)
+	if !is_instance_valid(currentAnimation):
+		return
+	var animRoot: Node = selectedAnimationPlayer.get_node(selectedAnimationPlayer.root_node)
+	
+	_append_children_to_array(get_tree().edited_scene_root, animRoot, 100)
+	var unsorted_tracks: Dictionary = {} # 2: ["Head/Eyes", "Head/Eyes:position"]
+	var sorted_tracks: Array = []
+	
+	for tr in currentAnimation.get_track_count():
+		var full_path: String = currentAnimation.track_get_path(tr)
+		var node_path: String = full_path.split(':')[0]
+		
+		var scene_pos: int = _animRoot_scene_paths.find(node_path)
+		if scene_pos == -1:
+			continue
+		
+		if !unsorted_tracks.has(scene_pos):
+			unsorted_tracks[scene_pos] = [node_path, full_path]
+		else:
+			unsorted_tracks[scene_pos].append(full_path)
+	
+	var sorted_scene_positions: PoolIntArray = _sort_numbers(unsorted_tracks.keys(), false)
+	for i in sorted_scene_positions.size():
+		var scene_pos = sorted_scene_positions[i]
+		var node_path = unsorted_tracks[scene_pos][0]
+		
+		for j in range(1, unsorted_tracks[scene_pos].size()):
+			var full_path: String = unsorted_tracks[scene_pos][j]
+			sorted_tracks.append(full_path)
+	
+	for i in sorted_tracks.size():
+		var full_path: String = sorted_tracks[i]
+		
+		var tr: int = currentAnimation.find_track(full_path)
+		currentAnimation.track_move_to(tr, i)
+
+func _sort_numbers(numbers: Array, allow_duplicates: bool = true):
+	var unsorted_numbers: PoolIntArray = numbers
+	var sorted_numbers: PoolIntArray = [unsorted_numbers[0]]
+	for unsorted_num in unsorted_numbers:
+		for i in sorted_numbers.size():
+			if unsorted_num > sorted_numbers[i]:
+				if (i == sorted_numbers.size()-1) :
+					sorted_numbers.append(unsorted_num)
+					break
+				elif unsorted_num < sorted_numbers[i+1]:
+					sorted_numbers.insert(i+1, unsorted_num)
+					break
+			elif unsorted_num < sorted_numbers[i]:
+				if (i == 0) :
+					sorted_numbers.insert(0, unsorted_num)
+					break
+				elif unsorted_num > sorted_numbers[i-1]:
+					sorted_numbers.insert(i-1, unsorted_num)
+					break
+			elif allow_duplicates:
+				sorted_numbers.insert(i, unsorted_num)
+				break
+	return sorted_numbers
+
+var _animRoot_scene_paths: Array = []
+var _animRoot_scene_paths_iter: int = 0
+func _append_children_to_array(parent: Node, animRoot: Node, max_iters: int = 0):
+	if max_iters > 0: # max_iters over 0 means root scene.
+		_animRoot_scene_paths = []
+		_animRoot_scene_paths_iter = max_iters
+	
+	for child in parent.get_children():
+		if _animRoot_scene_paths_iter == 0:
+			return
+		_animRoot_scene_paths_iter -= 1
+		
+		_animRoot_scene_paths.append(str(animRoot.get_path_to(child)))
+		_append_children_to_array(child, animRoot)
 
 func _get_sample_length(sample: AudioStreamSample) -> float:
 	return stepify(float(sample.data.size()) / (sample.mix_rate * 4), 0.01)

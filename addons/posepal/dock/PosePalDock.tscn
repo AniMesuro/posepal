@@ -465,7 +465,6 @@ hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-visible = false
 margin_top = 128.0
 margin_right = 244.0
 margin_bottom = 145.0
@@ -473,26 +472,25 @@ path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
 
 [node name="MiscVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
-visible = false
 margin_top = 149.0
-margin_right = 379.0
-margin_bottom = 202.0
+margin_right = 244.0
+margin_bottom = 221.0
 script = ExtResource( 29 )
 
 [node name="FileDependencyButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 15.0
 text = "Debug file dependency"
 
 [node name="SliceToggleAudioButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
 margin_top = 19.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 34.0
 text = "Slice toggle audio key"
 
 [node name="ClearTracksButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
 margin_top = 38.0
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 53.0
 text = "Clear all tracks"
 
@@ -509,6 +507,12 @@ window_title = ""
 dialog_text = "===   ! ! Dangerous Task ! !   	===
 This will clear all tracks in current animation.
 Are you absolutely sure?"
+
+[node name="SortTracksButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/MiscVBox"]
+margin_top = 57.0
+margin_right = 244.0
+margin_bottom = 72.0
+text = "Sort tracks"
 
 [node name="Pallete" type="VBoxContainer" parent="VSplit/TabContainer"]
 visible = false
