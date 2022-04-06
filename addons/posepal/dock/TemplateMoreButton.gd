@@ -54,6 +54,9 @@ func _on_pressed():
 		popupMenu.add_item('Create', Items.CREATE)
 	elif owner.poselib_template == 'default':
 		popupMenu.add_item('Create', Items.CREATE)
+		popupMenu.add_item('Edit', Items.EDIT)
+		popupMenu.add_item('Apply', Items.APPLY)
+		popupMenu.add_item('Key', Items.KEY)
 	else:
 		popupMenu.add_item('Edit', Items.EDIT)
 		popupMenu.add_item('Create', Items.CREATE)
