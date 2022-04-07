@@ -36,7 +36,7 @@ var poseData: Dictionary = {}
 var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
-var settings: RES_PosePalSettings
+var settings: RES_PosePalSettings setget ,_get_settings
 var current_poselib: Resource
 var wf_current_poselib: WeakRef
 
@@ -129,15 +129,20 @@ func load_poseData() -> int:
 	
 	return err
 
-func save_poseData():
-	var selectedScene: Node= get_tree().edited_scene_root.get_node_or_null(poselib_scene)
+func save_poseData(override_path: String = ""):
+	# Overriding file
+	if override_path != "":
+		pass
+	
+	var selectedScene: Node = get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
 		return
 	var settings: Resource = self.pluginInstance.settings
 	
 	var f: File = File.new()
 	var is_poseFile_valid: bool = false
-	if selectedScene.has_meta('_plPoseLib_poseFile'):
+	
+	if (override_path  == '') && selectedScene.has_meta('_plPoseLib_poseFile'):
 		var scene_posefile: String = selectedScene.get_meta('_plPoseLib_poseFile')
 		if f.file_exists(scene_posefile):
 			var filename_pieces: PoolStringArray = scene_posefile.get_file().split(".", false, 2)
@@ -150,17 +155,24 @@ func save_poseData():
 					poseFile_path = "res://addons/posepal/.poselibs/"+filename_pieces[0]+'.'+filename_pieces[1]+'.'+user_extension
 					is_poseFile_valid = true
 					selectedScene.set_meta('_plPoseLib_poseFile', poseFile_path)
+	elif override_path != '':
+		poseFile_path = override_path
+		is_poseFile_valid = true
+		selectedScene.set_meta('_plPoseLib_poseFile', poseFile_path)
 	
 	# Reference FilePath to scene's metadata.
 	if !is_poseFile_valid:
 		var available_path: String = "#"
 		var user_extension = settings.PoselibExtensions.keys()[settings.poselib_extension]
 		var d: Directory = Directory.new()
-		if !d.dir_exists("res://addons/posepal/.poselibs/"):
-			d.make_dir("res://addons/posepal/.poselibs/")
-
+		
+#		if !d.dir_exists("res://addons/posepal/.poselibs/"):
+#			d.make_dir("res://addons/posepal/.poselibs/")
+		var scene_dir = selectedScene.filename.get_base_dir()+'/'
 		for i in 100:
-			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
+#			available_path = "res://addons/posepal/.poselibs/" + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
+			
+			available_path = scene_dir + selectedScene.name+"_"+str(i) + ".poselib." + user_extension
 			if f.file_exists(available_path):
 				continue
 			selectedScene.set_meta('_plPoseLib_poseFile', available_path)
@@ -179,7 +191,12 @@ func save_poseData():
 			print('[posepal] saving didnt succeed, error ',err)
 		else:
 			pass
-	return
+			
+	if override_path != '':
+		# if override, select poselib.
+		var sceneSelectButton: MenuButton = $"VSplit/TabContainer/PoseLib/VBox/ParametersVBox/SceneHBox/MenuButton"
+		load_poseData()
+		sceneSelectButton.select_poselib()
 
 # Attempt to, not always succeed. Getting the AnimationPlayer directly in the TimelineEditor is impossible.
 func get_selected_animationPlayer() -> AnimationPlayer:
@@ -262,6 +279,9 @@ func _get_editorControl() -> Control:
 	if !is_instance_valid(self.pluginInstance):
 		return null
 	return self.pluginInstance.get_editor_interface().get_base_control()
+
+func _get_settings():
+	return self.pluginInstance.settings
 
 func _key_queued_pose(final_pose: Dictionary):
 	if queuedPoseData.size() == 0:

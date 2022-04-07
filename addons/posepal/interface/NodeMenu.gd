@@ -30,6 +30,7 @@ func _on_Button_pressed() -> void:
 		popup = get_popup()
 	popup.clear()
 	popup.rect_min_size = Vector2(rect_size.x, 0)
+	popup.set_as_minsize()
 #	popup.rect_size = popup.rect_min_size
 	
 	editedSceneRoot = get_tree().edited_scene_root
@@ -46,9 +47,9 @@ func _on_Button_pressed() -> void:
 			else:
 				# Representation of the path for getting itself (?)
 				popup.add_item('./'+editedSceneRoot.name)
-	popup.set_as_minsize()
 	if edited_scene_child.size() == 0:
 		text = msg_no_selection
+	popup.set_as_minsize()
 
 func _on_PopupMenu_item_selected(id :int):
 	last_index = id

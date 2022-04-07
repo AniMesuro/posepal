@@ -30,7 +30,8 @@ func _on_text_entered(new_text :String):
 		return
 	
 	if Dir.open(new_text) == OK:
-		var subdir :PoolStringArray= new_text.rsplit("/", false)
+		var subdir :PoolStringArray= new_text.split("/", false)
+		print('subdir: ',subdir)
 		match subdir[0]:
 			'res:':
 				if owner.filesystem_access == FileDialog.ACCESS_RESOURCES:

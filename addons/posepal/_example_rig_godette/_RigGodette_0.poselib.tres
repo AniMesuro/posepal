@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource( 2 )
 owner_filepath = "res://addons/posepal/_example_rig_godette/RigGodette.tscn"
+poselib_version = PoolIntArray( 0, 9, 0 )
 resourceReferences = {
 0: "res://addons/posepal/_example_rig_godette/assets/34 left/neck.png",
 1: "res://addons/posepal/_example_rig_godette/assets/34 left/torso bottom.png",

@@ -2,10 +2,20 @@ tool
 extends "res://addons/posepal/interface/PropertyMenu.gd"
 
 const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.tscn") 
+const TEX_PluginIcon: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
 
 var scene_nodepaths :PoolStringArray
 var selected_scene_id :int= -1
 
+
+
+# If scene has poselib, it should reflect on text.
+func select_poselib():
+	text = owner.current_poselib.resource_path.get_file().split('.')[0]
+	icon = owner.editorControl.get_icon("KinematicBody2D", "EditorIcons")
+#	icon = TEX_PluginIcon
+	owner.fix_warning('scene_not_selected')
+#	owner.emit_signal("updated_reference", owner_reference)
 
 func get_child_scenes() -> PoolStringArray:
 	var editedSceneRoot :Node= get_tree().edited_scene_root
@@ -50,7 +60,8 @@ func _on_id_selected(id :int):
 	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
 	owner.poselib_scene = scene_nodepaths[id]
 	hint_tooltip = ''
-	
+	owner.current_poselib = null
+	owner.poseFile_path = ''
 #	Only read poseFile
 	var is_poseFile_valid: bool = false
 	if selected_scene.has_meta('_plPoseLib_poseFile'):
@@ -72,9 +83,13 @@ func _on_id_selected(id :int):
 			return
 		
 		hint_tooltip = owner.current_poselib.resource_path
+		select_poselib()
+		
+		return
 	else:
 		hint_tooltip = popup.get_item_text(id)+" (unsaved)"
-			
+	
+	
 	_select_scene(id)
 
 func _on_PoseLibrary_updated_reference(reference :String):

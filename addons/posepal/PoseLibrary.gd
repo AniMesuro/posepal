@@ -7,6 +7,7 @@ extends Resource
 
 # Scene path
 export var owner_filepath: String = "res://"
+export var poselib_version: PoolIntArray = [0, 9, 0]
 
 enum ReferenceType {
 	PATH,
@@ -24,7 +25,9 @@ export var templateData: Dictionary = {"default": {}}
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 
 func setup():
-	prepare_loading_resourceReferences()
+	if poselib_version:
+		update_poselib()
+#	prepare_loading_resourceReferences()
 
 # 0 OK 
 # Resources don't track dependency, so it'll store only paths again.
@@ -93,3 +96,10 @@ func get_id_from_res(res: Resource):
 	
 func get_res_paths() -> Array:
 	return resourceReferences.values()
+
+# Attempts to update to latest version.
+func update_poselib():
+	var latest_version: PoolIntArray
+	var current_version: PoolIntArray = poselib_version
+	
+	poselib_version = latest_version

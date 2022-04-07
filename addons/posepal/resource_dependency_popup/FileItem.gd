@@ -50,7 +50,7 @@ func _on_OpenButton_pressed():
 	$HBox/OpenButton.add_child(fileSelectorPreview)
 	var pure_file: String = old_path.trim_prefix(old_path.get_base_dir()+'/')
 	fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray([extension]),
-	"* All files", "Select new path for "+pure_file)
+	"* All files", "Select new path for "+pure_file, FileDialog.MODE_OPEN_FILE)
 	fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [], CONNECT_ONESHOT)
 	fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
 	
