@@ -9,7 +9,7 @@ enum Items {
 #	NEW,
 	SAVE,
 	SAVE_AS,
-#	LOAD,
+	LOAD,
 }
 
 func _ready() -> void:
@@ -32,11 +32,11 @@ func _on_pressed():
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if is_instance_valid(poselib):
 #		popupMenu.add_item('New', Items.NEW)
-#		popupMenu.add_item('Load', Items.LOAD)
+		popupMenu.add_item('Load', Items.LOAD)
 		popupMenu.add_item('Save', Items.SAVE)
 		popupMenu.add_item('Save as', Items.SAVE_AS)
-#	else:
-#		popupMenu.add_item('Load', Items.LOAD)
+	else:
+		popupMenu.add_item('Load', Items.LOAD)
 
 func _on_id_pressed(id: int):
 	match id:
@@ -73,12 +73,24 @@ func _on_id_pressed(id: int):
 			
 			fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [Items.SAVE_AS], CONNECT_ONESHOT)
 			fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
-#		Items.LOAD:
-#			var fileSelectorPreview = SCN_FileSelectorPreview.instance()
-#			add_child(fileSelectorPreview)
-#
-#			fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [Items.LOAD], CONNECT_ONESHOT)
-#			fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
+		Items.LOAD:
+			var last_poselib: RES_PoseLibrary = owner.current_poselib
+			var last_poselib_dir: String = ''
+			if is_instance_valid(last_poselib):
+				last_poselib_dir = last_poselib.resource_path.get_base_dir()+'/'
+			
+			var fileSelectorPreview = SCN_FileSelectorPreview.instance()
+			add_child(fileSelectorPreview)
+			
+			fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray(['res', 'tres']),
+					"* All poselibs", "Select the poselib file to load.", FileDialog.MODE_OPEN_FILE)
+			if last_poselib_dir == '':
+				fileSelectorPreview.current_dir = get_tree().edited_scene_root.get_node(owner.poselib_scene).filename.get_base_dir()
+			else:
+				fileSelectorPreview.current_dir = last_poselib_dir
+			
+			fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [Items.LOAD], CONNECT_ONESHOT)
+			fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
 
 func _on_file_selected(filepath: String, last_pressed_item: int):
 #	var last_pressed_item: int = args[0]
@@ -86,6 +98,10 @@ func _on_file_selected(filepath: String, last_pressed_item: int):
 	match last_pressed_item:
 		Items.SAVE_AS:
 			owner.save_poseData(filepath)
+		Items.LOAD:
+			print('loading')
+			owner.load_poseData(filepath)
+			$"../MenuButton".select_poselib()
 
 func _on_file_canceled():
 	pass

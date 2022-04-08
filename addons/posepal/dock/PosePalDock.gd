@@ -106,10 +106,12 @@ func fix_warning(warning :String):
 func issue_warning(warning :String):
 	emit_signal("warning_issued", warning)
 
-func load_poseData() -> int:
-	if poselib_scene == "":
+func load_poseData(override_path: String = "") -> int:
+	if override_path == '' and poselib_scene == "":
 		current_poselib = null
 		return FAILED
+	elif override_path != '':
+		poseFile_path = override_path
 	
 #	If the poslib is created at the first time, it will only save to file
 #	When the first pose is saved.
@@ -127,13 +129,11 @@ func load_poseData() -> int:
 	var err: int = current_poselib.prepare_loading_resourceReferences()
 	current_poselib.owner_filepath = sceneNode.filename
 	
+	if override_path !='':
+		sceneNode.set_meta('_plPoseLib_poseFile', poseFile_path)
 	return err
 
 func save_poseData(override_path: String = ""):
-	# Overriding file
-	if override_path != "":
-		pass
-	
 	var selectedScene: Node = get_tree().edited_scene_root.get_node_or_null(poselib_scene)
 	if !is_instance_valid(selectedScene):
 		return
