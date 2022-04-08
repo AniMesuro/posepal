@@ -6,7 +6,7 @@ const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 
 enum Items {
-#	NEW,
+	NEW,
 	SAVE,
 	SAVE_AS,
 	LOAD,
@@ -31,7 +31,7 @@ func _on_pressed():
 	
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if is_instance_valid(poselib):
-#		popupMenu.add_item('New', Items.NEW)
+		popupMenu.add_item('New', Items.NEW)
 		popupMenu.add_item('Load', Items.LOAD)
 		popupMenu.add_item('Save', Items.SAVE)
 		popupMenu.add_item('Save as', Items.SAVE_AS)
@@ -91,6 +91,16 @@ func _on_id_pressed(id: int):
 			
 			fileSelectorPreview.connect("file_selected", self, "_on_file_selected", [Items.LOAD], CONNECT_ONESHOT)
 			fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
+		Items.NEW:
+			# Delete reference to current poselib
+			owner.current_poselib = null
+			owner.current_poselib = RES_PoseLibrary.new()
+			owner.current_poselib.owner_filepath = get_tree().edited_scene_root.get_node(owner.poselib_scene).filename
+			var scene_name: String = owner.poselib_scene.split('/')[-1]
+			if scene_name == '.':
+				scene_name = get_tree().edited_scene_root.name
+			$"../MenuButton"._select_scene(scene_name)
+			$"../MenuButton".hint_tooltip = owner.poselib_scene+" (unsaved)"
 
 func _on_file_selected(filepath: String, last_pressed_item: int):
 #	var last_pressed_item: int = args[0]

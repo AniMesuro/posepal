@@ -5,7 +5,7 @@ const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/r
 const TEX_PluginIcon: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
 
 var scene_nodepaths :PoolStringArray
-var selected_scene_id :int= -1
+var selectedScene_id :int= -1
 
 
 
@@ -57,20 +57,20 @@ func _on_pressed():
 	popup.set_as_minsize()
 
 func _on_id_selected(id :int):
-	var selected_scene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
+	var selectedScene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
 	owner.poselib_scene = scene_nodepaths[id]
 	hint_tooltip = ''
 	owner.current_poselib = null
 	owner.poseFile_path = ''
 #	Only read poseFile
 	var is_poseFile_valid: bool = false
-	if selected_scene.has_meta('_plPoseLib_poseFile'):
+	if selectedScene.has_meta('_plPoseLib_poseFile'):
 		var f :File= File.new()
-		if f.file_exists(selected_scene.get_meta('_plPoseLib_poseFile')):
-			var filename_pieces: PoolStringArray = selected_scene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
+		if f.file_exists(selectedScene.get_meta('_plPoseLib_poseFile')):
+			var filename_pieces: PoolStringArray = selectedScene.get_meta('_plPoseLib_poseFile').get_file().split(".", false, 2)
 			if (filename_pieces[1] == "poselib"
 			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
-				owner.poseFile_path = selected_scene.get_meta('_plPoseLib_poseFile')
+				owner.poseFile_path = selectedScene.get_meta('_plPoseLib_poseFile')
 				is_poseFile_valid = true
 	
 	if is_poseFile_valid:
@@ -89,8 +89,8 @@ func _on_id_selected(id :int):
 	else:
 		hint_tooltip = popup.get_item_text(id)+" (unsaved)"
 	
-	
-	_select_scene(id)
+	var scene_name: String = selectedScene.name
+	_select_scene(scene_name)
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	if !is_inside_tree():
@@ -105,17 +105,17 @@ func _on_PoseLibrary_updated_reference(reference :String):
 func _on_issued_forced_selection():
 	pass
 
-func _select_scene(id: int):
+func _select_scene(scene_name: String):
 	popup = get_popup()
 	owner.fix_warning('scene_not_selected')
-	text = popup.get_item_text(id).split('/')[-1]
+	text = scene_name
 	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
 	owner.emit_signal("updated_reference", owner_reference)
 
 func _on_ResourceDependencyPopup_ok_pressed(has_missing_dependencies: bool, id: int):
 	if has_missing_dependencies:
 		return
-	_select_scene(id)
+	_select_scene(popup.get_item_text(id))
 
 func _reset_selection():
 	text = msg_no_selection
