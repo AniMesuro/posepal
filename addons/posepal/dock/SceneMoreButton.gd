@@ -75,8 +75,8 @@ func _on_id_pressed(id: int):
 			fileSelectorPreview.connect("tree_exited", self, "_on_file_canceled", [], CONNECT_ONESHOT)
 		Items.LOAD:
 			var last_poselib: RES_PoseLibrary = owner.current_poselib
-			var last_poselib_dir: String = ''
-			if is_instance_valid(last_poselib):
+			var last_poselib_dir: String = '' 
+			if is_instance_valid(last_poselib) && last_poselib.owner_filepath != 'res://':
 				last_poselib_dir = last_poselib.resource_path.get_base_dir()+'/'
 			
 			var fileSelectorPreview = SCN_FileSelectorPreview.instance()
@@ -85,7 +85,7 @@ func _on_id_pressed(id: int):
 			fileSelectorPreview.setup(FileDialog.ACCESS_RESOURCES, PoolStringArray(['res', 'tres']),
 					"* All poselibs", "Select the poselib file to load.", FileDialog.MODE_OPEN_FILE)
 			if last_poselib_dir == '':
-				fileSelectorPreview.current_dir = get_tree().edited_scene_root.get_node(owner.poselib_scene).filename.get_base_dir()
+				fileSelectorPreview.current_dir = get_tree().edited_scene_root.get_node(owner.poselib_scene).filename.get_base_dir()+'/'
 			else:
 				fileSelectorPreview.current_dir = last_poselib_dir
 			
@@ -97,9 +97,16 @@ func _on_file_selected(filepath: String, last_pressed_item: int):
 	
 	match last_pressed_item:
 		Items.SAVE_AS:
+			return
 			owner.save_poseData(filepath)
 		Items.LOAD:
-			print('loading')
+			var pure_file: String = filepath.get_file()
+			var file_parts: PoolStringArray = pure_file.split('.')
+			print(file_parts)
+			if  (file_parts.size() != 3 or file_parts[1] != 'poselib'
+			or !(file_parts[2] == 'res' or file_parts[2] == 'tres')):
+				print('[posepal] Loading unsuccessful. Selected file is not poselib.')
+			return
 			owner.load_poseData(filepath)
 			$"../MenuButton".select_poselib()
 

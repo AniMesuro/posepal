@@ -60,6 +60,7 @@ func clear():
 	templateData = {"default": {}}
 	available_res_id = 0
 	resourceReferences = {}
+	poselib_version = [0,9,0] # latest version
 
 func get_res_from_id(id: int):
 	if !resourceReferences.has(id):

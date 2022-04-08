@@ -36,6 +36,8 @@ func update_file_list():
 		add_child(fileIcon)
 		fileIcon.setup(file, fileIcon.TYPE.file)
 		fileIcon.connect("file_selected", self, "_on_file_selected")
+	
+#	yield(get_tree(), "idle_frame")
 	$"../../../ZoomHbox"._update_FileIcon_sizes()
 
 func _on_file_selected(file_name :String):

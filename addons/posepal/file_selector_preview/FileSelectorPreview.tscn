@@ -104,8 +104,13 @@ rect_clip_content = false
 size_flags_vertical = 3
 
 [node name="FileContainer" type="GridContainer" parent="Margin/VBox/FilePanel/ScrollContainer"]
+margin_right = 416.0
+margin_bottom = 310.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-columns = 2
+custom_constants/hseparation = 2
+columns = 4
 script = ExtResource( 9 )
 
 [node name="ZoomHbox" type="HBoxContainer" parent="Margin/VBox"]

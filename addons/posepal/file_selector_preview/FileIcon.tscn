@@ -7,8 +7,8 @@
 margin_right = 200.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 60, 20 )
-size_flags_horizontal = 3
-size_flags_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource( 2 )
 
 [node name="Preview" type="TextureButton" parent="."]

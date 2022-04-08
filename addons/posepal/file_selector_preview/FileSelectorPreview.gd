@@ -4,14 +4,14 @@ extends WindowDialog
 
 signal file_selected (filepath)
 
-var starting_dir :String= "res://"
+var starting_dir: String= "res://"
 var current_file: String = "" setget _set_current_file
 var current_dir: String setget _set_current_dir
 var dir_files: PoolStringArray = PoolStringArray()
 var dir_folders: PoolStringArray = PoolStringArray()
 
-var filters :PoolStringArray= PoolStringArray()
-var current_filter :String= "*" setget _set_current_filter
+var filters: PoolStringArray = PoolStringArray()
+var current_filter: String = "*" setget _set_current_filter
 var mode: int
 
 var editorControl :Control
