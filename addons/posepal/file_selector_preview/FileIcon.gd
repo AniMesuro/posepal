@@ -4,6 +4,8 @@ extends VBoxContainer
 signal file_selected (filepath)
 signal folder_selected (filepath)
 
+const TEX_PoseLibIcon: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
+
 enum TYPE {
 	file,
 	folder
@@ -24,11 +26,17 @@ func setup(_file_name :String, _type :int= TYPE.file):
 	my_type = _type
 	# files beginning with . are not extensions
 	var preview: TextureButton = $Preview
+	var eCtrl :Control = get_parent().fileSelectorPreview.editorControl
 	if my_type == TYPE.folder:
 		preview.texture_normal = get_parent().TEX_IconFolder
 		return
-		
-	var eCtrl :Control = get_parent().fileSelectorPreview.editorControl
+	var file_parts: PoolStringArray = file_name.split('.')
+	
+	if file_parts.size() == 3:
+		if file_parts[1] == 'poselib' and (file_parts[2] == 'tres' or file_parts[3] == 'res'): 
+			preview.texture_normal = TEX_PoseLibIcon
+			return
+	
 	match file_name.get_extension():
 		'png','jpg','jpeg':
 			preview.texture_normal = load(get_parent().fileSelectorPreview.current_dir+ file_name)

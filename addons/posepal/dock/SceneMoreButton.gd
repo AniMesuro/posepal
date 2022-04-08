@@ -102,11 +102,9 @@ func _on_file_selected(filepath: String, last_pressed_item: int):
 		Items.LOAD:
 			var pure_file: String = filepath.get_file()
 			var file_parts: PoolStringArray = pure_file.split('.')
-			print(file_parts)
 			if  (file_parts.size() != 3 or file_parts[1] != 'poselib'
 			or !(file_parts[2] == 'res' or file_parts[2] == 'tres')):
 				print('[posepal] Loading unsuccessful. Selected file is not poselib.')
-			return
 			owner.load_poseData(filepath)
 			$"../MenuButton".select_poselib()
 
