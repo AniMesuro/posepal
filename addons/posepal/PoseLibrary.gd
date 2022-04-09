@@ -24,9 +24,12 @@ export var templateData: Dictionary = {"default": {}}
 
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 
-func setup():
-	if poselib_version:
-		update_poselib()
+var pluginInstance: EditorPlugin
+func setup(_pluginInstance: EditorPlugin):
+	if !is_instance_valid(_pluginInstance):
+		return
+	pluginInstance = _pluginInstance
+	update_poselib()
 #	prepare_loading_resourceReferences()
 
 # 0 OK 
@@ -100,7 +103,29 @@ func get_res_paths() -> Array:
 
 # Attempts to update to latest version.
 func update_poselib():
-	var latest_version: PoolIntArray
-	var current_version: PoolIntArray = poselib_version
+#	var current_version: PoolIntArray = poselib_version # current version
+#	var lv: PoolIntArray = pluginInstance.plugin_version # latest version
 	
-	poselib_version = latest_version
+#	var ver1: PoolIntArray = [0,9,0]
+#	var ver2: PoolIntArray = [0,9,1]
+	
+#	Updating is cumulative, only <0.8.9 is ignored.
+
+#	if _version_is_older_than([0,8,9]):
+#		print("[posepal] Poselib version too old, couldn't update file to latest version.")
+#		return
+#	if _version_is_older_than([0,9,1]):
+#		print("[posepal] Poselib older than 0.9.1. Updating to latest version.")
+#
+#
+		return
+	
+#	poselib_version = latest_version
+func _version_is_older_than(check_version: PoolIntArray):
+	if poselib_version[0] > check_version[0]: # MAJOR
+		return false
+	if poselib_version[1] > check_version[1]: # MINOR
+		return false
+	if poselib_version[2] >= check_version[2]: # PATCH
+		return false
+	return true

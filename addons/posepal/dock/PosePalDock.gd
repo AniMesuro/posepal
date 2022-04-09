@@ -15,6 +15,8 @@ signal pose_created (pose_id)
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 const RES_PosePalSettings: GDScript = preload("res://addons/posepal/PosePalSettings.gd")
 
+const PolygonDataProperties: PoolStringArray = PoolStringArray(['polygon', 'polygons', 'uv', 'skeleton'])
+
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorControl: Control setget ,_get_editorControl
 
@@ -37,7 +39,7 @@ var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
 var settings: RES_PosePalSettings setget ,_get_settings
-var current_poselib: Resource
+var current_poselib: RES_PoseLibrary
 var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
@@ -126,6 +128,7 @@ func load_poseData(override_path: String = "") -> int:
 			current_poselib.clear()
 		return OK
 	current_poselib = load(poseFile_path)
+	current_poselib.setup(self.pluginInstance)
 	var err: int = current_poselib.prepare_loading_resourceReferences()
 	current_poselib.owner_filepath = sceneNode.filename
 	
@@ -332,6 +335,9 @@ func _key_queued_pose(final_pose: Dictionary):
 	optionKeyingVBox.is_pose_queued = false
 
 func _on_pose_selected(pose_id :int):
+	key_pose(pose_id)
+
+func key_pose(pose_id: int):
 	if !is_instance_valid(poselib_animPlayer):
 		issue_warning('animplayer_invalid')
 		return
@@ -361,7 +367,7 @@ func _on_pose_selected(pose_id :int):
 			for property in final_pose[nodepath]:
 				if final_pose[nodepath][property].has('out'):
 					continue
-				final_pose[nodepath][property]['out'] = 1.0 # Mabye dont override anything so godot chooses
+#				final_pose[nodepath][property]['out'] = 1.0 # Mabye dont override anything so godot chooses
 		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
 		for nodepath in _pose:
 			if !final_pose.has(nodepath):
@@ -381,12 +387,12 @@ func _on_pose_selected(pose_id :int):
 		var node: Node = poseRoot.get_node(nodepath)
 		
 		for property in final_pose[nodepath]:
-			var track_path :String= str(animRoot.get_path_to(node))+':'+property
-			var tr_property :int= anim.find_track(track_path)
+			var track_path: String = str(animRoot.get_path_to(node))+':'+property
+			var tr_property: int = anim.find_track(track_path)
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-			var _key_time :float= float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
+			var _key_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			
 			var key_value
 			if final_pose[nodepath][property].has('val'):
@@ -396,7 +402,7 @@ func _on_pose_selected(pose_id :int):
 			else:
 				continue
 			
-			var key_last :int= anim.track_find_key(tr_property, _key_time - 0.01, false)
+			var key_last: int = anim.track_find_key(tr_property, _key_time - 0.01, false)
 			if key_last != -1:
 				if optionsData.dont_key_duplicate:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:

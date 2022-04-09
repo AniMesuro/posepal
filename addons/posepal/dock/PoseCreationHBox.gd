@@ -267,7 +267,10 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
 			break
-		for property in pose[node_path]:
+		var final_properties: Dictionary = pose[node_path].duplicate(false)
+		if final_properties.has('_data'):
+			final_properties.erase('_data')
+		for property in final_properties.keys():
 			var value
 			if !pose[node_path][property].has('val'):
 				value = poselib.get_res_from_id(pose[node_path][property]['valr'])
@@ -461,6 +464,20 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		
 		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
+		
+		if node.is_class('Polygon2D') && property == 'texture':
+#		property == 'texture'
+			print('Im polyogn2d')
+			if !is_instance_valid(node.get_node(node.skeleton)):
+				return
+			if !poselib.templateData[owner.poselib_template][node_path].has('_data'):
+				poselib.templateData[owner.poselib_template][node_path]['_data'] = {}
+				
+			poselib.templateData[owner.poselib_template][node_path]['_data']['skeleton'] = node.skeleton
+			poselib.templateData[owner.poselib_template][node_path]['_data']['polygon'] = node.polygon
+			poselib.templateData[owner.poselib_template][node_path]['_data']['polygons'] = node.polygons
+			poselib.templateData[owner.poselib_template][node_path]['_data']['uv'] = node.uv
+			print(poselib.templateData[owner.poselib_template][node_path]['_data'].size())
 
 
 

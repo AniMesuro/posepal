@@ -20,17 +20,24 @@ func key_template_pose():
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
 	var poseRoot: Node = get_tree().edited_scene_root.get_node(owner.poselib_scene)
 	
+#	var final_pose: Dictionary = poselib.templateData[owner.poselib_template].duplicate(false)
 	for nodepath in poselib.templateData[owner.poselib_template]:
 #		var node: Node = animRoot.get_node(nodepath)
 		var node: Node = poseRoot.get_node(nodepath)
 		
-		for property in poselib.templateData[owner.poselib_template][nodepath]:
-			var track_path :String= str(animRoot.get_path_to(node))+':'+property
-			var tr_property :int= anim.find_track(track_path)
+		var final_properties: Dictionary = poselib.templateData[owner.poselib_template][nodepath].duplicate(false)
+		if final_properties.has('_data'):
+			final_properties.erase('_data')
+		
+		var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
+#		for property in poselib.templateData[owner.poselib_template][nodepath]:
+		for property in final_properties.keys():
+			var track_path: String = str(animRoot.get_path_to(node))+':'+property
+			var tr_property: int = anim.find_track(track_path)
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-			var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
+				
 			var key_value
 			if poselib.templateData[owner.poselib_template][nodepath][property].has('val'):
 				key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
@@ -39,6 +46,23 @@ func key_template_pose():
 			else:
 				continue
 			anim.track_insert_key(tr_property, current_time, key_value)
+		
+		if node.is_class('Polygon2D') && final_properties.has('texture'):
+			for property in owner.PolygonDataProperties:
+				var track_path: String = str(animRoot.get_path_to(node))+':'+property
+				var tr_property: int = anim.find_track(track_path)
+				if tr_property == -1:
+					tr_property = anim.add_track(Animation.TYPE_VALUE)
+					anim.track_set_path(tr_property, track_path)
+					anim.value_track_set_update_mode(tr_property, anim.UPDATE_DISCRETE)
+				
+				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
+				var key_value = poselib.templateData[owner.poselib_template][nodepath]['_data'][property]
+				if key_last != -1:
+					if anim.track_get_key_value(tr_property, key_last) == key_value:
+						continue
+				anim.track_insert_key(tr_property, current_time, key_value, 0.0)
+			
 
 func _on_pressed():
 	popupMenu = get_popup()

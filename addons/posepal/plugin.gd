@@ -13,15 +13,16 @@ const plugin_group: String = "plugin posepal"
 const SCN_PosePalDock: PackedScene = preload("res://addons/posepal/dock/PosePalDock.tscn")
 
 # Editor References
-var animationPlayerEditor :Node
-var animationPlayerEditor_CurrentTime_LineEdit :LineEdit
-var animationPlayerEditor_CurrentAnimation_OptionButton :OptionButton
-
+var animationPlayerEditor: Node
+var animationPlayerEditor_CurrentTime_LineEdit: LineEdit
+var animationPlayerEditor_CurrentAnimation_OptionButton: OptionButton
 var editorSceneTabs: Tabs setget ,_get_EditorSceneTabs
 
 var settings: Resource setget ,_get_settings
-var posePalDock :Control
-var editorControl :Control
+var plugin_version: PoolIntArray = []
+
+var posePalDock: Control
+var editorControl: Control
 
 func _enter_tree() -> void:
 	add_to_group(plugin_group)
@@ -36,6 +37,14 @@ func _ready() -> void:
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, posePalDock)
 	_get_editor_references()
 	settings = load("res://addons/posepal/settings.tres")
+	
+	var configFile: ConfigFile = ConfigFile.new()
+	var err: int = configFile.load("res://addons/posepal/plugin.cfg")
+	if err != OK:
+		return
+	var keys: PoolStringArray = configFile.get_section_keys('plugin')
+	plugin_version = Array(configFile.get_value('plugin', 'version').split('.', false))
+	
 
 func _get_settings():
 	if !is_instance_valid(settings):

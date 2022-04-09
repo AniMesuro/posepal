@@ -107,7 +107,6 @@ func _on_file_selected(filepath: String, last_pressed_item: int):
 	
 	match last_pressed_item:
 		Items.SAVE_AS:
-			return
 			owner.save_poseData(filepath)
 		Items.LOAD:
 			var pure_file: String = filepath.get_file()
