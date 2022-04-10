@@ -2,6 +2,7 @@ tool
 extends MenuButton
 
 const SCN_FileSelectorPreview: PackedScene = preload("res://addons/posepal/file_selector_preview/FileSelectorPreview.tscn")
+const SCN_SetupBonesPopup: PackedScene = preload("res://addons/posepal/setup_bones_popup/SetupBonesPopup.tscn")
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 
@@ -114,7 +115,9 @@ func _on_id_pressed(id: int):
 			
 #			Check if scene has a skeleton2D and at least a polygon2d.
 #			Open SetupBonesPopup. 
-			pass
+			var setupBonesPopup: WindowDialog = SCN_SetupBonesPopup.instance()
+			setupBonesPopup.posepalDock = owner
+			add_child(setupBonesPopup)
 
 func _on_file_selected(filepath: String, last_pressed_item: int):
 #	var last_pressed_item: int = args[0]

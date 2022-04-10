@@ -23,6 +23,7 @@ margin_right = -0.392014
 margin_bottom = 40.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
+is_boned = false
 
 [node name="SeparatorHBox" type="HBoxContainer" parent="."]
 margin_bottom = 40.0

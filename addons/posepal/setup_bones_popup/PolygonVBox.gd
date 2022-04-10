@@ -3,7 +3,7 @@ extends VBoxContainer
 
 signal checked_node (node, child_id, value)
 
-const SCN_NodeItem: PackedScene =  preload("res://addons/posepal/interface/NodeItem.tscn")
+const SCN_PolygonItem: PackedScene =  preload("res://addons/posepal/setup_bones_popup/PolygonItem.tscn")
 
 var poseSceneRoot: Node
 func _ready() -> void:
@@ -31,8 +31,8 @@ func fill_nodes(type: String = ''):
 	_add_children_items(poseSceneRoot, _poseSceneRoot, 400)
 
 
-func add_node_item(parentItem: Node, node: Node) -> Node:
-	var nodeItem: HBoxContainer = SCN_NodeItem.instance()
+func add_node_item(parentItem: Node, node: Node, disabled: bool = false) -> Node:
+	var nodeItem: HBoxContainer = SCN_PolygonItem.instance()
 	nodeItem.node_name = node.name
 	nodeItem.node = node
 	nodeItem.parentItem = parentItem
@@ -40,7 +40,7 @@ func add_node_item(parentItem: Node, node: Node) -> Node:
 	add_child(nodeItem)
 	nodeItem.node_type = node.get_class()
 	nodeItem.is_expanded = true
-	nodeItem.connect("checked_node", self, "_on_checked_node")
+#	nodeItem.connect("checked_node", self, "_on_checked_node")
 	
 	if is_instance_valid(parentItem):
 		parentItem.childrenItems.resize(parentItem.childrenItems.size()+1)
