@@ -11,7 +11,6 @@ export var is_expanded: bool = true setget  _set_is_expanded
 var node: Node
 var parentItem: Node
 var childrenItems: Array = [] setget _set_childrenItems
-var propertyDisplay: Control
 
 var pluginInstance: EditorPlugin setget ,_get_pluginInstance
 var editorInterface: EditorInterface

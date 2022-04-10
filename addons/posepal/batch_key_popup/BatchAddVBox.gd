@@ -25,18 +25,18 @@ func _ready() -> void:
 func confirm_property(text: String):
 	if valid_state == ValidState.WAITING:
 		$InactivityTimer.stop()
-		_check_validity()
+	_check_validity()
 	if valid_state == ValidState.INVALID:
 		return
 	
 	var propertyBox: VBoxContainer = $"../HSplitContainer/PropertyScroll/VBox"
 	for propertyDisplay in propertyBox.get_children():
-		var propertyContainer: Control = propertyDisplay.get_node("PropertyContainer")
-		for propertyItem in propertyContainer.get_children():
-			if propertyItem.property == text:
-				continue
+#		for property in propertyDisplay.get_properties():
+#			if property == text:
+#				continue
 				
-		if propertyDisplay.is_valid_for_batch_property:
+#		if propertyDisplay.is_valid_for_batch_property:
+		if propertyDisplay.validate_batch_property(text):
 			propertyDisplay.add_propertyItem(text)
 	$"HBox/LineEdit".text = ""
 	self.valid_state == ValidState.INVALID

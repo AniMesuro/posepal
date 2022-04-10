@@ -306,8 +306,10 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
 			break
-		
-		for property in pose[node_path]:
+		var final_properties: Dictionary = pose[node_path].duplicate(false)
+		if final_properties.has('_data'):
+			final_properties.erase('_data')
+		for property in final_properties:
 			var value
 			if pose[node_path][property].has('val'):
 				value = pose[node_path][property]['val']

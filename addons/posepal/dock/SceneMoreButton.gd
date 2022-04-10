@@ -10,6 +10,7 @@ enum Items {
 	SAVE,
 	SAVE_AS,
 	LOAD,
+	SETUP_BONES
 }
 
 func _ready() -> void:
@@ -35,6 +36,8 @@ func _on_pressed():
 		popupMenu.add_item('Load', Items.LOAD)
 		popupMenu.add_item('Save', Items.SAVE)
 		popupMenu.add_item('Save as', Items.SAVE_AS)
+		
+		popupMenu.add_item('Setup bones', Items.SETUP_BONES)
 	else:
 		popupMenu.add_item('Load', Items.LOAD)
 
@@ -101,6 +104,17 @@ func _on_id_pressed(id: int):
 				scene_name = get_tree().edited_scene_root.name
 			$"../MenuButton"._select_scene(scene_name)
 			$"../MenuButton".hint_tooltip = owner.poselib_scene+" (unsaved)"
+		Items.SETUP_BONES:
+#			The relationship between polygon2d and bones doesn't seem to be able to be created by code,
+#			so a gross workaround is to make the user select polygon and bone relationship by hand
+#			so that it works like a RemoteTransform2D.
+
+#			This is only necessary for the previews to (roughly) reflect the pose changes,
+#			Keying works fine.
+			
+#			Check if scene has a skeleton2D and at least a polygon2d.
+#			Open SetupBonesPopup. 
+			pass
 
 func _on_file_selected(filepath: String, last_pressed_item: int):
 #	var last_pressed_item: int = args[0]

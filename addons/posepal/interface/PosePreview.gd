@@ -24,6 +24,8 @@ var askIDPopup: Popup
 
 var popupMenu: PopupMenu
 
+var _once: bool= true
+
 var thumbnailButton: TextureButton
 var thumbnailViewport: Viewport
 var label: Label
@@ -108,6 +110,8 @@ func _generate_thumbnail():
 	thumbnailButton.texture_normal = thumbnailViewport.get_texture()
 	thumbnailViewport.set_clear_mode(thumbnailViewport.CLEAR_MODE_ONLY_NEXT_FRAME)
 	thumbnailViewport.set_update_mode( Viewport.UPDATE_ALWAYS)
+	
+#	yield(get_child(0), "tree_entered")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -193,8 +197,16 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 					_ch.polygon = ch.polygon
 					_ch.polygons = ch.polygons
 					_ch.uv = ch.uv
-					
 					_ch.z_index = ch.z_index
+					_ch.rotation_degrees = 90
+			'Skeleton2D':
+				_ch = Skeleton2D.new()
+			'Bone2D':
+				_ch = Bone2D.new()
+				_ch.rest = ch.rest
+			'RemoteTransform2D':
+				_ch = RemoteTransform2D.new()
+				_ch.remote_path = ch.remote_path
 			_:
 				_ch = Node2D.new()
 		_ch.modulate = ch.modulate
@@ -206,7 +218,10 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 		
 	if my_nodepath in templatePose:
 		var poselib: Resource = get_parent().owner.current_poselib
-		for property in templatePose[my_nodepath]:
+		var final_properties: Dictionary = templatePose[my_nodepath].duplicate(false)
+		if final_properties.has('_data'):
+			final_properties.erase('_data')
+		for property in final_properties.keys():
 			var _copy_from_template: bool = true
 			
 			if pose.has(my_nodepath):
@@ -219,6 +234,13 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 						_ch.set(property, templatePose[my_nodepath][property]['val'])
 				elif templatePose[my_nodepath][property].has('valr'):
 					_ch.set(property, poselib.get_res_from_id(templatePose[my_nodepath][property]['valr']))
+	
+		if ch.is_class('Polygon2D') && templatePose[my_nodepath].has('texture'):
+			_ch.skeleton = templatePose[my_nodepath]['_data']['skeleton']
+			_ch.polygon = templatePose[my_nodepath]['_data']['polygon']
+			_ch.polygons = templatePose[my_nodepath]['_data']['polygons']
+			_ch.uv = templatePose[my_nodepath]['_data']['uv']
+	
 	
 	if my_nodepath in pose:
 		var poselib: Resource = get_parent().owner.current_poselib
@@ -248,6 +270,7 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_tr.xform(rect.end), # BR
 				_tr.xform(Vector2(rect.end.x, rect.position.y)), # TL
 			]))
+	
 	return _ch
 
 func get_node_global_pos(node :Node2D):
@@ -466,3 +489,11 @@ func _on_id_settled(new_id: int):
 		label.text = str(pose_id)+ ":"+ pose_name
 	hint_tooltip = label.text
 	owner.save_poseData()
+
+var _debug_found_node: Node = null
+func _debug_find_first_of_class(parent: Node, class_type: String):
+	for child in parent.get_children():
+		if child.is_class(class_type):
+			_debug_found_node = child
+			return
+		_debug_find_first_of_class(child, class_type)

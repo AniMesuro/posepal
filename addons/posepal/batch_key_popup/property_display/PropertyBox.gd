@@ -8,16 +8,21 @@ export var title: String = 'Node'
 
 var unselectedPropertyData: Dictionary = {}
 
+
+func _ready() -> void:
+	var nodeVBox: VBoxContainer = $"../../TreeScroll/VBox"
+	nodeVBox.connect("checked_node", self, "_on_NodeVBox_checked_node")
+
 func fill_properties():
 	return
 
-func insert_propertyDisplay(nodeItem: Control, child_id: int):
+func insert_propertyDisplay(node: Node, child_id: int):
 	var propertyDisplay: Control = SCN_PropertyDisplay.instance()
 	var batchAddVBox: VBoxContainer = $"../../../BatchAddVBox"
 	var batchAddLineEdit: LineEdit = $"../../../BatchAddVBox/HBox/LineEdit"
 	var editedSceneRoot = get_tree().edited_scene_root
 	var poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
-	var node = nodeItem.node
+#	var node = nodeItem.node
 	
 	propertyDisplay.node = node
 	propertyDisplay.title = node.name
@@ -84,3 +89,9 @@ func remove_propertyDisplay(node: Node):
 				unselectedPropertyData[ch.node_nodepath][i] = property
 			ch.queue_free()
 			return
+
+func _on_NodeVBox_checked_node(node: Node, child_id: int, value: bool):
+	if value:
+		insert_propertyDisplay(node, child_id)
+	else:
+		remove_propertyDisplay(node)

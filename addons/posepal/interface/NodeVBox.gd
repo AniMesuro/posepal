@@ -1,7 +1,9 @@
 tool
 extends VBoxContainer
 
-const SCN_NodeItem: PackedScene =  preload("res://addons/posepal/batch_key_popup/NodeItem.tscn")
+signal checked_node (node, child_id, value)
+
+const SCN_NodeItem: PackedScene =  preload("res://addons/posepal/interface/NodeItem.tscn")
 
 var poseSceneRoot: Node
 func _ready() -> void:
@@ -59,11 +61,12 @@ func _add_children_items(parent: Node, parentItem: Node, max_iter: int = 0):
 
 
 func _on_checked_node(nodeItem: Control, child_id: int , value: bool):
-	var node = nodeItem.node
-	var propertyBox: VBoxContainer = $"../../PropertyScroll/VBox"
-	
-	if value:
-		propertyBox.insert_propertyDisplay(nodeItem, child_id)
-	else:
-		propertyBox.remove_propertyDisplay(node)
+	emit_signal("checked_node", nodeItem.node, child_id, value)
+#	var node = nodeItem.node
+#	var propertyBox: VBoxContainer = $"../../PropertyScroll/VBox"
+#
+#	if value:
+#		propertyBox.insert_propertyDisplay(node, child_id)
+#	else:
+#		propertyBox.remove_propertyDisplay(node)
 	
