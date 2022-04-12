@@ -301,18 +301,16 @@ func _key_queued_pose(final_pose: Dictionary):
 	var animRoot :Node= poselib_animPlayer.get_node(poselib_animPlayer.root_node)
 	var poseRoot: Node = get_tree().edited_scene_root.get_node(poselib_scene)
 	
-	print('finalpose ',final_pose)
+#	print('finalpose ',final_pose)
 	
 	for nodepath in queuedPoseData.keys():
-		print('queued ',nodepath)
+		var node: Node = poseRoot.get_node(nodepath)
 		for property in queuedPoseData[nodepath].keys():
-			var track_path: String = nodepath +':'+ property
+			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr: int = anim.find_track(track_path)
-#			print('track ',tr,' ',property)
 			if tr == -1:
 				continue
 			if !final_pose.has(nodepath):
-#				print('finalpose doesnt have np', nodepath)
 				continue
 			var _can_continue: bool = false
 			if optionsData.dont_key_duplicate:

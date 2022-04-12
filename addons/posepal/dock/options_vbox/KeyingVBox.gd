@@ -21,12 +21,15 @@ func _ready() -> void:
 	dontKeyDuplicateChk.connect("pressed", self, "_on_DontKeyDuplicateChk_pressed")
 	keyTemplateChk.connect("pressed", self, "_on_KeyTemplateChk_pressed")
 	queueKeyTime.connect("pressed", self, "_on_QueueKeyTimeBtn_pressed")
+	
+	owner.pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 
 func _on_KeyTemplateChk_pressed():
 	owner.optionsData.key_template = $KeyTemplateChk.pressed
 
 func _on_QueueKeyTimeBtn_pressed():
 	if get_parent().get_posegen_mode() == 2: # SAVE - Editing pose.
+		self.is_pose_queued = false
 		return
 	if (owner.poselib_scene == '' or owner.poselib_filter == ''
 	or  owner.poselib_template == '' or owner.poselib_collection == ''):
@@ -40,9 +43,9 @@ func _on_QueueKeyTimeBtn_pressed():
 		return
 		
 	if is_pose_queued:
-		var tr_queue_keys: int = currentAnimation.find_track(selectedAnimationPlayer.name+':editor_description')
-		if tr_queue_keys != -1:
-			currentAnimation.remove_track(tr_queue_keys)
+#		var tr_queue_keys: int = currentAnimation.find_track(selectedAnimationPlayer.name+':editor_description')
+#		if tr_queue_keys != -1:
+#			currentAnimation.remove_track(tr_queue_keys)
 		self.is_pose_queued = false
 		return
 	owner.pluginInstance._get_editor_references()
@@ -57,22 +60,26 @@ func _on_QueueKeyTimeBtn_pressed():
 	# Save a temporary pose with every property from tracks,
 	# But when keyed only the changed keys will be keyd.
 	owner.queuedPoseData = {}
+	var poseRootNode: Node = get_tree().edited_scene_root.get_node(owner.poselib_scene)
 	var animRootNode: Node = selectedAnimationPlayer.get_node(selectedAnimationPlayer.root_node)
-	var _animPlayer_path: String = str(animRootNode.get_path_to(selectedAnimationPlayer))
-#	print('animrootnode ',animRootNode)
+	var _animPlayer_path: String = str(poseRootNode.get_path_to(selectedAnimationPlayer))
+#	print('queue animrootnode ',animRootNode)
 	for tr in currentAnimation.get_track_count():
 		var track_path: NodePath = currentAnimation.track_get_path(tr) # (@@@)/./Sprite:position
 		var path_subnames: NodePath = track_path.get_concatenated_subnames() # :position
-		var node_path: String = str(track_path).trim_suffix(str(path_subnames)).rstrip(':') # Sprite
+		var anim_node_path: String = str(track_path).trim_suffix(str(path_subnames)).rstrip(':') # Sprite
+#		print('ndoepath ',node_path)
+		var node: Node = animRootNode.get_node(anim_node_path)
+		var node_path: String = poseRootNode.get_path_to(node)
 		if node_path == '':
 			node_path = '.'
 		if node_path == _animPlayer_path:
 			continue
 		if !owner.queuedPoseData.has(node_path):
 			owner.queuedPoseData[node_path] = {}
-		owner.queuedPoseData[node_path][path_subnames] = animRootNode.get_node(node_path).get(path_subnames)
-#		print(owner.queuedPoseData[node_path][path_subnames])
-#	print('queued ',owner.queuedPoseData.size())
+		owner.queuedPoseData[node_path][path_subnames] = node.get(path_subnames)
+#		print(owner.queuedPoseData[node_path])
+#	print('queued[1] ',owner.queuedPoseData.values()[0]) if owner.queuedPoseData.size() else ''
 	owner.queued_key_time = current_time
 	self.is_pose_queued = true
 
@@ -107,6 +114,9 @@ func _on_BatchKeyBtn_pressed():
 func _on_DontKeyDuplicateChk_pressed():
 	owner.optionsData.dont_key_duplicate = $DontKeyDuplicateChk.pressed
 
+func _on_scene_changed():
+	self.is_pose_queued = false
+
 func refresh():
 	if !is_instance_valid(self):
 		return
@@ -116,6 +126,8 @@ func refresh():
 
 func _set_is_pose_queued(new_is_pose_queued: bool):
 	is_pose_queued = new_is_pose_queued
+	if !is_inside_tree():
+		return
 	queueKeyTime = $"QueueKeyTimeBtn"
 	if is_pose_queued:
 		queueKeyTime.text = "Cancel queued pose"
