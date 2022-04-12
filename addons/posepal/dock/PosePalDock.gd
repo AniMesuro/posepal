@@ -385,11 +385,15 @@ func key_pose(pose_id: int):
 		var node: Node = poseRoot.get_node(nodepath)
 		
 		for property in final_pose[nodepath]:
+			if property == '_data':
+				continue
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr_property: int = anim.find_track(track_path)
+			var _is_new_track: bool = false
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
+				_is_new_track = true
 			var _key_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			
 			var key_value
@@ -399,6 +403,12 @@ func key_pose(pose_id: int):
 				key_value = current_poselib.get_res_from_id(final_pose[nodepath][property]['valr'])
 			else:
 				continue
+			
+#			if _is_new_track:
+#				var update_mode: int = anim.UPDATE_CONTINUOUS
+#				if key_value is Object or key_value is String or key_value is bool:
+#					update_mode = anim.UPDATE_DISCRETE
+#				anim.value_track_set_update_mode(tr_property, )
 			
 			var key_last: int = anim.track_find_key(tr_property, _key_time - 0.01, false)
 			if key_last != -1:

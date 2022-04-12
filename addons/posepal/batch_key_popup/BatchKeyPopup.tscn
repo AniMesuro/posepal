@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=1]
 [ext_resource path="res://addons/posepal/batch_key_popup/BatchKeyPopup.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://addons/posepal/batch_key_popup/BatchAddVBox.gd" type="Script" id=6]
 [ext_resource path="res://addons/posepal/batch_key_popup/FinishHBox.gd" type="Script" id=7]
 [ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/posepal/assets/icons/icon_more.png" type="Texture" id=9]
 [ext_resource path="res://addons/posepal/batch_key_popup/SelectAllCheck.gd" type="Script" id=11]
 
 [node name="BatchKeyPopup" type="WindowDialog"]
@@ -50,7 +49,6 @@ __meta__ = {
 [node name="TitleBar" parent="MarginContainer/VBox" instance=ExtResource( 8 )]
 margin_right = 582.0
 title_name = "Batch key to: "
-icon_texture = ExtResource( 9 )
 window_path = NodePath("../../..")
 
 [node name="TitleHBox" type="HBoxContainer" parent="MarginContainer/VBox"]
