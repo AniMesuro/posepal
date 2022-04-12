@@ -14,7 +14,9 @@ var pose_id: int = -1
 var pose_name: String = ""
 var pose: Dictionary = {}
 var poseSceneRoot: Node
+var poseSkeleton: Skeleton2D
 var is_being_edited: bool = false setget _set_is_being_edited
+var boned_polygons: Array = []
 
 var filterPose: Dictionary
 var templatePose: Dictionary
@@ -46,6 +48,8 @@ func _ready() -> void:
 	var poselib: Resource = owner.current_poselib
 	filterPose = poselib.filterData[owner.poselib_filter]
 	templatePose = poselib.templateData[owner.poselib_template]
+	
+	
 
 var used_rect :Rect2
 var used_points: PoolVector2Array
@@ -81,6 +85,11 @@ func _generate_thumbnail():
 			_generate_preview_scene(poseSceneRoot, _rt, true, 15)
 	else:
 		_generate_preview_scene(poseSceneRoot, _rt, true, 15)
+	
+	var poselib: Resource = get_parent().owner.current_poselib
+	if poselib.boneRelationshipData.has('_skeleton'):
+		poseSkeleton = _rt.get_node(poselib.boneRelationshipData['_skeleton'])
+	_apply_fake_bones()
 	
 	calculate_children_used_points(_rt, 10)
 	used_rect = get_used_rect(used_points)
@@ -149,6 +158,7 @@ func _generate_preview_scene(parent: Node = null, previewParent: Node = null, ha
 			is_node_filtered = false
 
 func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
+	var poselib: Resource = get_parent().owner.current_poselib
 	var my_nodepath: String= poseSceneRoot.get_path_to(ch)
 	# Create dummy previewnode
 	var _ch: Node
@@ -189,6 +199,11 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_ch = Polygon2D.new()
 				var p: Polygon2D
 				
+				var my_path: String = poseSceneRoot.get_path_to(ch)
+#				var bone_path: String
+				if my_path in poselib.boneRelationshipData:
+					_ch.set_meta('bone_path', poselib.boneRelationshipData[my_path])
+					boned_polygons.append(_ch)
 				_ch.color = ch.color
 				if is_instance_valid(ch.texture):
 					_ch.offset = ch.offset
@@ -215,9 +230,9 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 	# Load default node transform
 	if ch is Node2D:
 		_ch.transform = ch.transform
+	_ch.name = ch.name
 		
 	if my_nodepath in templatePose:
-		var poselib: Resource = get_parent().owner.current_poselib
 		var final_properties: Dictionary = templatePose[my_nodepath].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
@@ -243,7 +258,7 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 	
 	
 	if my_nodepath in pose:
-		var poselib: Resource = get_parent().owner.current_poselib
+#		var poselib: Resource = get_parent().owner.current_poselib
 		for property in pose[my_nodepath]:
 			
 			if property in _ch:
@@ -451,6 +466,17 @@ func ask_for_id(title_name: String):
 	askIDPopup.max_id = poselib.poseData[owner.poselib_template][owner.poselib_collection].size()-1
 	askIDPopup.label.text = "Please select a value from 0 to " + str(askIDPopup.max_id)
 	return askIDPopup
+
+func _apply_fake_bones():
+	for _p in boned_polygons:
+		var polygon: Polygon2D = _p
+		var bone_path: String = polygon.get_meta('bone_path')
+#		print(poseSkeleton.get_node(bone_path))
+		var bone: Bone2D =poseSkeleton.get_node(bone_path)
+		
+		polygon.transform = bone.transform
+#		polygon.transform = bone.rest
+#		bone.transform
 
 func _on_name_settled(new_name: String):
 	var poselib: Resource = owner.current_poselib

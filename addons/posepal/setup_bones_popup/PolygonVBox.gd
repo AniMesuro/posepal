@@ -19,7 +19,10 @@ func _ready() -> void:
 	
 	posepalDock = owner.posepalDock
 	fill_nodes(poseRoot)
+	if node_type == 'Bone2D':
+		return
 	load_bone_relationships()
+	owner.update_bone_relationship('_skeleton', poseRoot.get_path_to(poseSkeleton))
 
 func clear_tree():
 	for child in get_children():

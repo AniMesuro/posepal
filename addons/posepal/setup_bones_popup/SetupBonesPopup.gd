@@ -26,6 +26,8 @@ func update_bone_relationship(node_path: String, bone_path: String):
 
 func _on_OkButton_pressed():
 	# SAVE TO POSELIB
+#	var polygonVBox: VBoxContainer = $"MarginContainer/VBoxContainer/HSplitContainer/PolygonScroll/VBox"
+#	polygonVBox.poseSkeleton
 	poselib.boneRelationshipData = boneRelationshipData
 	queue_free()
 
