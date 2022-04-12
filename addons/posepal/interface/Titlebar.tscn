@@ -14,8 +14,6 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 script = ExtResource( 2 )
 title_name = "Title Name"
-icon_texture = ExtResource( 4 )
-window_path = NodePath("")
 
 [node name="IconRect" type="TextureRect" parent="."]
 margin_right = 24.0

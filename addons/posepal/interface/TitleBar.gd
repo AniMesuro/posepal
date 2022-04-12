@@ -23,12 +23,12 @@ func _ready() -> void:
 
 func _enter_tree() -> void:
 	closeButton = $CloseButton
-	if window_path == NodePath():
-		if get_tree().edited_scene_root != self:
-			window_path = self.get_path_to(owner)
-		else:
-			return
-			
+#	if window_path == NodePath('.'):
+#		if get_tree().edited_scene_root != self:
+#			window_path = self.get_path_to(owner)
+#		else:
+#			return
+	
 	windowRect = get_node(window_path)
 	if !closeButton.is_connected("pressed", self, '_on_CloseButton_pressed'):
 		closeButton.connect("pressed", self, '_on_CloseButton_pressed', [owner])
@@ -50,16 +50,16 @@ func _set_title_name(value :String):
 
 func _set_icon_texture(value :StreamTexture):
 	if !is_inside_tree():
-		if is_instance_valid(self):
-			yield(self, "tree_entered")
-		else:
-			return
-	iconRect = $IconRect
-	if !is_instance_valid(value):
-		iconRect.visible = false
-		icon_texture = TEX_BackupIcon
-		iconRect.texture = icon_texture
+#		if is_instance_valid(self):
+#			yield(self, "tree_entered")
+#		else:
 		return
+	if !is_instance_valid(value):
+#		iconRect.visible = false
+#		icon_texture = TEX_BackupIcon
+#		iconRect.texture = icon_texture
+		return
+	iconRect = $IconRect
 	
 	icon_texture = value
 	iconRect.texture = value

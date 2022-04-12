@@ -3,19 +3,39 @@ extends VBoxContainer
 
 signal checked_node (node, child_id, value)
 
-const SCN_PolygonItem: PackedScene =  preload("res://addons/posepal/setup_bones_popup/PolygonItem.tscn")
+export var sceneNodeItem: PackedScene
 
-var poseSceneRoot: Node
+#const SCN_PolygonItem: PackedScene =  preload("res://addons/posepal/setup_bones_popup/PolygonItem.tscn")
+
+export var node_type: String = ''
+
+var poseRoot: Node
+var poseSkeleton: Skeleton2D
+
+var posepalDock: Control
 func _ready() -> void:
 	if owner == get_tree().edited_scene_root:
 		return
-	fill_nodes()
+	
+	posepalDock = owner.posepalDock
+	fill_nodes(poseRoot)
+	load_bone_relationships()
 
 func clear_tree():
 	for child in get_children():
 		child.queue_free()
 
-func fill_nodes(type: String = ''):
+func load_bone_relationships():
+	for child in get_children():
+		var nodeItem: Node = child
+		if nodeItem.node_type == 'Polygon2D':
+			if 'boneRelationshipData' in owner:
+				var str_path: String = nodeItem.node_path
+				if owner.boneRelationshipData.has(str_path):
+	#				print(owner.boneRelationshipData[str_path])
+					nodeItem.bone_path = owner.boneRelationshipData[str_path]
+
+func fill_nodes(_poseRoot: Node = null):
 	clear_tree()
 	if !is_inside_tree():
 		return
@@ -23,16 +43,22 @@ func fill_nodes(type: String = ''):
 		return
 		
 	var editedSceneRoot = get_tree().edited_scene_root
-	poseSceneRoot = editedSceneRoot.get_node_or_null(owner.posepalDock.poselib_scene)
-	if !is_instance_valid(poseSceneRoot):
-		return
-		
-	var _poseSceneRoot: Control = add_node_item(null, poseSceneRoot)
-	_add_children_items(poseSceneRoot, _poseSceneRoot, 400)
+	if !is_instance_valid(_poseRoot):
+		poseRoot = editedSceneRoot.get_node_or_null(posepalDock.poselib_scene)
+#	else:
+#		poseRoot = _poseRoot
+#	if !is_instance_valid(poseRoot):
+#		return
+	
+	var is_disabled: bool = false
+	if node_type != '':
+		is_disabled = !poseRoot.is_class(node_type)
+	var _poseRootItem: Control = add_node_item(null, poseRoot, is_disabled)
+	_add_children_items(poseRoot, _poseRootItem, 400)
 
 
 func add_node_item(parentItem: Node, node: Node, disabled: bool = false) -> Node:
-	var nodeItem: HBoxContainer = SCN_PolygonItem.instance()
+	var nodeItem: Control = sceneNodeItem.instance() #SCN_PolygonItem.instance()
 	nodeItem.node_name = node.name
 	nodeItem.node = node
 	nodeItem.parentItem = parentItem
@@ -40,8 +66,14 @@ func add_node_item(parentItem: Node, node: Node, disabled: bool = false) -> Node
 	add_child(nodeItem)
 	nodeItem.node_type = node.get_class()
 	nodeItem.is_expanded = true
-#	nodeItem.connect("checked_node", self, "_on_checked_node")
 	
+	
+	nodeItem.node_path = poseRoot.get_path_to(node)
+	
+				
+#	nodeItem.connect("checked_node", self, "_on_checked_node")
+	if nodeItem.node_type == 'Skeleton2D':
+		poseSkeleton = node
 	if is_instance_valid(parentItem):
 		parentItem.childrenItems.resize(parentItem.childrenItems.size()+1)
 		parentItem.childrenItems[-1] = nodeItem
@@ -58,8 +90,12 @@ func _add_children_items(parent: Node, parentItem: Node, max_iter: int = 0):
 			return
 		_add_children_items_iter -= 1
 		
-		var _child: Node = add_node_item(parentItem, child)
+		var is_disabled: bool = false
+		if node_type != '':
+			is_disabled = !child.is_class(node_type)
+		var _child: Node = add_node_item(parentItem, child, is_disabled)
 		_add_children_items(child, _child, _add_children_items_iter)
+
 
 
 func _on_checked_node(nodeItem: Control, child_id: int , value: bool):
@@ -72,3 +108,4 @@ func _on_checked_node(nodeItem: Control, child_id: int , value: bool):
 #	else:
 #		propertyBox.remove_propertyDisplay(node)
 	
+

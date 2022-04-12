@@ -23,7 +23,7 @@ export var filterData: Dictionary = {"none": {}}
 export var templateData: Dictionary = {"default": {}}
 
 # Only used for scenes with skeleton2d
-export var boneRelationshipData: Dictionary = {}  # {'Sprite/Polygon2D': 'BSprite/BPolygon2D'}
+export (Dictionary) var boneRelationshipData = {}  # {'Sprite/Polygon2D': 'BSprite/BPolygon2D'}
 
 var filtered_pose_ids: Array = [] # [0,3,6,12,13] shows the pose_ids visible within filters.
 

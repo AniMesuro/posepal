@@ -2,6 +2,9 @@ tool
 extends HBoxContainer
 
 signal checked_node (nodeItem, child_id, value)
+signal bone_selected (node_path, bone_path)
+
+const SCN_BonePopup: PackedScene = preload("res://addons/posepal/setup_bones_popup/BonePopup.tscn")
 
 export var node_type :String= "Node" setget _set_node_type
 export var node_name :String= "Node" setget _set_node_name
@@ -10,6 +13,9 @@ export var child_id: int = -1
 export var is_expanded: bool = true setget  _set_is_expanded
 export var is_boned: bool = false setget _set_is_boned
 export var is_polygon2d: bool = true setget _set_is_polygon2d
+var node_path: NodePath
+var bone_path: NodePath setget _set_bone_path
+
 var node: Node
 var parentItem: Node
 var childrenItems: Array = [] setget _set_childrenItems
@@ -37,9 +43,14 @@ func _ready() -> void:
 		return
 	self.childrenItems = childrenItems
 	self.is_expanded = is_expanded
-#	var checkButton: CheckButton = $CheckButton
-#	checkButton.connect("pressed", self, "_on_CheckButton_pressed")
-	var icon: TextureRect = $Icon
+	self.is_boned = is_boned
+	
+	owner = get_parent().owner
+	var boneButton: Button = $BoneButton
+	var boneIcon: TextureRect = $BoneIcon
+	boneIcon.texture = editorControl.get_icon("Bone", "EditorIcons")
+	boneButton.connect("pressed", self, "_on_BoneButton_pressed")
+#	var icon: TextureRect = $Icon
 #	icon.texture = 
 
 func _set_nesting_level(new_nesting_level: int):
@@ -101,19 +112,24 @@ func _set_is_expanded(new_is_expanded: bool):
 	set_visible_childrenItems(new_is_expanded)
 
 func _set_is_boned(new_is_boned: bool):
-	is_boned = new_is_boned
+#	print('boned',new_is_boned)
 	if !is_inside_tree():
 		return
 	if !is_polygon2d:
 		return
+	is_boned = new_is_boned
 	editorInterface = pluginInstance.get_editor_interface()
 	editorControl = editorInterface.get_base_control()
 	
-	var boneButton: TextureButton = $"BoneButton"
+	var boneIcon: TextureRect = $BoneIcon
+	var boneButton: Button = $BoneButton
 	if !is_boned:
-		boneButton.texture_normal = editorControl.get_icon("BoneAttachment", "EditorIcons")
+		boneIcon.modulate = Color(.4,.4,.7)
+		boneButton.text = '--'
+#		boneIcon.texture = editorControl.get_icon("Bone2D", "EditorIcons")
 	else:
-		boneButton.texture_normal = editorControl.get_icon("Bone", "EditorIcons")
+		boneIcon.modulate = Color.white
+#		boneIcon.texture = editorControl.get_icon("Bone", "EditorIcons")
 
 func _set_is_polygon2d(new_is_polygon2d: bool):
 	is_polygon2d = new_is_polygon2d
@@ -121,7 +137,7 @@ func _set_is_polygon2d(new_is_polygon2d: bool):
 		return
 	$VSeparator.visible = is_polygon2d
 	$BoneButton.visible = is_polygon2d
-	$BoneLabel.visible = is_polygon2d
+	$BoneIcon.visible = is_polygon2d
 	if !is_polygon2d:
 		$Label.add_color_override("font_color", Color(.5, .5, .5))
 	else:
@@ -144,6 +160,16 @@ func _on_ExpandButton_pressed():
 #	emit_signal("checked_node", self, child_id, checkButton.pressed)
 #	emit_signal("checked_node", node, child_id, checkButton.pressed)
 
+func _on_BoneButton_pressed():
+	var bonePopup = SCN_BonePopup.instance()
+	bonePopup.posepalDock = get_parent().owner.posepalDock
+	bonePopup.skeletonRoot = get_parent().poseSkeleton
+	add_child(bonePopup)
+	var boneButton: Button = $BoneButton
+	var popup_pos = Vector2(boneButton.rect_global_position.x + boneButton.rect_size.x, boneButton.rect_global_position.y)
+	bonePopup.popup(Rect2(popup_pos, Vector2(400,400)))
+	bonePopup.connect("bone_selected", self, "_on_bonePopup_bone_selected")
+
 func _set_childrenItems(new_childrenItems: Array):
 	childrenItems = new_childrenItems
 #	print(childrenItems)
@@ -159,8 +185,23 @@ func _set_childrenItems(new_childrenItems: Array):
 		self.is_expanded = true
 #		expandButton.rect_size.y = 24
 
+func _on_bonePopup_bone_selected(_bone_path: NodePath):
+#	print('bone path ',_bone_path)
+	self.bone_path = _bone_path
+	owner.update_bone_relationship(node_path, bone_path)
+
+
 func _get_pluginInstance():
 	if is_instance_valid(pluginInstance):
 		return pluginInstance
 	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 	return pluginInstance
+
+func _set_bone_path(new_bone_path: NodePath):
+	if !is_instance_valid(get_parent().poseSkeleton) or !is_instance_valid(get_parent().poseSkeleton.get_node(new_bone_path)):
+		self.is_boned = false
+		return
+	bone_path = new_bone_path
+	$BoneButton.text = str(bone_path).split('/')[-1]
+	$BoneButton.hint_tooltip = bone_path
+	self.is_boned = true
