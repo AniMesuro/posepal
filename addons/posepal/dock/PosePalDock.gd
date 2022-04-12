@@ -259,6 +259,7 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 	posePalette = self.posePalette#$"VSplit/TabContainer/Palette/GridContainer"
 	if is_instance_valid(posePalette):
 		posePalette.fill_previews()
+	
 
 func _get_posePalette():
 	posePalette = $"VSplit/TabContainer/Pallete/ScrollContainer/GridContainer"

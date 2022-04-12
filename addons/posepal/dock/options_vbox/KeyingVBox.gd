@@ -114,8 +114,11 @@ func _on_BatchKeyBtn_pressed():
 func _on_DontKeyDuplicateChk_pressed():
 	owner.optionsData.dont_key_duplicate = $DontKeyDuplicateChk.pressed
 
-func _on_scene_changed():
+func _on_scene_changed(_sceneRoot: Node):
 	self.is_pose_queued = false
+	owner.optionsData['key_template'] = false
+	owner.optionsData['dont_key_duplicate'] = false
+	refresh()
 
 func refresh():
 	if !is_instance_valid(self):

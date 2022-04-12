@@ -19,12 +19,13 @@ func _on_OkButton_pressed():
 		return
 		
 	var anim: Animation = animPlayer.get_animation(currentAnimOptionButton.text)
+	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)
 	
 	var current_time: float = float(currentTimeLineEdit.text)
 	for propertyDisplay in propertyBox.get_children():
 		var node = propertyDisplay.node
 		for property in propertyDisplay.get_properties():
-			var property_path: String = str(poseSceneRoot.get_path_to(node))+':'+property
+			var property_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr_property: int = anim.find_track(property_path)
 			
 			var key_value = node.get(property)
