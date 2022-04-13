@@ -71,7 +71,7 @@ func _on_name_settled(new_name: String, id: int):
 		Items.CREATE:
 			if new_name == 'none':
 				return
-			poselib.filterData[new_name] = {}
+			poselib.filterData[new_name] = []
 			
 			owner.poselib_filter = new_name
 			owner.emit_signal("issued_forced_selection")

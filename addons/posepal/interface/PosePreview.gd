@@ -143,6 +143,8 @@ func _generate_preview_scene(parent: Node = null, previewParent: Node = null, ha
 	for ch in parent.get_children():
 		var _np_ch: String = poseSceneRoot.get_path_to(ch)
 		var _ch: Node
+		if ch is Skeleton2D or ch is Bone2D:
+			is_node_filtered = true
 		if !is_node_filtered:
 			if filter.has(_np_ch):
 				is_node_filtered = true
@@ -189,7 +191,7 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			'AnimatedSprite':
 				_ch = AnimatedSprite.new()
 				_ch.frames = ch.frames
-				if is_instance_valid(ch.frames):
+				if !(owner.optionsData.ignore_scene_pose) && is_instance_valid(ch.frames):
 					_ch.animation = ch.animation
 					_ch.frame = ch.frame
 			'TextureRect':
