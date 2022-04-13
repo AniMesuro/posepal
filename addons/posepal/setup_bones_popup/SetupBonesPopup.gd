@@ -10,6 +10,8 @@ var poselib: Resource
 var posepalDock: Control
 func _enter_tree() -> void:
 	show()
+	if get_tree().edited_scene_root == self:
+		return
 	poselib = posepalDock.current_poselib
 	boneRelationshipData = poselib.boneRelationshipData.duplicate(false)
 #	$"MarginContainer/VBoxContainer/HSplitContainer/PolygonScroll/VBox"

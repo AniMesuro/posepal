@@ -107,7 +107,7 @@ func get_res_paths() -> Array:
 # Attempts to update to latest version.
 func update_poselib():
 #	var current_version: PoolIntArray = poselib_version # current version
-#	var lv: PoolIntArray = pluginInstance.plugin_version # latest version
+	var latest_version: PoolIntArray = pluginInstance.plugin_version # latest version
 	
 #	var ver1: PoolIntArray = [0,9,0]
 #	var ver2: PoolIntArray = [0,9,1]
@@ -117,13 +117,18 @@ func update_poselib():
 #	if _version_is_older_than([0,8,9]):
 #		print("[posepal] Poselib version too old, couldn't update file to latest version.")
 #		return
-#	if _version_is_older_than([0,9,1]):
-#		print("[posepal] Poselib older than 0.9.1. Updating to latest version.")
-#
-#
-		return
+	if _version_is_older_than([0,9,1]):
+		print("[posepal] Poselib older than 0.9.1. Updating to latest version.")
+		# Convert filter data from pose to an Array.
+#		var new_filterData: Dictionary = filterData.duplicate(false)
+		for filter in filterData: # upper, bottom, face...
+			if typeof(filterData[filter]) == TYPE_ARRAY:
+				break
+			filterData[filter] = filterData[filter].keys()
 	
-#	poselib_version = latest_version
+	poselib_version = latest_version
+	print('[posepal] Poselib succesfully updated to ',poselib_version)
+	
 func _version_is_older_than(check_version: PoolIntArray):
 	if poselib_version[0] > check_version[0]: # MAJOR
 		return false
