@@ -18,7 +18,7 @@ var poseSkeleton: Skeleton2D
 var is_being_edited: bool = false setget _set_is_being_edited
 var boned_polygons: Array = []
 
-var filterPose: Dictionary
+var filter: Array
 var templatePose: Dictionary
 
 var askNamePopup: Popup
@@ -46,7 +46,7 @@ func _ready() -> void:
 	
 	owner = get_parent().owner
 	var poselib: Resource = owner.current_poselib
-	filterPose = poselib.filterData[owner.poselib_filter]
+	filter = poselib.filterData[owner.poselib_filter]
 	templatePose = poselib.templateData[owner.poselib_template]
 	
 	
@@ -133,7 +133,7 @@ func _generate_thumbnail():
 	thumbnailViewportImage.unlock()
 	thumbnailButton.texture_normal = thumbnailImageTexture
 	thumbnailViewport.queue_free()
-	filterPose = {}
+	filter = []
 	pose = {}
 	used_points.resize(0)
 
@@ -144,7 +144,7 @@ func _generate_preview_scene(parent: Node = null, previewParent: Node = null, ha
 		var _np_ch: String = poseSceneRoot.get_path_to(ch)
 		var _ch: Node
 		if !is_node_filtered:
-			if filterPose.has(_np_ch):
+			if filter.has(_np_ch):
 				is_node_filtered = true
 		
 		if is_node_filtered:

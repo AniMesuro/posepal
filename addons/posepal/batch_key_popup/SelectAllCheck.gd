@@ -1,11 +1,13 @@
 tool
 extends CheckBox
 
+export var nodesVBox_path: NodePath
+
 func _ready() -> void:
 	connect("pressed", self, "_on_pressed")
 
 func _on_pressed():
-	var nodesVBox: VBoxContainer = $"../../HSplitContainer/TreeScroll/VBox"
+	var nodesVBox: VBoxContainer = get_node(nodesVBox_path)
 	var has_unchecked_nodes: bool = false
 	for nodeItem in nodesVBox.get_children():
 		if !nodeItem.get_node('CheckButton').pressed:

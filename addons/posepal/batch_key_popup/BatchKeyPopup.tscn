@@ -64,6 +64,7 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+nodesVBox_path = NodePath("../../HSplitContainer/TreeScroll/VBox")
 
 [node name="NodeLabel" type="Label" parent="MarginContainer/VBox/TitleHBox"]
 margin_left = 20.0
