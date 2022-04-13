@@ -117,6 +117,7 @@ func update_poselib():
 #	if _version_is_older_than([0,8,9]):
 #		print("[posepal] Poselib version too old, couldn't update file to latest version.")
 #		return
+	var has_updated: bool = false
 	if _version_is_older_than([0,9,1]):
 		print("[posepal] Poselib older than 0.9.1. Updating to latest version.")
 		# Convert filter data from pose to an Array.
@@ -125,9 +126,10 @@ func update_poselib():
 			if typeof(filterData[filter]) == TYPE_ARRAY:
 				break
 			filterData[filter] = filterData[filter].keys()
-	
-	poselib_version = latest_version
-	print('[posepal] Poselib succesfully updated to ',poselib_version)
+		has_updated = true
+	if has_updated:
+		poselib_version = latest_version
+		print('[posepal] Poselib succesfully updated to ',poselib_version)
 	
 func _version_is_older_than(check_version: PoolIntArray):
 	if poselib_version[0] > check_version[0]: # MAJOR

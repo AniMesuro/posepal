@@ -33,19 +33,20 @@ func _on_id_pressed(id: int):
 	match id:
 		Items.EDIT:
 			owner.load_poseData()
-#			var filterEditPopup: WindowDialog = SCN_FilterEditPopup.instance()
-#			filterEditPopup.posepalDock = owner
-#			add_child(filterEditPopup)
-#			var window_size: Vector2 = OS.window_size
-#			filterEditPopup.popup_centered(Vector2(window_size.x * .3, window_size.y * .8))
-#			return
-			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.FILTER)
-			var menuButton: MenuButton = $"../MenuButton"
-			menuButton.is_being_edited = true
-			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
-				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
-			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
-				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
+			var filterEditPopup: WindowDialog = SCN_FilterEditPopup.instance()
+			filterEditPopup.posepalDock = owner
+			filterEditPopup.filterData = poselib.filterData[owner.poselib_filter].duplicate(false)
+			add_child(filterEditPopup)
+			var window_size: Vector2 = OS.window_size
+			filterEditPopup.popup_centered(Vector2(window_size.x * .3, window_size.y * .8))
+			return
+#			poseCreationHBox.edit_pose(0, poseCreationHBox.PoseType.FILTER)
+#			var menuButton: MenuButton = $"../MenuButton"
+#			menuButton.is_being_edited = true
+#			if !poseCreationHBox.is_connected("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled"):
+#				poseCreationHBox.connect("pose_editing_canceled", menuButton, "_on_poseCreationHBox_pose_editing_canceled", [], CONNECT_ONESHOT)
+#			if !poseCreationHBox.is_connected("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved"):
+#				poseCreationHBox.connect("pose_editing_saved", menuButton, "_on_poseCreationHBox_pose_editing_saved", [], CONNECT_ONESHOT)
 		Items.CREATE:
 			ask_for_name("Please insert the name for the new filter pose.")
 			askNamePopup.connect('name_settled', self, '_on_name_settled', [id])

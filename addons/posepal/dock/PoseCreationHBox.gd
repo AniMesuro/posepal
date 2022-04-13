@@ -126,10 +126,12 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	var pose_name: String = str(pose_id)
 	if pose_type == PoseType.FILTER:
-		if !poselib.filterData.has(owner.poselib_filter):
-			return
-		
-		pose_name = owner.poselib_filter
+		print("[posepal] Outdated poselib. Filters can't be edited as poses anymore.")
+		return
+#		if !poselib.filterData.has(owner.poselib_filter):
+#			return
+#
+#		pose_name = owner.poselib_filter
 	elif pose_type == PoseType.TEMPLATE:
 		if !poselib.templateData.has(owner.poselib_template):
 			return
@@ -290,7 +292,8 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 	if pose_type == PoseType.NORMAL:
 		pose = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 	elif pose_type == PoseType.FILTER:
-		pose = poselib.filterData[owner.poselib_filter]
+		return
+#		pose = poselib.filterData[owner.poselib_filter]
 	else:
 		pose = poselib.templateData[owner.poselib_template]
 	
