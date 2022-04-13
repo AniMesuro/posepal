@@ -33,7 +33,7 @@ var optionsData: Dictionary = {
 }
 
 var poseFile_path: String = ""
-var poseData: Dictionary = {}
+#var poseData: Dictionary = {}
 
 var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
@@ -259,7 +259,7 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 	posePalette = self.posePalette#$"VSplit/TabContainer/Palette/GridContainer"
 	if is_instance_valid(posePalette):
 		posePalette.fill_previews()
-	
+		
 
 func _get_posePalette():
 	posePalette = $"VSplit/TabContainer/Pallete/ScrollContainer/GridContainer"
@@ -381,6 +381,7 @@ func key_pose(pose_id: int):
 	if queuedPoseData.size() > 0:
 		_key_queued_pose(final_pose)
 	
+	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 	for nodepath in final_pose:
 #		var node: Node = animRoot.get_node(nodepath)
 		var node: Node = poseRoot.get_node(nodepath)
@@ -390,12 +391,9 @@ func key_pose(pose_id: int):
 				continue
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr_property: int = anim.find_track(track_path)
-			var _is_new_track: bool = false
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-				_is_new_track = true
-			var _key_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 			
 			var key_value
 			if final_pose[nodepath][property].has('val'):
@@ -411,7 +409,7 @@ func key_pose(pose_id: int):
 #					update_mode = anim.UPDATE_DISCRETE
 #				anim.value_track_set_update_mode(tr_property, )
 			
-			var key_last: int = anim.track_find_key(tr_property, _key_time - 0.01, false)
+			var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
 			if key_last != -1:
 				if optionsData.dont_key_duplicate:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
@@ -419,5 +417,21 @@ func key_pose(pose_id: int):
 				if final_pose[nodepath][property].has('in'):
 					anim.track_set_key_transition(tr_property, key_last, final_pose[nodepath][property]['in'])
 			if final_pose[nodepath][property].has('out'):
-				anim.track_insert_key(tr_property, _key_time, key_value, final_pose[nodepath][property]['out'])
+				anim.track_insert_key(tr_property, current_time, key_value, final_pose[nodepath][property]['out'])
+		
+		if node.is_class('Polygon2D') && final_pose[nodepath].has('texture'):
+			for property in PolygonDataProperties:
+				var track_path: String = str(animRoot.get_path_to(node))+':'+property
+				var tr_property: int = anim.find_track(track_path)
+				if tr_property == -1:
+					tr_property = anim.add_track(Animation.TYPE_VALUE)
+					anim.track_set_path(tr_property, track_path)
+					anim.value_track_set_update_mode(tr_property, anim.UPDATE_DISCRETE)
+				
+				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
+				var key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]['_data'][property]
+				if key_last != -1:
+					if anim.track_get_key_value(tr_property, key_last) == key_value:
+						continue
+				anim.track_insert_key(tr_property, current_time, key_value, 0.0)
 

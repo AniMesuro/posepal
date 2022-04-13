@@ -439,7 +439,17 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
-				owner.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
+				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
+		
+		if node.is_class('Polygon2D') && property == 'texture':
+			print('Im polyogn2d')
+			if !is_instance_valid(node.get_node(node.skeleton)):
+				return
+			if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path].has('_data'):
+				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path]['_data'] = {}
+			_save_polygon_data_to_poseData(poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path], node)
+			print('polygon data ', poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path]['_data'].size())
+			
 	elif current_pose_type == PoseType.FILTER:
 		if !poselib.filterData[owner.poselib_filter].has(node_path):
 			poselib.filterData[owner.poselib_filter][node_path] = {}
@@ -468,20 +478,20 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
-#		property == 'texture'
 			print('Im polyogn2d')
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
 			if !poselib.templateData[owner.poselib_template][node_path].has('_data'):
 				poselib.templateData[owner.poselib_template][node_path]['_data'] = {}
 				
-			poselib.templateData[owner.poselib_template][node_path]['_data']['skeleton'] = node.skeleton
-			poselib.templateData[owner.poselib_template][node_path]['_data']['polygon'] = node.polygon
-			poselib.templateData[owner.poselib_template][node_path]['_data']['polygons'] = node.polygons
-			poselib.templateData[owner.poselib_template][node_path]['_data']['uv'] = node.uv
-			print(poselib.templateData[owner.poselib_template][node_path]['_data'].size())
+			_save_polygon_data_to_poseData(poselib.templateData[owner.poselib_template][node_path], node)
+			print('polygon data ', poselib.templateData[owner.poselib_template][node_path]['_data'].size())
 
-
+func _save_polygon_data_to_poseData(poseData: Dictionary, node: Node):
+	poseData['_data']['skeleton'] = node.skeleton
+	poseData['_data']['polygon'] = node.polygon
+	poseData['_data']['polygons'] = node.polygons
+	poseData['_data']['uv'] = node.uv
 
 func _hide_editorSceneTabs():
 	var sceneTabs: Tabs = owner.pluginInstance.editorSceneTabs 

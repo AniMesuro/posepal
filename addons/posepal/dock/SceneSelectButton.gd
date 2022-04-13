@@ -123,5 +123,5 @@ func _reset_selection():
 	hint_tooltip = ''
 	
 	owner.poselib_scene = ""
-	owner.poseData = {}
+#	owner.poseData = {}
 	owner.poseFile_path = ""
