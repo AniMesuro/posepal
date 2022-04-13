@@ -390,8 +390,9 @@ custom_constants/margin_left = 10
 
 [node name="OptionsVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin"]
 margin_left = 10.0
+margin_top = 10.0
 margin_right = 254.0
-margin_bottom = 395.0
+margin_bottom = 385.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

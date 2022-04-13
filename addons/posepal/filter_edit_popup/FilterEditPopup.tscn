@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/posepal/interface/Titlebar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/posepal/assets/PostuRecordTheme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/posepal/interface/NodeVBox.gd" type="Script" id=3]
+[ext_resource path="res://addons/posepal/filter_edit_popup/FilterEditPopup.gd" type="Script" id=4]
+
+[node name="FilterEditPopup" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -219.0
+margin_top = -313.0
+margin_right = 263.0
+margin_bottom = 314.0
+input_pass_on_modal_close_click = false
+theme = ExtResource( 2 )
+resizable = true
+script = ExtResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 472.0
+margin_bottom = 617.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TitleBar" parent="Margin/VBox" instance=ExtResource( 1 )]
+margin_right = 462.0
+title_name = "Filter Edit Popup"
+window_path = NodePath("../../..")
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
+margin_top = 28.0
+margin_right = 462.0
+margin_bottom = 588.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NodeVBox" type="VBoxContainer" parent="Margin/VBox/Scroll"]
+margin_right = 462.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="OkButton" type="Button" parent="Margin/VBox"]
+margin_left = 207.0
+margin_top = 592.0
+margin_right = 255.0
+margin_bottom = 607.0
+rect_min_size = Vector2( 48, 0 )
+size_flags_horizontal = 4
+text = "Ok"
