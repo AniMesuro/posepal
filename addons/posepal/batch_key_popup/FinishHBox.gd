@@ -32,7 +32,7 @@ func _on_OkButton_pressed():
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, property_path)
-				var update_mode: int = _get_default_update_mode(property, key_value)
+				var update_mode: int = owner.posepalDock.get_default_update_mode(property, key_value)
 				anim.value_track_set_update_mode(tr_property, update_mode)
 			
 			anim.track_insert_key(tr_property, current_time, key_value)
@@ -41,10 +41,4 @@ func _on_OkButton_pressed():
 func _on_CancelButton_pressed():
 	owner.queue_free()
 
-func _get_default_update_mode(property: String, value) -> int:
-	if (value is bool) or (value is String) or (value is Object):
-		return Animation.UPDATE_DISCRETE
-	match property:
-		'offset', 'frame', 'z_index':
-			return Animation.UPDATE_DISCRETE
-	return Animation.UPDATE_CONTINUOUS
+

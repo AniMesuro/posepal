@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 2 )
 owner_filepath = "res://addons/posepal/_example_rig_godette/RigGodette.tscn"
-poselib_version = PoolIntArray( 0, 9, 0 )
+poselib_version = PoolIntArray( 0, 9, 1 )
 resourceReferences = {
 0: "res://addons/posepal/_example_rig_godette/assets/34 left/neck.png",
 1: "res://addons/posepal/_example_rig_godette/assets/34 left/torso bottom.png",
@@ -1234,136 +1234,8 @@ poseData = {
 }
 }
 filterData = {
-"full body": {
-"TorsoBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/LLegTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/LLegTop/LLegBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/LLegTop/LLegBottom/LFeet": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/RLegTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/RLegTop/RLegBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/RLegTop/RLegBottom/RFeet": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Bag": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Eyes": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Fringe": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-},
-"TorsoBottom/TorsoTop/Neck/Head/Mouth": {
-"visible": {
-"out": 1.0,
-"val": true
-}
-}
-},
-"none": {
-}
+"full body": [ "TorsoBottom", "TorsoBottom/LLegTop", "TorsoBottom/LLegTop/LLegBottom", "TorsoBottom/LLegTop/LLegBottom/LFeet", "TorsoBottom/RLegTop", "TorsoBottom/RLegTop/RLegBottom", "TorsoBottom/RLegTop/RLegBottom/RFeet", "TorsoBottom/TorsoTop", "TorsoBottom/TorsoTop/ArmRTop", "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom", "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand", "TorsoBottom/TorsoTop/Bag", "TorsoBottom/TorsoTop/LArmTop", "TorsoBottom/TorsoTop/LArmTop/LArmBottom", "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand", "TorsoBottom/TorsoTop/Neck", "TorsoBottom/TorsoTop/Neck/Head", "TorsoBottom/TorsoTop/Neck/Head/Ebrow", "TorsoBottom/TorsoTop/Neck/Head/Eyes", "TorsoBottom/TorsoTop/Neck/Head/Fringe", "TorsoBottom/TorsoTop/Neck/Head/Mouth" ],
+"none": [  ]
 }
 templateData = {
 "": {
@@ -1372,12 +1244,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.797424, 8.24968 )
 },
 "rotation_degrees": {
@@ -1392,24 +1264,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 1
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 15.5143, 80.9811 )
 },
 "position": {
@@ -1429,29 +1301,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 2
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 23.5, 96.761 )
 },
 "position": {
@@ -1471,29 +1343,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 3
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -24.6102, 44.346 )
 },
 "position": {
@@ -1513,29 +1385,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 4
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -3.6322, 79.2544 )
 },
 "position": {
@@ -1555,29 +1427,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 5
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.71838, 101.115 )
 },
 "position": {
@@ -1597,29 +1469,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 6
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -56.7817, 14.1098 )
 },
 "position": {
@@ -1639,29 +1511,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 7
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 16.969, -91.615 )
 },
 "position": {
@@ -1681,24 +1553,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 8
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -16.2493, 55.2509 )
 },
 "position": {
@@ -1718,29 +1590,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 9
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.9995, 54.2677 )
 },
 "position": {
@@ -1760,29 +1632,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 10
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.2817, 21.1371 )
 },
 "position": {
@@ -1802,29 +1674,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 11
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 5.65991, -88.0972 )
 },
 "position": {
@@ -1844,29 +1716,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 12
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 6.6395, 54.7096 )
 },
 "position": {
@@ -1886,29 +1758,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 13
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 22.5927, 54.2411 )
 },
 "position": {
@@ -1928,29 +1800,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 14
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 25.7694, 21.32 )
 },
 "position": {
@@ -1970,29 +1842,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 15
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -6.01403, -36.1606 )
 },
 "position": {
@@ -2012,29 +1884,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 0
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0.2601, -118.923 )
 },
 "position": {
@@ -2054,29 +1926,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 16
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2096,24 +1968,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 17
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2133,24 +2005,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 18
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.7487, 75.7297 )
 },
 "position": {
@@ -2170,24 +2042,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 19
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2207,12 +2079,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 20
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 }

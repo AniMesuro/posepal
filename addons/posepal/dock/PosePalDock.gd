@@ -234,6 +234,19 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 
 	return null
 
+func get_default_update_mode(property: String, value = null) -> int:
+	if (value is bool) or (value is String) or (value is Object):
+		return Animation.UPDATE_DISCRETE
+	elif value == null:
+		match property: 'texture', 'flip_h', 'flip_v', 'visible', 'animation':
+			return Animation.UPDATE_DISCRETE
+				
+	match property:
+		'offset', 'frame', 'z_index':
+			return Animation.UPDATE_DISCRETE
+	return Animation.UPDATE_CONTINUOUS
+
+
 var _edited_scene_nodes: Array = []
 var _select_children_as_array_iter: int = 0
 func _select_children_as_array(parent: Node, is_root: bool = false, max_iters: int = 0):

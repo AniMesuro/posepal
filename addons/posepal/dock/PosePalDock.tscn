@@ -400,22 +400,29 @@ script = ExtResource( 24 )
 
 [node name="PoseCreationColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
 visible = false
-margin_right = 379.0
+margin_right = 244.0
 path_to_expandableControl = NodePath("../PoseCreationVBox")
 text = "Pose Creation"
 
 [node name="PoseCreationVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 visible = false
 margin_top = 21.0
-margin_right = 379.0
-margin_bottom = 36.0
+margin_right = 244.0
+margin_bottom = 55.0
 script = ExtResource( 27 )
 
 [node name="UpdateFromTemplateButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationVBox"]
-margin_right = 379.0
+margin_right = 244.0
 margin_bottom = 15.0
 hint_tooltip = "Copies update_mode and transition from template and applies to every paralel track in selected pose."
 text = "Update from template"
+
+[node name="DefaultUpdateModeButton" type="Button" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PoseCreationVBox"]
+margin_top = 19.0
+margin_right = 244.0
+margin_bottom = 34.0
+hint_tooltip = "Copies update_mode and transition from template and applies to every paralel track in selected pose."
+text = "Default update mode"
 
 [node name="PreviewColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
 margin_right = 244.0
