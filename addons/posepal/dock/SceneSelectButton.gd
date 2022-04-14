@@ -72,6 +72,8 @@ func _on_id_selected(id :int):
 			&& (filename_pieces[2] == "tres" or filename_pieces[2] == "res")):
 				owner.poseFile_path = selectedScene.get_meta('_plPoseLib_poseFile')
 				is_poseFile_valid = true
+		else:
+			print("[posepal] ",selectedScene.name,"'s has invalid pose filepath: ",selectedScene.get_meta('_plPoseLib_poseFile'))
 	
 	if is_poseFile_valid:
 		var err: int = owner.load_poseData()
