@@ -21,6 +21,9 @@ func _ready() -> void:
 	fill_nodes(poseRoot)
 	if node_type == 'Bone2D':
 		return
+	if !is_instance_valid(poseSkeleton):
+		owner.queue_free()
+		return
 	load_bone_relationships()
 	owner.update_bone_relationship('_skeleton', poseRoot.get_path_to(poseSkeleton))
 
