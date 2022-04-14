@@ -386,7 +386,6 @@ func key_pose(pose_id: int):
 	
 	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 	for nodepath in final_pose:
-#		var node: Node = animRoot.get_node(nodepath)
 		var node: Node = poseRoot.get_node(nodepath)
 		
 		for property in final_pose[nodepath]:
@@ -397,6 +396,8 @@ func key_pose(pose_id: int):
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
+				if final_pose[nodepath][property].has('upmo'):
+					anim.value_track_set_update_mode(tr_property, final_pose[nodepath][property]['upmo'])
 			
 			var key_value
 			if final_pose[nodepath][property].has('val'):
@@ -422,7 +423,7 @@ func key_pose(pose_id: int):
 			if final_pose[nodepath][property].has('out'):
 				anim.track_insert_key(tr_property, current_time, key_value, final_pose[nodepath][property]['out'])
 		
-		if node.is_class('Polygon2D') && final_pose[nodepath].has('texture'):
+		if node.is_class('Polygon2D') && final_pose[nodepath].has('_data'):
 			for property in PolygonDataProperties:
 				var track_path: String = str(animRoot.get_path_to(node))+':'+property
 				var tr_property: int = anim.find_track(track_path)
@@ -432,7 +433,8 @@ func key_pose(pose_id: int):
 					anim.value_track_set_update_mode(tr_property, anim.UPDATE_DISCRETE)
 				
 				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
-				var key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]['_data'][property]
+				var key_value = final_pose[nodepath]['_data'][property]
+#				var key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]['_data'][property]
 				if key_last != -1:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue
