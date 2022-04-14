@@ -7,6 +7,7 @@ var updateFromTemplateButton: Button
 func _ready() -> void:
 	$UpdateFromTemplateButton.connect("pressed", self, "_on_UpdateFromTemplateButton_pressed")
 	$DefaultUpdateModeButton.connect("pressed", self, "_on_DefaultUpdateModeButton_pressed")
+	$"../PoseCreationColumn".connect("is_locked_changed", self, "_on_is_locked_changed")
 
 func refresh():
 	# make invisible if template editing. 
@@ -75,3 +76,7 @@ func _on_DefaultUpdateModeButton_pressed():
 #		for property in templatePose[node_path]:
 #			templatePose[node_path]
 	
+func _on_is_locked_changed(value: bool):
+	if value: 
+		return
+	refresh()

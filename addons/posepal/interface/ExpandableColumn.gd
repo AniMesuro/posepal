@@ -1,6 +1,8 @@
 tool
 extends PanelContainer
 
+signal is_locked_changed (value)
+
 export var path_to_expandableControl: NodePath = NodePath('.')
 export var text: String setget _set_tab_text
 export var is_locked: bool = true setget _set_is_locked
@@ -77,3 +79,4 @@ func _set_is_locked(new_is_locked: bool):
 	else:
 		self.expand = expand
 		visible = true
+	emit_signal('is_locked_changed', is_locked)

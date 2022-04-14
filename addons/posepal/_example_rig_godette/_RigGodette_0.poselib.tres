@@ -2093,12 +2093,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.797424, 8.24968 )
 },
 "rotation_degrees": {
@@ -2113,19 +2113,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 1
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -16.4857, 85.9811 )
 },
 "position": {
@@ -2145,29 +2145,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 2
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -24.5, 96.761 )
 },
 "position": {
@@ -2187,29 +2187,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 3
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 21.3898, 29.346 )
 },
 "position": {
@@ -2229,29 +2229,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 4
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 4.3678, 79.2544 )
 },
 "position": {
@@ -2271,29 +2271,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 5
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -2.28162, 100.115 )
 },
 "position": {
@@ -2313,29 +2313,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 6
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 58.2183, 13.1098 )
 },
 "position": {
@@ -2355,29 +2355,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 7
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -17.031, -93.615 )
 },
 "position": {
@@ -2397,29 +2397,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 8
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 15.7507, 56.2509 )
 },
 "position": {
@@ -2439,29 +2439,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 9
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 24.2814, 55.5351 )
 },
 "position": {
@@ -2481,29 +2481,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 10
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 27.7183, 23.1371 )
 },
 "position": {
@@ -2523,29 +2523,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 11
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -18.3401, -129.097 )
 },
 "position": {
@@ -2565,29 +2565,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 12
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -3.3605, 59.7096 )
 },
 "position": {
@@ -2607,29 +2607,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 13
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -23.4073, 57.2411 )
 },
 "position": {
@@ -2649,29 +2649,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 14
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -31.4204, 26.4441 )
 },
 "position": {
@@ -2691,29 +2691,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 15
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 5.98597, -34.1606 )
 },
 "position": {
@@ -2733,29 +2733,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 0
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 5.2601, -93.923 )
 },
 "position": {
@@ -2775,29 +2775,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 166
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2817,24 +2817,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 17
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2854,24 +2854,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 18
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 27, 90.5001 )
 },
 "position": {
@@ -2891,29 +2891,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 138
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -2933,12 +2933,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 20
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 }
@@ -2947,12 +2947,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -10.7974, 11.2497 )
 },
 "rotation_degrees": {
@@ -2967,19 +2967,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 98
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.5143, 93.981 )
 },
 "position": {
@@ -2999,29 +2999,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 99
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.5, 92.761 )
 },
 "position": {
@@ -3041,24 +3041,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 100
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -39.6102, 11.346 )
 },
 "position": {
@@ -3078,24 +3078,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 101
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 7.3678, 88.2544 )
 },
 "position": {
@@ -3115,29 +3115,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 102
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -2.28162, 83.115 )
 },
 "position": {
@@ -3157,24 +3157,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 103
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.22274, 4.77777 )
 },
 "position": {
@@ -3194,24 +3194,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 104
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 7.969, -88.615 )
 },
 "position": {
@@ -3231,24 +3231,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 105
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 8.7507, 59.2509 )
 },
 "position": {
@@ -3268,29 +3268,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 106
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 7.2814, 47.5351 )
 },
 "position": {
@@ -3310,24 +3310,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 107
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 7.161, 10.4041 )
 },
 "position": {
@@ -3347,24 +3347,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 108
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -18.3401, -129.097 )
 },
 "position": {
@@ -3384,24 +3384,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 109
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -12.3605, 62.7096 )
 },
 "position": {
@@ -3421,29 +3421,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 110
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -10.713, 70 )
 },
 "position": {
@@ -3463,24 +3463,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 111
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -30.4204, 21.4441 )
 },
 "position": {
@@ -3500,24 +3500,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 112
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.01403, -24.1606 )
 },
 "position": {
@@ -3537,29 +3537,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 113
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 21.2601, -96.923 )
 },
 "position": {
@@ -3579,29 +3579,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 114
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -3621,53 +3621,53 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 115
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 18
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 19
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 20
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 }
@@ -3676,12 +3676,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 9.20258, 23.2497 )
 },
 "position": {
@@ -3696,19 +3696,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 98
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.485701, 101.981 )
 },
 "position": {
@@ -3728,29 +3728,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 99
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.5, 84.761 )
 },
 "position": {
@@ -3770,24 +3770,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 100
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 33.3898, 16.346 )
 },
 "position": {
@@ -3802,24 +3802,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 101
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -11.6322, 81.2544 )
 },
 "position": {
@@ -3839,29 +3839,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 102
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -2.28162, 83.115 )
 },
 "position": {
@@ -3881,24 +3881,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 103
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 12.2183, 1.1098 )
 },
 "position": {
@@ -3913,24 +3913,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 104
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.031, -88.615 )
 },
 "position": {
@@ -3945,19 +3945,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 105
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.2493, 60.2509 )
 },
 "position": {
@@ -3972,29 +3972,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 106
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.7186, 48.5351 )
 },
 "position": {
@@ -4009,24 +4009,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 107
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.839, 10.4041 )
 },
 "position": {
@@ -4041,24 +4041,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 108
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -18.3401, -129.097 )
 },
 "position": {
@@ -4073,24 +4073,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 109
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 10.6395, 59.7096 )
 },
 "position": {
@@ -4105,29 +4105,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 110
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 11, 70 )
 },
 "position": {
@@ -4142,24 +4142,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 111
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 25.5796, 17.4441 )
 },
 "position": {
@@ -4174,24 +4174,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 112
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 4.98597, -29.1606 )
 },
 "position": {
@@ -4206,19 +4206,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 113
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -13.7399, -94.923 )
 },
 "position": {
@@ -4233,19 +4233,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 137
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -4260,24 +4265,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 115
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -4292,7 +4297,7 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 18
 },
 "visible": {
@@ -4304,12 +4309,12 @@ templateData = {
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 27, 90.5001 )
 },
 "position": {
@@ -4324,24 +4329,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 138
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -4356,12 +4361,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 20
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 }
@@ -4370,12 +4375,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.797424, 8.24968 )
 },
 "position": {
@@ -4390,19 +4395,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 139
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 2.867, 99.5304 )
 },
 "position": {
@@ -4422,29 +4427,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 146
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 8.5, 85.761 )
 },
 "position": {
@@ -4464,24 +4469,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 147
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 17.3898, -0.653999 )
 },
 "position": {
@@ -4501,24 +4506,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 148
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -6.6322, 98.2544 )
 },
 "position": {
@@ -4538,29 +4543,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 146
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -12.2816, 83.115 )
 },
 "position": {
@@ -4580,24 +4585,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 147
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -21.014, 3.8194 )
 },
 "position": {
@@ -4617,24 +4622,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 148
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.96904, -85.615 )
 },
 "position": {
@@ -4649,19 +4654,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 140
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.2493, 56.2509 )
 },
 "position": {
@@ -4676,29 +4681,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 142
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -28.4386, 50.4124 )
 },
 "position": {
@@ -4713,24 +4718,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 143
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.2817, 26.1371 )
 },
 "position": {
@@ -4745,24 +4750,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 144
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.34009, -89.0972 )
 },
 "position": {
@@ -4777,24 +4782,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 145
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 22.6395, 55.7096 )
 },
 "position": {
@@ -4809,29 +4814,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 142
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 27.2654, 48.8525 )
 },
 "position": {
@@ -4846,24 +4851,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 143
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 18.7694, 25.32 )
 },
 "position": {
@@ -4878,24 +4883,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 144
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -1.01403, -20.1606 )
 },
 "position": {
@@ -4910,19 +4915,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 141
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0.2601, -118.923 )
 },
 "position": {
@@ -4937,19 +4942,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 53
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -4964,24 +4969,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 115
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -4996,24 +5001,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 18
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 27, 90.5001 )
 },
 "position": {
@@ -5028,24 +5033,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 138
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -5060,12 +5065,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 20
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 }
 }
@@ -5076,12 +5081,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.797424, 8.24968 )
 },
 "position": {
@@ -5101,19 +5106,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 116
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 19.867, 93.5304 )
 },
 "position": {
@@ -5133,29 +5138,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 117
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 3.5, 97.761 )
 },
 "position": {
@@ -5175,29 +5180,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 118
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 9.3898, 40.346 )
 },
 "position": {
@@ -5217,29 +5222,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 119
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -15.6322, 92.2544 )
 },
 "position": {
@@ -5259,29 +5264,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 120
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.71838, 101.115 )
 },
 "position": {
@@ -5301,29 +5306,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 121
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -5.014, 34.8194 )
 },
 "position": {
@@ -5343,29 +5348,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 122
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 1.96904, -85.615 )
 },
 "position": {
@@ -5385,24 +5390,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 123
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.2493, 56.2509 )
 },
 "position": {
@@ -5422,29 +5427,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 124
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -31.4386, 61.4124 )
 },
 "position": {
@@ -5464,29 +5469,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 125
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -22.2817, 21.1371 )
 },
 "position": {
@@ -5506,29 +5511,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 126
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.34009, -89.0972 )
 },
 "position": {
@@ -5548,24 +5553,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 127
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 22.6395, 55.7096 )
 },
 "position": {
@@ -5585,29 +5590,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 128
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 26.2654, 54.8525 )
 },
 "position": {
@@ -5627,29 +5632,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 129
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 23.7694, 18.32 )
 },
 "position": {
@@ -5669,29 +5674,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 130
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.01403, -42.1606 )
 },
 "position": {
@@ -5711,29 +5716,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 131
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0.2601, -118.923 )
 },
 "position": {
@@ -5753,29 +5758,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 132
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -5795,29 +5800,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 133
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -5837,29 +5842,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 134
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -24.7487, 47.7297 )
 },
 "position": {
@@ -5879,29 +5884,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 135
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -5921,17 +5926,17 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 136
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 }
@@ -5940,12 +5945,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -0.797424, 8.24968 )
 },
 "position": {
@@ -5960,19 +5965,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 149
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 24.8052, 98.2122 )
 },
 "position": {
@@ -5987,29 +5992,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 158
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 10.5, 103.761 )
 },
 "position": {
@@ -6024,24 +6029,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 159
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -33.6102, 37.346 )
 },
 "position": {
@@ -6056,24 +6061,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 160
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 7.3678, 78.2544 )
 },
 "position": {
@@ -6088,29 +6093,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 161
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 8.71838, 96.115 )
 },
 "position": {
@@ -6125,24 +6130,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 162
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -35.014, 15.8194 )
 },
 "position": {
@@ -6157,24 +6162,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 163
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 16.969, -81.615 )
 },
 "position": {
@@ -6189,19 +6194,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 150
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -5.2493, 55.2509 )
 },
 "position": {
@@ -6216,29 +6221,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 151
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -1.4386, 51.4124 )
 },
 "position": {
@@ -6253,24 +6258,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 152
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -29.2817, 22.1371 )
 },
 "position": {
@@ -6285,24 +6290,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 153
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -7.34009, -89.0972 )
 },
 "position": {
@@ -6317,24 +6322,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 157
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -4.3605, 64.7096 )
 },
 "position": {
@@ -6349,29 +6354,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 154
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 4.2654, 64.8525 )
 },
 "position": {
@@ -6386,24 +6391,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 155
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 8.7694, 32.32 )
 },
 "position": {
@@ -6418,24 +6423,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 156
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -8.01403, -39.1606 )
 },
 "position": {
@@ -6450,19 +6455,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 97
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 9.2601, -82.923 )
 },
 "position": {
@@ -6477,7 +6482,7 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 92
 },
 "z_index": {
@@ -6489,12 +6494,12 @@ templateData = {
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -6509,24 +6514,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 93
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -6541,24 +6546,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 94
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -24.7487, 47.7297 )
 },
 "position": {
@@ -6573,24 +6578,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 95
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -6605,12 +6610,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 96
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 }
@@ -6619,12 +6624,12 @@ templateData = {
 "TorsoBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 6.20258, 9.24968 )
 },
 "position": {
@@ -6639,19 +6644,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 149
 }
 },
 "TorsoBottom/LLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -30.1948, 99.2122 )
 },
 "position": {
@@ -6666,29 +6671,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 158
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/LLegTop/LLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -5.5, 96.761 )
 },
 "position": {
@@ -6703,24 +6708,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 159
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/LLegTop/LLegBottom/LFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 32.3898, 26.346 )
 },
 "position": {
@@ -6735,24 +6740,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 160
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/RLegTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -5.6322, 79.2544 )
 },
 "position": {
@@ -6767,29 +6772,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 161
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.28162, 97.115 )
 },
 "position": {
@@ -6804,24 +6809,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 162
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/RLegTop/RLegBottom/RFeet": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 26.986, 7.8194 )
 },
 "position": {
@@ -6836,24 +6841,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 163
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -15.031, -85.615 )
 },
 "position": {
@@ -6868,19 +6873,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 150
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 5.7507, 60.2509 )
 },
 "position": {
@@ -6895,29 +6900,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 151
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 5.5614, 51.4124 )
 },
 "position": {
@@ -6932,24 +6937,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 152
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/ArmRTop/ArmRBottom/RHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 28.7183, 22.1371 )
 },
 "position": {
@@ -6964,24 +6969,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 153
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -1
 }
 },
 "TorsoBottom/TorsoTop/Bag": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": false
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -2.34009, -60.0972 )
 },
 "position": {
@@ -6996,24 +7001,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 165
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": -2
 }
 },
 "TorsoBottom/TorsoTop/LArmTop": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 4.6395, 63.7096 )
 },
 "position": {
@@ -7028,29 +7033,29 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 154
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -3.7346, 66.8525 )
 },
 "position": {
@@ -7065,24 +7070,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 155
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/LArmTop/LArmBottom/LHand": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -8.2306, 30.32 )
 },
 "position": {
@@ -7097,24 +7102,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 156
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 0
 }
 },
 "TorsoBottom/TorsoTop/Neck": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 10.986, -38.1606 )
 },
 "position": {
@@ -7129,19 +7134,19 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 97
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( -9.7399, -82.923 )
 },
 "position": {
@@ -7156,24 +7161,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 92
 },
 "z_index": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": 1
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Ebrow": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -7188,24 +7193,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 93
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Eyes": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -7220,24 +7225,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 94
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Fringe": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 52.2513, 86.7297 )
 },
 "position": {
@@ -7252,24 +7257,24 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 164
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 },
 "TorsoBottom/TorsoTop/Neck/Head/Mouth": {
 "flip_h": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 },
 "offset": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": Vector2( 0, 0 )
 },
 "position": {
@@ -7284,12 +7289,12 @@ templateData = {
 },
 "texture": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "valr": 96
 },
 "visible": {
 "out": 1.0,
-"upmo": 0,
+"upmo": 1,
 "val": true
 }
 }
