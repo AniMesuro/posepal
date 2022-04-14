@@ -434,7 +434,6 @@ func key_pose(pose_id: int):
 				
 				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
 				var key_value = final_pose[nodepath]['_data'][property]
-#				var key_value = current_poselib.poseData[poselib_template][poselib_collection][pose_id][nodepath]['_data'][property]
 				if key_last != -1:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue

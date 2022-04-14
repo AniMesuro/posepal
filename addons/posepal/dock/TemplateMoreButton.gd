@@ -37,6 +37,8 @@ func key_template_pose():
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
+				if poselib.templateData[owner.poselib_template][nodepath][property].has('upmo'):
+					anim.value_track_set_update_mode(tr_property, poselib.templateData[owner.poselib_template][nodepath][property]['upmo'])
 				
 			var key_value
 			if poselib.templateData[owner.poselib_template][nodepath][property].has('val'):

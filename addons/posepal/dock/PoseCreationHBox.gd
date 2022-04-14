@@ -494,14 +494,12 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
-			print('Im polyogn2d')
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
 			if !poselib.templateData[owner.poselib_template][node_path].has('_data'):
 				poselib.templateData[owner.poselib_template][node_path]['_data'] = {}
 				
 			_save_polygon_data_to_poseData(poselib.templateData[owner.poselib_template][node_path], node)
-			print('polygon data ', poselib.templateData[owner.poselib_template][node_path]['_data'].size())
 
 func _save_polygon_data_to_poseData(poseData: Dictionary, node: Node):
 	poseData['_data']['skeleton'] = node.skeleton
