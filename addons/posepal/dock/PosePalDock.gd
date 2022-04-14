@@ -27,9 +27,12 @@ var poselib_collection: String = "" # Stores pose data.
 var poselib_animPlayer: AnimationPlayer # AnimationPlayer from edited scene to make changes to.
 
 var optionsData: Dictionary = {
+	# PREVIEW
 	'ignore_scene_pose': false,
+	'show_bones': false,
+	# KEYING
 	'key_template': false,
-	'dont_key_duplicate': false
+	'dont_key_duplicate': false,
 }
 
 var poseFile_path: String = ""

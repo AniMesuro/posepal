@@ -427,7 +427,7 @@ expand = true
 [node name="PreviewVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
 margin_top = 21.0
 margin_right = 244.0
-margin_bottom = 37.0
+margin_bottom = 57.0
 script = ExtResource( 28 )
 
 [node name="IgnoreScenePoseChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PreviewVBox"]
@@ -435,19 +435,25 @@ margin_right = 244.0
 margin_bottom = 16.0
 text = "Ignore scene pose"
 
-[node name="KeyingColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-margin_top = 41.0
+[node name="ShowBonesChk" type="CheckBox" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/PreviewVBox"]
+margin_top = 20.0
 margin_right = 244.0
-margin_bottom = 58.0
+margin_bottom = 36.0
+text = "Show bones"
+
+[node name="KeyingColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
+margin_top = 61.0
+margin_right = 244.0
+margin_bottom = 78.0
 path_to_expandableControl = NodePath("../KeyingVBox")
 text = "Keying"
 is_locked = false
 expand = true
 
 [node name="KeyingVBox" type="VBoxContainer" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox"]
-margin_top = 62.0
+margin_top = 82.0
 margin_right = 244.0
-margin_bottom = 124.0
+margin_bottom = 144.0
 custom_constants/separation = 0
 script = ExtResource( 26 )
 
@@ -477,9 +483,9 @@ hint_tooltip = "Batch keys into an Animation."
 text = "Queue key at time"
 
 [node name="MiscColumn" parent="VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox" instance=ExtResource( 23 )]
-margin_top = 128.0
+margin_top = 148.0
 margin_right = 244.0
-margin_bottom = 145.0
+margin_bottom = 165.0
 path_to_expandableControl = NodePath("../MiscVBox")
 text = "Misc"
 is_locked = false

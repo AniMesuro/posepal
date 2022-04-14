@@ -7,7 +7,7 @@ var ignoreScenePoseChk: CheckBox
 
 func _ready() -> void:
 	ignoreScenePoseChk = $"PreviewVBox/IgnoreScenePoseChk"
-	ignoreScenePoseChk.connect("pressed", self, "_on_IgnoreScenePoseChk_pressed")
+	
 	
 	owner.connect('updated_reference', self, '_on_PoseLibrary_updated_reference')
 	owner.connect("issued_forced_selection", self, "_on_issued_forced_selection")
@@ -18,9 +18,6 @@ func _ready() -> void:
 	else:
 		$"MiscColumn".is_locked = true
 
-func _on_IgnoreScenePoseChk_pressed():
-	ignoreScenePoseChk = $PreviewVBox/IgnoreScenePoseChk
-	owner.optionsData.ignore_scene_pose = ignoreScenePoseChk.pressed
 
 func refresh_ui():
 	$KeyingVBox.refresh()

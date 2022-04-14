@@ -17,6 +17,7 @@ var poseSceneRoot: Node
 var poseSkeleton: Skeleton2D
 var is_being_edited: bool = false setget _set_is_being_edited
 var boned_polygons: Array = []
+var bones: Array = []
 
 var filter: Array
 var templatePose: Dictionary
@@ -219,8 +220,16 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			'Skeleton2D':
 				_ch = Skeleton2D.new()
 			'Bone2D':
-				_ch = Bone2D.new()
-				_ch.rest = ch.rest
+				if !owner.optionsData.show_bones:
+					_ch = Bone2D.new()
+					_ch.rest = ch.rest
+				else:
+#					print('bone is line2d')
+					_ch = Line2D.new()
+					var l:Line2D
+					_ch.width = 20
+					_ch.z_index = 1000
+					bones.append(_ch)
 			'RemoteTransform2D':
 				_ch = RemoteTransform2D.new()
 				_ch.remote_path = ch.remote_path
@@ -238,6 +247,8 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 		var final_properties: Dictionary = templatePose[my_nodepath].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
+		elif final_properties.has('rest'):
+			final_properties.erase('rest')
 		for property in final_properties.keys():
 			var _copy_from_template: bool = true
 			
@@ -260,9 +271,10 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 	
 	
 	if my_nodepath in pose:
-#		var poselib: Resource = get_parent().owner.current_poselib
-		for property in pose[my_nodepath]:
-			
+		var final_properties: Dictionary = pose[my_nodepath].duplicate(false)
+		if final_properties.has('rest'):
+			final_properties.erase('rest')
+		for property in final_properties:
 			if property in _ch:
 				if property == 'texture':
 					if pose[my_nodepath]['texture'].has('valr'):
@@ -474,11 +486,15 @@ func _apply_fake_bones():
 		var polygon: Polygon2D = _p
 		var bone_path: String = polygon.get_meta('bone_path')
 #		print(poseSkeleton.get_node(bone_path))
-		var bone: Bone2D =poseSkeleton.get_node(bone_path)
+		var bone: Node2D =poseSkeleton.get_node(bone_path)
 		
 		polygon.transform = bone.transform
-#		polygon.transform = bone.rest
-#		bone.transform
+		
+	for _bone in bones:
+		var bone: Line2D = _bone
+		bone.modulate = Color(1,4,0)
+		# Works somewhat.
+		bone.points = [-bone.position, Vector2() ]
 
 func _on_name_settled(new_name: String):
 	var poselib: Resource = owner.current_poselib

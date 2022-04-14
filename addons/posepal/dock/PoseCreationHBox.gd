@@ -445,13 +445,11 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
-			print('Im polyogn2d')
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
 			if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path].has('_data'):
 				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path]['_data'] = {}
 			_save_polygon_data_to_poseData(poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path], node)
-			print('polygon data ', poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path]['_data'].size())
 			
 	elif current_pose_type == PoseType.FILTER:
 		if !poselib.filterData[owner.poselib_filter].has(node_path):
