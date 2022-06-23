@@ -378,7 +378,6 @@ func key_pose(pose_id: int):
 		return
 	
 	var final_pose: Dictionary
-	print('key')
 	if optionsData.key_template:
 		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
 		for nodepath in final_pose:
@@ -400,13 +399,10 @@ func key_pose(pose_id: int):
 	if queuedPoseData.size() > 0:
 		_key_queued_pose(final_pose)
 	
-	print('keying')
 	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 	for nodepath in final_pose:
-		var node: Node = poseRoot.get_node(nodepath)
-		print(node,' ',nodepath)
+		var node: Node = poseRoot.get_node_or_null(nodepath)
 		if !is_instance_valid(node):
-			print(node.name,' not valid')
 			_debug_pose_broken_paths_num +=1
 			continue
 		
@@ -462,6 +458,7 @@ func key_pose(pose_id: int):
 				anim.track_insert_key(tr_property, current_time, key_value, 0.0)
 				
 	if _debug_pose_broken_paths_num > 0:
+		issue_warning("broken_nodepaths")
 		print("[posepal] Couldn't finish keying pose because "+ str(_debug_pose_broken_paths_num)+
 				" broken nodepaths were found.")
 	_debug_pose_broken_paths_num = 0
