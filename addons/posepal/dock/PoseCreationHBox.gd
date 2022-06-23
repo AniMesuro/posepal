@@ -243,6 +243,7 @@ func to_key_value(pose: Dictionary, node_path: String, property: String, f: File
 			return value
 	return null
 
+var _debug_pose_broken_paths_num: int = 0
 func apply_pose(pose_id: int, pose_type: int = -1):
 	var poselib: RES_PoseLibrary = owner.current_poselib
 	if !is_instance_valid(poselib):
@@ -268,7 +269,9 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	for node_path in pose.keys():
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
-			break
+			_debug_pose_broken_paths_num +=1
+			continue
+		
 		var final_properties: Dictionary = pose[node_path].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
@@ -279,6 +282,12 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 			else:
 				value = pose[node_path][property]['val']
 			animNode.set(property, value)
+	
+	if _debug_pose_broken_paths_num > 0:
+		owner.issue_warning("broken_nodepaths")
+		print("[posepal] Couldn't finish applying pose because "+ str(_debug_pose_broken_paths_num)+
+				" broken nodepaths were found.")
+	_debug_pose_broken_paths_num = 0
 
 func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 	if !(is_instance_valid(animationPlayer)):

@@ -9,10 +9,11 @@ var WarningText: Dictionary = {
 	'scene_not_selected': "No Scene is selected.",
 	'cant_change_default_parameter': "Default parameters can't be renamed or deleted.",
 	'broken_dependencies': "Resources from poselib have invalid paths.",
+	'broken_nodepaths': "Poses have invalid nodepaths.",
 	
 	'cant_frame': "Could not add keyframe because owner lacks parameters.",
 	'animplayeredit_empty': "Could not add keyframe because Animation is not selected on AnimationPlayerEditor.",
-	'animsprite_empty': "AnimatedSprite lacks a SpriteFrames resource."
+	'animsprite_empty': "AnimatedSprite lacks a SpriteFrames resource.",
 }
 
 # Maybe toolhint should display all warning data instead of just current_warning?

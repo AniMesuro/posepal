@@ -10,6 +10,7 @@ func is_name_valid(new_name: String):
 		return false
 	return true
 
+var _debug_pose_broken_paths_num: int = 0
 func key_template_pose():
 	var animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	if !is_instance_valid(animPlayer):
@@ -23,7 +24,10 @@ func key_template_pose():
 #	var final_pose: Dictionary = poselib.templateData[owner.poselib_template].duplicate(false)
 	for nodepath in poselib.templateData[owner.poselib_template]:
 #		var node: Node = animRoot.get_node(nodepath)
-		var node: Node = poseRoot.get_node(nodepath)
+		var node: Node = poseRoot.get_node_or_null(nodepath)
+		if !is_instance_valid(node):
+			_debug_pose_broken_paths_num +=1
+			continue
 		
 		var final_properties: Dictionary = poselib.templateData[owner.poselib_template][nodepath].duplicate(false)
 		if final_properties.has('_data'):
@@ -64,7 +68,12 @@ func key_template_pose():
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue
 				anim.track_insert_key(tr_property, current_time, key_value, 0.0)
-			
+				
+	if _debug_pose_broken_paths_num > 0:
+		owner.issue_warning("broken_nodepaths")
+		print("[posepal] Couldn't finish applying pose because "+ str(_debug_pose_broken_paths_num)+
+				" broken nodepaths were found.")
+	_debug_pose_broken_paths_num = 0
 
 func _on_pressed():
 	popupMenu = get_popup()

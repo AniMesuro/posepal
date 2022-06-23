@@ -56,7 +56,7 @@ var used_rect :Rect2
 var used_points: PoolVector2Array
 var rootPreview :Node2D
 # Generates a fake scene
-func _generate_thumbnail():
+func generate_thumbnail():
 	if !is_instance_valid(poseSceneRoot):
 		return {}
 	# Create thumbnail viewport or
@@ -78,6 +78,7 @@ func _generate_thumbnail():
 	if "position" in _rt:
 		_rt.position = Vector2()
 	
+		
 	if owner.poselib_filter != 'none':
 		var poselib: Resource = owner.current_poselib
 		if poselib.filterData[owner.poselib_filter].size() > 0:

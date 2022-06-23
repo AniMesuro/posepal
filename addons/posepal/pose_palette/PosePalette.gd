@@ -69,18 +69,19 @@ func fill_previews(limit_by_page: bool = true):#true):
 			posePreview.hint_tooltip = posePreview.label.text
 		else:
 			posePreview.label.text = str(pose_id)
-			
+		
+		
 		posePreview.pose_id = pose_id
 		posePreview.pose_name = pose_name
-		posePreview.pose = collection[pose_id]
+		posePreview.pose = pose#collection[pose_id]
 		posePreview.poseSceneRoot = editedSceneRoot.get_node(owner.poselib_scene)
-		posePreview._generate_thumbnail()
+		posePreview.generate_thumbnail()
 	var zoomSlider: HSlider = $"../../HBox/ZoomHBox/ZoomSlider"
 	
 	zoomSlider._update_frame_sizes()
 	yield(get_tree(), "idle_frame")
 	zoomSlider._fix_columns()
-
+	
 func _clear_previews():
 	for posePreview in get_children():
 		posePreview.queue_free()

@@ -118,7 +118,7 @@ func load_poseData(override_path: String = "") -> int:
 	elif override_path != '':
 		poseFile_path = override_path
 	
-#	If the poslib is created at the first time, it will only save to file
+#	If the poselib is created at the first time, it will only save to file
 #	When the first pose is saved.
 	var sceneNode: Node = get_tree().edited_scene_root.get_node(poselib_scene)
 
@@ -131,8 +131,9 @@ func load_poseData(override_path: String = "") -> int:
 			current_poselib.clear()
 		return OK
 	current_poselib = load(poseFile_path)
-	current_poselib.setup(self.pluginInstance)
+	current_poselib.setup(self.pluginInstance, self)
 	var err: int = current_poselib.prepare_loading_resourceReferences()
+#	var err: int = current_poselib.prepare_loading_resourceReferences()
 	current_poselib.owner_filepath = sceneNode.filename
 	
 	if override_path !='':
@@ -352,6 +353,7 @@ func _key_queued_pose(final_pose: Dictionary):
 func _on_pose_selected(pose_id :int):
 	key_pose(pose_id)
 
+var _debug_pose_broken_paths_num: int = 0
 func key_pose(pose_id: int):
 	if !is_instance_valid(poselib_animPlayer):
 		issue_warning('animplayer_invalid')
@@ -376,6 +378,7 @@ func key_pose(pose_id: int):
 		return
 	
 	var final_pose: Dictionary
+	print('key')
 	if optionsData.key_template:
 		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
 		for nodepath in final_pose:
@@ -397,9 +400,15 @@ func key_pose(pose_id: int):
 	if queuedPoseData.size() > 0:
 		_key_queued_pose(final_pose)
 	
+	print('keying')
 	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 	for nodepath in final_pose:
 		var node: Node = poseRoot.get_node(nodepath)
+		print(node,' ',nodepath)
+		if !is_instance_valid(node):
+			print(node.name,' not valid')
+			_debug_pose_broken_paths_num +=1
+			continue
 		
 		for property in final_pose[nodepath]:
 			if property == '_data':
@@ -451,4 +460,8 @@ func key_pose(pose_id: int):
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue
 				anim.track_insert_key(tr_property, current_time, key_value, 0.0)
-
+				
+	if _debug_pose_broken_paths_num > 0:
+		print("[posepal] Couldn't finish keying pose because "+ str(_debug_pose_broken_paths_num)+
+				" broken nodepaths were found.")
+	_debug_pose_broken_paths_num = 0
