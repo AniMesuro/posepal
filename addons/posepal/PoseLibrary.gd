@@ -162,11 +162,24 @@ func update_poselib():
 	if _version_is_older_than([0,9,1]):
 		print("[posepal] Poselib older than 0.9.1. Updating to latest version.")
 		# Convert filter data from pose to an Array.
-#		var new_filterData: Dictionary = filterData.duplicate(false)
 		for filter in filterData: # upper, bottom, face...
 			if typeof(filterData[filter]) == TYPE_ARRAY:
 				break
 			filterData[filter] = filterData[filter].keys()
+		has_updated = true
+	if _version_is_older_than([0,9,2]):
+		print("[posepal] Poselib older than 0.9.2. Updating to latest version.")
+		# Convert all nodepath references to nodepath ids.
+		for template in poseData.keys():
+			for collection in poseData[template].keys():
+				for pose_id in poseData[template][collection].size():
+					var pose: Dictionary = poseData[template][collection][pose_id]
+					for nodepath in pose.keys():
+						if typeof(nodepath) == TYPE_INT:
+							break
+						var np_id: int = get_id_from_nodepath(nodepath)
+						pose[np_id] = pose[nodepath]
+						pose.erase(nodepath)
 		has_updated = true
 	if has_updated:
 		poselib_version = latest_version
