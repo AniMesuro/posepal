@@ -447,32 +447,33 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 		return
 		
 	if current_pose_type == PoseType.NORMAL:
-		if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has(node_path):
-			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path] = {}
+		var pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+		if !pose.has(node_path):
+			pose[node_path] = {}
 		
-		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property] = {}
+		pose[node_path][property] = {}
 		
 		if typeof(node.get(property)) != TYPE_OBJECT:
-			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+			pose[node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
 		else:
-			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
+			pose[node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
 		
-		poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
+		pose[node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
-				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
+				pose[node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 		
 		var track_update_mode: int = anim.value_track_get_update_mode(track_index)
 		if (!poselib.templateData[owner.poselib_template].has(node_path)
 		or track_update_mode != poselib.templateData[owner.poselib_template][node_path][property]['upmo']):
-			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
+			pose[node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
-			if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path].has('_data'):
-				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path]['_data'] = {}
-			_save_polygon_data_to_poseData(poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id][node_path], node)
+			if !pose[node_path].has('_data'):
+				pose[node_path]['_data'] = {}
+			_save_polygon_data_to_poseData(pose[node_path], node)
 			
 	elif current_pose_type == PoseType.FILTER:
 		return
@@ -490,25 +491,26 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 #			if anim.track_get_key_time(track_index, key_in) < 0:
 #				poselib.filterData[owner.poselib_filter][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 	else: # TEMPLATE
-		if !poselib.templateData[owner.poselib_template].has(node_path):
-			poselib.templateData[owner.poselib_template][node_path] = {}
-		poselib.templateData[owner.poselib_template][node_path][property] = {}
+		var pose: Dictionary = poselib.templateData[owner.poselib_template]
+		if !pose.has(node_path):
+			pose[node_path] = {}
+		pose[node_path][property] = {}
 		
 		if typeof(node.get(property)) != TYPE_OBJECT:
-			poselib.templateData[owner.poselib_template][node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+			pose[node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
 		else:
-			poselib.templateData[owner.poselib_template][node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
+			pose[node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
 		
-		poselib.templateData[owner.poselib_template][node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
-		poselib.templateData[owner.poselib_template][node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
+		pose[node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
+		pose[node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
-			if !poselib.templateData[owner.poselib_template][node_path].has('_data'):
-				poselib.templateData[owner.poselib_template][node_path]['_data'] = {}
+			if !pose[node_path].has('_data'):
+				pose[node_path]['_data'] = {}
 				
-			_save_polygon_data_to_poseData(poselib.templateData[owner.poselib_template][node_path], node)
+			_save_polygon_data_to_poseData(pose[node_path], node)
 
 func _save_polygon_data_to_poseData(poseData: Dictionary, node: Node):
 	poseData['_data']['skeleton'] = node.skeleton
