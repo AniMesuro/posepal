@@ -10,7 +10,7 @@ func _on_pressed():
 	if !_is_selected_scene_valid():
 		return
 	popupMenu.clear()
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	if !poselib.poseData.has(owner.poselib_template):
@@ -23,7 +23,7 @@ func _on_pressed():
 		popupMenu.add_item('Erase',Items.ERASE)
 
 func _on_id_pressed(id: int):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:
@@ -44,7 +44,7 @@ func _on_id_pressed(id: int):
 			owner.save_poseData()
 
 func _on_name_settled(new_name: String, id: int):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:
@@ -66,7 +66,7 @@ func _on_name_settled(new_name: String, id: int):
 	owner.save_poseData()
 
 func is_name_valid(new_name: String) -> bool:
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if ((new_name == 'default' && owner.poselib_template == "default")
 	or (new_name == '') or (new_name in poselib.poseData[owner.poselib_template])):
 		return false

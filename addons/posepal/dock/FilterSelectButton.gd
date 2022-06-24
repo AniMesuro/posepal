@@ -14,7 +14,7 @@ func _on_pressed():
 	
 	owner.load_poseData()
 	
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	# if !poselib.is_references_valid:
@@ -24,7 +24,7 @@ func _on_pressed():
 	popup.set_as_minsize()
 
 func _on_id_selected(id :int):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		_reset_selection()
 		return
@@ -41,7 +41,7 @@ func _on_id_selected(id :int):
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	owner.load_poseData()
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		_reset_selection()
 		return
@@ -50,9 +50,9 @@ func _on_PoseLibrary_updated_reference(reference :String):
 		return
 
 func _on_issued_forced_selection():
-	if !is_instance_valid(owner.current_poselib):
+	if !is_instance_valid(owner.currentPoselib):
 		return
-	if !owner.current_poselib.filterData.has(owner.poselib_filter):
+	if !owner.currentPoselib.filterData.has(owner.poselib_filter):
 		return
 	text = owner.poselib_filter
 	icon = owner.editorControl.get_icon("Groups", "EditorIcons")

@@ -82,6 +82,12 @@ func clear():
 	resourceReferences = {}
 	poselib_version = [0,9,0] # latest version
 
+#func get_nodepath_from_id(id: int):
+#	if !nodepathReferences.has(id):
+#		return ''
+#	var nodepath: String
+#	nod
+
 func get_res_from_id(id: int):
 	if !resourceReferences.has(id):
 		return null
@@ -117,6 +123,27 @@ func get_id_from_res(res: Resource):
 	
 func get_res_paths() -> Array:
 	return resourceReferences.values()
+
+func get_id_from_nodepath(nodepath: String):
+	for np_id in nodepathReferences.keys():
+		var ref_np: String = nodepathReferences[np_id]
+		if ref_np == nodepath:
+			return np_id
+			
+	var id: int	
+	var max_iter: int = 100
+	var iter: int = 0
+	while (resourceReferences.has(available_nodepath_id + iter) && (iter < max_iter)):
+		iter += 1
+	id = available_nodepath_id + iter
+	available_nodepath_id = id + 1
+	nodepathReferences[id] = nodepath
+	return id
+
+func get_nodepath_from_id(id: int):
+	if !nodepathReferences.has(id):
+		return ''
+	return nodepathReferences[id]
 
 # Attempts to update to latest version.
 func update_poselib():

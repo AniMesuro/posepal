@@ -11,7 +11,7 @@ var selectedScene_id :int= -1
 
 # If scene has poselib, it should reflect on text.
 func select_poselib():
-	text = owner.current_poselib.resource_path.get_file().split('.')[0]
+	text = owner.currentPoselib.resource_path.get_file().split('.')[0]
 	icon = owner.editorControl.get_icon("KinematicBody2D", "EditorIcons")
 #	icon = TEX_PluginIcon
 	owner.fix_warning('scene_not_selected')
@@ -60,7 +60,7 @@ func _on_id_selected(id :int):
 	var selectedScene: Node = get_tree().edited_scene_root.get_node(scene_nodepaths[id])
 	owner.poselib_scene = scene_nodepaths[id]
 	hint_tooltip = ''
-	owner.current_poselib = null
+	owner.currentPoselib = null
 	owner.poseFile_path = ''
 #	Only read poseFile
 	var is_poseFile_valid: bool = false
@@ -84,7 +84,7 @@ func _on_id_selected(id :int):
 			resourceDependencyPopup.connect("ok_pressed", self, "_on_ResourceDependencyPopup_ok_pressed", [id], CONNECT_ONESHOT)
 			return
 		
-		hint_tooltip = owner.current_poselib.resource_path
+		hint_tooltip = owner.currentPoselib.resource_path
 		select_poselib()
 		
 		return

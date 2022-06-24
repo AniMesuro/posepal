@@ -46,7 +46,7 @@ func _ready() -> void:
 	thumbnailButton.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	
 	owner = get_parent().owner
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	filter = poselib.filterData[owner.poselib_filter]
 	templatePose = poselib.templateData[owner.poselib_template]
 	
@@ -80,7 +80,7 @@ func generate_thumbnail():
 	
 		
 	if owner.poselib_filter != 'none':
-		var poselib: Resource = owner.current_poselib
+		var poselib: Resource = owner.currentPoselib
 		if poselib.filterData[owner.poselib_filter].size() > 0:
 			_generate_preview_scene(poseSceneRoot, _rt, false, 15)
 		else:
@@ -88,7 +88,7 @@ func generate_thumbnail():
 	else:
 		_generate_preview_scene(poseSceneRoot, _rt, true, 15)
 	
-	var poselib: Resource = get_parent().owner.current_poselib
+	var poselib: Resource = get_parent().owner.currentPoselib
 	if poselib.boneRelationshipData.has('_skeleton'):
 		poseSkeleton = _rt.get_node(poselib.boneRelationshipData['_skeleton'])
 	_apply_fake_bones()
@@ -162,8 +162,9 @@ func _generate_preview_scene(parent: Node = null, previewParent: Node = null, ha
 			is_node_filtered = false
 
 func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
-	var poselib: Resource = get_parent().owner.current_poselib
+	var poselib: Resource = get_parent().owner.currentPoselib
 	var my_nodepath: String= poseSceneRoot.get_path_to(ch)
+	var np_id: int = poselib.get_id_from_nodepath(my_nodepath)
 	# Create dummy previewnode
 	var _ch: Node
 	if is_poseroot:
@@ -253,8 +254,8 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 		for property in final_properties.keys():
 			var _copy_from_template: bool = true
 			
-			if pose.has(my_nodepath):
-				if pose[my_nodepath].has(property):
+			if pose.has(np_id):
+				if pose[np_id].has(property):
 					_copy_from_template = false
 					
 			if property in _ch && _copy_from_template:
@@ -270,22 +271,22 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 			_ch.polygons = templatePose[my_nodepath]['_data']['polygons']
 			_ch.uv = templatePose[my_nodepath]['_data']['uv']
 	
-	
-	if my_nodepath in pose:
-		var final_properties: Dictionary = pose[my_nodepath].duplicate(false)
+#	poselib.
+	if np_id in pose:
+		var final_properties: Dictionary = pose[np_id].duplicate(false)
 		if final_properties.has('rest'):
 			final_properties.erase('rest')
 		for property in final_properties:
 			if property in _ch:
 				if property == 'texture':
-					if pose[my_nodepath]['texture'].has('valr'):
-						if !pose[my_nodepath]['texture'].has('valr'):
+					if pose[np_id]['texture'].has('valr'):
+						if !pose[np_id]['texture'].has('valr'):
 							continue
-						_ch.set('texture', poselib.get_res_from_id(pose[my_nodepath]['texture']['valr']))
+						_ch.set('texture', poselib.get_res_from_id(pose[np_id]['texture']['valr']))
 					else:
-						_ch.set(property, pose[my_nodepath][property]['val'])
+						_ch.set(property, pose[np_id][property]['val'])
 				else:
-					_ch.set(property, pose[my_nodepath][property]['val'])
+					_ch.set(property, pose[np_id][property]['val'])
 					
 	if _ch is Sprite:
 		var s:Sprite=_ch
@@ -397,7 +398,7 @@ func _on_PopupMenu_id_selected(id: int):
 		return
 	
 	var posePalette: GridContainer = owner.posePalette
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 		
@@ -471,7 +472,7 @@ func ask_for_name(title_name: String):
 	return askNamePopup
 
 func ask_for_id(title_name: String):
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	if is_instance_valid(askIDPopup):
 		askIDPopup.queue_free()
 	askIDPopup = get_parent().SCN_AskIDPopup.instance()
@@ -498,7 +499,7 @@ func _apply_fake_bones():
 		bone.points = [-bone.position, Vector2() ]
 
 func _on_name_settled(new_name: String):
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	if new_name == "":
 		if poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has('_name'):
 			poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].erase('_name')
@@ -519,7 +520,7 @@ func _on_name_settled(new_name: String):
 	owner.save_poseData()
 	
 func _on_id_settled(new_id: int):
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	if (new_id == pose_id or new_id < 0):
 		return
 	

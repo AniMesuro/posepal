@@ -21,7 +21,7 @@ func _on_UpdateFromTemplateButton_pressed():
 	if owner.poselib_scene == '' or owner.poselib_template == '':
 		return
 	var selectedAnimPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(selectedAnimPlayer) or !is_instance_valid(poselib):
 		return
 	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
@@ -50,7 +50,7 @@ func _on_DefaultUpdateModeButton_pressed():
 	if owner.poselib_scene == '' or owner.poselib_template == '':
 		return
 	var selectedAnimPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(selectedAnimPlayer) or !is_instance_valid(poselib):
 		return
 	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"

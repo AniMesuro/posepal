@@ -25,13 +25,13 @@ func _set_current_page(new_current_page: int):
 	$"../../ScrollContainer/GridContainer".fill_previews()
 
 func _on_FirstButton_pressed():
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	self.current_page = 0
 
 func _on_LastButton_pressed():
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	self.current_page = page_count-1
@@ -45,7 +45,7 @@ func _on_NextButton_pressed():
 		self.current_page += 1
 
 func update_NumButton_item_list():
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	var numButton: OptionButton = $NumButton
 	if poselib.poseData.size() == 0:
 		page_count = -1
@@ -75,7 +75,7 @@ func update_pages():
 		numButton.select(current_page)
 
 func get_page_count() -> int:
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if poselib.poseData.size() == 0:
 		_reset_info()
 		return -1

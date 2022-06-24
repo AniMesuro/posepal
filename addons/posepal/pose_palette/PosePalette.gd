@@ -19,7 +19,7 @@ func fill_previews(limit_by_page: bool = true):#true):
 	# Bad practice - Prefer to reuse existing previews
 	# and updating the new/old ones.
 	_clear_previews()
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	if !poselib.is_references_valid:

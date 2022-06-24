@@ -88,7 +88,7 @@ func _on_NewPoseButton_pressed():
 	if owner.poselib_collection == '':
 		owner.issue_warning('lacking_parameters')
 	
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		_show_editorSceneTabs()
 		return
@@ -123,7 +123,7 @@ func _on_NewPoseButton_pressed():
 
 # open pose editor | select pose | 
 func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	var pose_name: String = str(pose_id)
 	if pose_type == PoseType.FILTER:
 		print("[posepal] Outdated poselib. Filters can't be edited as poses anymore.")
@@ -220,13 +220,13 @@ func _on_EditedSceneRoot_tree_exiting():
 		child.set_process_input(false)
 		child.queue_free()
 
-func to_key_value(pose: Dictionary, node_path: String, property: String, f: File):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+func to_key_value(pose: Dictionary, node_path: String, np_id: int, property: String, f: File):
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	var editedSceneRoot: Node= get_tree().edited_scene_root
 	var poseSceneRoot: Node= editedSceneRoot.get_node(owner.poselib_scene)
 	var animNode: Node= poseSceneRoot.get_node_or_null(node_path)
-	var value = pose[node_path][property]['val']
-	var value_ref = pose[node_path][property]['valr']
+	var value = pose[np_id][property]['val']
+	var value_ref = pose[np_id][property]['valr']
 
 	match typeof(animNode.get(property)):
 		TYPE_OBJECT:
@@ -245,7 +245,7 @@ func to_key_value(pose: Dictionary, node_path: String, property: String, f: File
 
 var _debug_pose_broken_paths_num: int = 0
 func apply_pose(pose_id: int, pose_type: int = -1):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	
@@ -266,21 +266,22 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 	var editedSceneRoot: Node = get_tree().edited_scene_root
 	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
 	
-	for node_path in pose.keys():
+	for np_id in pose.keys():
+		var node_path: String = poselib.get_nodepath_from_id(np_id)
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
 			_debug_pose_broken_paths_num +=1
 			continue
 		
-		var final_properties: Dictionary = pose[node_path].duplicate(false)
+		var final_properties: Dictionary = pose[np_id].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
 		for property in final_properties.keys():
 			var value
-			if !pose[node_path][property].has('val'):
-				value = poselib.get_res_from_id(pose[node_path][property]['valr'])
+			if !pose[np_id][property].has('val'):
+				value = poselib.get_res_from_id(pose[np_id][property]['valr'])
 			else:
-				value = pose[node_path][property]['val']
+				value = pose[np_id][property]['val']
 			animNode.set(property, value)
 	
 	if _debug_pose_broken_paths_num > 0:
@@ -292,7 +293,7 @@ func apply_pose(pose_id: int, pose_type: int = -1):
 func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 	if !(is_instance_valid(animationPlayer)):
 		return
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	
@@ -312,22 +313,23 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 	
 	var editedSceneRoot: Node = get_tree().edited_scene_root
 	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
-	for node_path in pose:
+	for np_id in pose:
+		var node_path: String = poselib.get_nodepath_from_id(np_id)
 		if node_path == "_name":
 			continue
 		var animNode: Node = poseSceneRoot.get_node_or_null(node_path)
 		if !is_instance_valid(animNode):
 			break
-		var final_properties: Dictionary = pose[node_path].duplicate(false)
+		var final_properties: Dictionary = pose[np_id].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
 		for property in final_properties:
 			var value
-			if pose[node_path][property].has('val'):
-				value = pose[node_path][property]['val']
+			if pose[np_id][property].has('val'):
+				value = pose[np_id][property]['val']
 			else:
-				if pose[node_path][property].has('valr'):
-					value = poselib.get_res_from_id(pose[node_path][property]['valr'])
+				if pose[np_id][property].has('valr'):
+					value = poselib.get_res_from_id(pose[np_id][property]['valr'])
 			
 			var tr_property: int = anim.add_track(Animation.TYPE_VALUE)
 			anim.track_set_path(tr_property, str(poseSceneRoot.get_path_to(animNode)) + ':' + property)
@@ -335,8 +337,8 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 			var key_value = value
 			var transition_out: float = 1.0
 			var transition_in: float = 1.0
-			if pose[node_path][property].has('out'):
-				transition_out = pose[node_path][property]['out']
+			if pose[np_id][property].has('out'):
+				transition_out = pose[np_id][property]['out']
 				
 			elif pose_type == PoseType.NORMAL:
 				if poselib.templateData[owner.poselib_template].has(node_path):
@@ -344,8 +346,8 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 						if poselib.templateData[owner.poselib_template][node_path][property].has('out'):
 							transition_out = poselib.templateData[owner.poselib_template][node_path][property]['out']
 			
-			if pose[node_path][property].has('in'):
-				transition_in = pose[node_path][property]['in']
+			if pose[np_id][property].has('in'):
+				transition_in = pose[np_id][property]['in']
 				anim.track_insert_key(tr_property, -1.0, key_value, transition_in)
 			
 			anim.track_insert_key(tr_property, 0.0, key_value, transition_out)
@@ -356,8 +358,8 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 						anim.value_track_set_update_mode(tr_property,
 								poselib.templateData[owner.poselib_template][node_path][property]['upmo'])
 								
-			if pose_type == PoseType.NORMAL && pose[node_path][property].has('upmo'):
-				anim.value_track_set_update_mode(tr_property, pose[node_path][property]['upmo'])
+			if pose_type == PoseType.NORMAL && pose[np_id][property].has('upmo'):
+				anim.value_track_set_update_mode(tr_property, pose[np_id][property]['upmo'])
 			elif (poselib.templateData[owner.poselib_template].has(node_path)
 			&& poselib.templateData[owner.poselib_template][node_path].has(property)): 
 				anim.value_track_set_update_mode(tr_property,
@@ -380,7 +382,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	var poseSceneRoot: Node = editedSceneRoot.get_node(owner.poselib_scene)
 	if !is_instance_valid(poseSceneRoot):
 		return
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	
@@ -408,6 +410,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		var path_subnames: NodePath = track_path.get_concatenated_subnames() # :position
 		var node_path: String = str(track_path).rstrip(str(path_subnames)).rstrip(':') # position
 		var node: Node = poseSceneRoot.get_node(node_path)
+#		print(track_path)
 		
 		if node_path == '':
 			node_path = '.'
@@ -428,7 +431,7 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 		_select_queued_poselib_animplayer()
 
 func are_parameters_valid() -> bool:
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return false
 	if (!poselib.poseData.has(owner.poselib_template) or !poselib.templateData.has(owner.poselib_template)
@@ -439,41 +442,54 @@ func are_parameters_valid() -> bool:
 	return true
 
 func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path: String, node: Node, property: String, key_out: float = 1.0, key_in: float = -1.0):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	var anim: Animation = animationPlayer.get_animation(selected_animation)
 	if !is_instance_valid(anim):
 		return
-		
+	
 	if current_pose_type == PoseType.NORMAL:
 		var pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
-		if !pose.has(node_path):
-			pose[node_path] = {}
+#		var new_nodepath_id: int = -1
+#		print(pose)
+#		for np_id in poselib.nodepathReferences.keys():
+#			var ref_np: String = poselib.nodepathReferences[np_id]
+#			print(np_id,':',ref_np)
+###			print('nodepath ',nodepath)
+##			print(np_id, '',poselib.nodepathReferences[np_id])
+#			if ref_np == node_path: 
+#				new_nodepath_id = np_id
+#		if np_id == -1:
+		var np_id: int = poselib.get_id_from_nodepath(node_path)
+		print('npref = ',poselib.nodepathReferences)
+#		print('chosen id ',new_nodepath_id)
+		if !pose.has(np_id):
+			pose[np_id] = {}
 		
-		pose[node_path][property] = {}
+		pose[np_id][property] = {}
 		
 		if typeof(node.get(property)) != TYPE_OBJECT:
-			pose[node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+			pose[np_id][property]['val'] = anim.track_get_key_value(track_index, key_out)
 		else:
-			pose[node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
+			pose[np_id][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
 		
-		pose[node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
+		pose[np_id][property]['out'] = anim.track_get_key_transition(track_index, key_out)
 		if key_in != -1.0:
 			if anim.track_get_key_time(track_index, key_in) < 0:
-				pose[node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
+				pose[np_id][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 		
 		var track_update_mode: int = anim.value_track_get_update_mode(track_index)
 		if (!poselib.templateData[owner.poselib_template].has(node_path)
 		or track_update_mode != poselib.templateData[owner.poselib_template][node_path][property]['upmo']):
-			pose[node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
+			pose[np_id][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
-			if !pose[node_path].has('_data'):
-				pose[node_path]['_data'] = {}
-			_save_polygon_data_to_poseData(pose[node_path], node)
+			if !pose[np_id].has('_data'):
+				pose[np_id]['_data'] = {}
+			_save_polygon_data_to_poseData(pose[np_id], node)
 			
 	elif current_pose_type == PoseType.FILTER:
 		return
@@ -492,25 +508,26 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 #				poselib.filterData[owner.poselib_filter][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 	else: # TEMPLATE
 		var pose: Dictionary = poselib.templateData[owner.poselib_template]
-		if !pose.has(node_path):
-			pose[node_path] = {}
-		pose[node_path][property] = {}
+		var np_id: String = node_path # TEMP UNTIL UPDATEDD
+		if !pose.has(np_id):
+			pose[np_id] = {}
+		pose[np_id][property] = {}
 		
 		if typeof(node.get(property)) != TYPE_OBJECT:
-			pose[node_path][property]['val'] = anim.track_get_key_value(track_index, key_out)
+			pose[np_id][property]['val'] = anim.track_get_key_value(track_index, key_out)
 		else:
-			pose[node_path][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
+			pose[np_id][property]['valr'] = poselib.get_id_from_res(anim.track_get_key_value(track_index, key_out))
 		
-		pose[node_path][property]['out'] = anim.track_get_key_transition(track_index, key_out)
-		pose[node_path][property]['upmo'] = anim.value_track_get_update_mode(track_index)
+		pose[np_id][property]['out'] = anim.track_get_key_transition(track_index, key_out)
+		pose[np_id][property]['upmo'] = anim.value_track_get_update_mode(track_index)
 		
 		if node.is_class('Polygon2D') && property == 'texture':
 			if !is_instance_valid(node.get_node(node.skeleton)):
 				return
-			if !pose[node_path].has('_data'):
-				pose[node_path]['_data'] = {}
+			if !pose[np_id].has('_data'):
+				pose[np_id]['_data'] = {}
 				
-			_save_polygon_data_to_poseData(pose[node_path], node)
+			_save_polygon_data_to_poseData(pose[np_id], node)
 
 func _save_polygon_data_to_poseData(poseData: Dictionary, node: Node):
 	poseData['_data']['skeleton'] = node.skeleton

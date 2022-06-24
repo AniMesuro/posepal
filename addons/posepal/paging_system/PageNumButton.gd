@@ -12,7 +12,7 @@ func _on_item_selected(id: int):
 	pageHBox.current_page = id
 
 func _on_pressed():
-	var poselib: Resource = owner.current_poselib
+	var poselib: Resource = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		pageHBox = get_parent()
 		pageHBox._reset_info()

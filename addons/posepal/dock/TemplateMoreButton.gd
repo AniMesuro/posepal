@@ -4,7 +4,7 @@ extends "res://addons/posepal/interface/PropertyMoreButton.gd"
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
 func is_name_valid(new_name: String):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if (new_name == 'default') or (new_name == '') or (new_name in poselib.templateData.keys()):
 		print('[posepal] Name invalid.')
 		return false
@@ -15,7 +15,7 @@ func key_template_pose():
 	var animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
 	if !is_instance_valid(animPlayer):
 		return
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	
 	var anim: Animation = animPlayer.get_animation(owner.pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton.text)
 	var animRoot: Node = animPlayer.get_node(animPlayer.root_node)#owner.poselib_animPlayer.root_node)
@@ -82,7 +82,7 @@ func _on_pressed():
 	popupMenu.clear()
 	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
 	
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	if !poselib.poseData.has(owner.poselib_template):
@@ -102,7 +102,7 @@ func _on_pressed():
 
 func _on_id_pressed(id: int):
 	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:
@@ -139,7 +139,7 @@ func _on_id_pressed(id: int):
 
 func _on_name_settled(new_name: String, id: int):
 	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:

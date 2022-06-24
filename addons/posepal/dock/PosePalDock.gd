@@ -42,7 +42,7 @@ var queuedPoseData: Dictionary = {}
 var queued_key_time: float = -1.0
 
 var settings: RES_PosePalSettings setget ,_get_settings
-var current_poselib: RES_PoseLibrary
+var currentPoselib: RES_PoseLibrary
 var wf_current_poselib: WeakRef
 
 var warningIcon :TextureRect
@@ -113,7 +113,7 @@ func issue_warning(warning :String):
 
 func load_poseData(override_path: String = "") -> int:
 	if override_path == '' and poselib_scene == "":
-		current_poselib = null
+		currentPoselib = null
 		return FAILED
 	elif override_path != '':
 		poseFile_path = override_path
@@ -125,16 +125,16 @@ func load_poseData(override_path: String = "") -> int:
 	var f: File = File.new()
 	if !f.file_exists(poseFile_path):
 		poseFile_path = ''
-		if !is_instance_valid(current_poselib):
-			current_poselib = RES_PoseLibrary.new()
+		if !is_instance_valid(currentPoselib):
+			currentPoselib = RES_PoseLibrary.new()
 #			Shoudn't be necessary but it somehow still references values from previous poselibs.
-			current_poselib.clear()
+			currentPoselib.clear()
 		return OK
-	current_poselib = load(poseFile_path)
-	current_poselib.setup(self.pluginInstance, self)
-	var err: int = current_poselib.prepare_loading_resourceReferences()
-#	var err: int = current_poselib.prepare_loading_resourceReferences()
-	current_poselib.owner_filepath = sceneNode.filename
+	currentPoselib = load(poseFile_path)
+	currentPoselib.setup(self.pluginInstance, self)
+	var err: int = currentPoselib.prepare_loading_resourceReferences()
+#	var err: int = currentPoselib.prepare_loading_resourceReferences()
+	currentPoselib.owner_filepath = sceneNode.filename
 	
 	if override_path !='':
 		sceneNode.set_meta('_plPoseLib_poseFile', poseFile_path)
@@ -189,11 +189,11 @@ func save_poseData(override_path: String = ""):
 		if available_path == '#':
 			return
 	
-	if is_instance_valid(current_poselib):
-		current_poselib.owner_filepath = selectedScene.filename
-		current_poselib.prepare_saving_resourceReferences()
-		var err: int = ResourceSaver.save(poseFile_path, current_poselib)
-		current_poselib.prepare_loading_resourceReferences()
+	if is_instance_valid(currentPoselib):
+		currentPoselib.owner_filepath = selectedScene.filename
+		currentPoselib.prepare_saving_resourceReferences()
+		var err: int = ResourceSaver.save(poseFile_path, currentPoselib)
+		currentPoselib.prepare_loading_resourceReferences()
 		if err != OK:
 			print('[posepal] saving didnt succeed, error ',err)
 		else:
@@ -270,7 +270,7 @@ func _on_scene_changed(_sceneRoot :Node): #Edited Scene Root
 	poselib_filter = ""
 	poselib_collection = ""
 	poselib_animPlayer = null
-	current_poselib = null
+	currentPoselib = null
 	emit_signal("updated_reference", "poselib_scene")
 	
 	posePalette = self.posePalette#$"VSplit/TabContainer/Palette/GridContainer"
@@ -321,26 +321,27 @@ func _key_queued_pose(final_pose: Dictionary):
 	
 #	print('finalpose ',final_pose)
 	
-	for nodepath in queuedPoseData.keys():
+	for np_id in queuedPoseData.keys():
+		var nodepath = np_id
 		var node: Node = poseRoot.get_node(nodepath)
 		for property in queuedPoseData[nodepath].keys():
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr: int = anim.find_track(track_path)
 			if tr == -1:
 				continue
-			if !final_pose.has(nodepath):
+			if !final_pose.has(np_id):
 				continue
 			var _can_continue: bool = false
 			if optionsData.dont_key_duplicate:
-				for prop in final_pose[nodepath].keys():
+				for prop in final_pose[np_id].keys():
 					if prop != property:
 						continue
-					if final_pose[nodepath][prop].has('val'):
-						if queuedPoseData[nodepath][property] == final_pose[nodepath][prop]['val']:#final_pose[nodepath][property]['val']:
+					if final_pose[np_id][prop].has('val'):
+						if queuedPoseData[nodepath][property] == final_pose[np_id][prop]['val']:#final_pose[np_id][property]['val']:
 							_can_continue = true
 							break
-					elif final_pose[nodepath][prop].has('valr'):
-						if queuedPoseData[nodepath][property] == current_poselib.get_res_from_id(final_pose[nodepath][prop]['valr']):#final_pose[nodepath][property]['val']:
+					elif final_pose[np_id][prop].has('valr'):
+						if queuedPoseData[nodepath][property] == currentPoselib.get_res_from_id(final_pose[np_id][prop]['valr']):#final_pose[np_id][property]['val']:
 							_can_continue = true
 							break
 			if _can_continue:
@@ -367,46 +368,49 @@ func key_pose(pose_id: int):
 	var poseRoot: Node = get_tree().edited_scene_root.get_node(poselib_scene)
 	
 	
-	if !is_instance_valid(current_poselib):
+	if !is_instance_valid(currentPoselib):
 		return
-	if !current_poselib.poseData.has(poselib_template):
+	if !currentPoselib.poseData.has(poselib_template):
 		return
-	if !current_poselib.poseData[poselib_template].has(poselib_collection):
+	if !currentPoselib.poseData[poselib_template].has(poselib_collection):
 		return
-	if pose_id > current_poselib.poseData[poselib_template][poselib_collection].size():
+	if pose_id > currentPoselib.poseData[poselib_template][poselib_collection].size():
 		print('[posepal] posedata not have ',pose_id)
 		return
 	
 	var final_pose: Dictionary
 	if optionsData.key_template:
-		final_pose = current_poselib.templateData[poselib_template].duplicate(true)
-		for nodepath in final_pose:
-			for property in final_pose[nodepath]:
-				if final_pose[nodepath][property].has('out'):
+		final_pose = currentPoselib.templateData[poselib_template].duplicate(true)
+		for np_id in final_pose:
+			var nodepath  = np_id
+			for property in final_pose[np_id]:
+				if final_pose[np_id][property].has('out'):
 					continue
-#				final_pose[nodepath][property]['out'] = 1.0 # Mabye dont override anything so godot chooses
-		var _pose: Dictionary = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
-		for nodepath in _pose:
-			if !final_pose.has(nodepath):
-				final_pose[nodepath] = {}
-			for property in _pose[nodepath]:
-				final_pose[nodepath][property] = _pose[nodepath][property]
+#				final_pose[np_id][property]['out'] = 1.0 # Mabye dont override anything so godot chooses
+		var _pose: Dictionary = currentPoselib.poseData[poselib_template][poselib_collection][pose_id].duplicate(true)
+		for np_id  in _pose:
+			var nodepath = np_id
+			if !final_pose.has(np_id):
+				final_pose[np_id] = {}
+			for property in _pose[np_id]:
+				final_pose[np_id][property] = _pose[np_id][property]
 	else:
-		final_pose = current_poselib.poseData[poselib_template][poselib_collection][pose_id].duplicate()
+		final_pose = currentPoselib.poseData[poselib_template][poselib_collection][pose_id].duplicate()
 	if final_pose.has('_name'):
 		final_pose.erase('_name')
 	
 	if queuedPoseData.size() > 0:
 		_key_queued_pose(final_pose)
-	
+	currentPoselib
 	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
-	for nodepath in final_pose:
+	for np_id in final_pose:
+		var nodepath: String = currentPoselib.get_nodepath_from_id(np_id)
 		var node: Node = poseRoot.get_node_or_null(nodepath)
 		if !is_instance_valid(node):
 			_debug_pose_broken_paths_num +=1
 			continue
 		
-		for property in final_pose[nodepath]:
+		for property in final_pose[np_id]:
 			if property == '_data':
 				continue
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
@@ -414,14 +418,14 @@ func key_pose(pose_id: int):
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-				if final_pose[nodepath][property].has('upmo'):
-					anim.value_track_set_update_mode(tr_property, final_pose[nodepath][property]['upmo'])
+				if final_pose[np_id][property].has('upmo'):
+					anim.value_track_set_update_mode(tr_property, final_pose[np_id][property]['upmo'])
 			
 			var key_value
-			if final_pose[nodepath][property].has('val'):
-				key_value = final_pose[nodepath][property]['val']
-			elif final_pose[nodepath][property].has('valr'):
-				key_value = current_poselib.get_res_from_id(final_pose[nodepath][property]['valr'])
+			if final_pose[np_id][property].has('val'):
+				key_value = final_pose[np_id][property]['val']
+			elif final_pose[np_id][property].has('valr'):
+				key_value = currentPoselib.get_res_from_id(final_pose[np_id][property]['valr'])
 			else:
 				continue
 			
@@ -436,12 +440,12 @@ func key_pose(pose_id: int):
 				if optionsData.dont_key_duplicate:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue
-				if final_pose[nodepath][property].has('in'):
-					anim.track_set_key_transition(tr_property, key_last, final_pose[nodepath][property]['in'])
-			if final_pose[nodepath][property].has('out'):
-				anim.track_insert_key(tr_property, current_time, key_value, final_pose[nodepath][property]['out'])
+				if final_pose[np_id][property].has('in'):
+					anim.track_set_key_transition(tr_property, key_last, final_pose[np_id][property]['in'])
+			if final_pose[np_id][property].has('out'):
+				anim.track_insert_key(tr_property, current_time, key_value, final_pose[np_id][property]['out'])
 		
-		if node.is_class('Polygon2D') && final_pose[nodepath].has('_data'):
+		if node.is_class('Polygon2D') && final_pose[np_id].has('_data'):
 			for property in PolygonDataProperties:
 				var track_path: String = str(animRoot.get_path_to(node))+':'+property
 				var tr_property: int = anim.find_track(track_path)
@@ -451,7 +455,7 @@ func key_pose(pose_id: int):
 					anim.value_track_set_update_mode(tr_property, anim.UPDATE_DISCRETE)
 				
 				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
-				var key_value = final_pose[nodepath]['_data'][property]
+				var key_value = final_pose[np_id]['_data'][property]
 				if key_last != -1:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue

@@ -11,7 +11,7 @@ func _on_pressed():
 	popupMenu.clear()
 	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
 	
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	if !poselib.filterData.has(owner.poselib_filter):
@@ -27,7 +27,7 @@ func _on_pressed():
 
 func _on_id_pressed(id: int):
 	var poseCreationHBox = $"../../../../../../ExtraHBox/PoseCreationHBox"
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:
@@ -64,7 +64,7 @@ func _on_id_pressed(id: int):
 			owner.emit_signal("issued_forced_selection")
 
 func _on_name_settled(new_name: String, id: int):
-	var poselib: RES_PoseLibrary = owner.current_poselib
+	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if !is_instance_valid(poselib):
 		return
 	match id:
