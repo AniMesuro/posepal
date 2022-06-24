@@ -184,6 +184,8 @@ func update_poselib():
 	if has_updated:
 		poselib_version = latest_version
 		print('[posepal] Poselib succesfully updated to ',poselib_version)
+		
+		posepalDock.save_poseData()
 	
 func _version_is_older_than(check_version: PoolIntArray):
 	if poselib_version[0] > check_version[0]: # MAJOR
