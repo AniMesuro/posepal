@@ -322,9 +322,9 @@ func _key_queued_pose(final_pose: Dictionary):
 #	print('finalpose ',final_pose)
 	
 	for np_id in queuedPoseData.keys():
-		var nodepath = np_id
+		var nodepath: String = currentPoselib.get_nodepath_from_id(np_id)
 		var node: Node = poseRoot.get_node(nodepath)
-		for property in queuedPoseData[nodepath].keys():
+		for property in queuedPoseData[np_id].keys():
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr: int = anim.find_track(track_path)
 			if tr == -1:
@@ -337,16 +337,16 @@ func _key_queued_pose(final_pose: Dictionary):
 					if prop != property:
 						continue
 					if final_pose[np_id][prop].has('val'):
-						if queuedPoseData[nodepath][property] == final_pose[np_id][prop]['val']:#final_pose[np_id][property]['val']:
+						if queuedPoseData[np_id][property] == final_pose[np_id][prop]['val']:#final_pose[np_id][property]['val']:
 							_can_continue = true
 							break
 					elif final_pose[np_id][prop].has('valr'):
-						if queuedPoseData[nodepath][property] == currentPoselib.get_res_from_id(final_pose[np_id][prop]['valr']):#final_pose[np_id][property]['val']:
+						if queuedPoseData[np_id][property] == currentPoselib.get_res_from_id(final_pose[np_id][prop]['valr']):#final_pose[np_id][property]['val']:
 							_can_continue = true
 							break
 			if _can_continue:
 				continue
-			anim.track_insert_key(tr, queued_key_time, queuedPoseData[nodepath][property])
+			anim.track_insert_key(tr, queued_key_time, queuedPoseData[np_id][property])
 	
 	var optionKeyingVBox: VBoxContainer = $"VSplit/TabContainer/PoseLib/VBox/OptionsMargin/OptionsVBox/KeyingVBox"
 	optionKeyingVBox.is_pose_queued = false
@@ -382,7 +382,7 @@ func key_pose(pose_id: int):
 	if optionsData.key_template:
 		final_pose = currentPoselib.templateData[poselib_template].duplicate(true)
 		for np_id in final_pose:
-			var nodepath  = np_id
+			var nodepath: String = currentPoselib.get_nodepath_from_id(np_id)
 			for property in final_pose[np_id]:
 				if final_pose[np_id][property].has('out'):
 					continue
@@ -401,7 +401,6 @@ func key_pose(pose_id: int):
 	
 	if queuedPoseData.size() > 0:
 		_key_queued_pose(final_pose)
-	currentPoselib
 	var current_time: float = float(pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
 	for np_id in final_pose:
 		var nodepath: String = currentPoselib.get_nodepath_from_id(np_id)

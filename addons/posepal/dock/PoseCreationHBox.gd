@@ -352,18 +352,18 @@ func load_pose(pose_id: int, pose_type: int= -1):# -> int:
 			
 			anim.track_insert_key(tr_property, 0.0, key_value, transition_out)
 #			if pose_type == PoseType.NORMAL or pose_type == PoseType.TEMPLATE:
-			if poselib.templateData[owner.poselib_template].has(node_path):
-				if poselib.templateData[owner.poselib_template][node_path].has(property):
-					if poselib.templateData[owner.poselib_template][node_path][property].has('upmo'):
+			if poselib.templateData[owner.poselib_template].has(np_id):
+				if poselib.templateData[owner.poselib_template][np_id].has(property):
+					if poselib.templateData[owner.poselib_template][np_id][property].has('upmo'):
 						anim.value_track_set_update_mode(tr_property,
-								poselib.templateData[owner.poselib_template][node_path][property]['upmo'])
+								poselib.templateData[owner.poselib_template][np_id][property]['upmo'])
 								
 			if pose_type == PoseType.NORMAL && pose[np_id][property].has('upmo'):
 				anim.value_track_set_update_mode(tr_property, pose[np_id][property]['upmo'])
-			elif (poselib.templateData[owner.poselib_template].has(node_path)
-			&& poselib.templateData[owner.poselib_template][node_path].has(property)): 
+			elif (poselib.templateData[owner.poselib_template].has(np_id)
+			&& poselib.templateData[owner.poselib_template][np_id].has(property)): 
 				anim.value_track_set_update_mode(tr_property,
-						poselib.templateData[owner.poselib_template][node_path][property]['upmo'])
+						poselib.templateData[owner.poselib_template][np_id][property]['upmo'])
 			
 	self.posegen_mode = PoseGenMode.SAVE
 	return true # returns true if loading was succesful
@@ -394,11 +394,12 @@ func save_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 			poselib.poseData[owner.poselib_template][owner.poselib_collection].append({})
 			is_pose_new = true
 		else:
-			if !poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id].has('_name'):
-				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id] = {}
+			var pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
+			if !pose.has('_name'):
+				pose = {}
 			else:
-				poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id] = {'_name':
-				  poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]['_name']}
+				pose = {'_name':
+				  pose['_name']}
 	elif current_pose_type == PoseType.FILTER:
 		return
 #		poselib.filterData[owner.poselib_filter] = {}
@@ -451,19 +452,8 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 	
 	if current_pose_type == PoseType.NORMAL:
 		var pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
-#		var new_nodepath_id: int = -1
-#		print(pose)
-#		for np_id in poselib.nodepathReferences.keys():
-#			var ref_np: String = poselib.nodepathReferences[np_id]
-#			print(np_id,':',ref_np)
-###			print('nodepath ',nodepath)
-##			print(np_id, '',poselib.nodepathReferences[np_id])
-#			if ref_np == node_path: 
-#				new_nodepath_id = np_id
-#		if np_id == -1:
 		var np_id: int = poselib.get_id_from_nodepath(node_path)
-		print('npref = ',poselib.nodepathReferences)
-#		print('chosen id ',new_nodepath_id)
+		print('np_ref = ',poselib.nodepathReferences)
 		if !pose.has(np_id):
 			pose[np_id] = {}
 		
@@ -508,7 +498,7 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 #				poselib.filterData[owner.poselib_filter][node_path][property]['in'] = anim.track_get_key_transition(track_index, key_in)
 	else: # TEMPLATE
 		var pose: Dictionary = poselib.templateData[owner.poselib_template]
-		var np_id: String = node_path # TEMP UNTIL UPDATEDD
+		var np_id: int = poselib.get_id_from_nodepath(node_path)
 		if !pose.has(np_id):
 			pose[np_id] = {}
 		pose[np_id][property] = {}
