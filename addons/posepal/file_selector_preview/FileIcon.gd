@@ -33,7 +33,7 @@ func setup(_file_name: String, _type: int = TYPE.file):
 	var file_parts: PoolStringArray = file_name.split('.')
 	
 	if file_parts.size() == 3:
-		if file_parts[1] == 'poselib' and (file_parts[2] == 'tres' or file_parts[3] == 'res'): 
+		if file_parts[1] == 'poselib' and (file_parts[2] == 'tres' or file_parts[2] == 'res'): 
 			preview.texture_normal = TEX_PoseLibIcon
 			return
 	

@@ -26,8 +26,8 @@ func _ready() -> void:
 var popupMenu: PopupMenu
 func _on_pressed():
 	popupMenu = get_popup()
-#	if !_is_selected_scene_valid():
-#		return
+	if !_is_selected_scene_valid():
+		return
 	popupMenu.clear()
 	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
 	
@@ -39,9 +39,19 @@ func _on_pressed():
 		popupMenu.add_item('Save as', Items.SAVE_AS)
 		
 		popupMenu.add_item('Setup bones', Items.SETUP_BONES)
-	else:
-		popupMenu.add_item('Load', Items.LOAD)
+#	else:
+#		popupMenu.add_item('Load', Items.LOAD)
 
+func _is_selected_scene_valid() -> bool:
+	var editedSceneRoot: Node = get_tree().edited_scene_root
+	var poseSceneRoot: Node = editedSceneRoot.get_node_or_null(owner.poselib_scene)
+	
+	if !is_instance_valid(poseSceneRoot):
+		popupMenu.hide()
+		owner.issue_warning('scene_not_selected')
+		return false
+	return true
+	
 func _on_id_pressed(id: int):
 	match id:
 		Items.SAVE:

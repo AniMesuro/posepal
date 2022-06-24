@@ -17,9 +17,9 @@ export var resourceReferences:  Dictionary = {} # Resource path ref ex. {0: "res
 var resourceReferences_res: 	Dictionary = {} # Resource ref ex. {0: [StreamTexture:1234]}
 export var available_res_id: int = 0
 var is_references_valid: bool = true
-#export var nodepathReferences: Dictionary = {} # nodepath ref (from root) ex. {0: "Pelvis/Torso/LarmTop/LarmBottom/LHand"}
-#export var available_nodepath_id: int = 0
-#var is_nodepath_references_valid: bool = true
+export var nodepathReferences: Dictionary = {} # nodepath ref (from root) ex. {0: "Pelvis/Torso/LarmTop/LarmBottom/LHand"}
+export var available_nodepath_id: int = 0
+var is_nodepath_references_valid: bool = true
 
 export var poseData: Dictionary = {"default": {"default": []}}
 export var filterData: Dictionary = {"none": {}}
@@ -59,13 +59,14 @@ func prepare_loading_resourceReferences() -> int:
 			return ERR_FILE_MISSING_DEPENDENCIES
 	return OK
 
-#func validate_nodepaths():
-#	if !is_instance_valid(posepalDock):
-#		return
-#	var poseRoot: Node = posepalDock.get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
-#	for nodepath in nodepathReferences:
-#		print(nodepath)
-#	pass
+func validate_nodepaths():
+	if !is_instance_valid(posepalDock):
+		return
+	var poseRoot: Node = posepalDock.get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
+	
+	for nodepath in nodepathReferences:
+		print(nodepath)
+	pass
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.
