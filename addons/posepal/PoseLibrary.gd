@@ -59,14 +59,28 @@ func prepare_loading_resourceReferences() -> int:
 			return ERR_FILE_MISSING_DEPENDENCIES
 	return OK
 
-func validate_nodepaths():
+func validate_nodepaths(poseRoot: Node = null) -> int:
+	var is_nodepaths_valid: bool = false
 	if !is_instance_valid(posepalDock):
-		return
-	var poseRoot: Node = posepalDock.get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
+		return ERR_UNAVAILABLE
+	if !is_instance_valid(poseRoot):
+		poseRoot = posepalDock.get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
+	if !is_instance_valid(poseRoot):
+		return ERR_UNAVAILABLE
+	print('validate')
 	
-	for nodepath in nodepathReferences:
-		print(nodepath)
-	pass
+	for np_id in nodepathReferences:
+		var nodepath: String = get_nodepath_from_id(np_id)
+		if is_instance_valid(poseRoot.get_node_or_null(nodepath)):
+			print(nodepath,' is valid')
+			continue
+		print(nodepath,' invalid')
+		return ERR_FILE_BAD_PATH
+	return OK
+	
+#	for nodepath in nodepathReferences:
+#		print(nodepath)
+
 
 func prepare_saving_resourceReferences():
 	# Delete all actual resource references.
@@ -144,6 +158,7 @@ func get_nodepath_from_id(id: int):
 	if !nodepathReferences.has(id):
 		return ''
 	return nodepathReferences[id]
+		
 
 # Attempts to update to latest version.
 func update_poselib():

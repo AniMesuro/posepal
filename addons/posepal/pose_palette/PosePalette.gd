@@ -38,8 +38,15 @@ func fill_previews(limit_by_page: bool = true):#true):
 	var pose_count: int = collection.size()
 	if pose_count == 0:
 		return
-	pageHBox = $"../../HBox/PageHBox"
 	
+#	poselib.nodepathReferences
+	var err_nodepath: int = poselib.validate_nodepaths(editedSceneRoot.get_node(owner.poselib_scene))
+	if err_nodepath != OK:
+		owner.issue_warning("broken_nodepaths")
+		print("[posepal] Couldn't complete filling palette because broken nodepaths were found.")
+	return
+	
+	pageHBox = $"../../HBox/PageHBox"
 	pageHBox.update_pages()
 	if pageHBox.current_page < 0:
 		pageHBox.set('current_page', 0)
