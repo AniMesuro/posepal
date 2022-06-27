@@ -25,13 +25,14 @@ func _ready() -> void:
 
 var popupMenu: PopupMenu
 func _on_pressed():
-	popupMenu = get_popup()
 	if !_is_selected_scene_valid():
 		return
+	var poselib: RES_PoseLibrary = owner.currentPoselib
+	
+	popupMenu = get_popup()
 	popupMenu.clear()
 	popupMenu.rect_min_size = Vector2(rect_size.x, 0)
 	
-	var poselib: RES_PoseLibrary = owner.currentPoselib
 	if is_instance_valid(poselib):
 		popupMenu.add_item('New', Items.NEW)
 		popupMenu.add_item('Load', Items.LOAD)

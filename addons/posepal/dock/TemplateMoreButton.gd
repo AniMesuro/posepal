@@ -22,33 +22,34 @@ func key_template_pose():
 	var poseRoot: Node = get_tree().edited_scene_root.get_node(owner.poselib_scene)
 	
 #	var final_pose: Dictionary = poselib.templateData[owner.poselib_template].duplicate(false)
-	for nodepath in poselib.templateData[owner.poselib_template]:
+	for np_id in poselib.templateData[owner.poselib_template]:
 #		var node: Node = animRoot.get_node(nodepath)
+		var nodepath: String = poselib.get_nodepath_from_id(np_id)
 		var node: Node = poseRoot.get_node_or_null(nodepath)
 		if !is_instance_valid(node):
 			_debug_pose_broken_paths_num +=1
 			continue
 		
-		var final_properties: Dictionary = poselib.templateData[owner.poselib_template][nodepath].duplicate(false)
+		var final_properties: Dictionary = poselib.templateData[owner.poselib_template][np_id].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
 		
 		var current_time: float = float(owner.pluginInstance.animationPlayerEditor_CurrentTime_LineEdit.text)
-#		for property in poselib.templateData[owner.poselib_template][nodepath]:
+#		for property in poselib.templateData[owner.poselib_template][np_id]:
 		for property in final_properties.keys():
 			var track_path: String = str(animRoot.get_path_to(node))+':'+property
 			var tr_property: int = anim.find_track(track_path)
 			if tr_property == -1:
 				tr_property = anim.add_track(Animation.TYPE_VALUE)
 				anim.track_set_path(tr_property, track_path)
-				if poselib.templateData[owner.poselib_template][nodepath][property].has('upmo'):
-					anim.value_track_set_update_mode(tr_property, poselib.templateData[owner.poselib_template][nodepath][property]['upmo'])
+				if poselib.templateData[owner.poselib_template][np_id][property].has('upmo'):
+					anim.value_track_set_update_mode(tr_property, poselib.templateData[owner.poselib_template][np_id][property]['upmo'])
 				
 			var key_value
-			if poselib.templateData[owner.poselib_template][nodepath][property].has('val'):
-				key_value = poselib.templateData[owner.poselib_template][nodepath][property]['val']
-			elif poselib.templateData[owner.poselib_template][nodepath][property].has('valr'):
-				key_value = poselib.get_res_from_id(poselib.templateData[owner.poselib_template][nodepath][property]['valr'])
+			if poselib.templateData[owner.poselib_template][np_id][property].has('val'):
+				key_value = poselib.templateData[owner.poselib_template][np_id][property]['val']
+			elif poselib.templateData[owner.poselib_template][np_id][property].has('valr'):
+				key_value = poselib.get_res_from_id(poselib.templateData[owner.poselib_template][np_id][property]['valr'])
 			else:
 				continue
 			anim.track_insert_key(tr_property, current_time, key_value)
@@ -63,7 +64,7 @@ func key_template_pose():
 					anim.value_track_set_update_mode(tr_property, anim.UPDATE_DISCRETE)
 				
 				var key_last: int = anim.track_find_key(tr_property, current_time - 0.01, false)
-				var key_value = poselib.templateData[owner.poselib_template][nodepath]['_data'][property]
+				var key_value = poselib.templateData[owner.poselib_template][np_id]['_data'][property]
 				if key_last != -1:
 					if anim.track_get_key_value(tr_property, key_last) == key_value:
 						continue

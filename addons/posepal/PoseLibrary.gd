@@ -192,6 +192,14 @@ func update_poselib():
 						var np_id: int = get_id_from_nodepath(nodepath)
 						pose[np_id] = pose[nodepath]
 						pose.erase(nodepath)
+		for template in templateData.keys():
+			var pose: Dictionary = templateData[template]
+			for nodepath in pose.keys():
+				if typeof(nodepath) == TYPE_INT:
+					break
+				var np_id: int = get_id_from_nodepath(nodepath)
+				pose[np_id] = pose[nodepath]
+				pose.erase(nodepath)
 		has_updated = true
 	if has_updated:
 		poselib_version = latest_version
