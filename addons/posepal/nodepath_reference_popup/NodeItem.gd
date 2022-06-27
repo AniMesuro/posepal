@@ -1,14 +1,18 @@
 tool
 extends HBoxContainer
 
-export var bone_path: NodePath
 export var child_id: int
-export var node_type :String= "Node" setget _set_node_type
-export var node_name :String= "Node" setget _set_node_name
+export var node_path: NodePath
+export var node_type: String= "Node" setget _set_node_type
+export var node_name: String= "Node" setget _set_node_name
 export var nesting_level: int = 0 setget _set_nesting_level
-export var is_expanded: bool = true
+export var is_expanded: bool = true setget _set_is_expanded
 export var is_disabled: bool = false setget _set_is_disabled
-var node_path: NodePath
+
+const TEX_Expand: StreamTexture = preload("res://addons/posepal/assets/icons/icon_expand.png")
+const TEX_ExpandCollapse: StreamTexture = preload("res://addons/posepal/assets/icons/icon_expand_collapsed.png")
+
+#var node_path: NodePath
 var childrenItems: Array = []
 var parentItem: Node
 var node: Node
@@ -22,8 +26,9 @@ func _ready() -> void:
 		return
 	owner = get_parent().owner
 #	print('node ',node,' skel ',owner.skeletonRoot)
-	bone_path = owner.skeletonRoot.get_path_to(node)
-	$Button.connect("pressed", owner, "_on_BoneButton_pressed", [bone_path])
+#	bone_path = owner.skeletonRoot.get_path_to(node)
+	$Button.connect("pressed", owner, "_on_NodeButton_pressed", [node_path])
+	$ExpandButton.connect("pressed", self, "_on_ExpandButton_pressed")
 
 func _set_nesting_level(new_nesting_level: int):
 	if !is_inside_tree():
@@ -83,6 +88,20 @@ func _set_is_disabled(new_is_disabled: bool):
 #	else:
 #		$Label.add_color_override("font_color", Color.white)
 
+func _set_is_expanded(new_is_expanded: bool):
+	is_expanded = new_is_expanded
+	
+	
+	if is_expanded:
+		$ExpandButton.texture_normal = TEX_Expand
+	else:
+		$ExpandButton.texture_normal = TEX_ExpandCollapse
+	update_childrenItems_visibility(is_expanded)
+
+func update_childrenItems_visibility(new_visibility: bool):
+	for ch in childrenItems:
+		ch.visible = new_visibility
+		ch.update_childrenItems_visibility(new_visibility)
 
 func _get_pluginInstance():
 	if is_instance_valid(pluginInstance):
@@ -90,3 +109,6 @@ func _get_pluginInstance():
 	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
 	return pluginInstance
 
+func _on_ExpandButton_pressed():
+	self.is_expanded = !self.is_expanded
+	

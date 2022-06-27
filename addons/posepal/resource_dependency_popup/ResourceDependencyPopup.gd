@@ -22,12 +22,12 @@ func _enter_tree() -> void:
 	if !is_instance_valid(posePalDock):
 		queue_free()
 		return
-	if !is_instance_valid(posePalDock.current_poselib):
+	if !is_instance_valid(posePalDock.currentPoselib):
 		queue_free()
 		return
 		
 	popup_centered()
-	poselib = posePalDock.current_poselib
+	poselib = posePalDock.currentPoselib
 	old_paths = poselib.get_res_paths()
 
 func _ready() -> void:
@@ -45,7 +45,7 @@ func fix_warning():
 func _resolve_dependencies() -> bool:
 	var fileVBox: VBoxContainer = $"MarginCon/VBox/VBox/ScrollCon/FileVBox"
 	var f: File = File.new()
-	var poselib: RES_PoseLibrary = posePalDock.current_poselib
+	var poselib: RES_PoseLibrary = posePalDock.currentPoselib
 	var has_broken_dependencies: bool = false
 	
 	for k in poselib.resourceReferences.keys():

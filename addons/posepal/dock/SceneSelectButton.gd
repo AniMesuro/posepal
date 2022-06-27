@@ -2,6 +2,7 @@ tool
 extends "res://addons/posepal/interface/PropertyMenu.gd"
 
 const SCN_ResourceDependencyPopup: PackedScene = preload("res://addons/posepal/resource_dependency_popup/ResourceDependencyPopup.tscn") 
+const SCN_NodepathReferencePopup: PackedScene = preload("res://addons/posepal/nodepath_reference_popup/NodepathReferencePopup.tscn")
 const TEX_PluginIcon: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
 
 var scene_nodepaths :PoolStringArray
@@ -82,7 +83,19 @@ func _on_id_selected(id :int):
 			resourceDependencyPopup.posePalDock = owner
 			add_child(resourceDependencyPopup)
 			resourceDependencyPopup.connect("ok_pressed", self, "_on_ResourceDependencyPopup_ok_pressed", [id], CONNECT_ONESHOT)
-			return
+#			return
+		
+		var editedSceneRoot: Node = get_tree().edited_scene_root
+		var err_nodepath: int = owner.currentPoselib.validate_nodepaths(editedSceneRoot.get_node(owner.poselib_scene))
+		if err_nodepath != OK:
+			owner.issue_warning("broken_nodepaths")
+			print("[posepal] Couldn't complete filling palette because broken nodepaths were found.")
+			# CALL Nodepath Reference Popup.
+			var nodepathReferencePopup: WindowDialog = SCN_NodepathReferencePopup.instance()
+			nodepathReferencePopup.posepalDock = owner
+			add_child(nodepathReferencePopup)
+#			return
+		
 		
 		hint_tooltip = owner.currentPoselib.resource_path
 		select_poselib()

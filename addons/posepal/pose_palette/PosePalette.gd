@@ -3,6 +3,7 @@ extends GridContainer
 
 const SCN_AskNamePopup: PackedScene = preload("res://addons/posepal/interface/AskNamePopup.tscn")
 const SCN_AskIDPopup: PackedScene = preload("res://addons/posepal/interface/AskIDPopup.tscn")
+const SCN_NodepathReferencePopup: PackedScene = preload("res://addons/posepal/nodepath_reference_popup/NodepathReferencePopup.tscn")
 const SCN_PosePreview: PackedScene= preload("res://addons/posepal/interface/PosePreview.tscn")
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
@@ -40,11 +41,15 @@ func fill_previews(limit_by_page: bool = true):#true):
 		return
 	
 #	poselib.nodepathReferences
-	var err_nodepath: int = poselib.validate_nodepaths(editedSceneRoot.get_node(owner.poselib_scene))
-	if err_nodepath != OK:
-		owner.issue_warning("broken_nodepaths")
-		print("[posepal] Couldn't complete filling palette because broken nodepaths were found.")
-	return
+#	var err_nodepath: int = poselib.validate_nodepaths(editedSceneRoot.get_node(owner.poselib_scene))
+#	if err_nodepath != OK:
+#		owner.issue_warning("broken_nodepaths")
+#		print("[posepal] Couldn't complete filling palette because broken nodepaths were found.")
+#		# CALL Nodepath Reference Popup.
+#		var nodepathReferencePopup: WindowDialog = SCN_NodepathReferencePopup.instance()
+#
+#		owner.editorPlugin.add_child(nodepathReferencePopup)
+#	return
 	
 	pageHBox = $"../../HBox/PageHBox"
 	pageHBox.update_pages()

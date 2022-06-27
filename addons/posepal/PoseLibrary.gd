@@ -67,14 +67,11 @@ func validate_nodepaths(poseRoot: Node = null) -> int:
 		poseRoot = posepalDock.get_tree().edited_scene_root.get_node_or_null(posepalDock.poselib_scene)
 	if !is_instance_valid(poseRoot):
 		return ERR_UNAVAILABLE
-	print('validate')
 	
 	for np_id in nodepathReferences:
 		var nodepath: String = get_nodepath_from_id(np_id)
 		if is_instance_valid(poseRoot.get_node_or_null(nodepath)):
-			print(nodepath,' is valid')
 			continue
-		print(nodepath,' invalid')
 		return ERR_FILE_BAD_PATH
 	return OK
 	

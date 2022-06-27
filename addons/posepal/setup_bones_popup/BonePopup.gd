@@ -14,6 +14,6 @@ func _enter_tree() -> void:
 func _fill_bones():
 	pass
 
-func _on_BoneButton_pressed(bone_path: NodePath):
+func _on_BoneButton_pressed(bone_path: String):
 	emit_signal("bone_selected", bone_path)
 	queue_free()
