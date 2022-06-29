@@ -200,6 +200,15 @@ func update_poselib():
 				var np_id: int = get_id_from_nodepath(nodepath)
 				pose[np_id] = pose[nodepath]
 				pose.erase(nodepath)
+		for filter in filterData.keys():
+			for i in filterData[filter].size():
+				var nodepath = filterData[filter][i]
+				if typeof(nodepath) == TYPE_INT:
+					break
+				var np_id: int = get_id_from_nodepath(nodepath)
+				filterData[filter][i] = np_id
+#				filterData[filter][np_id] = filterData[filter][nodepath]
+#				filterData[filter].erase(nodepath)
 		has_updated = true
 	if has_updated:
 		poselib_version = latest_version

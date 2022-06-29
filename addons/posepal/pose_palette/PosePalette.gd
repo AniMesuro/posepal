@@ -7,6 +7,9 @@ const SCN_NodepathReferencePopup: PackedScene = preload("res://addons/posepal/no
 const SCN_PosePreview: PackedScene= preload("res://addons/posepal/interface/PosePreview.tscn")
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
 
+
+#var poselib: RES_PoseLibrary
+	
 var pageHBox: HBoxContainer
 
 func _ready() -> void:
@@ -50,7 +53,6 @@ func fill_previews(limit_by_page: bool = true):#true):
 #
 #		owner.editorPlugin.add_child(nodepathReferencePopup)
 #	return
-	
 	pageHBox = $"../../HBox/PageHBox"
 	pageHBox.update_pages()
 	if pageHBox.current_page < 0:
@@ -107,9 +109,8 @@ func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
 	var pose_raw: Dictionary = pose
 	
 	pose_raw.erase('_name')
-	for node_path in pose:
-		if node_path == '_name':
-			continue
+	for np_id in pose_raw:
+		var node_path: String = poselib.get_nodepath_from_id(np_id)
 		
 		# Loop through all parents to see if any of them is filtered
 		# Find highest filtered level parent.
@@ -120,7 +121,7 @@ func _filter_previews(pose: Dictionary, poselib: RES_PoseLibrary) -> bool:
 				current_path = current_path +'/'+ nodepath_array[i]
 			if current_path in highest_filtered_parents_path:
 				break
-			if poselib.filterData[owner.poselib_filter].has(current_path):
+			if poselib.filterData[owner.poselib_filter].has(np_id):
 				highest_filtered_parents_path.append(current_path)
 				highest_filtered_parents_level.append(i)
 				break

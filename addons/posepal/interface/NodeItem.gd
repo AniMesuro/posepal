@@ -3,8 +3,8 @@ extends HBoxContainer
 
 signal checked_node (nodeItem, child_id, value)
 
-export var node_type :String= "Node" setget _set_node_type
-export var node_name :String= "Node" setget _set_node_name
+export var node_type: String= "Node" setget _set_node_type
+export var node_name: String= "Node" setget _set_node_name
 export var nesting_level: int = 0 setget _set_nesting_level
 export var child_id: int = -1
 export var is_expanded: bool = true setget  _set_is_expanded

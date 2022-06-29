@@ -141,23 +141,25 @@ func generate_thumbnail():
 
 func _generate_preview_scene(parent: Node = null, previewParent: Node = null, has_filtered: bool = false, iter: int = 0):
 	# Loops through all of a Node's children in a maximum of %iter iterations.
+	var poselib: Resource = get_parent().owner.currentPoselib
 	var is_node_filtered: bool = has_filtered
-	for ch in parent.get_children():
-		var _np_ch: String = poseSceneRoot.get_path_to(ch)
-		var _ch: Node
-		if ch is Skeleton2D or ch is Bone2D:
+	for _ch in parent.get_children(): # ch = previewChild | _ch = child
+		var np: String = poseSceneRoot.get_path_to(_ch)
+		var np_id: int = poselib.get_id_from_nodepath(np)
+		var ch: Node
+		if _ch is Skeleton2D or _ch is Bone2D:
 			is_node_filtered = true
 		if !is_node_filtered:
-			if filter.has(_np_ch):
+			if filter.has(np_id):
 				is_node_filtered = true
 		
 		if is_node_filtered:
-			_ch = _generate_previewNode(ch)
+			ch = _generate_previewNode(_ch)
 		else:
-			_ch = Node2D.new()
+			ch = Node2D.new()
 		
-		previewParent.add_child(_ch)
-		_generate_preview_scene(ch, _ch, has_filtered, iter-1)
+		previewParent.add_child(ch)
+		_generate_preview_scene(_ch, ch, has_filtered, iter-1)
 		if !has_filtered:
 			is_node_filtered = false
 

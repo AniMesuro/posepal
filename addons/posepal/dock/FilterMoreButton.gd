@@ -35,6 +35,7 @@ func _on_id_pressed(id: int):
 			owner.load_poseData()
 			var filterEditPopup: WindowDialog = SCN_FilterEditPopup.instance()
 			filterEditPopup.posepalDock = owner
+			filterEditPopup.poselib = poselib
 			filterEditPopup.filterData = poselib.filterData[owner.poselib_filter].duplicate(false)
 			add_child(filterEditPopup)
 			var window_size: Vector2 = OS.window_size
