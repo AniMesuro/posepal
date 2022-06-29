@@ -143,112 +143,114 @@ func _generate_preview_scene(parent: Node = null, previewParent: Node = null, ha
 	# Loops through all of a Node's children in a maximum of %iter iterations.
 	var poselib: Resource = get_parent().owner.currentPoselib
 	var is_node_filtered: bool = has_filtered
-	for _ch in parent.get_children(): # ch = previewChild | _ch = child
-		var np: String = poseSceneRoot.get_path_to(_ch)
+	# mn - MasterNode | sn - SlaveNode
+	for mn in parent.get_children(): 
+		var np: String = poseSceneRoot.get_path_to(mn)
 		var np_id: int = poselib.get_id_from_nodepath(np)
-		var ch: Node
-		if _ch is Skeleton2D or _ch is Bone2D:
+		var sn: Node
+		if mn is Skeleton2D or mn is Bone2D:
 			is_node_filtered = true
 		if !is_node_filtered:
 			if filter.has(np_id):
 				is_node_filtered = true
 		
 		if is_node_filtered:
-			ch = _generate_previewNode(_ch)
+			sn = _generate_previewNode(mn)
 		else:
-			ch = Node2D.new()
+			sn = Node2D.new()
 		
-		previewParent.add_child(ch)
-		_generate_preview_scene(_ch, ch, has_filtered, iter-1)
+		previewParent.add_child(sn)
+		_generate_preview_scene(mn, sn, has_filtered, iter-1)
 		if !has_filtered:
 			is_node_filtered = false
 
-func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
+func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 	var poselib: Resource = get_parent().owner.currentPoselib
-	var my_nodepath: String= poseSceneRoot.get_path_to(ch)
+	var my_nodepath: String= poseSceneRoot.get_path_to(mn)
 	var np_id: int = poselib.get_id_from_nodepath(my_nodepath)
 	# Create dummy previewnode
-	var _ch: Node
+	# mn - MasterNode | sn - SlaveNode
+	var sn: Node
 	if is_poseroot:
-		_ch = Sprite.new()
-		_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
-		_ch.z_index = 1000
-		_ch.z_as_relative = false
-		_ch.self_modulate = Color()
-		return _ch
+		sn = Sprite.new()
+		sn.texture = load("res://addons/posepal/assets/icons/icon_not.png")
+		sn.z_index = 1000
+		sn.z_as_relative = false
+		sn.self_modulate = Color()
+		return sn
 		
-	elif ch is CanvasItem:
-		match ch.get_class():
+	elif mn is CanvasItem:
+		match mn.get_class():
 			'Sprite':
-				_ch = Sprite.new()
-				if is_instance_valid(ch.texture):
-					if ch.visible && !(owner.optionsData.ignore_scene_pose):
-						_ch.texture = ch.texture
-						_ch.offset = ch.offset
+				sn = Sprite.new()
+				if is_instance_valid(mn.texture):
+					if mn.visible && !(owner.optionsData.ignore_scene_pose):
+						sn.texture = mn.texture
+						sn.offset = mn.offset
 				else:
-					_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
+					sn.texture = load("res://addons/posepal/assets/icons/icon_not.png")
 					
 				if !(owner.optionsData.ignore_scene_pose):
-					_ch.offset = ch.offset
-					_ch.flip_h = ch.flip_h
-					_ch.flip_v = ch.flip_v
-					_ch.z_index = ch.z_index
+					sn.offset = mn.offset
+					sn.flip_h = mn.flip_h
+					sn.flip_v = mn.flip_v
+					sn.z_index = mn.z_index
 			'AnimatedSprite':
-				_ch = AnimatedSprite.new()
-				_ch.frames = ch.frames
-				if !(owner.optionsData.ignore_scene_pose) && is_instance_valid(ch.frames):
-					_ch.animation = ch.animation
-					_ch.frame = ch.frame
+				sn = AnimatedSprite.new()
+				sn.frames = mn.frames
+				if !(owner.optionsData.ignore_scene_pose) && is_instance_valid(mn.frames):
+					sn.animation = mn.animation
+					sn.frame = mn.frame
 			'TextureRect':
-				_ch = TextureRect.new()
-				_ch.texture = load("res://addons/posepal/assets/icons/icon_not.png")
+				sn = TextureRect.new()
+				sn.texture = load("res://addons/posepal/assets/icons/icon_not.png")
 			'Polygon2D':
-				_ch = Polygon2D.new()
+				sn = Polygon2D.new()
 				var p: Polygon2D
 				
-				var my_path: String = poseSceneRoot.get_path_to(ch)
+				var my_path: String = poseSceneRoot.get_path_to(mn)
 #				var bone_path: String
 				if my_path in poselib.boneRelationshipData:
-					_ch.set_meta('bone_path', poselib.boneRelationshipData[my_path])
-					boned_polygons.append(_ch)
-				_ch.color = ch.color
-				if is_instance_valid(ch.texture):
-					_ch.offset = ch.offset
-					_ch.skeleton = ch.skeleton
-					_ch.texture = ch.texture
-					_ch.polygon = ch.polygon
-					_ch.polygons = ch.polygons
-					_ch.uv = ch.uv
-					_ch.z_index = ch.z_index
-					_ch.rotation_degrees = 90
+					sn.set_meta('bone_path', poselib.boneRelationshipData[my_path])
+					boned_polygons.append(sn)
+				sn.color = mn.color
+				if is_instance_valid(mn.texture):
+					sn.offset = mn.offset
+					sn.skeleton = mn.skeleton
+					sn.texture = mn.texture
+					sn.polygon = mn.polygon
+					sn.polygons = mn.polygons
+					sn.uv = mn.uv
+					sn.z_index = mn.z_index
+					sn.rotation_degrees = 90
 			'Skeleton2D':
-				_ch = Skeleton2D.new()
+				sn = Skeleton2D.new()
 			'Bone2D':
 				if !owner.optionsData.show_bones:
-					_ch = Bone2D.new()
-					_ch.rest = ch.rest
+					sn = Bone2D.new()
+					sn.rest = mn.rest
 				else:
 #					print('bone is line2d')
-					_ch = Line2D.new()
+					sn = Line2D.new()
 					var l:Line2D
-					_ch.width = 20
-					_ch.z_index = 1000
-					bones.append(_ch)
+					sn.width = 20
+					sn.z_index = 1000
+					bones.append(sn)
 			'RemoteTransform2D':
-				_ch = RemoteTransform2D.new()
-				_ch.remote_path = ch.remote_path
+				sn = RemoteTransform2D.new()
+				sn.remote_path = mn.remote_path
 			_:
-				_ch = Node2D.new()
-		_ch.modulate = ch.modulate
+				sn = Node2D.new()
+		sn.modulate = mn.modulate
 	else:
-		_ch = Node.new()
+		sn = Node.new()
 	# Load default node transform
-	if ch is Node2D:
-		_ch.transform = ch.transform
-	_ch.name = ch.name
+	if mn is Node2D:
+		sn.transform = mn.transform
+	sn.name = mn.name
 		
-	if my_nodepath in templatePose:
-		var final_properties: Dictionary = templatePose[my_nodepath].duplicate(false)
+	if np_id in templatePose:
+		var final_properties: Dictionary = templatePose[np_id].duplicate(false)
 		if final_properties.has('_data'):
 			final_properties.erase('_data')
 		elif final_properties.has('rest'):
@@ -260,18 +262,18 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				if pose[np_id].has(property):
 					_copy_from_template = false
 					
-			if property in _ch && _copy_from_template:
-				if templatePose[my_nodepath][property].has('val'):
-					if !templatePose[my_nodepath][property]['val'] == null:
-						_ch.set(property, templatePose[my_nodepath][property]['val'])
-				elif templatePose[my_nodepath][property].has('valr'):
-					_ch.set(property, poselib.get_res_from_id(templatePose[my_nodepath][property]['valr']))
+			if property in sn && _copy_from_template:
+				if templatePose[np_id][property].has('val'):
+					if !templatePose[np_id][property]['val'] == null:
+						sn.set(property, templatePose[np_id][property]['val'])
+				elif templatePose[np_id][property].has('valr'):
+					sn.set(property, poselib.get_res_from_id(templatePose[np_id][property]['valr']))
 	
-		if ch.is_class('Polygon2D') && templatePose[my_nodepath].has('texture'):
-			_ch.skeleton = templatePose[my_nodepath]['_data']['skeleton']
-			_ch.polygon = templatePose[my_nodepath]['_data']['polygon']
-			_ch.polygons = templatePose[my_nodepath]['_data']['polygons']
-			_ch.uv = templatePose[my_nodepath]['_data']['uv']
+		if mn.is_class('Polygon2D') && templatePose[np_id].has('texture'):
+			sn.skeleton = templatePose[np_id]['_data']['skeleton']
+			sn.polygon = templatePose[np_id]['_data']['polygon']
+			sn.polygons = templatePose[np_id]['_data']['polygons']
+			sn.uv = templatePose[np_id]['_data']['uv']
 	
 #	poselib.
 	if np_id in pose:
@@ -279,19 +281,19 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 		if final_properties.has('rest'):
 			final_properties.erase('rest')
 		for property in final_properties:
-			if property in _ch:
+			if property in sn:
 				if property == 'texture':
 					if pose[np_id]['texture'].has('valr'):
 						if !pose[np_id]['texture'].has('valr'):
 							continue
-						_ch.set('texture', poselib.get_res_from_id(pose[np_id]['texture']['valr']))
+						sn.set('texture', poselib.get_res_from_id(pose[np_id]['texture']['valr']))
 					else:
-						_ch.set(property, pose[np_id][property]['val'])
+						sn.set(property, pose[np_id][property]['val'])
 				else:
-					_ch.set(property, pose[np_id][property]['val'])
+					sn.set(property, pose[np_id][property]['val'])
 					
-	if _ch is Sprite:
-		var s:Sprite=_ch
+	if sn is Sprite:
+		var s:Sprite=sn
 		var can_calculate_full_rect: bool = false
 		if can_calculate_full_rect:
 			var _tr: Transform2D = get_node_global_transform(s)
@@ -304,7 +306,7 @@ func _generate_previewNode(ch :Node, is_poseroot: bool = false) -> Node:
 				_tr.xform(Vector2(rect.end.x, rect.position.y)), # TL
 			]))
 	
-	return _ch
+	return sn
 
 func get_node_global_pos(node :Node2D):
 	if node == rootPreview:
