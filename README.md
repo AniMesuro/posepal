@@ -1,9 +1,8 @@
 # ![posepal Logo](https://images2.imgbox.com/9d/53/qxG5RAKa_o.png)
-posepal is a Godot add-on by AniMesuro that allows storing a collection of scene properties into Pose Libraries for use in 2D animation.
-The project is close to its first release, but's still a work in progress.
+Posepal is a Godot add-on by AniMesuro that allows storing a collection of scene properties into Pose Libraries for use in 2D animation.
 
 ## Installation
-posepal is still in development, so you can only install it from the github page.
+Posepal is still in development, so you can only install it from the github page.
 There's no stable release yet, so either clone it or download as a zip file and paste it on `res://addons/` of your project.
 
 ## Demo Video
@@ -38,14 +37,15 @@ Her files are found on `res://addons/posepal/_example_rig_godette/`
 <img src=https://images2.imgbox.com/59/41/6rC3QnnF_o.png width = 500>
 
 ## Pose Library
-A Pose Library is a Resource bound to a scene that stores pose templates and collections.
+A Pose Library is a Resource that stores pose templates and collections.
 Poselibs are bound to scenes by the meta variable "_plPoseLib_poseFile" in the scene root.
-Although you can save poselibs separately, you shouldn't try to open a poselib for a different scene than the original because there's a chance of corrupting the poselib.  
+> Although you can save poselibs separately, you shouldn't try to open a poselib for a different scene than the original without backup. Reusing poselibs isn't tested enough to make it a part of posepal's workflow yet.
+
 A poselib file will by default be saved at the scene directory and will have the ".poselib.tres" or ".poselib.res" extension, by the choice of the user.\
 <img src=https://images2.imgbox.com/98/88/CS3HrUc4_o.png >
 ## Pose
 Pose is a record of data that stores the state of a scene by storing selected properties. Usually used for character animation, but most kind of properties can be saved. (Unless tests are proven otherwise)
-Pose editing is done through the AnimationTimelineEditor in Godot, by keying desired properties at the current time
+Pose editing is done through the AnimationTimelineEditor in Godot, by keying desired properties at the current time.
 
 ## Filter
 Filter is a selection of nodes.
@@ -69,17 +69,15 @@ The code for finding the user selected AnimationPlayer is dumb, so it's advisabl
 <img src=https://images2.imgbox.com/32/e2/eUkSS720_o.png width=600>
 
 ## Skeleton Support
-posepal kind of supports skeleton posing, although with some quirks.
+The posepal addon kind of supports skeleton posing, although with some quirks.
 You shouldn't key the polygon data when editing a pose, posepal does it automatically when you key  the polygon 'texture' and save the pose.
 The previews are in a different level though, polygons don't seem to be able to bound with a skeleton by code, so a workaround is necessary: you need the calibrate the bones by selecting the scene option "Setup bones" and associating the bone and polygon relationship. The results are less than ideal, but give a crude idea of the pose's gist if the rig is somewhat basic.
 If you want to see the skeleton for the scene for readability you can select 'Show bones' in the preview pose options.
 
 ## Limitations:
-- posepal does not support 3D scenes.
-- posepal supports skeleton poses, but not previewing them. A workaround is to make polygons copy the bone's transform, but it looks gross.
+- Posepal does not support 3D scenes.
+- Posepal supports skeleton poses, but not previewing them. A workaround is to make polygons copy the bone's transform, but it looks gross.
 - Changing the edited scene as you're editing a pose crashes Godot, so the Scene Tabs is invisible as you do so.
-- Changing nodes names and nodepaths may make the poselib unusable.
-- Changing resources (Images)'s paths will confuse the poselib. You'll need to fix the dependencies manually.
 
 The add-on is not very stable, so it's advisable not use in production.
 Making backups is always advisable, but you'd need to copy the files manually.
