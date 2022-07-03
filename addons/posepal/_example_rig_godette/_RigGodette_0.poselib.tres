@@ -173,9 +173,20 @@ resourceReferences = {
 163: "res://addons/posepal/_example_rig_godette/assets/left/rleg feet.png",
 164: "res://addons/posepal/_example_rig_godette/assets/right/head fringe.png",
 165: "res://addons/posepal/_example_rig_godette/assets/right/bag.png",
-166: "res://addons/posepal/_example_rig_godette/assets/34 right/head base.png"
+166: "res://addons/posepal/_example_rig_godette/assets/34 right/head base.png",
+167: "res://addons/posepal/_example_rig_godette/assets/misc/SF ebrows 34l.res",
+168: "res://addons/posepal/_example_rig_godette/assets/misc/SF eyes 34l.res",
+169: "res://addons/posepal/_example_rig_godette/assets/misc/SF mouth 34l.res",
+170: "res://addons/posepal/_example_rig_godette/assets/misc/SF ebrows l.res",
+171: "res://addons/posepal/_example_rig_godette/assets/misc/SF eyes l.res",
+172: "res://addons/posepal/_example_rig_godette/assets/misc/SF mouth l.res",
+173: "res://addons/posepal/_example_rig_godette/assets/misc/SF ebrows f.res",
+174: "res://addons/posepal/_example_rig_godette/assets/misc/SF eyes f.res",
+175: "res://addons/posepal/_example_rig_godette/assets/misc/SF mouth f.res",
+176: "res://addons/posepal/_example_rig_godette/assets/misc/SF ebrows 34bl.res",
+177: "res://addons/posepal/_example_rig_godette/assets/misc/hand.res"
 }
-available_res_id = 167
+available_res_id = 178
 nodepathReferences = {
 100: "TorsoBottom",
 167: "TorsoBottom/LLegTop",
@@ -280,78 +291,98 @@ poseData = {
 100: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": -44.9999
 }
 },
 167: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 44.9999
 }
 },
 168: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 44.9999
 }
 },
 169: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 89.9999
 }
 },
 170: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 74.9999
 }
 },
 173: {
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": -30.0
 }
 },
 174: {
 "position": {
 "out": 1.0,
+"upmo": 0,
 "val": Vector2( 36.9908, -172.563 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
 "out": 1.0,
+"upmo": 1,
 "valr": 97
 }
 },
 175: {
 "offset": {
 "out": 1.0,
+"upmo": 1,
 "val": Vector2( -3.18289e-05, -76.588 )
 },
 "position": {
 "out": 1.0,
+"upmo": 0,
 "val": Vector2( 9.88089, -32.6706 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
 "out": 1.0,
+"upmo": 1,
 "valr": 92
 }
 },
 176: {
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 170
+},
 "position": {
 "out": 1.0,
-"val": Vector2( -90.2606, -73.665 )
+"upmo": 0,
+"val": Vector2( -10.8891, -56.0932 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
@@ -360,12 +391,19 @@ poseData = {
 }
 },
 177: {
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 171
+},
 "position": {
 "out": 1.0,
-"val": Vector2( -77.2606, -42.665 )
+"upmo": 0,
+"val": Vector2( -10.0246, -33.5487 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
@@ -376,28 +414,39 @@ poseData = {
 178: {
 "offset": {
 "out": 1.0,
+"upmo": 1,
 "val": Vector2( -9.7487, 75.7297 )
 },
 "position": {
 "out": 1.0,
-"val": Vector2( -51.0123, -156.895 )
+"upmo": 0,
+"val": Vector2( -37.5476, -155.583 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
 "out": 1.0,
+"upmo": 1,
 "valr": 95
 }
 },
 179: {
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 172
+},
 "position": {
 "out": 1.0,
-"val": Vector2( -67.2606, 8.33496 )
+"upmo": 0,
+"val": Vector2( -24.5964, 8.66101 )
 },
 "rotation_degrees": {
 "out": 1.0,
+"upmo": 0,
 "val": 0.0
 },
 "texture": {
@@ -405,7 +454,8 @@ poseData = {
 "valr": 96
 }
 }
-} ]
+} ],
+"face": [  ]
 },
 "34 right": {
 "default": [ {
@@ -491,16 +541,43 @@ poseData = {
 169: {
 "position": {
 "out": 1.0,
+"upmo": 0,
 "val": Vector2( -10, -148 )
 },
 "rotation_degrees": {
 "out": 1.0,
-"val": -43.8029
+"upmo": 0,
+"val": -40.8269
+}
+},
+170: {
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -69, -144 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": -434.909
+}
+},
+173: {
+"position": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 18, -33 )
+},
+"rotation_degrees": {
+"out": 1.0,
+"upmo": 0,
+"val": 56.4655
 }
 },
 174: {
 "texture": {
 "out": 1.0,
+"upmo": 1,
 "valr": 0
 }
 }
@@ -1262,6 +1339,7 @@ poseData = {
 }
 filterData = {
 "full body": [ 100, 167, 171, 180, 168, 172, 181, 173, 169, 185, 182, 186, 170, 187, 183, 174, 175, 176, 177, 178, 179, 100, 173, 174, 175, 176, 177, 179, 178, 169, 185, 182, 170, 187, 183, 186, 167, 171, 180, 168, 172, 181 ],
+"head": [ 175, 176, 177, 179, 178 ],
 "none": [  ],
 "upper": [ 173, 174, 175, 176, 179, 177, 178, 185, 169, 182, 170, 187, 183, 186 ]
 }
@@ -1646,7 +1724,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -4.00001, -0.99998 )
+"val": Vector2( -22, -7.00001 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -1675,35 +1753,30 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 167
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -57, -111 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 17
+"val": Vector2( 1, -107 )
 },
 "visible": {
 "out": 1.0,
@@ -1712,35 +1785,30 @@ templateData = {
 }
 },
 177: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 168
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -44, -80 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 18
+"val": Vector2( 2, -77 )
 },
 "visible": {
 "out": 1.0,
@@ -1762,7 +1830,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -30, -189 )
+"val": Vector2( -12, -183.23 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -1786,35 +1854,30 @@ templateData = {
 }
 },
 179: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 169
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -34, -29 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 20
+"val": Vector2( -6, -25 )
 },
 "visible": {
 "out": 1.0,
@@ -1907,20 +1970,35 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -22.2817, 21.1371 )
+"val": 1
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -2.2817, 37.1371 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -42.9313, 109.534 )
+"val": Vector2( -37.9313, 109.534 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -1931,11 +2009,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 11
 },
 "visible": {
 "out": 1.0,
@@ -1949,35 +2022,45 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 25.7694, 21.32 )
+"val": 5
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -1.46226, 31.4026 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 49.8102, 118.124 )
+"val": Vector2( 52.0391, 126.007 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
-"val": 0.0
+"val": -1.59391
 },
 "scale": {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 15
 },
 "visible": {
 "out": 1.0,
@@ -2490,12 +2573,12 @@ templateData = {
 "offset": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 5.2601, -93.923 )
+"val": Vector2( 23.2601, -91.923 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -7.62939e-06, -22 )
+"val": Vector2( -7.62939e-06, -32 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -2524,35 +2607,30 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 167
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 61, -87 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 17
+"val": Vector2( 26, -80.0001 )
 },
 "visible": {
 "out": 1.0,
@@ -2561,35 +2639,30 @@ templateData = {
 }
 },
 177: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 168
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 49, -57 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 18
+"val": Vector2( 22, -49 )
 },
 "visible": {
 "out": 1.0,
@@ -2611,7 +2684,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 20, -182 )
+"val": Vector2( 20, -174 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -2640,35 +2713,30 @@ templateData = {
 }
 },
 179: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 169
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 39.7487, -5.22971 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 20
+"val": Vector2( 29, 3 )
 },
 "visible": {
 "out": 1.0,
@@ -2761,20 +2829,30 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 27.7183, 23.1371 )
+"val": 1
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 39.4427, 107.267 )
+"val": Vector2( 39.4428, 113.267 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -2785,11 +2863,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 11
 },
 "visible": {
 "out": 1.0,
@@ -2803,20 +2876,30 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -31.4204, 26.4441 )
+"val": 5
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -43, 114 )
+"val": Vector2( -50.9955, 132.001 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -2827,11 +2910,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 15
 },
 "visible": {
 "out": 1.0,
@@ -3363,15 +3441,25 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 176
 },
 "position": {
 "out": 1.0,
@@ -3388,11 +3476,6 @@ templateData = {
 "upmo": 0,
 "val": Vector2( 1, 1 )
 },
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 115
-},
 "visible": {
 "out": 1.0,
 "upmo": 1,
@@ -3405,11 +3488,6 @@ templateData = {
 }
 },
 177: {
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 18
-},
 "visible": {
 "out": 1.0,
 "upmo": 1,
@@ -3429,11 +3507,6 @@ templateData = {
 }
 },
 179: {
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 20
-},
 "visible": {
 "out": 1.0,
 "upmo": 1,
@@ -3515,20 +3588,30 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 7.161, 10.4041 )
+"val": 7
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 12, 96 )
+"val": Vector2( 15, 99 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -3539,11 +3622,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 108
 },
 "z_index": {
 "out": 1.0,
@@ -3552,20 +3630,30 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": false
+"val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -30.4204, 21.4441 )
+"val": 5
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -15, 135 )
+"val": Vector2( -22, 143 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -3576,11 +3664,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 112
 },
 "z_index": {
 "out": 1.0,
@@ -3985,6 +4068,11 @@ templateData = {
 "out": 1.0,
 "upmo": 1,
 "valr": 105
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": -1
 }
 },
 174: {
@@ -4047,15 +4135,25 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 176
 },
 "position": {
 "out": 1.0,
@@ -4066,11 +4164,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 115
 },
 "visible": {
 "out": 1.0,
@@ -4098,11 +4191,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 18
 },
 "visible": {
 "out": 1.0,
@@ -4162,11 +4250,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 20
 },
 "visible": {
 "out": 1.0,
@@ -4239,30 +4322,40 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -9.839, 10.4041 )
+"val": 7
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 1.161, 35.4041 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -13, 97 )
+"val": Vector2( -15, 99 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 108
 },
 "z_index": {
 "out": 1.0,
@@ -4271,30 +4364,40 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": true
+"val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 5
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( 25.5796, 17.4441 )
+"upmo": 0,
+"val": Vector2( 0.579599, 29.4441 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 20, 140 )
+"val": Vector2( 19, 145 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 112
 },
 "z_index": {
 "out": 1.0,
@@ -4711,6 +4814,11 @@ templateData = {
 "out": 1.0,
 "upmo": 1,
 "valr": 141
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": -1
 }
 },
 175: {
@@ -4738,19 +4846,14 @@ templateData = {
 "out": 1.0,
 "upmo": 1,
 "valr": 53
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": 0
 }
 },
 176: {
-"flip_h": {
-"out": 1.0,
-"upmo": 1,
-"val": false
-},
-"offset": {
-"out": 1.0,
-"upmo": 1,
-"val": Vector2( 0, 0 )
-},
 "position": {
 "out": 1.0,
 "upmo": 0,
@@ -4761,11 +4864,6 @@ templateData = {
 "upmo": 0,
 "val": 0.0
 },
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 115
-},
 "visible": {
 "out": 1.0,
 "upmo": 1,
@@ -4773,16 +4871,6 @@ templateData = {
 }
 },
 177: {
-"flip_h": {
-"out": 1.0,
-"upmo": 1,
-"val": true
-},
-"offset": {
-"out": 1.0,
-"upmo": 1,
-"val": Vector2( 0, 0 )
-},
 "position": {
 "out": 1.0,
 "upmo": 0,
@@ -4792,11 +4880,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 18
 },
 "visible": {
 "out": 1.0,
@@ -4837,16 +4920,6 @@ templateData = {
 }
 },
 179: {
-"flip_h": {
-"out": 1.0,
-"upmo": 1,
-"val": true
-},
-"offset": {
-"out": 1.0,
-"upmo": 1,
-"val": Vector2( 0, 0 )
-},
 "position": {
 "out": 1.0,
 "upmo": 0,
@@ -4856,11 +4929,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 20
 },
 "visible": {
 "out": 1.0,
@@ -4943,30 +5011,40 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": false
+"val": true
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 6
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( -22.2817, 26.1371 )
+"upmo": 0,
+"val": Vector2( -1.2817, 32.1371 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -54, 96 )
+"val": Vector2( -61, 105 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 144
 },
 "z_index": {
 "out": 1.0,
@@ -4975,30 +5053,40 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": true
+"val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 6
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( 18.7694, 25.32 )
+"upmo": 0,
+"val": Vector2( -1.2306, 33.32 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 57, 97 )
+"val": Vector2( 59, 102 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 144
 },
 "z_index": {
 "out": 1.0,
@@ -5099,7 +5187,7 @@ templateData = {
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": 1
+"val": 0
 }
 }
 },
@@ -5483,7 +5571,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -7.62939e-06, -3.99998 )
+"val": Vector2( -7.62939e-06, 1.99999 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -5512,87 +5600,67 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 173
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -2.55108e-05, -124 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 133
+"val": Vector2( -16, -120 )
 },
 "visible": {
 "out": 1.0,
 "upmo": 1,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 1,
-"val": 0
 }
 },
 177: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 174
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 1.00003, -84 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 134
+"val": Vector2( -15, -89 )
 },
 "visible": {
 "out": 1.0,
 "upmo": 1,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 1,
-"val": 0
 }
 },
 178: {
@@ -5609,7 +5677,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 21, -203 )
+"val": Vector2( 21, -210 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -5638,45 +5706,35 @@ templateData = {
 }
 },
 179: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 175
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -1.99997, -29 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"scale": {
-"out": 1.0,
-"upmo": 0,
-"val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 136
+"val": Vector2( -0.99997, -32 )
 },
 "visible": {
 "out": 1.0,
 "upmo": 1,
 "val": true
-},
-"z_index": {
-"out": 1.0,
-"upmo": 1,
-"val": 0
 }
 },
 180: {
@@ -5764,20 +5822,35 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -22.2817, 21.1371 )
+"val": 2
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -3.2817, 34.1371 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -66, 112 )
+"val": Vector2( -62, 125 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -5788,11 +5861,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 126
 },
 "visible": {
 "out": 1.0,
@@ -5806,20 +5874,35 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": false
+"val": true
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 2
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( 23.7694, 18.32 )
+"upmo": 0,
+"val": Vector2( 2.7694, 32.32 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 57, 95 )
+"val": Vector2( 53, 105 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -5830,11 +5913,6 @@ templateData = {
 "out": 1.0,
 "upmo": 0,
 "val": Vector2( 1, 1 )
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 130
 },
 "visible": {
 "out": 1.0,
@@ -6105,7 +6183,7 @@ templateData = {
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": -1
+"val": -2
 }
 },
 170: {
@@ -6142,7 +6220,7 @@ templateData = {
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": 0
+"val": 1
 }
 },
 171: {
@@ -6261,6 +6339,11 @@ templateData = {
 "out": 1.0,
 "upmo": 1,
 "valr": 97
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": -1
 }
 },
 175: {
@@ -6277,7 +6360,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -4.00001, -47 )
+"val": Vector2( -18, -46 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -6296,10 +6379,25 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 170
 },
 "offset": {
 "out": 1.0,
@@ -6309,17 +6407,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -74, -84 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 93
+"val": Vector2( -1, -69 )
 },
 "visible": {
 "out": 1.0,
@@ -6328,10 +6416,25 @@ templateData = {
 }
 },
 177: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 4
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 171
 },
 "offset": {
 "out": 1.0,
@@ -6341,17 +6444,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -63, -43 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 94
+"val": Vector2( 0, -38 )
 },
 "visible": {
 "out": 1.0,
@@ -6373,7 +6466,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -25, -134 )
+"val": Vector2( -11, -133 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -6392,10 +6485,25 @@ templateData = {
 }
 },
 179: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 172
 },
 "offset": {
 "out": 1.0,
@@ -6405,17 +6513,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -48, 8 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 96
+"val": Vector2( -14, 3 )
 },
 "visible": {
 "out": 1.0,
@@ -6488,30 +6586,40 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": false
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( -29.2817, 22.1371 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( -2.21752, 33.8975 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -2, 104 )
+"val": Vector2( -5.72107, 105.05 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 153
 },
 "z_index": {
 "out": 1.0,
@@ -6520,35 +6628,45 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": false
+"val": true
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 4
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( 8.7694, 32.32 )
+"upmo": 0,
+"val": Vector2( -0.2306, 31.32 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 10, 124 )
+"val": Vector2( 14, 137 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 156
-},
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": 0
+"val": -1
 }
 },
 185: {
@@ -6784,7 +6902,7 @@ templateData = {
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": -1
+"val": -2
 }
 },
 170: {
@@ -6821,7 +6939,7 @@ templateData = {
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": 0
+"val": 1
 }
 },
 171: {
@@ -6940,6 +7058,11 @@ templateData = {
 "out": 1.0,
 "upmo": 1,
 "valr": 97
+},
+"z_index": {
+"out": 1.0,
+"upmo": 1,
+"val": -1
 }
 },
 175: {
@@ -6956,7 +7079,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 8.00001, -49 )
+"val": Vector2( 22, -49 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -6975,30 +7098,30 @@ templateData = {
 }
 },
 176: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 170
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 76, -84 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 93
+"val": Vector2( 2, -69 )
 },
 "visible": {
 "out": 1.0,
@@ -7007,30 +7130,30 @@ templateData = {
 }
 },
 177: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 4
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 171
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 63, -43 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 94
+"val": Vector2( 1, -39 )
 },
 "visible": {
 "out": 1.0,
@@ -7052,7 +7175,7 @@ templateData = {
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -3, -174 )
+"val": Vector2( -17, -172 )
 },
 "rotation_degrees": {
 "out": 1.0,
@@ -7071,30 +7194,30 @@ templateData = {
 }
 },
 179: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "open"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 0, 0 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 172
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 49, 9 )
-},
-"rotation_degrees": {
-"out": 1.0,
-"upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 96
+"val": Vector2( 13, 3 )
 },
 "visible": {
 "out": 1.0,
@@ -7167,30 +7290,40 @@ templateData = {
 }
 },
 182: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
 "val": true
 },
-"offset": {
+"frame": {
 "out": 1.0,
 "upmo": 1,
-"val": Vector2( 28.7183, 22.1371 )
+"val": 0
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
+},
+"offset": {
+"out": 1.0,
+"upmo": 0,
+"val": Vector2( 3.6713, 31.1856 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( 8, 107 )
+"val": Vector2( 8.12854, 108.153 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
-"val": 0.0
-},
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 153
+"val": 39.2813
 },
 "z_index": {
 "out": 1.0,
@@ -7199,35 +7332,45 @@ templateData = {
 }
 },
 183: {
+"animation": {
+"out": 1.0,
+"upmo": 1,
+"val": "default"
+},
 "flip_h": {
 "out": 1.0,
 "upmo": 1,
-"val": true
+"val": false
+},
+"frame": {
+"out": 1.0,
+"upmo": 1,
+"val": 4
+},
+"frames": {
+"out": 1.0,
+"upmo": 1,
+"valr": 177
 },
 "offset": {
 "out": 1.0,
-"upmo": 1,
-"val": Vector2( -8.2306, 30.32 )
+"upmo": 0,
+"val": Vector2( -4.2306, 33.32 )
 },
 "position": {
 "out": 1.0,
 "upmo": 0,
-"val": Vector2( -10, 128 )
+"val": Vector2( -11, 133 )
 },
 "rotation_degrees": {
 "out": 1.0,
 "upmo": 0,
 "val": 0.0
 },
-"texture": {
-"out": 1.0,
-"upmo": 1,
-"valr": 156
-},
 "z_index": {
 "out": 1.0,
 "upmo": 1,
-"val": 0
+"val": -1
 }
 },
 185: {

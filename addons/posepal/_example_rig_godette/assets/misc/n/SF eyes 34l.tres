@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=18 format=2]
+
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o e tl.png" type="Texture" id=1]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o n bl.png" type="Texture" id=2]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o n c.png" type="Texture" id=3]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o e bl.png" type="Texture" id=4]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o e tr.png" type="Texture" id=5]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o e c.png" type="Texture" id=6]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o n tl.png" type="Texture" id=7]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o n tr.png" type="Texture" id=8]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o e br.png" type="Texture" id=9]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l o n br.png" type="Texture" id=10]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l c h.png" type="Texture" id=11]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l c s.png" type="Texture" id=12]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l h tr.png" type="Texture" id=13]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l h br.png" type="Texture" id=14]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l h bl.png" type="Texture" id=15]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l h tl.png" type="Texture" id=16]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/face/eyes/34l h c.png" type="Texture" id=17]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "open",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "closed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "half",
+"speed": 5.0
+} ]

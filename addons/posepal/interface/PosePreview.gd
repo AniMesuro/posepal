@@ -282,11 +282,11 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 			final_properties.erase('rest')
 		for property in final_properties:
 			if property in sn:
-				if property == 'texture':
-					if pose[np_id]['texture'].has('valr'):
-						if !pose[np_id]['texture'].has('valr'):
+				if property == 'texture' or property == 'frames':
+					if pose[np_id][property].has('valr'):
+						if !pose[np_id][property].has('valr'):
 							continue
-						sn.set('texture', poselib.get_res_from_id(pose[np_id]['texture']['valr']))
+						sn.set(property, poselib.get_res_from_id(pose[np_id][property]['valr']))
 					else:
 						sn.set(property, pose[np_id][property]['val'])
 				else:

@@ -453,7 +453,6 @@ func _save_track_property_to_poseData(track_index: int, pose_id: int, node_path:
 	if current_pose_type == PoseType.NORMAL:
 		var pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 		var np_id: int = poselib.get_id_from_nodepath(node_path)
-		print('np_ref = ',poselib.nodepathReferences)
 		if !pose.has(np_id):
 			pose[np_id] = {}
 		
