@@ -37,6 +37,7 @@ func _ready() -> void:
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, posePalDock)
 	_get_editor_references()
 	settings = load("res://addons/posepal/settings.tres")
+	settings.pluginInstance = self
 	
 	var configFile: ConfigFile = ConfigFile.new()
 	var err: int = configFile.load("res://addons/posepal/plugin.cfg")

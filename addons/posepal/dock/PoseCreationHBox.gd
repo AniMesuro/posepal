@@ -1,14 +1,17 @@
 tool
 extends HBoxContainer
 
+signal pose_editing_started
 signal pose_editing_canceled
 signal pose_editing_saved
 
 # This script reference is just for autocompletion.
 const RES_PoseLibrary: GDScript = preload("res://addons/posepal/PoseLibrary.gd")
+const RES_PosePalSettings: GDScript = preload("res://addons/posepal/PosePalSettings.gd")
 
 const TEX_IconSave: StreamTexture = preload("res://addons/posepal/assets/icons/icon_save.png")
 const TEX_IconNew: StreamTexture = preload("res://addons/posepal/assets/icons/icon_new.png")
+const TEX_IconPosepal: StreamTexture = preload("res://addons/posepal/plugin_icon.png")
 
 enum PoseType {
 	NORMAL,  # Animation Pose - Stores property animation keys.
@@ -39,6 +42,10 @@ func _ready() -> void:
 	var pluginInstance: EditorPlugin = owner.pluginInstance
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 	$CancelPoseButton.visible = false
+	
+	connect("pose_editing_started", self, "_on_pose_editing_started")
+	connect("pose_editing_saved", self, "_on_pose_editing_finished")
+	connect("pose_editing_canceled", self, "_on_pose_editing_finished")
 
 func _set_posegen_mode(new_mode :int):
 	var newPoseButton: Button = $NewPoseButton
@@ -76,6 +83,38 @@ func _on_PoseLibrary_updated_reference(reference :String):
 	self.posegen_mode = PoseGenMode.CREATE
 	if is_instance_valid(animationPlayer):
 		animationPlayer.queue_free()
+
+func _on_pose_editing_started():
+	if !is_instance_valid(owner.pluginInstance.settings):
+		return
+	var settings: Resource = owner.pluginInstance.settings
+	if !settings.enable_addons_integration or !settings.is_addon_active('animation_frame_picker'):
+		return
+	framepicker_select_poseAnimationPlayer(settings)
+
+func _on_pose_editing_finished():
+	if !is_instance_valid(owner.pluginInstance.settings):
+		return
+	var settings: Resource = owner.pluginInstance.settings
+	if !settings.enable_addons_integration or !settings.is_addon_active('animation_frame_picker'):
+		return
+	framepicker_deselect_poseAnimationPlayer(settings)
+
+# Integration for "Animation Frame Picker" addon by AniMesuro.
+
+func framepicker_select_poseAnimationPlayer(settings: Resource):
+	var framePickerPlugin: EditorPlugin = settings.get_plugin_instance_for('animation_frame_picker')
+	var framePickerSettings: Resource = framePickerPlugin.settings
+	var framePicker: Control = framePickerSettings.dock
+	framePicker.anim_animPlayer = animationPlayer
+	framePicker.force_select_animPlayer(animationPlayer, animationPlayer.name, TEX_IconPosepal)
+	print('selected ',framePicker.anim_animPlayer)
+
+func framepicker_deselect_poseAnimationPlayer(settings: Resource):
+	var framePickerPlugin: EditorPlugin = settings.get_plugin_instance_for('animation_frame_picker')
+	var framePickerSettings: Resource = framePickerPlugin.settings
+	var framePicker: Control = framePickerSettings.dock
+	framePicker.force_deselect_animPlayer()
 
 var newPosePopup :Control
 func _on_NewPoseButton_pressed():
@@ -190,6 +229,10 @@ func edit_pose(pose_id: int, pose_type: int = PoseType.NORMAL):
 	anim.length = 0.01
 	animationPlayer.advance(0.01)
 	animationPlayer.seek(0.01, true)
+	
+	emit_signal("pose_editing_started")
+	
+		
 	
 	# If pose exists, load pose.
 	if pose_type == PoseType.NORMAL:

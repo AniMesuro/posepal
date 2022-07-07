@@ -69,6 +69,7 @@ func _ready() -> void:
 #	connect("pose_created", self, "_on_pose_created")
 	pluginInstance.connect("scene_changed", self, "_on_scene_changed")
 	settings = self.pluginInstance.settings
+	
 
 func get_relevant_children() -> Array:
 	var editedSceneRoot = get_tree().edited_scene_root
@@ -286,11 +287,12 @@ func _get_posePalette():
 func _get_pluginInstance() -> EditorPlugin:
 	if is_instance_valid(pluginInstance):
 		return pluginInstance
-	if get_tree().get_nodes_in_group("plugin posepal").size() == 0:
+	for node in get_tree().get_nodes_in_group("plugin posepal"):
 		# queue_free()
-		return null
-	pluginInstance = get_tree().get_nodes_in_group("plugin posepal")[0]
-	return pluginInstance
+		if node is EditorPlugin:
+			pluginInstance = node
+			return node
+	return null
 
 func _get_poseCreationHBox() -> HBoxContainer:
 	poseCreationHBox = $"VSplit/ExtraHBox/PoseCreationHBox"
