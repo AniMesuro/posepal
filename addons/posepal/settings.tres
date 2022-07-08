@@ -8,5 +8,5 @@ poselib_extension = 0
 debug_mode = 1
 enable_addons_integration = true
 integrations = {
-"animation_frame_picker": null
+"animation_frame_picker": true
 }

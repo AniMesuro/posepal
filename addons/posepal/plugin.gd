@@ -27,6 +27,8 @@ var editorControl: Control
 func _enter_tree() -> void:
 	add_to_group(plugin_group)
 	self.editorSceneTabs.visible = true
+	settings = load("res://addons/posepal/settings.tres")
+	settings.pluginInstance = self
 
 func _ready() -> void:
 	posePalDock = SCN_PosePalDock.instance()
@@ -34,10 +36,10 @@ func _ready() -> void:
 	editorControl = get_editor_interface().get_base_control()
 	posePalDock.editorControl = editorControl
 	
+	
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, posePalDock)
 	_get_editor_references()
-	settings = load("res://addons/posepal/settings.tres")
-	settings.pluginInstance = self
+	
 	
 	var configFile: ConfigFile = ConfigFile.new()
 	var err: int = configFile.load("res://addons/posepal/plugin.cfg")

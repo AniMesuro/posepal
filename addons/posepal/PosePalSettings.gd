@@ -22,9 +22,11 @@ export var integrations: Dictionary = {
 
 var pluginInstance: EditorPlugin 
 func is_addon_active(addon_name: String):
+	print('active a ',is_instance_valid(pluginInstance),' ',enable_addons_integration,' ', integrations.get(addon_name, false))
 	if (!enable_addons_integration or !integrations.get(addon_name, false)
-	or  !is_instance_valid(pluginInstance)):
+	or !is_instance_valid(pluginInstance)):
 		return false
+	print('active b')
 	if pluginInstance.get_tree().get_nodes_in_group("plugin "+addon_name).size()>0:
 		return true
 

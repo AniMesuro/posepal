@@ -87,10 +87,13 @@ func _on_PoseLibrary_updated_reference(reference :String):
 func _on_pose_editing_started():
 	if !is_instance_valid(owner.pluginInstance.settings):
 		return
+	print('a')
 	var settings: Resource = owner.pluginInstance.settings
 	if !settings.enable_addons_integration or !settings.is_addon_active('animation_frame_picker'):
 		return
+	print('b')
 	framepicker_select_poseAnimationPlayer(settings)
+	print('c')
 
 func _on_pose_editing_finished():
 	if !is_instance_valid(owner.pluginInstance.settings):
@@ -104,15 +107,18 @@ func _on_pose_editing_finished():
 
 func framepicker_select_poseAnimationPlayer(settings: Resource):
 	var framePickerPlugin: EditorPlugin = settings.get_plugin_instance_for('animation_frame_picker')
-	var framePickerSettings: Resource = framePickerPlugin.settings
+	var framePickerSettings: Resource = framePickerPlugin.get('settings')
+	if !is_instance_valid(framePickerSettings):
+		return
 	var framePicker: Control = framePickerSettings.dock
 	framePicker.anim_animPlayer = animationPlayer
 	framePicker.force_select_animPlayer(animationPlayer, animationPlayer.name, TEX_IconPosepal)
-	print('selected ',framePicker.anim_animPlayer)
 
 func framepicker_deselect_poseAnimationPlayer(settings: Resource):
 	var framePickerPlugin: EditorPlugin = settings.get_plugin_instance_for('animation_frame_picker')
-	var framePickerSettings: Resource = framePickerPlugin.settings
+	var framePickerSettings: Resource = framePickerPlugin.get('settings')
+	if !is_instance_valid(framePickerSettings):
+		return
 	var framePicker: Control = framePickerSettings.dock
 	framePicker.force_deselect_animPlayer()
 
