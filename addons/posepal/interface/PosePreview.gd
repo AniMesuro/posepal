@@ -527,10 +527,12 @@ func _on_id_settled(new_id: int):
 	var poselib: Resource = owner.currentPoselib
 	if (new_id == pose_id or new_id < 0):
 		return
-	
+	var _pose: Dictionary = poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id]
 	poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id] = (
-		poselib.poseData[owner.poselib_template][owner.poselib_collection][new_id])
-	poselib.poseData[owner.poselib_template][owner.poselib_collection][new_id] = pose
+		poselib.poseData[owner.poselib_template][owner.poselib_collection][new_id]).duplicate()
+	poselib.poseData[owner.poselib_template][owner.poselib_collection][new_id] = _pose
+	
+#	print('#OLD#',poselib.poseData[owner.poselib_template][owner.poselib_collection][pose_id],'\n#NEW#\n',poselib.poseData[owner.poselib_template][owner.poselib_collection][new_id])
 	
 	pose_id = new_id
 	if pose_name == '':

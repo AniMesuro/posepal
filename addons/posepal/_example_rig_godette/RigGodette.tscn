@@ -9331,7 +9331,7 @@ tracks/139/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "default" ]
+"values": [ "angry" ]
 }
 tracks/140/type = "value"
 tracks/140/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:flip_h")
@@ -9355,7 +9355,7 @@ tracks/141/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 tracks/142/type = "value"
 tracks/142/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:frames")
@@ -9391,7 +9391,7 @@ tracks/144/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "open" ]
+"values": [ "half" ]
 }
 tracks/145/type = "value"
 tracks/145/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:flip_h")
@@ -9451,7 +9451,7 @@ tracks/149/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "open" ]
+"values": [ "closed" ]
 }
 tracks/150/type = "value"
 tracks/150/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:flip_h")
@@ -9475,7 +9475,7 @@ tracks/151/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 2 ]
 }
 tracks/152/type = "value"
 tracks/152/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:frames")
@@ -17404,19 +17404,22 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Ebrow" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -16, -120 )
-frames = ExtResource( 2 )
-
 [node name="Eyes" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
 position = Vector2( -15, -89 )
 frames = ExtResource( 18 )
-animation = "open"
+animation = "half"
+
+[node name="Ebrow" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
+position = Vector2( -16, -120 )
+frames = ExtResource( 2 )
+animation = "angry"
+frame = 1
 
 [node name="Mouth" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
 position = Vector2( -0.99997, -32 )
 frames = ExtResource( 12 )
-animation = "open"
+animation = "closed"
+frame = 2
 
 [node name="Fringe" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
 position = Vector2( 21, -210 )
