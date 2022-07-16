@@ -50,10 +50,10 @@ func prepare_loading_resourceReferences() -> int:
 		for k in resourceReferences.keys():
 			resourceReferences[k] = resourceReferences[k][0]
 		
-	for k in resourceReferences.keys():
-		var path: String = resourceReferences[k]
+	for r_id in resourceReferences.keys():
+		var path: String = resourceReferences[r_id]
 		if ResourceLoader.exists(path):
-			resourceReferences_res[k] = ResourceLoader.load(path)
+			resourceReferences_res[r_id] = ResourceLoader.load(path)
 		else:
 			is_references_valid = false
 			return ERR_FILE_MISSING_DEPENDENCIES
@@ -109,17 +109,17 @@ func get_res_from_id(id: int):
 		res = load(resourceReferences[id])
 	return res
 
-func get_id_from_path(path: String):
-	for k in resourceReferences.keys():
-		var res_path = resourceReferences[k]
-		if res_path == path:
-			return k
+#func get_id_from_path(path: String):
+#	for k in resourceReferences.keys():
+#		var res_path = resourceReferences[k]
+#		if res_path == path:
+#			return k
 
 func get_id_from_res(res: Resource):
-	for k in resourceReferences.keys():
-		var res_path: String = resourceReferences[k]
+	for r_id in resourceReferences.keys():
+		var res_path: String = resourceReferences[r_id]
 		if res_path == res.resource_path:
-			return k
+			return r_id
 			
 	var id: int	
 	var max_iter: int = 100
@@ -130,7 +130,7 @@ func get_id_from_res(res: Resource):
 	id = available_res_id + iter
 	available_res_id = id + 1
 	resourceReferences[id] = res.resource_path#[res.resource_path, res]
-	return id;
+	return id
 	
 func get_res_paths() -> Array:
 	return resourceReferences.values()
@@ -144,7 +144,8 @@ func get_id_from_nodepath(nodepath: String):
 	var id: int	
 	var max_iter: int = 100
 	var iter: int = 0
-	while (resourceReferences.has(available_nodepath_id + iter) && (iter < max_iter)):
+	
+	while (nodepathReferences.has(available_nodepath_id + iter) && (iter < max_iter)):
 		iter += 1
 	id = available_nodepath_id + iter
 	available_nodepath_id = id + 1

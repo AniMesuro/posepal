@@ -201,6 +201,12 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 				if !(owner.optionsData.ignore_scene_pose) && is_instance_valid(mn.frames):
 					sn.animation = mn.animation
 					sn.frame = mn.frame
+				
+				if !(owner.optionsData.ignore_scene_pose):
+					sn.offset = mn.offset
+					sn.flip_h = mn.flip_h
+					sn.flip_v = mn.flip_v
+					sn.z_index = mn.z_index
 			'TextureRect':
 				sn = TextureRect.new()
 				sn.texture = load("res://addons/posepal/assets/icons/icon_not.png")
