@@ -89,11 +89,12 @@ func _on_id_selected(id :int):
 		var err_nodepath: int = owner.currentPoselib.validate_nodepaths(editedSceneRoot.get_node(owner.poselib_scene))
 		if err_nodepath != OK:
 			owner.issue_warning("broken_nodepaths")
-			print("[posepal] Couldn't complete filling palette because broken nodepaths were found.")
+			print("[posepal] Broken nodepaths were found at poselib.")
 			# CALL Nodepath Reference Popup.
 			var nodepathReferencePopup: WindowDialog = SCN_NodepathReferencePopup.instance()
 			nodepathReferencePopup.posepalDock = owner
 			add_child(nodepathReferencePopup)
+#			nodepathReferencePopup.popup_centered(Vector2(OS.window_size.x/2, OS.window_size.y))
 #			return
 		
 		

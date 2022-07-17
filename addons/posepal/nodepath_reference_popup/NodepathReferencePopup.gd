@@ -12,7 +12,7 @@ var poselib: RES_PoseLibrary
 
 func _enter_tree() -> void:
 	if get_tree().edited_scene_root != self:
-		popup()
+		popup_centered(Vector2(OS.window_size.x* .4, OS.window_size.y-20))
 	else:
 		show()
 	if !is_instance_valid(posepalDock):
@@ -26,6 +26,7 @@ func _on_OkButton_pressed():
 	var nodepathVBox: VBoxContainer = $"MarginCon/VBox/VBox/ScrollCon/NodepathVBox"
 	for nodepathItem in nodepathVBox.get_children():
 		poselib.nodepathReferences[nodepathItem.np_id] = nodepathItem.new_path
+	posepalDock.save_poseData()
 	queue_free()
 
 func _set_unfixed_nodepaths_num(new_unfixed_nodepaths_num):

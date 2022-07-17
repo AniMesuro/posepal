@@ -14,7 +14,6 @@ func _enter_tree() -> void:
 		popup()
 
 func _on_NodeButton_pressed(node_path: String):
-	print('np ',node_path)
 	emit_signal("nodepath_selected", node_path)
 	queue_free()
 
