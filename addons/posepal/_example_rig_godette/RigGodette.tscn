@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/bag.png" type="Texture" id=1]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/misc/SF ebrows f.res" type="SpriteFrames" id=2]
@@ -63,6 +63,7 @@
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/right/head fringe.png" type="Texture" id=61]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/34 left/torso bottom.png" type="Texture" id=62]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/34b left/neck.png" type="Texture" id=63]
+[ext_resource path="res://addons/posepal/_example_rig_godette/assets/34b right/head smear.png" type="Texture" id=64]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/34b left/rleg bottom.png" type="Texture" id=65]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/right/bag.png" type="Texture" id=66]
 [ext_resource path="res://addons/posepal/_example_rig_godette/assets/left/neck.png" type="Texture" id=67]
@@ -9322,7 +9323,7 @@ tracks/138/keys = {
 "values": [ Vector2( -15, -89 ) ]
 }
 tracks/139/type = "value"
-tracks/139/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:animation")
+tracks/139/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:frames")
 tracks/139/interp = 1
 tracks/139/loop_wrap = true
 tracks/139/imported = false
@@ -9331,10 +9332,10 @@ tracks/139/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "angry" ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/140/type = "value"
-tracks/140/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:flip_h")
+tracks/140/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:animation")
 tracks/140/interp = 1
 tracks/140/loop_wrap = true
 tracks/140/imported = false
@@ -9343,10 +9344,10 @@ tracks/140/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ "angry" ]
 }
 tracks/141/type = "value"
-tracks/141/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:frame")
+tracks/141/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:flip_h")
 tracks/141/interp = 1
 tracks/141/loop_wrap = true
 tracks/141/imported = false
@@ -9355,10 +9356,10 @@ tracks/141/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1 ]
+"values": [ false ]
 }
 tracks/142/type = "value"
-tracks/142/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:frames")
+tracks/142/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:frame")
 tracks/142/interp = 1
 tracks/142/loop_wrap = true
 tracks/142/imported = false
@@ -9367,7 +9368,7 @@ tracks/142/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ 1 ]
 }
 tracks/143/type = "value"
 tracks/143/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Ebrow:visible")
@@ -9382,7 +9383,7 @@ tracks/143/keys = {
 "values": [ true ]
 }
 tracks/144/type = "value"
-tracks/144/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:animation")
+tracks/144/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:frames")
 tracks/144/interp = 1
 tracks/144/loop_wrap = true
 tracks/144/imported = false
@@ -9391,10 +9392,10 @@ tracks/144/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "half" ]
+"values": [ ExtResource( 18 ) ]
 }
 tracks/145/type = "value"
-tracks/145/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:flip_h")
+tracks/145/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:animation")
 tracks/145/interp = 1
 tracks/145/loop_wrap = true
 tracks/145/imported = false
@@ -9403,10 +9404,10 @@ tracks/145/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ "open" ]
 }
 tracks/146/type = "value"
-tracks/146/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:frame")
+tracks/146/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:flip_h")
 tracks/146/interp = 1
 tracks/146/loop_wrap = true
 tracks/146/imported = false
@@ -9415,10 +9416,10 @@ tracks/146/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ false ]
 }
 tracks/147/type = "value"
-tracks/147/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:frames")
+tracks/147/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:frame")
 tracks/147/interp = 1
 tracks/147/loop_wrap = true
 tracks/147/imported = false
@@ -9427,7 +9428,7 @@ tracks/147/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 18 ) ]
+"values": [ 0 ]
 }
 tracks/148/type = "value"
 tracks/148/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Eyes:visible")
@@ -9442,7 +9443,7 @@ tracks/148/keys = {
 "values": [ true ]
 }
 tracks/149/type = "value"
-tracks/149/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:animation")
+tracks/149/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:frames")
 tracks/149/interp = 1
 tracks/149/loop_wrap = true
 tracks/149/imported = false
@@ -9451,10 +9452,10 @@ tracks/149/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "closed" ]
+"values": [ ExtResource( 12 ) ]
 }
 tracks/150/type = "value"
-tracks/150/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:flip_h")
+tracks/150/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:animation")
 tracks/150/interp = 1
 tracks/150/loop_wrap = true
 tracks/150/imported = false
@@ -9463,10 +9464,10 @@ tracks/150/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ "closed" ]
 }
 tracks/151/type = "value"
-tracks/151/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:frame")
+tracks/151/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:flip_h")
 tracks/151/interp = 1
 tracks/151/loop_wrap = true
 tracks/151/imported = false
@@ -9475,10 +9476,10 @@ tracks/151/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ false ]
 }
 tracks/152/type = "value"
-tracks/152/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:frames")
+tracks/152/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:frame")
 tracks/152/interp = 1
 tracks/152/loop_wrap = true
 tracks/152/imported = false
@@ -9487,7 +9488,7 @@ tracks/152/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 12 ) ]
+"values": [ 2 ]
 }
 tracks/153/type = "value"
 tracks/153/path = NodePath("TorsoBottom/TorsoTop/Neck/Head/Mouth:visible")
@@ -17381,133 +17382,150 @@ __meta__ = {
 }
 
 [node name="TorsoBottom" type="Sprite" parent="."]
-texture = ExtResource( 75 )
-offset = Vector2( -0.797424, 8.24968 )
+texture = ExtResource( 73 )
+offset = Vector2( 9.20258, 23.2497 )
+flip_h = true
 
 [node name="TorsoTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( -1.52588e-05, -24 )
-texture = ExtResource( 17 )
-offset = Vector2( 1.96904, -85.615 )
+position = Vector2( 12, -4 )
+z_index = -1
+texture = ExtResource( 81 )
+offset = Vector2( -9.031, -88.615 )
+flip_h = true
 
 [node name="Neck" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( -1, -165 )
-texture = ExtResource( 6 )
-offset = Vector2( -0.01403, -42.1606 )
+position = Vector2( -35, -151 )
+texture = ExtResource( 63 )
+offset = Vector2( 4.98597, -29.1606 )
+flip_h = true
 
 [node name="Head" type="Sprite" parent="TorsoBottom/TorsoTop/Neck"]
 show_behind_parent = true
-position = Vector2( -7.62939e-06, 1.99999 )
-z_index = 1
-texture = ExtResource( 38 )
-offset = Vector2( 0.2601, -118.923 )
+position = Vector2( 8, -54 )
+texture = ExtResource( 64 )
+offset = Vector2( 4.2601, -106.923 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Eyes" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -15, -89 )
+visible = false
+position = Vector2( -44, -80 )
 frames = ExtResource( 18 )
-animation = "half"
+animation = "open"
+flip_h = true
 
 [node name="Ebrow" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -16, -120 )
-frames = ExtResource( 2 )
-animation = "angry"
-frame = 1
+visible = false
+position = Vector2( 90, -80 )
+frames = ExtResource( 27 )
+flip_h = true
 
 [node name="Mouth" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( -0.99997, -32 )
+visible = false
+position = Vector2( -34, -29 )
 frames = ExtResource( 12 )
 animation = "closed"
 frame = 2
+flip_h = true
 
 [node name="Fringe" type="Sprite" parent="TorsoBottom/TorsoTop/Neck/Head"]
-position = Vector2( 21, -210 )
-texture = ExtResource( 88 )
-offset = Vector2( -24.7487, 47.7297 )
+visible = false
+position = Vector2( -30, -189 )
+texture = ExtResource( 79 )
+offset = Vector2( 27, 90.5001 )
+flip_h = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="ArmRTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( -35, -129 )
-z_index = -1
-texture = ExtResource( 94 )
-offset = Vector2( -22.2493, 56.2509 )
+position = Vector2( -58, -155 )
+z_index = -2
+texture = ExtResource( 56 )
+offset = Vector2( -7.2493, 60.2509 )
+flip_h = true
 
 [node name="ArmRBottom" type="Sprite" parent="TorsoBottom/TorsoTop/ArmRTop"]
-position = Vector2( -45, 99 )
-texture = ExtResource( 98 )
-offset = Vector2( -31.4386, 61.4124 )
+position = Vector2( -11, 119 )
+texture = ExtResource( 57 )
+offset = Vector2( -9.7186, 48.5351 )
+flip_h = true
 
 [node name="RHand" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/ArmRTop/ArmRBottom"]
 modulate = Color( 0.682353, 0.647059, 0.596078, 1 )
-position = Vector2( -62, 125 )
+position = Vector2( -15, 99 )
 z_index = -1
 frames = ExtResource( 19 )
-frame = 2
-offset = Vector2( -3.2817, 34.1371 )
+frame = 7
+offset = Vector2( 1.161, 35.4041 )
+flip_h = true
 
 [node name="LArmTop" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( 31, -128 )
-z_index = -1
-texture = ExtResource( 78 )
-offset = Vector2( 22.6395, 55.7096 )
+position = Vector2( -3, -153 )
+texture = ExtResource( 22 )
+offset = Vector2( 10.6395, 59.7096 )
+flip_h = true
 
 [node name="LArmBottom" type="Sprite" parent="TorsoBottom/TorsoTop/LArmTop"]
-position = Vector2( 53, 118 )
+position = Vector2( 16, 117 )
 z_index = 1
-texture = ExtResource( 26 )
-offset = Vector2( 26.2654, 54.8525 )
+texture = ExtResource( 90 )
+offset = Vector2( 11, 70 )
+flip_h = true
 
 [node name="LHand" type="AnimatedSprite" parent="TorsoBottom/TorsoTop/LArmTop/LArmBottom"]
 modulate = Color( 0.682353, 0.647059, 0.596078, 1 )
-position = Vector2( 53, 105 )
-z_index = -1
+position = Vector2( 19, 145 )
 frames = ExtResource( 19 )
-frame = 2
-offset = Vector2( 2.7694, 32.32 )
-flip_h = true
+frame = 5
+offset = Vector2( 0.579599, 29.4441 )
 
 [node name="Bag" type="Sprite" parent="TorsoBottom/TorsoTop"]
-position = Vector2( 7, -11 )
-z_index = -2
-texture = ExtResource( 5 )
-offset = Vector2( -7.34009, -89.0972 )
+position = Vector2( -55, 34 )
+z_index = 1
+texture = ExtResource( 82 )
+offset = Vector2( -18.3401, -129.097 )
+flip_h = true
 
 [node name="LLegTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( 21, 10 )
+position = Vector2( 19, 44 )
 z_index = -1
-texture = ExtResource( 34 )
-offset = Vector2( 19.867, 93.5304 )
+texture = ExtResource( 86 )
+offset = Vector2( -0.485701, 101.981 )
+flip_h = true
 
 [node name="LLegBottom" type="Sprite" parent="TorsoBottom/LLegTop"]
-position = Vector2( 37, 208 )
-z_index = -1
-texture = ExtResource( 68 )
-offset = Vector2( 3.5, 97.761 )
+position = Vector2( -4, 217 )
+texture = ExtResource( 23 )
+offset = Vector2( 1.5, 84.761 )
+flip_h = true
 
 [node name="LFeet" type="Sprite" parent="TorsoBottom/LLegTop/LLegBottom"]
-position = Vector2( 11, 196 )
-texture = ExtResource( 8 )
-offset = Vector2( 9.3898, 40.346 )
+position = Vector2( 20, 179 )
+texture = ExtResource( 30 )
+offset = Vector2( 33.3898, 16.346 )
+flip_h = true
 
 [node name="RLegTop" type="Sprite" parent="TorsoBottom"]
-position = Vector2( -28, 11 )
-z_index = -1
-texture = ExtResource( 25 )
-offset = Vector2( -15.6322, 92.2544 )
+position = Vector2( -21, 39 )
+z_index = -2
+texture = ExtResource( 55 )
+offset = Vector2( -11.6322, 81.2544 )
+flip_h = true
 
 [node name="RLegBottom" type="Sprite" parent="TorsoBottom/RLegTop"]
-position = Vector2( -37, 201 )
-z_index = -1
-texture = ExtResource( 95 )
-offset = Vector2( 1.71838, 101.115 )
+position = Vector2( -35, 174 )
+texture = ExtResource( 65 )
+offset = Vector2( -2.28162, 83.115 )
+flip_h = true
 
 [node name="RFeet" type="Sprite" parent="TorsoBottom/RLegTop/RLegBottom"]
-position = Vector2( -14, 215 )
-texture = ExtResource( 97 )
-offset = Vector2( -5.014, 34.8194 )
+position = Vector2( -3, 178 )
+rotation = 0.0204329
+texture = ExtResource( 35 )
+offset = Vector2( 12.2183, 1.1098 )
+flip_h = true
 
 [node name="TurnaroundReference" type="Sprite" parent="."]
 visible = false
