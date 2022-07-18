@@ -11,7 +11,7 @@ enum Items {
 	SAVE,
 	SAVE_AS,
 	LOAD,
-	SETUP_BONES
+#	SETUP_BONES
 }
 
 func _ready() -> void:
@@ -39,7 +39,7 @@ func _on_pressed():
 		popupMenu.add_item('Save', Items.SAVE)
 		popupMenu.add_item('Save as', Items.SAVE_AS)
 		
-		popupMenu.add_item('Setup bones', Items.SETUP_BONES)
+#		popupMenu.add_item('Setup bones', Items.SETUP_BONES)
 #	else:
 #		popupMenu.add_item('Load', Items.LOAD)
 
@@ -116,7 +116,8 @@ func _on_id_pressed(id: int):
 				scene_name = get_tree().edited_scene_root.name
 			$"../MenuButton"._select_scene(scene_name)
 			$"../MenuButton".hint_tooltip = owner.poselib_scene+" (unsaved)"
-		Items.SETUP_BONES:
+#		Items.SETUP_BONES:
+		# IT ACTUALLY IS. I'M DUB.
 #			The relationship between polygon2d and bones doesn't seem to be able to be created by code,
 #			so a gross workaround is to make the user select polygon and bone relationship by hand
 #			so that it works like a RemoteTransform2D.
@@ -126,9 +127,9 @@ func _on_id_pressed(id: int):
 			
 #			Check if scene has a skeleton2D and at least a polygon2d.
 #			Open SetupBonesPopup. 
-			var setupBonesPopup: WindowDialog = SCN_SetupBonesPopup.instance()
-			setupBonesPopup.posepalDock = owner
-			add_child(setupBonesPopup)
+#			var setupBonesPopup: WindowDialog = SCN_SetupBonesPopup.instance()
+#			setupBonesPopup.posepalDock = owner
+#			add_child(setupBonesPopup)
 
 func _on_file_selected(filepath: String, last_pressed_item: int):
 #	var last_pressed_item: int = args[0]

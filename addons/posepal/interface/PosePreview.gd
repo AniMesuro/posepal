@@ -16,8 +16,8 @@ var pose: Dictionary = {}
 var poseSceneRoot: Node
 var poseSkeleton: Skeleton2D
 var is_being_edited: bool = false setget _set_is_being_edited
-var boned_polygons: Array = []
-var bones: Array = []
+#var boned_polygons: Array = []
+#var bones: Array = []
 
 var filter: Array
 var templatePose: Dictionary
@@ -91,7 +91,7 @@ func generate_thumbnail():
 	var poselib: Resource = get_parent().owner.currentPoselib
 	if poselib.boneRelationshipData.has('_skeleton'):
 		poseSkeleton = _rt.get_node(poselib.boneRelationshipData['_skeleton'])
-	_apply_fake_bones()
+#	_apply_fake_bones()
 	
 	calculate_children_used_points(_rt, 10)
 	used_rect = get_used_rect(used_points)
@@ -214,11 +214,11 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 				sn = Polygon2D.new()
 				var p: Polygon2D
 				
-				var my_path: String = poseSceneRoot.get_path_to(mn)
+#				var my_path: String = poseSceneRoot.get_path_to(mn)
 #				var bone_path: String
-				if my_path in poselib.boneRelationshipData:
-					sn.set_meta('bone_path', poselib.boneRelationshipData[my_path])
-					boned_polygons.append(sn)
+#				if my_path in poselib.boneRelationshipData:
+#					sn.set_meta('bone_path', poselib.boneRelationshipData[my_path])
+#					boned_polygons.append(sn)
 				sn.color = mn.color
 				if is_instance_valid(mn.texture):
 					sn.offset = mn.offset
@@ -229,19 +229,22 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 					sn.uv = mn.uv
 					sn.z_index = mn.z_index
 					sn.rotation_degrees = 90
+#					sn
+					sn.bones = mn.bones
+#					p.bones
 			'Skeleton2D':
 				sn = Skeleton2D.new()
 			'Bone2D':
-				if !owner.optionsData.show_bones:
-					sn = Bone2D.new()
-					sn.rest = mn.rest
-				else:
-#					print('bone is line2d')
-					sn = Line2D.new()
-					var l:Line2D
-					sn.width = 20
-					sn.z_index = 1000
-					bones.append(sn)
+#				if !owner.optionsData.show_bones:
+				sn = Bone2D.new()
+				sn.rest = mn.rest
+#				else:
+##					print('bone is line2d')
+#					sn = Line2D.new()
+#					var l:Line2D
+#					sn.width = 20
+#					sn.z_index = 1000
+#					bones.append(sn)
 			'RemoteTransform2D':
 				sn = RemoteTransform2D.new()
 				sn.remote_path = mn.remote_path
@@ -275,11 +278,11 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 				elif templatePose[np_id][property].has('valr'):
 					sn.set(property, poselib.get_res_from_id(templatePose[np_id][property]['valr']))
 	
-		if mn.is_class('Polygon2D') && templatePose[np_id].has('texture'):
-			sn.skeleton = templatePose[np_id]['_data']['skeleton']
-			sn.polygon = templatePose[np_id]['_data']['polygon']
-			sn.polygons = templatePose[np_id]['_data']['polygons']
-			sn.uv = templatePose[np_id]['_data']['uv']
+#		if mn.is_class('Polygon2D') && templatePose[np_id].has('texture'):
+#			sn.skeleton = templatePose[np_id]['_data']['skeleton']
+#			sn.polygon = templatePose[np_id]['_data']['polygon']
+#			sn.polygons = templatePose[np_id]['_data']['polygons']
+#			sn.uv = templatePose[np_id]['_data']['uv']
 	
 #	poselib.
 	if np_id in pose:
@@ -493,20 +496,20 @@ func ask_for_id(title_name: String):
 	askIDPopup.label.text = "Please select a value from 0 to " + str(askIDPopup.max_id)
 	return askIDPopup
 
-func _apply_fake_bones():
-	for _p in boned_polygons:
-		var polygon: Polygon2D = _p
-		var bone_path: String = polygon.get_meta('bone_path')
-#		print(poseSkeleton.get_node(bone_path))
-		var bone: Node2D =poseSkeleton.get_node(bone_path)
-		
-		polygon.transform = bone.transform
-		
-	for _bone in bones:
-		var bone: Line2D = _bone
-		bone.modulate = Color(1,4,0)
-		# Works somewhat.
-		bone.points = [-bone.position, Vector2() ]
+#func _apply_fake_bones():
+#	for _p in boned_polygons:
+#		var polygon: Polygon2D = _p
+#		var bone_path: String = polygon.get_meta('bone_path')
+##		print(poseSkeleton.get_node(bone_path))
+#		var bone: Node2D =poseSkeleton.get_node(bone_path)
+#
+#		polygon.transform = bone.transform
+#
+#	for _bone in bones:
+#		var bone: Line2D = _bone
+#		bone.modulate = Color(1,4,0)
+#		# Works somewhat.
+#		bone.points = [-bone.position, Vector2() ]
 
 func _on_name_settled(new_name: String):
 	var poselib: Resource = owner.currentPoselib
