@@ -14,8 +14,12 @@ func _enter_tree() -> void:
 func fill_files():
 	var old_paths = owner.old_paths
 	var poselib: Resource = owner.poselib
+	var f: File = File.new()
 	for k in poselib.resourceReferences.keys():
+#		Ignore valid filepaths.
 		var path: String = poselib.resourceReferences[k]#[0]
+		if f.file_exists(path):
+			continue
 		var item: PanelContainer = SCN_FileItem.instance()
 		
 		item.old_path = path
