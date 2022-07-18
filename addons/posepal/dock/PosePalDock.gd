@@ -208,9 +208,17 @@ func save_poseData(override_path: String = ""):
 
 # Attempt to, not always succeed. Getting the AnimationPlayer directly in the TimelineEditor is impossible.
 func get_selected_animationPlayer() -> AnimationPlayer:
-	# EditorSelection's AnimationPlayer is prioritized.
 	self.pluginInstance._get_editor_references()
+	
+	# PoseAnimationPlayer should always prioritized.
 	var currentAnimOptionButton: OptionButton = pluginInstance.animationPlayerEditor_CurrentAnimation_OptionButton
+	var newPoseButton: Button = self.poseCreationHBox.get_node("NewPoseButton")
+	var poseButton_children: Array = newPoseButton.get_children()
+	if poseButton_children.size() > 0:
+		var animPlayer: AnimationPlayer = newPoseButton.get_children()[0]
+		if animPlayer.assigned_animation == currentAnimOptionButton.text:
+			return animPlayer
+		
 	var editorInterface: EditorInterface = pluginInstance.get_editor_interface()
 	var editorSelection: EditorSelection = editorInterface.get_selection()
 	for selectedNode in editorSelection.get_selected_nodes():
@@ -221,15 +229,7 @@ func get_selected_animationPlayer() -> AnimationPlayer:
 			return null
 		if animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return animPlayer
-	
-	# PoseAnimationPlayer should be child of NewPoseButton
-	var newPoseButton: Button = self.poseCreationHBox.get_node("NewPoseButton")
-	var poseButton_children: Array = newPoseButton.get_children()
-	if poseButton_children.size() > 0:
-		var animPlayer: AnimationPlayer = newPoseButton.get_children()[0]
-		if animPlayer.assigned_animation == currentAnimOptionButton.text:
-			return animPlayer
-		
+			
 	if is_instance_valid(poselib_animPlayer):
 		if poselib_animPlayer.assigned_animation == currentAnimOptionButton.text:
 			return poselib_animPlayer

@@ -86,7 +86,9 @@ func _on_QueueKeyTimeBtn_pressed():
 func _on_BatchKeyBtn_pressed():
 	# open batch key popup
 	# should be disabled if no (generally) animationplayer selected and no poseroot selected.
-	if owner.poselib_scene == '':
+	var poseCreationHBox: HBoxContainer = $"../../../../../../ExtraHBox/PoseCreationHBox"
+	if owner.poselib_scene == '' or !is_instance_valid(poseCreationHBox.animationPlayer):
+		# POSE ANIMPLAYER
 		print('[posepal] poselib_scene not selected.')
 		return
 	
@@ -100,7 +102,7 @@ func _on_BatchKeyBtn_pressed():
 		return
 	
 	var current_edited_animPlayer: AnimationPlayer = owner.get_selected_animationPlayer()
-	var newPoseButton: Button = $"../../../../../../ExtraHBox/PoseCreationHBox/NewPoseButton"
+	print('animp sel ',current_edited_animPlayer)
 	
 	if !is_instance_valid(current_edited_animPlayer):
 		print('[posepal] No AnimationPlayer found in AnimationPlayerEditor')
