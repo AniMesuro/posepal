@@ -65,7 +65,7 @@ flags = 0
 image = SubResource( 7 )
 size = Vector2( 16, 16 )
 
-[node name="PosePal" type="Control"]
+[node name="Posepal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -760.0
