@@ -22,7 +22,7 @@ export var available_nodepath_id: int = 0
 var is_nodepath_references_valid: bool = true
 
 export var poseData: Dictionary = {"default": {"default": []}}
-export var filterData: Dictionary = {"none": {}}
+export var filterData: Dictionary = {"none": []}
 export var templateData: Dictionary = {"default": {}}
 
 # Only used for scenes with skeleton2d
@@ -160,14 +160,11 @@ func get_nodepath_from_id(id: int):
 
 # Attempts to update to latest version.
 func update_poselib():
-#	var current_version: PoolIntArray = poselib_version # current version
 	var latest_version: PoolIntArray = pluginInstance.plugin_version # latest version
-	
-#	var ver1: PoolIntArray = [0,9,0]
-#	var ver2: PoolIntArray = [0,9,1]
-	
-#	Updating is cumulative, only <0.8.9 is ignored.
+		
+#	Updating is cumulative.
 
+#	Useless because poselibs that old don't even have versions.
 #	if _version_is_older_than([0,8,9]):
 #		print("[posepal] Poselib version too old, couldn't update file to latest version.")
 #		return

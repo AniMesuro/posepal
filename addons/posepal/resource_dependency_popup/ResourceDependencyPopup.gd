@@ -26,7 +26,7 @@ func _enter_tree() -> void:
 		queue_free()
 		return
 		
-	popup_centered()
+	popup_centered(Vector2(OS.window_size.x* .4, OS.window_size.y-20))
 	poselib = posePalDock.currentPoselib
 	old_paths = poselib.get_res_paths()
 

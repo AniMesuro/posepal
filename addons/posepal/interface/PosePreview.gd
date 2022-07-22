@@ -14,8 +14,10 @@ var pose_id: int = -1
 var pose_name: String = ""
 var pose: Dictionary = {}
 var poseSceneRoot: Node
-var poseSkeleton: Skeleton2D
 var is_being_edited: bool = false setget _set_is_being_edited
+
+# DEPRECATED
+#var poseSkeleton: Skeleton2D
 #var boned_polygons: Array = []
 #var bones: Array = []
 
@@ -89,8 +91,8 @@ func generate_thumbnail():
 		_generate_preview_scene(poseSceneRoot, _rt, true, 15)
 	
 	var poselib: Resource = get_parent().owner.currentPoselib
-	if poselib.boneRelationshipData.has('_skeleton'):
-		poseSkeleton = _rt.get_node(poselib.boneRelationshipData['_skeleton'])
+#	if poselib.boneRelationshipData.has('_skeleton'):
+#		poseSkeleton = _rt.get_node(poselib.boneRelationshipData['_skeleton'])
 #	_apply_fake_bones()
 	
 	calculate_children_used_points(_rt, 10)
@@ -116,6 +118,7 @@ func generate_thumbnail():
 #	visibleRect.show_behind_parent = true
 #	visibleRect.rect_size = (used_rect.size) * _rt.scale
 #	visibleRect.rect_position = _rt.position - visible_offset 
+	
 	
 	# Screenshot it to a thumbnail,
 	thumbnailButton.texture_normal = thumbnailViewport.get_texture()
@@ -214,11 +217,13 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 				sn = Polygon2D.new()
 				var p: Polygon2D
 				
+				# DEPRECATED
 #				var my_path: String = poseSceneRoot.get_path_to(mn)
 #				var bone_path: String
 #				if my_path in poselib.boneRelationshipData:
 #					sn.set_meta('bone_path', poselib.boneRelationshipData[my_path])
 #					boned_polygons.append(sn)
+					
 				sn.color = mn.color
 				if is_instance_valid(mn.texture):
 					sn.offset = mn.offset
@@ -229,22 +234,22 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 					sn.uv = mn.uv
 					sn.z_index = mn.z_index
 					sn.rotation_degrees = 90
-#					sn
+					
+					
 					sn.bones = mn.bones
-#					p.bones
 			'Skeleton2D':
 				sn = Skeleton2D.new()
 			'Bone2D':
 #				if !owner.optionsData.show_bones:
 				sn = Bone2D.new()
 				sn.rest = mn.rest
+#				bones.append(sn)
 #				else:
 ##					print('bone is line2d')
 #					sn = Line2D.new()
 #					var l:Line2D
 #					sn.width = 20
 #					sn.z_index = 1000
-#					bones.append(sn)
 			'RemoteTransform2D':
 				sn = RemoteTransform2D.new()
 				sn.remote_path = mn.remote_path
@@ -278,11 +283,11 @@ func _generate_previewNode(mn: Node, is_poseroot: bool = false) -> Node:
 				elif templatePose[np_id][property].has('valr'):
 					sn.set(property, poselib.get_res_from_id(templatePose[np_id][property]['valr']))
 	
-#		if mn.is_class('Polygon2D') && templatePose[np_id].has('texture'):
-#			sn.skeleton = templatePose[np_id]['_data']['skeleton']
-#			sn.polygon = templatePose[np_id]['_data']['polygon']
-#			sn.polygons = templatePose[np_id]['_data']['polygons']
-#			sn.uv = templatePose[np_id]['_data']['uv']
+		if mn.is_class('Polygon2D') && templatePose[np_id].has('texture'):
+			sn.skeleton = templatePose[np_id]['_data']['skeleton']
+			sn.polygon = templatePose[np_id]['_data']['polygon']
+			sn.polygons = templatePose[np_id]['_data']['polygons']
+			sn.uv = templatePose[np_id]['_data']['uv']
 	
 #	poselib.
 	if np_id in pose:
@@ -500,16 +505,9 @@ func ask_for_id(title_name: String):
 #	for _p in boned_polygons:
 #		var polygon: Polygon2D = _p
 #		var bone_path: String = polygon.get_meta('bone_path')
-##		print(poseSkeleton.get_node(bone_path))
-#		var bone: Node2D =poseSkeleton.get_node(bone_path)
+#		var bone: Bone2D =poseSkeleton.get_node(bone_path)
 #
 #		polygon.transform = bone.transform
-#
-#	for _bone in bones:
-#		var bone: Line2D = _bone
-#		bone.modulate = Color(1,4,0)
-#		# Works somewhat.
-#		bone.points = [-bone.position, Vector2() ]
 
 func _on_name_settled(new_name: String):
 	var poselib: Resource = owner.currentPoselib

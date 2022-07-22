@@ -6,7 +6,8 @@ func _ready() -> void:
 	
 # Currently this button only works if user selects a path for each unique directory.
 func _on_pressed():
-	var poselib: Resource = owner.posePalDock.current_poselib
+	var poselib: Resource = owner.posePalDock.currentPoselib
+#	var poselib: Resource = owner.posePalDock.current_poselib
 	var fileVBox: VBoxContainer = $"../VBox/ScrollCon/FileVBox"
 	var f: File = File.new()
 	

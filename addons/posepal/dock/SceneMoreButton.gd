@@ -111,11 +111,16 @@ func _on_id_pressed(id: int):
 			owner.currentPoselib = null
 			owner.currentPoselib = RES_PoseLibrary.new()
 			owner.currentPoselib.owner_filepath = get_tree().edited_scene_root.get_node(owner.poselib_scene).filename
-			var scene_name: String = owner.poselib_scene.split('/')[-1]
+			var scene_path: String = owner.poselib_scene
+			var scene_name: String = scene_path.split('/')[-1]
 			if scene_name == '.':
 				scene_name = get_tree().edited_scene_root.name
-			$"../MenuButton"._select_scene(scene_name)
-			$"../MenuButton".hint_tooltip = owner.poselib_scene+" (unsaved)"
+			var sceneButton: MenuButton = $"../MenuButton"
+#			var idx: int = sceneButton.get_popup().get_current_index()
+#			print(sceneButton.get_popup().get_item_text(idx))
+			if sceneButton.current_selected_id != -1:
+				sceneButton.select_scene(sceneButton.current_selected_id)
+				sceneButton.hint_tooltip = scene_name+" (unsaved)"
 #		Items.SETUP_BONES:
 		# IT ACTUALLY IS. I'M DUB.
 #			The relationship between polygon2d and bones doesn't seem to be able to be created by code,

@@ -31,7 +31,6 @@ func select_poselib(validate_first: bool = false, id: int = -1):
 			add_child(nodepathReferencePopup)
 		
 	
-	
 	hint_tooltip = owner.currentPoselib.resource_path
 	text = owner.currentPoselib.resource_path.get_file().split('.')[0]
 	icon = owner.editorControl.get_icon("KinematicBody2D", "EditorIcons")
@@ -99,7 +98,7 @@ func _on_id_selected(id :int):
 	owner.currentPoselib = null
 	owner.poseFile_path = ''
 #	Only read poseFile
-	_select_scene(id)
+	select_scene(id)
 	
 #	var is_poseFile_valid: bool = _scene_validate_poseFile(selectedScene)
 #
@@ -129,7 +128,7 @@ func _on_id_selected(id :int):
 #		hint_tooltip = popup.get_item_text(id)+" (unsaved)"
 	
 #	var scene_name: String = selectedScene.name
-#	_select_scene(selectedScene)
+#	select_scene(selectedScene)
 
 func _on_PoseLibrary_updated_reference(reference :String):
 	if !is_inside_tree():
@@ -144,7 +143,14 @@ func _on_PoseLibrary_updated_reference(reference :String):
 func _on_issued_forced_selection():
 	pass
 
-func _select_scene(id: int):
+func get_id_from_scene(scene_path: String):
+	pass
+
+var current_selected_id: int = -1
+func select_scene(id: int):
+	current_selected_id = id
+	if id < 0:
+		return
 	var scene: Node = get_scene_from_id(id)
 	var is_poseFile_valid: bool = _scene_validate_poseFile(scene)
 	
@@ -153,18 +159,18 @@ func _select_scene(id: int):
 		return
 	else:
 		hint_tooltip = popup.get_item_text(id)+" (unsaved)"
-#	popup = get_popup()
-#	owner.fix_warning('scene_not_selected')
-#	text = scene_name
-#	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
-#	owner.emit_signal("updated_reference", owner_reference)
+	popup = get_popup()
+	owner.fix_warning('scene_not_selected')
+	text = scene.name
+	icon = owner.editorControl.get_icon("PackedScene", "EditorIcons")
+	owner.emit_signal("updated_reference", owner_reference)
 
 func _on_ResourceDependencyPopup_ok_pressed(has_missing_dependencies: bool, id: int):
 	if has_missing_dependencies:
 		return
 	select_poselib(false)
-#	_select_scene(id)
-#	_select_scene(popup.get_item_text(id))
+#	select_scene(id)
+#	select_scene(popup.get_item_text(id))
 
 func _reset_selection():
 	text = msg_no_selection
